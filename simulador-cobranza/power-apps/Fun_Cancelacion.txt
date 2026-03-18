@@ -1,0 +1,1472 @@
+Screens:
+  From_Genera_Formato_Cancelacion:
+    Properties:
+      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+    Children:
+      - shp_HeaderMobile_ScreenPrincipal_24:
+          Control: Rectangle@2.3.0
+          Group: grp_cmpHeaderTablet_ScreenPrincipal_24
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =RGBA(227, 227, 227, 1)
+            Height: =1
+            Width: =68
+            Y: =67
+      - img_HeaderMobile_ScreenPrincipal_24:
+          Control: Image@2.2.3
+          Group: grp_cmpHeaderTablet_ScreenPrincipal_24
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Height: =48
+            Image: =Isotipo
+            Width: =57
+            X: =5
+            Y: =12
+      - Label1_9:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =26
+            Size: =18
+            Text: ="BANCO DE BOGOTÁ"
+            Width: =274
+            X: =68
+            Y: =22
+      - Label1_10:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =20
+            Size: =12
+            Text: ="Solicitud de Normalizacion - Formato Único"
+            Width: =383
+            X: =200
+            Y: =58
+      - Label2_207:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =23
+            Size: =10
+            Text: ="DIA"
+            Width: =54
+            X: =599
+            Y: =12
+      - Label2_208:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =23
+            Size: =10
+            Text: ="MES"
+            Width: =54
+            X: =649
+            Y: =12
+      - Label2_209:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =23
+            Size: =10
+            Text: ="AÑO"
+            Width: =54
+            X: =699
+            Y: =12
+      - Label2_210:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =23
+            Size: =10
+            Text: =Month(Today())
+            Width: =54
+            X: =649
+            Y: =35
+      - Label2_212:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =23
+            Size: =10
+            Text: =Year(Today())
+            Width: =54
+            X: =699
+            Y: =35
+      - Label2_213:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =23
+            Size: =10
+            Text: =Day(Today())
+            Width: =50
+            X: =599
+            Y: =35
+      - Label2_214:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: ="Cód Ofc."
+            Width: =76
+            X: =15
+            Y: =97
+      - Label2_215:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =Dropdown2_8.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BNumero_cuenta'
+            Width: =159
+            X: =332
+            Y: =127
+      - Label2_216:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =Oficina_bb.Selected.CENT_COSTO
+            Width: =76
+            X: =15
+            Y: =127
+      - Label2_218:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =cp_inputtext_Codigo_Ofc.Text
+            Width: =241
+            X: =91
+            Y: =127
+      - Label2_219:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =inicio_inputtext_Nombre.Text
+            Width: =246
+            X: =15
+            Y: =196
+      - Label2_220:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: ="Nombre Cliente"
+            Width: =246
+            X: =15
+            Y: =166
+      - Label2_221:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =app_combobox_identificacion_ics.Text
+            Width: =105
+            X: =304
+            Y: =196
+      - Label2_222:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: ="Num. Documento"
+            Width: =105
+            X: =304
+            Y: =166
+      - Label2_225:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: |+
+              =inicio_dropdown_TipoDoc.SelectedText.Value
+
+            Width: =43
+            X: =261
+            Y: =196
+      - Label2_226:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: ="Tipo Doc"
+            Width: =43
+            X: =261
+            Y: =166
+      - Label2_227:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =CIUDAD_EXP_1.Selected.CIUDAD
+            Width: =177
+            X: =409
+            Y: =196
+      - Label2_228:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: |-
+              ="Lugar de Expedicion
+              "
+            Width: =177
+            X: =409
+            Y: =166
+      - Label2_229:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: |+
+              =cp_DatePicker_fecha_exp.SelectedDate
+
+            Width: =182
+            X: =586
+            Y: =196
+      - Label2_231:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: |-
+              ="Fecha De Expedicion
+              "
+            Width: =182
+            X: =586
+            Y: =166
+      - Label2_232:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: ="Oficina en que se realiza la negociación"
+            Width: =241
+            X: =91
+            Y: =97
+      - Label2_233:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: ="Cuenta del pago / SNR"
+            Width: =159
+            X: =332
+            Y: =97
+      - Label2_234:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =Dropdown2_11.SelectedText.Columna1
+            Width: =191
+            X: =147
+            Y: =246
+      - Label2_235:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: ="Descripcion Actividad"
+            Width: =191
+            X: =147
+            Y: =216
+      - Label2_237:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: ="$ " &cp_inputtext_ingr_bruto_3.Text
+            Width: =124
+            X: =338
+            Y: =246
+      - Label2_241:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: ="Ingreso Mensual"
+            Width: =124
+            X: =338
+            Y: =216
+      - Label2_242:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =Dropdown2_12.SelectedText.'Ingresos Adicionales'
+            Width: =191
+            X: =462
+            Y: =246
+      - Label2_243:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: ="Ocupación Ingresos Adicional"
+            Width: =191
+            X: =462
+            Y: =216
+      - Label2_244:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: |+
+              ="$ "& cp_inputtext_ingr_adi_3.Text
+
+            Width: =115
+            X: =653
+            Y: =246
+      - Label2_245:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: ="Ingresos Adicionales"
+            Width: =115
+            X: =653
+            Y: =216
+      - Label1_11:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =20
+            Size: =12
+            Text: |-
+              ="MECANISMO DE NORMALIZACION: CANCELACIÓN TOTAL"
+            Width: =566
+            X: =98
+            Y: =79
+      - Label6_3:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Justify
+            BorderColor: =RGBA(0, 18, 107, 1)
+            BorderThickness: =1
+            Font: =Font.'Open Sans'
+            Height: =379
+            Size: =6.5
+            Text: |-
+              ="Desde ahora acepto las nuevas  condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas, esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá, quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre el resultado de mi solicitud.
+              Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones, comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha establecida, sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio,  los valores consignados sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en la ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los beneficios ofrecidos anteriormente.
+              Acepto que existe la posibilidad que la amortización de las primeras cuotas pueda no incluir abono a capital (ejemplo: ajuste del plan de amortización al valor de la cuota propuesta por mí).  
+              En caso de existir inconsistencias en el diligenciamiento del formato, el Banco le informará  y si usted no las subsana en el término de tres (3) días,  la presente solicitud podrá  ser cancelada y se continuará con el proceso de cobro en la instancia correspondiente.
+              Acepto que:
+
+              a. Esta solicitud puede implicar el bloqueo de mis productos con cupo en el tiempo que establezcan las políticas vigentes.
+              b. La operación solicitada puede generar marcación ante las Centrales de Riesgo por lo que autorizo al Banco a actualizar el reporte respectivo.
+              c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la negociación podrá ser tramitada el mes siguiente.
+              d. Hasta cuando no se haya perfeccionado la negociación en trámite, se mantienen vigentes las condiciones actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos y en las fechas acordadas.
+
+              Manifiesto que he recibido la información adecuada sobre las implicaciones en términos de costos, nueva forma de pago y calificación crediticia, así como un comparativo entre las condiciones actuales y las del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la Circular Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia Financiera de Colombia.
+              En caso  de  incumplimiento de las nuevas condiciones del crédito se perderan  los beneficios otorgados, pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia Financiera de Colombia. Si la (s) obligación (es)  castigada (s) durante el trámite solicitado, el Banco hara el respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede  proceder a la destrucción de los documentos aportados.
+
+              Yo " &inicio_inputtext_Nombre.Text &" identificado con No. " &app_combobox_identificacion_ics.Text& " manifiesto que  la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente acuerdo, son de origen lícito y corresponde a ________________________________________________________________________Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la negociación el Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me será reintegrado y la negociación se tramitará con los nuevos saldos vigentes a la fecha de aplicación de la misma.
+
+              Para saber más sobre tiempo de permanencia y reporte negativo en las Centrales de Información: ingresa a la pagina del Banco de Bogotá www.bancodebogota.com, en la siguiente ruta: Inicio / Nuestra Organización / Transparencia / Ley Habeas Data.
+
+              Declaro que  conozco y acepto  los  términos y condiciones de esta negociación, los cuales pueden ser consultados a través de  https://www.bancodebogota.com/wps/portal/bancode-bogota/bogota/terminos-condiciones/ términos y condiciones - políticas de cobro 
+              "
+            Width: =753
+            X: =15
+            Y: =462
+      - button_pdf_3:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(0, 18, 107, 1)
+            Height: =40
+            Icon: =Icon.ChevronRight
+            OnSelect: |+
+              =Set(ocultar,false);
+
+              Office365Outlook.SendEmailV2(User().Email,"Cancelacion total fun cliente: " & app_combobox_identificacion_ics.Text,
+              "buen dia anexo el formato Fun del cliente: " &app_combobox_identificacion_ics.Text & "
+
+              "
+              &PCFCopyTextComponent2_2.Value ,
+              {Attachments: Table({Name: "Formato_FUN.pdf", ContentBytes: PDF(From_Genera_Formato_Cancelacion)})});
+              Notify("Formulario FUN enviado con exito",NotificationType.Success);
+
+              Set(ocultar,true)
+
+
+            TabIndex: =
+            Tooltip: ="Avanzar"
+            Visible: =ocultar
+            Width: =55
+            X: =679
+            Y: =1300
+      - Label7_9:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(56, 96, 178, 1)
+            Font: =Font.'Lato Black'
+            FontWeight: =FontWeight.Bold
+            Height: =15
+            Size: =10
+            Text: |-
+              ="INFORMACION CLIENTE
+              "
+            Width: =753
+            X: =15
+            Y: =152
+      - Label7_10:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(56, 96, 178, 1)
+            Font: =Font.'Lato Black'
+            FontWeight: =FontWeight.Bold
+            Height: =15
+            Size: =10
+            Text: |-
+              ="  INFORMACION DE LAS OBLIGACIONES A NORMALIZAR  
+              "
+            Width: =753
+            X: =15
+            Y: =272
+      - Label8_9:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =16
+            Size: =10
+            Text: ="Firma Cliente o Representante legal"
+            Width: =284
+            X: =15
+            Y: =1082
+      - Label8_10:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =24
+            Overflow: =Overflow.Scroll
+            Size: =9
+            Text: ="CC/NIT Número:"
+            Width: =143
+            X: =15
+            Y: =1098
+      - Icon6_6:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(0, 0, 0, 1)
+            FocusedBorderThickness: =0
+            Height: =1
+            HoverBorderColor: =ColorFade(Self.BorderColor, 10%)
+            Icon: =Icon.HorizontalLine
+            Width: =270
+            X: =15
+            Y: =1078
+      - Label8_11:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =26
+            Overflow: =Overflow.Scroll
+            Size: =10
+            Text: ="Huella"
+            X: =562
+            Y: =1079
+      - Label7_11:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(56, 96, 178, 1)
+            Font: =Font.'Lato Black'
+            FontWeight: =FontWeight.Bold
+            Height: =25
+            Size: =10
+            Text: ="ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES"
+            Width: =753
+            X: =15
+            Y: =437
+      - Label2_246:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =User().FullName
+            Width: =277
+            X: =491
+            Y: =127
+      - Label2_247:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: |-
+              ="Funcionario de quien efectúa la negociación: "
+            Width: =277
+            X: =491
+            Y: =97
+      - Label2_248:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =6.5
+            Text: =Label9.Text
+            Width: =722
+            X: =15
+            Y: =841
+      - Label2_249:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: |+
+              =ct_dropdown_pregunta1.SelectedText.Value
+
+            Width: =31
+            X: =737
+            Y: =841
+      - Label2_250:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =6.5
+            Text: =Label9_1.Text
+            Width: =722
+            X: =15
+            Y: =861
+      - Label2_251:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: |+
+              =ct_dropdown_pregunta2.SelectedText.Value
+
+            Width: =31
+            X: =737
+            Y: =861
+      - Label2_252:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =30
+            Size: =6.5
+            Text: =Label9_2.Text
+            Width: =722
+            X: =15
+            Y: =881
+      - Label2_253:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =30
+            Size: =9
+            Text: |+
+              =ct_dropdown_pregunta3.SelectedText.Value
+
+            Width: =31
+            X: =737
+            Y: =881
+      - Label2_254:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =30
+            Size: =6.5
+            Text: |-
+              =Label9_3
+              .Text
+            Width: =722
+            X: =15
+            Y: =911
+      - Label2_255:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =30
+            Size: =9
+            Text: |+
+              =ct_dropdown_pregunta4.SelectedText.Value
+
+            Width: =31
+            X: =737
+            Y: =911
+      - Label2_256:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =7
+            Text: ="Garantia FNG "
+            Width: =109
+            X: =628
+            Y: =961
+      - Label2_257:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =ct_dropdown_pregunta5.SelectedText.Value
+            Width: =31
+            X: =737
+            Y: =961
+      - Label2_258:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: |+
+              =ct_dropdown_pregunta6.SelectedText.Value
+
+            Width: =31
+            X: =737
+            Y: =941
+      - Icon6_7:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(0, 0, 0, 1)
+            FocusedBorderThickness: =0
+            Height: =1
+            HoverBorderColor: =ColorFade(Self.BorderColor, 10%)
+            Icon: =Icon.HorizontalLine
+            Width: =150
+            X: =562
+            Y: =1077
+      - Label2_259:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =7
+            Text: ="Garantia FAG "
+            Width: =109
+            X: =628
+            Y: =941
+      - Label2_260:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =27
+            Size: =8
+            Text: ="Nro. Obligación (4 ultimos)"
+            Width: =100
+            X: =15
+            Y: =304
+      - Label2_261:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =27
+            Size: =8
+            Text: ="Saldo Total"
+            Width: =82
+            X: =114
+            Y: =304
+      - Label2_262:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =27
+            Size: =8
+            Text: |-
+              ="Int Corrientes
+              "
+            Width: =74
+            X: =271
+            Y: =304
+      - Label2_263:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =16
+            Size: =8
+            Text: ="Datos ObligacionesCondiciones negocioación"
+            Width: =753
+            X: =15
+            Y: =288
+      - Label2_264:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: |-
+              =/*If(Len(inicio_inputtext_No_obl_1.Text)>16;Mid(obl_Dropdown_1.SelectedText.OBLIGACION;13;4);Right(obl_Dropdown_1.SelectedText.OBLIGACION;4))*/
+              Text_Num_obl.Text
+            Width: =100
+            X: =15
+            Y: =331
+      - Label2_265:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =28
+            Size: =8
+            Text: ="Int ExtraC ""TC"""
+            Width: =74
+            X: =419
+            Y: =304
+      - Label2_266:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: ="$ "& Text(Value(ct_inputtext_sald_total.Text), "[$-ES]#.###")
+            Width: =80
+            X: =114
+            Y: =331
+      - Label2_267:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: ="$ "& Text(Value(ct_inputtext_int_cte.Text), "[$-ES]#.###")
+            Width: =74
+            X: =271
+            Y: =331
+      - Label2_268:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =28
+            Size: =8
+            Text: ="int mora"
+            Width: =74
+            X: =345
+            Y: =304
+      - Label2_269:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: |-
+              ="$ "& 
+              Text(Value(ct_inputtext_int_mora.Text), "[$-ES]#.###")
+            Width: =74
+            X: =345
+            Y: =331
+      - Label2_270:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: ="$ "& Text(Value(ct_inputtext_int_ext.Text), "[$-ES]#.###")
+            Width: =74
+            X: =419
+            Y: =331
+      - Label2_272:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =inicio_dropdown_edadmora.SelectedText.'Rango Dias_3'
+            Width: =132
+            X: =15
+            Y: =246
+      - Label2_273:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            Size: =9
+            Text: ="Dias Mora"
+            Width: =132
+            X: =15
+            Y: =216
+      - Label2_274:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Size: =6.5
+            Text: |-
+              ="Observaciones : " & cp_textInput_observaciones_2.Text
+            Width: =613
+            X: =15
+            Y: =941
+      - Label2_275:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =87
+            Size: =10
+            Text: |-
+              ="Pago a Realizar: $" & ct_inputtext_snr.Text &"
+              "&
+              "Fecha del Pago: " & ct_DatePicker_fechapago.SelectedDate
+            Width: =275
+            X: =493
+            Y: =304
+      - Regresar_Principal_22:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(0, 18, 107, 1)
+            Height: =40
+            Icon: =Icon.Home
+            OnSelect: |-
+              =And(Set(porcentaje,""),
+                  Set(FormatteNum,""),
+                  Set(FormatteNum1,""),
+                  Set(FormatteNum2,""),
+                  Set(FormatteNum3,""),
+                  Set(FormatteNum4,""),
+                  Set(FormatteNum5,""),
+                  Set(FormatteNum6,""),
+                  Set(FormatteNum7,""), 
+                  Set(FormatteNum8,""), 
+                  Set(FormatteNum9,""),
+                  Set(FormatteNum10,""),
+                  Set(FormatteNum11,""),
+                  Set(FormatteNum12,""),
+                  Set(FormatteNum17,""),
+                  Set(FormatteNum18,""),
+                  Set(FormatteNum19,""),
+                  Set(FormatteNum20,""),
+                  Set(FormatteNum21,""),
+                  Set(FormatteNum22,""),
+                  Set(FormatteNum23,""),
+                  Set(FormatteNum24,""),
+                  Set(FormatteNum25,""),
+                  Set(FormatteNum26,""),
+                  Set(FormatteNum27,""),
+                  Set(FormatteNum28,""),
+                  Set(FormatteNum29,""),
+                  Set(FormatteNum30,""),
+                  Set(FormatteNum31,""),
+                  Set(FormatteNum32,""),
+                  Set(FormatteNum33,""), 
+                  Set(FormatteNum34,""), 
+                  Set(FormatteNum35,""),
+                  Set(FormatteNum36,""),
+                  Set(FormatteNum37,""),
+                  Set(FormatteNum38,""),
+                  Set(FormatteNum39,""),
+                  Set(FormatteNum40,""),
+                  Set(FormatteNum41,""),
+                  Set(FormatteNum42,""),
+                  Set(FormatteNum43,""),
+                  Set(FormatteNum44,""),
+                  Set(FormatteNum45,""),
+                  Set(FormatteNum46,""),
+                  Set(FormatteNum47,""),
+                  Set(FormatteNum48,""),
+                  Set(FormatteNum49,""),
+                  Set(FormatteNum50,""),
+                  Set(FormatteNum51,""),
+                  Set(FormatteNum52,""),
+                  Set(FormatteNum53,""),
+                  Set(FormatteNum54,""),
+                  Set(FormatteNum55,""),
+                  Set(FormatteNum56,""),
+                  Set(FormatteNum57,""),
+                  Set(FormatteNum58,""),
+                  Reset(inicio_dropdown_TipoDoc),
+                  Reset(app_combobox_identificacion_ics),
+                  Reset(Text_Num_obl),
+                  Reset(inicio_inputtext_Nombre),
+                  Reset(inicio_dropdown_pos_camb),
+                  Reset(inicio_dropdown_marca026_2),
+                  Reset(inicio_dropdown_telefonica_5),
+                  Reset(inicio_dropdown_edadmora),
+                  Reset(novacion_Dropdown_act_eco),
+                  Reset(novacion_inputtext_ingr_bruto),
+                  Reset(novacion_Dropdown_ocu_ingr_adicionales),
+                  Reset(novacion_inputtext_ingr_adi),
+                  Reset(novacion_inputtext_cuota_sin_BDB),
+                  Reset(novacion_inputtext_saldototal),
+                  Reset(novacion_inputtext_pagominimo),
+                  Reset(novacion_inputtext_pago_negociacion),
+                  Reset(novacion_DatePicker_fechapago),
+                  Reset(novacion_dropdown_plazo),
+                  Reset(tasa),
+                  Reset(novacion_dropdown_tasa),
+                  Reset(novacion_dropdown_compras_automaticas),
+                  Reset(novacion_dropdown_codigo_excepcion),
+                  Reset(amp_inputtext_otros_cargos),
+                  Reset(amp_inputtext_no_fact),
+                  Reset(amp_inputtext_conv_prima),
+                  Reset(amp_inputtext_int_cte),
+                  Reset(amp_inputtext_int_mora),
+                  Reset(amp_inputtext_snr),
+                  Reset(amp_DatePicker_fechapago),
+                  Reset(Dropdown2_2),
+                  Reset(amp_inputtext_ingr_bruto),
+                  Reset(Dropdown2_3),
+                  Reset(amp_inputtext_ingr_adi),
+                  Reset(amp_inputtext_cuota_sin_BDB),
+                  Reset(amp_inputtext_cap_total_ics),
+                  Reset(Dropdown4),
+                  Reset(amp_inputtext_plazo),
+                  Reset(amp_inputtext_tasa_int),
+                  Reset(amp_dropdown_tram_exec),
+                  Reset(Toggle2),
+                  Reset(pm_inputtext_pm),
+                  Reset(pm_inputtext_int_cte),
+                  Reset(pm_inputtext_int_mora),
+                  Reset(pm_inputtext_int_ext),
+                  Reset(pm_inputtext_snr),
+                  Reset(pm_DatePicker_fechapago),
+                  Reset(Dropdown1),
+                  Reset(pm_dropdown_tram_exec),
+                  Reset(cp_inputtext_cuota_sin_BDB_2),
+                  Reset(Dropdown2_9),
+                  Reset(cp_inputtext_ingr_bruto_2),
+                  Reset(Dropdown2_10),
+                  Reset(cp_inputtext_ingr_adi_2),
+                  Reset(Toggle2_1),
+                  Reset(ct_inputtext_sald_total),
+                  Reset(ct_inputtext_int_cte),
+                  Reset(ct_inputtext_int_mora),
+                  Reset(ct_inputtext_int_ext),
+                  Reset(ct_inputtext_cap_total),
+                  Reset(ct_inputtext_snr),
+                  Reset(ct_DatePicker_fechapago),
+                  Reset(ct_dropdown_tram_exec),
+                  Reset(cp_inputtext_cuota_sin_BDB_3),
+                  Reset(Dropdown2_11),
+                  Reset(cp_inputtext_ingr_bruto_3),
+                  Reset(Dropdown2_12),
+                  Reset(cp_inputtext_ingr_adi_3),
+                  Reset(cp_Toggle_1),
+                  Reset(inicio_inputtext_No_obl_1),
+                  Reset(cp_inputtext_sald_total_1),
+                  Reset(cp_inputtext_int_cte_1),
+                  Reset(cp_inputtext_int_mora_1),
+                  Reset(cp_inputtext_int_ext_1),
+                  Reset(inicio_dropdown_marca026_3),
+                  Reset(cp_Toggle_2),
+                  Reset(inicio_inputtext_No_obl_2),
+                  Reset(cp_inputtext_sald_total_2),
+                  Reset(cp_inputtext_int_cte_2),
+                  Reset(cp_inputtext_int_mora_2),
+                  Reset(cp_inputtext_int_ext_2),
+                  Reset(inicio_dropdown_marca026_4),
+                  Reset(cp_Toggle_3),
+                  Reset(inicio_inputtext_No_obl_3),
+                  Reset(cp_inputtext_sald_total_3),
+                  Reset(cp_inputtext_int_cte_3),
+                  Reset(cp_inputtext_int_mora_3),
+                  Reset(cp_inputtext_int_ext_3),
+                  Reset(inicio_dropdown_marca026_5),
+                  Reset(cp_Toggle_4),
+                  Reset(inicio_inputtext_No_obl_4),
+                  Reset(cp_inputtext_sald_total_4),
+                  Reset(cp_inputtext_int_cte_4),
+                  Reset(cp_inputtext_int_mora_4),
+                  Reset(cp_inputtext_int_ext_4),
+                  Reset(inicio_dropdown_marca026_6),
+                  Reset(cp_Toggle_5),
+                  Reset(inicio_inputtext_No_obl_5),
+                  Reset(cp_inputtext_sald_total_5),
+                  Reset(cp_inputtext_int_cte_5),
+                  Reset(cp_inputtext_int_mora_5),
+                  Reset(cp_inputtext_int_ext_5),
+                  Reset(inicio_dropdown_marca026_7),
+                  Reset(cp_Toggle_6),
+                  Reset(inicio_inputtext_No_obl_6),
+                  Reset(cp_inputtext_sald_total_6),
+                  Reset(cp_inputtext_int_cte_6),
+                  Reset(cp_inputtext_int_mora_6),
+                  Reset(cp_inputtext_int_ext_6),
+                  Reset(inicio_dropdown_marca026_8),
+                  Reset(Dropdown4_1),
+                  Reset(cp_inputtext_plazo),
+                  Reset(cp_inputtext_tasa_int_1),
+                  Reset(cp_DatePicker_fechapago_1),
+                  Reset(cp_dropdown_tram_exec_1),
+                  Reset(cp_inputtext_cuota_sin_BDB_1),
+                  Reset(Dropdown2_6),
+                  Reset(cp_inputtext_ingr_bruto_1),
+                  Reset(Dropdown2_7),
+                  Reset(cp_inputtext_ingr_adi_1),
+                  Reset(Oficina_bb),
+                  Reset(cp_inputtext_Codigo_Ofc),
+                  Reset(Dropdown2_8),
+                  Reset(CIUDAD_EXP_1),
+                  Reset(cp_DatePicker_fecha_exp),
+                  Reset(ct_dropdown_pregunta1),
+                  Reset(ct_dropdown_pregunta2),
+                  Reset(ct_dropdown_pregunta3),
+                  Reset(ct_dropdown_pregunta4),
+                  Reset(ct_dropdown_pregunta5),
+                  Reset(ct_dropdown_pregunta6),
+                  Reset(cp_textInput_observaciones_2),
+                  Navigate(ScreenPrincipal))
+            Visible: =ocultar
+            Width: =55
+            X: =379
+            Y: =1300
+      - Label2_336:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Size: =8
+            Text: ="Beneficios Aplicados"
+            Width: =179
+            X: =15
+            Y: =351
+      - Label2_338:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: ="$ "& Text(Value(ct_inputtext_desc_int_cte.Text), "[$-ES]#.###")
+            Width: =74
+            X: =271
+            Y: =351
+      - Label2_339:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: |-
+              ="$ "& 
+              Text(Value(ct_inputtext_desc_int_mora.Text), "[$-ES]#.###")
+            Width: =74
+            X: =345
+            Y: =351
+      - Label2_340:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: ="$ "& Text(Value(ct_inputtext_desc_int_ext.Text), "[$-ES]#.###")
+            Width: =74
+            X: =419
+            Y: =351
+      - Label2_341:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: ="$ "& Text(Value(ct_inputtext_porc_desc_cap.Text), "[$-ES]#.###")
+            Width: =77
+            X: =194
+            Y: =351
+      - Label2_342:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: =ct_inputtext_porc_int_cte_ics.Text
+            Width: =74
+            X: =271
+            Y: =371
+      - Label2_345:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: =ct_inputtext_porc_int_mora_ics.Text
+            Width: =74
+            X: =345
+            Y: =371
+      - Label2_346:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: =ct_inputtext_porc_int_ext_ics.Text
+            Width: =74
+            X: =419
+            Y: =371
+      - Label2_347:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: =ct_inputtext_porc_desc_cap_1.Text
+            Width: =77
+            X: =194
+            Y: =371
+      - Label2_271:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =27
+            Size: =8
+            Text: ="Saldo Total"
+            Width: =77
+            X: =194
+            Y: =304
+      - Label2_325:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =8
+            Text: ="$ "& Text(Value(ct_inputtext_cap_total.Text), "[$-ES]#.###")
+            Width: =77
+            X: =194
+            Y: =331

@@ -1,0 +1,102 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .container_declaration_garantias {
+      max-width: 804px;
+      margin: auto;
+      padding: 20px;
+    }
+    
+    .question_declaration_garantias {
+      display: inline-flex;
+      gap: 16px;
+      text-align: left;
+      align-items: center;
+      margin-bottom: 20px;
+
+    }
+
+    .question-text_declaration_garantias  {
+      flex: 1;
+      line-height: 1.9;
+      margin-left: 50px;
+    }
+
+    .question-select_declaration_garantias {
+      width: 120px;
+    }
+
+    select {
+      width: 100%;
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .question_declaration {
+        flex-direction: column;
+      }
+
+      .question-select_declaration {
+        width: 100%;
+
+      }
+    }
+
+    hr {
+      border: none;
+      height: 2px;
+      background-color: rgb(0, 44, 118);
+      width: 100%;
+    }
+
+    .form-section-title_garantias  {
+      font-weight: 500;
+      font-size: 1.2em;
+      white-space: pre-wrap;
+      margin-left: 20px;
+      
+    }
+  </style>
+</head>
+
+<body>
+  <hr>
+  </hr>
+  <div class="form-section-title_garantias">Fondo de Garantias</div>
+  <div class="container_declaration_garantias">
+    <div class="question_declaration_garantias">
+
+      <div class="question-text_declaration_garantias">
+        GARANTÍA FNG
+      </div>
+      <div class="question-select_declaration_garantias">
+        <select id="Garantiafng">
+          <option value="NO">NO</option>
+          <option value="SI">SI</option>
+
+        </select>
+      </div>
+    </div>
+
+    <div class="question_declaration_garantias">
+      <div class="question-text_declaration_garantias">
+        GARANTÍA FAG
+      </div>
+      <div class="question-select_declaration_garantias">
+        <select id="Garantiafag">
+          <option value="NO">NO</option>
+          <option value="SI">SI</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

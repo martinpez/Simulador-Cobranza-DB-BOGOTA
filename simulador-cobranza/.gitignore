@@ -1,0 +1,20 @@
+# Dependencias
+node_modules/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+*.suo
+*.user
+
+# Variables de entorno
+.env
+.env.local
+
+# Builds
+dist/
+build/
