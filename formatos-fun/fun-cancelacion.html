@@ -1,6 +1,4 @@
-<!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +18,7 @@
             padding: 60px;
         }
 
-        .container {
+        .container_Can {
             width: 780px;
             margin: 0 auto;
             background: white;
@@ -28,43 +26,43 @@
         }
 
 
-        .header-top {
+        .header-top_Can {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
         }
 
-        .logo-section {
+        .logo-section_Can {
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .logo-img {
+        .logo-img_Can {
             width: 57px;
             height: 58px;
             object-fit: contain;
         }
 
-        .bank-name {
+        .bank-name_Can {
             font-size: 18px;
             font-weight: 700;
             color: #333;
         }
 
-        .date-section {
+        .date-section_Can {
             margin: 5px;
             display: flex;
             gap: 0;
         }
 
-        .date-box {
+        .date-box_Can {
             border: 1px solid #000;
             text-align: center;
         }
 
-        .date-label {
+        .date-label_Can {
             background: white;
             padding: 4px 8px;
             font-size: 10px;
@@ -73,7 +71,7 @@
             min-width: 54px;
         }
 
-        .date-value {
+        .date-value_Can {
             background: white;
             padding: 4px 8px;
             font-size: 10px;
@@ -83,20 +81,20 @@
             justify-content: center;
         }
 
-        .title {
+        .title_Can {
             text-align: center;
             font-size: 12px;
             font-weight: 700;
         }
 
-        .subtitle {
+        .subtitle_Can {
             text-align: center;
             font-size: 12px;
             font-weight: 700;
         }
 
         /* Section Headers */
-        .section-header {
+        .section-header_Can {
             background: RGBA(56, 96, 178, 1);
             color: white;
             font-size: 10px;
@@ -106,7 +104,7 @@
             padding: 2px 2px;
         }
 
-        .subsection-header {
+        .subsection-header_Can {
             background: #A6A6A6;
             color: white;
             padding: 6px 15px;
@@ -116,22 +114,14 @@
             border: 1px solid #000;
         }
 
-        /* Form Grid */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            border-left: 1px solid #000;
-            border-top: 1px solid #000;
-        }
-
-        .form-field {
+        .form-field_Can {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             display: flex;
             flex-direction: column;
         }
 
-        .form-label {
+        .form-label_Can {
             background: white;
             font-size: 9px;
             font-weight: 700;
@@ -144,7 +134,7 @@
 
         }
 
-        .form-value {
+        .form-value_Can {
             background: white;
             padding: 8px;
             font-size: 9px;
@@ -155,21 +145,8 @@
             justify-content: center;
         }
 
-        /* Special layouts */
-        .field-full {
-            grid-column: 1 / -1;
-        }
-
-        .field-half {
-            grid-column: span 2;
-        }
-
-        .field-third {
-            grid-column: span 1;
-        }
-
         /* Office info section */
-        .office-section {
+        .office-section_Can {
 
             margin: 2px;
             margin-bottom: 0px;
@@ -180,7 +157,7 @@
         }
 
         /* Client info section */
-        .client-grid {
+        .client-grid_Can {
             margin: 0px 2px 2px 2px;
             margin-bottom: 0px;
             display: grid;
@@ -190,7 +167,7 @@
         }
 
         /* Activity section */
-        .activity-grid {
+        .activity-grid_Can{
             margin: 0px 2px 2px 2px;
             display: grid;
             grid-template-columns: 140px 130px 1fr 160px 100px;
@@ -199,7 +176,7 @@
         }
 
         /* Obligations and Conditions Container */
-        .obligations-conditions-container {
+        .obligations-conditions-container_Can {
             display: grid;
             grid-template-columns: 350px 1fr;
             gap: 0;
@@ -208,13 +185,13 @@
         }
 
 
-        .table-row {
+        .table-row_Can {
             display: grid;
             grid-template-columns: 1fr 50px 50px;
             border-left: 1px solid #000;
         }
 
-        .table-cell {
+        .table-cell_Can {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
 
@@ -225,79 +202,15 @@
             justify-content: center;
         }
 
-        .table-header {
+        .table-header_Can {
             background: white;
             font-weight: 700;
             min-height: 27px;
             border-top: 1px solid #000;
-        }
-
-        /* Payment row */
-        .payment-row {
-            display: grid;
-            grid-template-columns: 100px 81px 74px 74px;
-            border-left: 1px solid #000;
-        }
-
-        .payment-cell {
-            border-right: 1px solid #000;
-            border-bottom: 1px solid #000;
-            padding: 8px;
-            font-size: 7px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-        }
-
-        /* Conditions section */
-        .conditions-section {
-            display: flex;
-            flex-direction: column;
-            margin-left: 40px;
-        }
-
-        .conditions-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            border-left: 1px solid #000;
-            border-top: 1px solid #000;
-        }
-
-        .condition-field {
-            border-right: 1px solid #000;
-            border-bottom: 1px solid #000;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .condition-label {
-            background: white;
-            font-size: 7px;
-            font-weight: 700;
-            text-align: center;
-            border-bottom: 1px solid #000;
-            min-height: 27px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px;
-        }
-
-        .condition-value {
-            background: white;
-            padding: 6px;
-            font-size: 8px;
-            text-align: center;
-            min-height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         /* Terms and conditions */
-        .terms-text {
+        .terms-text_Can {
             border: 1px solid #000;
             padding: 8px;
             font-size: 6.5px;
@@ -307,24 +220,24 @@
             margin: 0px 2px 0px 2px;
         }
 
-        .terms-text p {
+        .terms-text_Can p {
             margin-bottom: 1px;
         }
 
         /* Questions section */
-        .questions-grid {
+        .questions-grid_Can {
 
             margin: 0px 2px 0px 2px;
         }
 
-        .question-row {
+        .question-row_Can {
             display: grid;
             grid-template-columns: 1fr 26px;
             border-left: 1px solid #000;
 
         }
 
-        .question-text {
+        .question-text_Can {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             padding: 8px;
@@ -332,7 +245,7 @@
             background: white;
         }
 
-        .question-answer {
+        .question-answer_Can {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             padding: 1px;
@@ -345,37 +258,37 @@
         }
 
         /* Signature section */
-        .signature-section {
+        .signature-section_Can {
             padding-bottom: 30px;
             margin: 30px 40px 0px 40px;
 
         }
 
-        .signature-line {
+        .signature-line_Can {
             width: 270px;
             height: 1px;
             background: #000;
             margin: 20px 0 5px 0;
         }
 
-        .signature-label {
+        .signature-label_Can {
             font-size: 10px;
             font-weight: 700;
             margin-bottom: 5px;
         }
 
-        .signature-info {
+        .signature-info_Can {
             font-size: 9px;
             font-weight: 700;
             margin-top: 5px;
         }
 
-        .fingerprint-box {
+        .fingerprint-box_Can {
             text-align: center;
 
         }
 
-        .fingerprint-line {
+        .fingerprint-line_Can {
             width: 70px;
             height: 70px;
             border: 1px solid #000;
@@ -389,13 +302,13 @@
             color: #555;
         }
 
-        .fingerprint-label {
+        .fingerprint-label_Can {
             font-size: 10px;
             font-weight: 700;
         }
 
         /* Observations */
-        .observations {
+        .observations_Can {
             margin: 0px 2px 2px 2px;
             display: flex;
             border: 1px solid #000;
@@ -405,7 +318,7 @@
 
         }
 
-        .observations-section {
+        .observations-section_Can {
             flex: 1;
             padding: 5px;
             font-size: 11px;
@@ -414,42 +327,42 @@
             align-items: center;
         }
 
-        .observations-label {
+        .observations-label_Can {
 
             font-size: 7px;
         }
 
-        .observaciones-answer {
+        .observaciones-answer_Can {
             flex: 1;
             padding: 2px;
             font-size: 8px;
         }
 
         /* Sección de Garantías (Derecha) */
-        .guarantees-section {
+        .guarantees-section_Can {
             width: 160px;
             /* Ajusta este ancho según necesites */
             display: flex;
             flex-direction: column;
         }
 
-        .guarantee-row {
+        .guarantee-row_Can {
             display: grid;
             grid-template-columns: 1fr 26px;
             height: 50%;
         }
 
-        .guarantee-row.top {
+        .guarantee-row_Can.top {
             border-bottom: 1px solid #000;
         }
 
-        .guarantee-text {
+        .guarantee-text_Can {
             padding: 2px;
             font-size: 8px;
             align-self: center;
         }
 
-        .guarantee-value {
+        .guarantee-value_Can {
             padding: 2px;
             font-size: 9px;
             text-align: center;
@@ -461,46 +374,46 @@
 
         /* Estilos específicos para la tabla de obligaciones */
         /* Estilos para la tabla de obligaciones */
-        .table-obligaciones {
+        .table-obligaciones_Can {
             width: 100%;
             border-collapse: collapse;
             table-layout: fixed;
             margin-top: -1px;
         }
 
-        .table-obligaciones td {
+        .table-obligaciones_Can td {
             border: 1px solid #000;
             font-size: 9px;
             text-align: center;
             vertical-align: middle;
         }
 
-        .header-celda {
+        .header-celda_Can {
             font-weight: 800;
             padding: 4px;
         }
 
         /* Nueva clase para la celda expandida */
-        .beneficios-label {
+        .beneficios-label_Can {
             font-weight: 800;
             background-color: white;
             text-align: center;
         }
 
-        .celda-dividida {
+        .celda-dividida_Can {
             padding: 0 !important;
         }
 
-        .sub-valor {
+        .sub-valor_Can {
             border-bottom: 1px solid #000;
             padding: 2px 0;
         }
 
-        .sub-porcentaje {
+        .sub-porcentaje_Can {
             padding: 2px 0;
         }
 
-        .panel-pago {
+        .panel-pago_Can {
             font-size: 13px;
             font-weight: 800;
             width: 25%;
@@ -522,121 +435,121 @@
 </head>
 
 <body class="layout-especial_Can">
-    <div id="contenedor-pdf" class="container">
+    <div id="contenedor-pdf" class="container_Can">
         <!-- Header -->
-        <div class="header">
-            <div class="header-top">
-                <div class="logo-section">
+        <div class="header_Can">
+            <div class="header-top_Can">
+                <div class="logo-section_Can">
                     <img src="https://i.postimg.cc/rp9ttPt3/Logo-BDB-removebg-preview.png" alt="Banco de Bogotá"
-                        class="logo-img">
-                    <div class="bank-name">BANCO DE BOGOTÁ</div>
+                        class="logo-img_Can">
+                    <div class="bank-name_Can">BANCO DE BOGOTÁ</div>
                 </div>
-                <div class="date-section">
-                    <div class="date-box">
-                        <div class="date-label">DIA</div>
-                        <div class="date-value" id="day"><!-- DYNAMIC: Day --></div>
+                <div class="date-section_Can">
+                    <div class="date-box_Can">
+                        <div class="date-label_Can">DIA</div>
+                        <div class="date-value_Can" id="day"></div>
                     </div>
-                    <div class="date-box">
-                        <div class="date-label">MES</div>
-                        <div class="date-value" id="month"><!-- DYNAMIC: Month --></div>
+                    <div class="date-box_Can">
+                        <div class="date-label_Can">MES</div>
+                        <div class="date-value_Can" id="month"></div>
                     </div>
-                    <div class="date-box">
-                        <div class="date-label">AÑO</div>
-                        <div class="date-value" id="year"><!-- DYNAMIC: Year --></div>
+                    <div class="date-box_Can">
+                        <div class="date-label_Can">AÑO</div>
+                        <div class="date-value_Can" id="year"></div>
                     </div>
                 </div>
             </div>
-            <div class="title">Solicitud de Normalizacion - Formato Único</div>
+            <div class="title_Can">Solicitud de Normalizacion - Formato Único</div>
         </div>
 
-        <div class="subtitle">MECANISMO DE NORMALIZACION: CANCELACIÓN TOTAL</div>
+        <div class="subtitle_Can">MECANISMO DE NORMALIZACION: CANCELACIÓN TOTAL</div>
 
         <!-- Office Information -->
-        <div class="office-section">
-            <div class="form-field">
-                <div class="form-label">Cód Ofc.</div>
-                <div class="form-value" id="codOficina"><!-- DYNAMIC: Código Oficina --></div>
+        <div class="office-section_Can">
+            <div class="form-field_Can">
+                <div class="form-label_Can">Cód Ofc.</div>
+                <div class="form-value_Can" id="codOficina"><!-- DYNAMIC: Código Oficina --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Oficina en que se realiza<br> la negociación</div>
-                <div class="form-value" id="nombreOficina"><!-- DYNAMIC: Nombre Oficina --></div>
+            <div class="form-field_Can">
+                <div class="form-label_Can">Oficina en que se realiza<br> la negociación</div>
+                <div class="form-value_Can" id="nombreOficina"><!-- DYNAMIC: Nombre Oficina --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Cuenta del pago / SNR</div>
-                <div class="form-value" id="cuentaPago"><!-- DYNAMIC: Cuenta Pago --></div>
+            <div class="form-field_Can">
+                <div class="form-label_Can">Cuenta del pago / SNR</div>
+                <div class="form-value_Can" id="cuentaPago"><!-- DYNAMIC: Cuenta Pago --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Funcionario de quien efectúa la negociación:</div>
-                <div class="form-value" id="funcionario"><!-- DYNAMIC: Nombre Funcionario --></div>
+            <div class="form-field_Can">
+                <div class="form-label_Can">Funcionario de quien efectúa la negociación:</div>
+                <div class="form-value_Can" id="funcionario"><!-- DYNAMIC: Nombre Funcionario --></div>
             </div>
         </div>
 
         <!-- Client Information Section -->
-        <div class="section-header">INFORMACION CLIENTE</div>
+        <div class="section-header_Can">INFORMACION CLIENTE</div>
 
-        <div class="client-grid">
-            <div class="form-field">
-                <div class="form-label">Nombre Cliente</div>
-                <div class="form-value" id="nombreCliente"><!-- DYNAMIC: Nombre Cliente --></div>
+        <div class="client-grid_Can">
+            <div class="form-field_Can">
+                <div class="form-label_Can">Nombre Cliente</div>
+                <div class="form-value_Can" id="nombreCliente"><!-- DYNAMIC: Nombre Cliente --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Tipo Doc</div>
-                <div class="form-value" id="tipoDoc"><!-- DYNAMIC: Tipo Documento --></div>
+            <div class="form-field_Can">
+                <div class="form-label_Can">Tipo Doc</div>
+                <div class="form-value_Can" id="tipoDoc"><!-- DYNAMIC: Tipo Documento --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Num. Documento</div>
-                <div class="form-value" id="numDoc"><!-- DYNAMIC: Número Documento --></div>
+            <div class="form-field_Can">
+                <div class="form-label_Can">Num. Documento</div>
+                <div class="form-value_Can" id="numDoc"><!-- DYNAMIC: Número Documento --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Lugar de Expedicion</div>
-                <div class="form-value" id="lugarExp"><!-- DYNAMIC: Lugar Expedición --></div>
+            <div class="form-field_Can">
+                <div class="form-label_Can">Lugar de Expedicion</div>
+                <div class="form-value_Can" id="lugarExp"><!-- DYNAMIC: Lugar Expedición --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Fecha De Expedicion</div>
-                <div class="form-value" id="fechaExp"><!-- DYNAMIC: Fecha Expedición --></div>
+            <div class="form-field_Can">
+                <div class="form-label_Can">Fecha De Expedicion</div>
+                <div class="form-value_Can" id="fechaExp"><!-- DYNAMIC: Fecha Expedición --></div>
             </div>
         </div>
 
         <!-- Activity and Income Information -->
-        <div class="activity-grid">
-            <div class="form-field">
-                <div class="form-label">Dias Mora</div>
-                <div class="form-value" id="diasMora"><!-- DYNAMIC: Días Mora --></div>
+        <div class="activity-grid_Can">
+            <div class="form-field_Can">
+                <div class="form-label_Can">Dias Mora</div>
+                <div class="form-value_Can" id="diasMora"><!-- DYNAMIC: Días Mora --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Descripcion Actividad</div>
-                <div class="form-value" id="descripcionActividad"><!-- DYNAMIC: Descripción Actividad --></div>
+            <div class="form-field_Can">
+                <div class="form-label_Can">Descripcion Actividad</div>
+                <div class="form-value_Can" id="descripcionActividad"><!-- DYNAMIC: Descripción Actividad --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Ingreso Mensual</div>
-                <div class="form-value" id="ingresoMensual"><!-- DYNAMIC: Ingreso Mensual --></div>
+            <div class="form-field_Can">
+                <div class="form-label_Can">Ingreso Mensual</div>
+                <div class="form-value_Can" id="ingresoMensual"><!-- DYNAMIC: Ingreso Mensual --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Ocupación Ingresos Adicional</div>
-                <div class="form-value" id="ocupacionAdicional"><!-- DYNAMIC: Ocupación Adicional --></div>
+            <div class="form-field_Can">
+                <div class="form-label_Can">Ocupación Ingresos Adicional</div>
+                <div class="form-value_Can" id="ocupacionAdicional"><!-- DYNAMIC: Ocupación Adicional --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Ingresos Adicionales</div>
-                <div class="form-value" id="ingresosAdicionales"><!-- DYNAMIC: Ingresos Adicionales --></div>
+            <div class="form-field_Can">
+                <div class="form-label_Can">Ingresos Adicionales</div>
+                <div class="form-value_Can" id="ingresosAdicionales"><!-- DYNAMIC: Ingresos Adicionales --></div>
             </div>
         </div>
 
-        <div class="section-header">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
+        <div class="section-header_Can">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
 
-        <div class="obligations-conditions-container" style="display: block; margin: 0 2px 20px;">
-            <div class="subsection-header" style="border-bottom: none;">
+        <div class="obligations-conditions-container_Can" style="display: block; margin: 0 2px 20px;">
+            <div class="subsection-header_Can" style="border-bottom: none;">
                 Datos Obligaciones Condiciones negociación
             </div>
 
-            <table class="table-obligaciones">
-                <tr class="header-celda">
+            <table class="table-obligaciones_Can">
+                <tr class="header-celda_Can">
                     <td style="width: 15%;">Nro. Obligación (4 ultimos)</td>
                     <td style="width: 12%;">Saldo Total</td>
                     <td style="width: 12%;">Saldo Total</td>
                     <td style="width: 12%;">Int Corrientes</td>
                     <td style="width: 12%;">int mora</td>
                     <td style="width: 12%;">Int ExtraC "TC"</td>
-                    <td rowspan="3" class="panel-pago">
+                    <td rowspan="3" class="panel-pago_Can">
                         Pago a Realizar: <span style="font-weight:200" id="pagoRealizar"></span><br><br>
                         Fecha del Pago: <span style="font-weight:200" id="fechaPagoNuevo"></span>
                     </td>
@@ -652,32 +565,32 @@
                 </tr>
 
                 <tr>
-                    <td colspan="2" class="beneficios-label">Beneficios Aplicados</td>
+                    <td colspan="2" class="beneficios-label_Can">Beneficios Aplicados</td>
 
-                    <td class="celda-dividida">
-                        <div class="sub-valor">$ <span id="benSaldo"></span></div>
-                        <div class="sub-porcentaje"><span id="porcBenSaldo"></span></div>
+                    <td class="celda-dividida_Can">
+                        <div class="sub-valor_Can">$ <span id="benSaldo"></span></div>
+                        <div class="sub-porcentaje_Can"><span id="porcBenSaldo"></span></div>
                     </td>
-                    <td class="celda-dividida">
-                        <div class="sub-valor">$ <span id="benIntCorr"></span></div>
-                        <div class="sub-porcentaje"><span id="porcBenIntCorr"></span></div>
+                    <td class="celda-dividida_Can">
+                        <div class="sub-valor_Can">$ <span id="benIntCorr"></span></div>
+                        <div class="sub-porcentaje_Can"><span id="porcBenIntCorr"></span></div>
                     </td>
-                    <td class="celda-dividida">
-                        <div class="sub-valor">$ <span id="benIntMora"></span></div>
-                        <div class="sub-porcentaje"><span id="porcBenIntMora"></span></div>
+                    <td class="celda-dividida_Can">
+                        <div class="sub-valor_Can">$ <span id="benIntMora"></span></div>
+                        <div class="sub-porcentaje_Can"><span id="porcBenIntMora"></span></div>
                     </td>
-                    <td class="celda-dividida">
-                        <div class="sub-valor">$ <span id="benIntExtra"></span></div>
-                        <div class="sub-porcentaje"><span id="porcBenIntExtra"></span></div>
+                    <td class="celda-dividida_Can">
+                        <div class="sub-valor_Can">$ <span id="benIntExtra"></span></div>
+                        <div class="sub-porcentaje_Can"><span id="porcBenIntExtra"></span></div>
                     </td>
                 </tr>
             </table>
         </div>
 
         <!-- Terms and Conditions -->
-        <div class="section-header">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
+        <div class="section-header_Can">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
 
-        <div class="terms-text" id="terminosCondiciones">
+        <div class="terms-text_Can" id="terminosCondiciones">
             <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
                 esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
                 quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre el
@@ -744,51 +657,51 @@
         </div>
 
         <!-- Questions Section -->
-        <div class="questions-grid">
-            <div class="question-row">
-                <div class="question-text">He permanecido más de 183 días en el último año, o 183 días durante los
+        <div class="questions-grid_Can">
+            <div class="question-row_Can">
+                <div class="question-text_Can">He permanecido más de 183 días en el último año, o 183 días durante los
                     últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia</div>
-                <div class="question-answer" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
+                <div class="question-answer_Can" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
             </div>
-            <div class="question-row">
-                <div class="question-text">Soy poseedor de un documento de identificación expedido en un pais diferente
+            <div class="question-row_Can">
+                <div class="question-text_Can">Soy poseedor de un documento de identificación expedido en un pais diferente
                     a Colombia</div>
-                <div class="question-answer" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
+                <div class="question-answer_Can" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
             </div>
-            <div class="question-row">
-                <div class="question-text">Recibo cualquier pago de intereses, dividendos, rentas, salarios, honorario,
+            <div class="question-row_Can">
+                <div class="question-text_Can">Recibo cualquier pago de intereses, dividendos, rentas, salarios, honorario,
                     primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
                     ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
-                <div class="question-answer" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
+                <div class="question-answer_Can" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
             </div>
-            <div class="question-row">
-                <div class="question-text">Recibo cualquier ingreso bruto procedente de la venta u otra disposición de
+            <div class="question-row_Can">
+                <div class="question-text_Can">Recibo cualquier ingreso bruto procedente de la venta u otra disposición de
                     cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera del
                     territorio Colombiano.</div>
-                <div class="question-answer" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
+                <div class="question-answer_Can" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
             </div>
         </div>
 
         <!-- Observations  garantias-->
-        <div class="observations">
+        <div class="observations_Can">
 
-            <div class="observations-section">
-                <span class="observations-label">Observaciones:</span>
-                <div class="observaciones-answer" id="observaciones">
+            <div class="observations-section_Can">
+                <span class="observations-label_Can">Observaciones:</span>
+                <div class="observaciones-answer_Can" id="observaciones">
                 </div>
             </div>
 
-            <div class="guarantees-section">
+            <div class="guarantees-section_Can">
 
-                <div class="guarantee-row top">
-                    <div class="guarantee-text">Garantia FAG</div>
-                    <div class="guarantee-value" id="garantiaFAG">
+                <div class="guarantee-row_Can top">
+                    <div class="guarantee-text_Can">Garantia FAG</div>
+                    <div class="guarantee-value_Can" id="garantiaFAG">
                     </div>
                 </div>
 
-                <div class="guarantee-row">
-                    <div class="guarantee-text">Garantia FNG</div>
-                    <div class="guarantee-value" id="garantiaFNG">
+                <div class="guarantee-row_Can">
+                    <div class="guarantee-text_Can">Garantia FNG</div>
+                    <div class="guarantee-value_Can" id="garantiaFNG">
                     </div>
                 </div>
 
@@ -797,18 +710,18 @@
 
 
         <!-- Signature Section -->
-        <div class="signature-section">
+        <div class="signature-section_Can">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
 
-                    <div class="signature-line"></div>
-                    <div class="signature-label">Firma Cliente o Representante legal</div>
-                    <div class="signature-info">CC/NIT Número:</div>
+                    <div class="signature-line_Can"></div>
+                    <div class="signature-label_Can">Firma Cliente o Representante legal</div>
+                    <div class="signature-info_Can">CC/NIT Número:</div>
                 </div>
-                <div class="fingerprint-box">
+                <div class="fingerprint-box_Can">
 
-                    <div class="fingerprint-line"></div>
-                    <div class="fingerprint-label">Huella</div>
+                    <div class="fingerprint-line_Can"></div>
+                    <div class="fingerprint-label_Can">Huella</div>
                 </div>
             </div>
         </div>

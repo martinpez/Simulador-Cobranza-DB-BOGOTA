@@ -1,29 +1,26 @@
-<!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link
         href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        .layout-especial_No * {
+        .layout-especial_con * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        .layout-especial_No {
+        .layout-especial_con {
             font-family: 'Open Sans', sans-serif;
             background: #f5f5f5;
             color: #333;
             padding: 60px;
         }
 
-        .container {
+        .container_con {
             width: 780px;
             margin: 0 auto;
             background: white;
@@ -31,43 +28,43 @@
         }
 
 
-        .header-top {
+        .header-top_con {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
         }
 
-        .logo-section {
+        .logo-section_con {
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .logo-img {
+        .logo-img_con {
             width: 57px;
             height: 58px;
             object-fit: contain;
         }
 
-        .bank-name {
+        .bank-name_con {
             font-size: 18px;
             font-weight: 700;
             color: #333;
         }
 
-        .date-section {
+        .date-section_con {
             margin: 5px;
             display: flex;
             gap: 0;
         }
 
-        .date-box {
+        .date-box_con {
             border: 1px solid #000;
             text-align: center;
         }
 
-        .date-label {
+        .date-label_con {
             background: white;
             padding: 4px 8px;
             font-size: 10px;
@@ -76,7 +73,7 @@
             min-width: 54px;
         }
 
-        .date-value {
+        .date-value_con {
             background: white;
             padding: 4px 8px;
             font-size: 10px;
@@ -86,20 +83,20 @@
             justify-content: center;
         }
 
-        .title {
+        .title_con {
             text-align: center;
             font-size: 12px;
             font-weight: 700;
         }
 
-        .subtitle {
+        .subtitle_con {
             text-align: center;
             font-size: 12px;
             font-weight: 700;
         }
 
         /* Section Headers */
-        .section-header {
+        .section-header_con {
             background: RGBA(56, 96, 178, 1);
             color: white;
             font-size: 10px;
@@ -109,7 +106,7 @@
             padding: 2px 2px;
         }
 
-        .subsection-header {
+        .subsection-header_con {
             background: #A6A6A6;
             color: white;
             padding: 6px 15px;
@@ -119,22 +116,14 @@
             border: 1px solid #000;
         }
 
-        /* Form Grid */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            border-left: 1px solid #000;
-            border-top: 1px solid #000;
-        }
-
-        .form-field {
+        .form-field_con {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             display: flex;
             flex-direction: column;
         }
 
-        .form-label {
+        .form-label_con {
             background: white;
             font-size: 9px;
             font-weight: 700;
@@ -147,7 +136,7 @@
 
         }
 
-        .form-value {
+        .form-value_con {
             background: white;
             padding: 8px;
             font-size: 9px;
@@ -158,21 +147,8 @@
             justify-content: center;
         }
 
-        /* Special layouts */
-        .field-full {
-            grid-column: 1 / -1;
-        }
-
-        .field-half {
-            grid-column: span 2;
-        }
-
-        .field-third {
-            grid-column: span 1;
-        }
-
         /* Office info section */
-        .office-section {
+        .office-section_con {
 
             margin: 2px;
             margin-bottom: 0px;
@@ -183,7 +159,7 @@
         }
 
         /* Client info section */
-        .client-grid {
+        .client-grid_con {
             margin: 0px 2px 2px 2px;
             margin-bottom: 0px;
             display: grid;
@@ -193,7 +169,7 @@
         }
 
         /* Activity section */
-        .activity-grid {
+        .activity-grid_con {
             margin: 0px 2px 2px 2px;
             display: grid;
             grid-template-columns: 140px 130px 1fr 160px 100px;
@@ -202,7 +178,7 @@
         }
 
         /* Obligations and Conditions Container */
-        .obligations-conditions-container {
+        .obligations-conditions-container_con {
             display: grid;
             grid-template-columns: 200px 400px;
             gap: 0;
@@ -211,13 +187,13 @@
         }
 
 
-        .table-row {
+        .table-row_con {
             display: grid;
             grid-template-columns: 1fr 50px 50px;
             border-left: 1px solid #000;
         }
 
-        .table-cell {
+        .table-cell_con {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
 
@@ -228,79 +204,15 @@
             justify-content: center;
         }
 
-        .table-header {
+        .table-header_con {
             background: white;
             font-weight: 700;
             min-height: 27px;
             border-top: 1px solid #000;
         }
 
-        /* Payment row */
-        .payment-row {
-            display: grid;
-            grid-template-columns: 100px 81px 74px 74px;
-            border-left: 1px solid #000;
-        }
-
-        .payment-cell {
-            border-right: 1px solid #000;
-            border-bottom: 1px solid #000;
-            padding: 8px;
-            font-size: 7px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-        }
-
-        /* Conditions section */
-        .conditions-section {
-            display: flex;
-            flex-direction: column;
-            margin-left: 40px;
-        }
-
-        .conditions-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            border-left: 1px solid #000;
-            border-top: 1px solid #000;
-        }
-
-        .condition-field {
-            border-right: 1px solid #000;
-            border-bottom: 1px solid #000;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .condition-label {
-            background: white;
-            font-size: 7px;
-            font-weight: 700;
-            text-align: center;
-            border-bottom: 1px solid #000;
-            min-height: 27px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px;
-        }
-
-        .condition-value {
-            background: white;
-            padding: 6px;
-            font-size: 8px;
-            text-align: center;
-            min-height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Terms and conditions */
-        .terms-text {
+        /* Nuevos estilos para la tabla estilo imagen aa6512 */
+        .terms-text_con {
             border: 1px solid #000;
             padding: 8px;
             font-size: 6.5px;
@@ -310,24 +222,24 @@
             margin: 0px 2px 0px 2px;
         }
 
-        .terms-text p {
+        .terms-text_con p {
             margin-bottom: 1px;
         }
 
         /* Questions section */
-        .questions-grid {
+        .questions-grid_con {
 
             margin: 0px 2px 0px 2px;
         }
 
-        .question-row {
+        .question-row_con {
             display: grid;
             grid-template-columns: 1fr 26px;
             border-left: 1px solid #000;
 
         }
 
-        .question-text {
+        .question-text_con {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             padding: 8px;
@@ -335,7 +247,7 @@
             background: white;
         }
 
-        .question-answer {
+        .question-answer_con {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             padding: 1px;
@@ -348,37 +260,37 @@
         }
 
         /* Signature section */
-        .signature-section {
+        .signature-section_con {
             padding-bottom: 30px;
             margin: 30px 40px 0px 40px;
 
         }
 
-        .signature-line {
+        .signature-line_con {
             width: 270px;
             height: 1px;
             background: #000;
             margin: 20px 0 5px 0;
         }
 
-        .signature-label {
+        .signature-label_con {
             font-size: 10px;
             font-weight: 700;
             margin-bottom: 5px;
         }
 
-        .signature-info {
+        .signature-info_con {
             font-size: 9px;
             font-weight: 700;
             margin-top: 5px;
         }
 
-        .fingerprint-box {
+        .fingerprint-box_con {
             text-align: center;
 
         }
 
-        .fingerprint-line {
+        .fingerprint-line_con {
             width: 70px;
             height: 70px;
             border: 1px solid #000;
@@ -392,24 +304,24 @@
             color: #555;
         }
 
-        .fingerprint-label {
+        .fingerprint-label_con {
             font-size: 10px;
             font-weight: 700;
         }
 
         /* Nuevos estilos para la tabla estilo imagen aa6512 */
-        .normalization-container {
+        .normalization-container_con {
             display: grid;
             grid-template-columns: 1.2fr 1fr;
             margin: 0px 2px 2px 2px;
             border: 1px solid #000;
         }
 
-        .obligations-table-new {
+        .obligations-table-new_con {
             border-right: 1px solid #000;
         }
 
-        .grid-header-row {
+        .grid-header-row_con {
             display: grid;
             grid-template-columns: 100px 1fr 1fr 1fr 1fr;
             background: #A6A6A6;
@@ -420,14 +332,14 @@
             border-bottom: 1px solid #000;
         }
 
-        .grid-data-row {
+        .grid-data-row_con {
             display: grid;
             grid-template-columns: 100px 1fr 1fr 1fr 1fr;
             min-height: 20px;
             border-bottom: 1px solid #000;
         }
 
-        .grid-cell {
+        .grid-cell_con {
             border-right: 1px solid #000;
             display: flex;
             align-items: center;
@@ -436,32 +348,32 @@
             padding: 2px;
         }
 
-        .grid-cell:last-child {
+        .grid-cell_con:last-child {
             border-right: none;
         }
 
-        .conditions-panel {
+        .conditions-panel_con {
             padding: 10px;
 
             font-size: 9px;
 
         }
 
-        .condition-item {
+        .condition-item_con {
             display: flex;
             justify-content: flex-start;
             font-weight: 700;
             margin-bottom: 2px;
         }
 
-        .condition-item span {
+        .condition-item_con span {
             font-weight: 400;
             margin-left: 5px;
         }
 
 
         /* Observations */
-        .observations {
+        .observations_con {
             margin: 0px 2px 2px 2px;
             display: flex;
             border: 1px solid #000;
@@ -471,7 +383,7 @@
 
         }
 
-        .observations-section {
+        .observations-section_con {
             flex: 1;
             padding: 5px;
             font-size: 11px;
@@ -480,42 +392,42 @@
             align-items: center;
         }
 
-        .observations-label {
+        .observations-label_con {
 
             font-size: 7px;
         }
 
-        .observaciones-answer {
+        .observaciones-answer_con {
             flex: 1;
             padding: 2px;
             font-size: 8px;
         }
 
         /* Sección de Garantías (Derecha) */
-        .guarantees-section {
+        .guarantees-section_con {
             width: 160px;
             /* Ajusta este ancho según necesites */
             display: flex;
             flex-direction: column;
         }
 
-        .guarantee-row {
+        .guarantee-row_con {
             display: grid;
             grid-template-columns: 1fr 26px;
             height: 50%;
         }
 
-        .guarantee-row.top {
+        .guarantee-row_con.top {
             border-bottom: 1px solid #000;
         }
 
-        .guarantee-text {
+        .guarantee-text_con {
             padding: 2px;
             font-size: 8px;
             align-self: center;
         }
 
-        .guarantee-value {
+        .guarantee-value_con {
             padding: 2px;
             font-size: 9px;
             text-align: center;
@@ -531,7 +443,7 @@
                 padding: 0;
             }
 
-            .container {
+            .container_con {
                 box-shadow: none;
                 max-width: 100%;
             }
@@ -539,182 +451,182 @@
     </style>
 </head>
 
-<body class="layout-especial_No">
-    <div id="contenedor-pdf" class="container">
+<body class="layout-especial_con">
+    <div id="contenedor-pdf" class="container_con">
         <!-- Header -->
-        <div class="header">
-            <div class="header-top">
-                <div class="logo-section">
+        <div class="header_con">
+            <div class="header-top_con">
+                <div class="logo-section_con">
                     <img src="https://i.postimg.cc/rp9ttPt3/Logo-BDB-removebg-preview.png" alt="Banco de Bogotá"
-                        class="logo-img">
-                    <div class="bank-name">BANCO DE BOGOTÁ</div>
+                        class="logo-img_con">
+                    <div class="bank-name_con">BANCO DE BOGOTÁ</div>
                 </div>
-                <div class="date-section">
-                    <div class="date-box">
-                        <div class="date-label">DIA</div>
-                        <div class="date-value" id="day"><!-- DYNAMIC: Day --></div>
+                <div class="date-section_con">
+                    <div class="date-box_con">
+                        <div class="date-label_con">DIA</div>
+                        <div class="date-value_con" id="day"></div>
                     </div>
-                    <div class="date-box">
-                        <div class="date-label">MES</div>
-                        <div class="date-value" id="month"><!-- DYNAMIC: Month --></div>
+                    <div class="date-box_con">
+                        <div class="date-label_con">MES</div>
+                        <div class="date-value_con" id="month"></div>
                     </div>
-                    <div class="date-box">
-                        <div class="date-label">AÑO</div>
-                        <div class="date-value" id="year"><!-- DYNAMIC: Year --></div>
+                    <div class="date-box_con">
+                        <div class="date-label_con">AÑO</div>
+                        <div class="date-value_con" id="year"></div>
                     </div>
                 </div>
             </div>
-            <div class="title">Solicitud de Normalizacion - Formato Único</div>
+            <div class="title_con">Solicitud de Normalizacion - Formato Único</div>
         </div>
 
-        <div class="subtitle">MECANISMO DE NORMALIZACION: CONSOLIDACION</div>
+        <div class="subtitle_con">MECANISMO DE NORMALIZACION: CONSOLIDACION</div>
 
         <!-- Office Information -->
-        <div class="office-section">
-            <div class="form-field">
-                <div class="form-label">Cód Ofc.</div>
-                <div class="form-value" id="codOficina"><!-- DYNAMIC: Código Oficina --></div>
+        <div class="office-section_con">
+            <div class="form-field_con">
+                <div class="form-label_con">Cód Ofc.</div>
+                <div class="form-value_con" id="codOficina"><!-- DYNAMIC: Código Oficina --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Oficina en que se realiza<br> la negociación</div>
-                <div class="form-value" id="nombreOficina"><!-- DYNAMIC: Nombre Oficina --></div>
+            <div class="form-field_con">
+                <div class="form-label_con">Oficina en que se realiza<br> la negociación</div>
+                <div class="form-value_con" id="nombreOficina"><!-- DYNAMIC: Nombre Oficina --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Cuenta del pago / SNR</div>
-                <div class="form-value" id="cuentaPago"><!-- DYNAMIC: Cuenta Pago --></div>
+            <div class="form-field_con">
+                <div class="form-label_con">Cuenta del pago / SNR</div>
+                <div class="form-value_con" id="cuentaPago"><!-- DYNAMIC: Cuenta Pago --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Funcionario de quien efectúa la negociación:</div>
-                <div class="form-value" id="funcionario"><!-- DYNAMIC: Nombre Funcionario --></div>
+            <div class="form-field_con">
+                <div class="form-label_con">Funcionario de quien efectúa la negociación:</div>
+                <div class="form-value_con" id="funcionario"><!-- DYNAMIC: Nombre Funcionario --></div>
             </div>
         </div>
 
         <!-- Client Information Section -->
-        <div class="section-header">INFORMACION CLIENTE</div>
+        <div class="section-header_con">INFORMACION CLIENTE</div>
 
-        <div class="client-grid">
-            <div class="form-field">
-                <div class="form-label">Nombre Cliente</div>
-                <div class="form-value" id="nombreCliente"><!-- DYNAMIC: Nombre Cliente --></div>
+        <div class="client-grid_con">
+            <div class="form-field_con">
+                <div class="form-label_con">Nombre Cliente</div>
+                <div class="form-value_con" id="nombreCliente"><!-- DYNAMIC: Nombre Cliente --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Tipo Doc</div>
-                <div class="form-value" id="tipoDoc"><!-- DYNAMIC: Tipo Documento --></div>
+            <div class="form-field_con">
+                <div class="form-label_con">Tipo Doc</div>
+                <div class="form-value_con" id="tipoDoc"><!-- DYNAMIC: Tipo Documento --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Num. Documento</div>
-                <div class="form-value" id="numDoc"><!-- DYNAMIC: Número Documento --></div>
+            <div class="form-field_con">
+                <div class="form-label_con">Num. Documento</div>
+                <div class="form-value_con" id="numDoc"><!-- DYNAMIC: Número Documento --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Lugar de Expedicion</div>
-                <div class="form-value" id="lugarExp"><!-- DYNAMIC: Lugar Expedición --></div>
+            <div class="form-field_con">
+                <div class="form-label_con">Lugar de Expedicion</div>
+                <div class="form-value_con" id="lugarExp"><!-- DYNAMIC: Lugar Expedición --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Fecha De Expedicion</div>
-                <div class="form-value" id="fechaExp"><!-- DYNAMIC: Fecha Expedición --></div>
+            <div class="form-field_con">
+                <div class="form-label_con">Fecha De Expedicion</div>
+                <div class="form-value_con" id="fechaExp"><!-- DYNAMIC: Fecha Expedición --></div>
             </div>
         </div>
 
         <!-- Activity and Income Information -->
-        <div class="activity-grid">
-            <div class="form-field">
-                <div class="form-label">Dias Mora</div>
-                <div class="form-value" id="diasMora"><!-- DYNAMIC: Días Mora --></div>
+        <div class="activity-grid_con">
+            <div class="form-field_con">
+                <div class="form-label_con">Dias Mora</div>
+                <div class="form-value_con" id="diasMora"><!-- DYNAMIC: Días Mora --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Descripcion Actividad</div>
-                <div class="form-value" id="descripcionActividad"><!-- DYNAMIC: Descripción Actividad --></div>
+            <div class="form-field_con">
+                <div class="form-label_con">Descripcion Actividad</div>
+                <div class="form-value_con" id="descripcionActividad"><!-- DYNAMIC: Descripción Actividad --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Ingreso Mensual</div>
-                <div class="form-value" id="ingresoMensual"><!-- DYNAMIC: Ingreso Mensual --></div>
+            <div class="form-field_con">
+                <div class="form-label_con">Ingreso Mensual</div>
+                <div class="form-value_con" id="ingresoMensual"><!-- DYNAMIC: Ingreso Mensual --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Ocupación Ingresos Adicional</div>
-                <div class="form-value" id="ocupacionAdicional"><!-- DYNAMIC: Ocupación Adicional --></div>
+            <div class="form-field_con">
+                <div class="form-label_con">Ocupación Ingresos Adicional</div>
+                <div class="form-value_con" id="ocupacionAdicional"><!-- DYNAMIC: Ocupación Adicional --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Ingresos Adicionales</div>
-                <div class="form-value" id="ingresosAdicionales"><!-- DYNAMIC: Ingresos Adicionales --></div>
+            <div class="form-field_con">
+                <div class="form-label_con">Ingresos Adicionales</div>
+                <div class="form-value_con" id="ingresosAdicionales"><!-- DYNAMIC: Ingresos Adicionales --></div>
             </div>
         </div>
 
         <!-- Obligations Section -->
-        <div class="section-header">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
+        <div class="section-header_con">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
 
-        <div class="normalization-container">
-            <div class="obligations-table-new">
+        <div class="normalization-container_con">
+            <div class="obligations-table-new_con">
                 <div
                     style="background: #A6A6A6; color: white; text-align: center; font-size: 9px; font-weight: 700; padding: 2px; border-bottom: 1px solid #000;">
                     Datos Obligaciones</div>
-                <div class="grid-header-row">
-                    <div class="grid-cell">Nro. Obligación (4 ultimos)</div>
-                    <div class="grid-cell">Saldo total</div>
-                    <div class="grid-cell">Int Corrientes</div>
-                    <div class="grid-cell">int mora</div>
-                    <div class="grid-cell">Int ExtraC "TC"</div>
+                <div class="grid-header-row_con">
+                    <div class="grid-cell_con">Nro. Obligación (4 ultimos)</div>
+                    <div class="grid-cell_con">Saldo total</div>
+                    <div class="grid-cell_con">Int Corrientes</div>
+                    <div class="grid-cell_con">int mora</div>
+                    <div class="grid-cell_con">Int ExtraC "TC"</div>
                 </div>
-                <div class="grid-data-row">
-                    <div class="grid-cell" id="numObligacion_1"></div>
-                    <div class="grid-cell" id="saldoTotal_1"></div>
-                    <div class="grid-cell" id="intCorrientes_1"></div>
-                    <div class="grid-cell" id="intMora_1"></div>
-                    <div class="grid-cell" id="intExtraC_1"></div>
+                <div class="grid-data-row_con">
+                    <div class="grid-cell_con" id="numObligacion_1"></div>
+                    <div class="grid-cell_con" id="saldoTotal_1"></div>
+                    <div class="grid-cell_con" id="intCorrientes_1"></div>
+                    <div class="grid-cell_con" id="intMora_1"></div>
+                    <div class="grid-cell_con" id="intExtraC_1"></div>
                 </div>
-                <div class="grid-data-row">
-                    <div class="grid-cell" id="numObligacion_2"></div>
-                    <div class="grid-cell" id="saldoTotal_2"></div>
-                    <div class="grid-cell" id="intCorrientes_2"></div>
-                    <div class="grid-cell" id="intMora_2"></div>
-                    <div class="grid-cell" id="intExtraC_2"></div>
+                <div class="grid-data-row_con">
+                    <div class="grid-cell_con" id="numObligacion_2"></div>
+                    <div class="grid-cell_con" id="saldoTotal_2"></div>
+                    <div class="grid-cell_con" id="intCorrientes_2"></div>
+                    <div class="grid-cell_con" id="intMora_2"></div>
+                    <div class="grid-cell_con" id="intExtraC_2"></div>
                 </div>
-                <div class="grid-data-row">
-                    <div class="grid-cell" id="numObligacion_3"></div>
-                    <div class="grid-cell" id="saldoTotal_3"></div>
-                    <div class="grid-cell" id="intCorrientes_3"></div>
-                    <div class="grid-cell" id="intMora_3"></div>
-                    <div class="grid-cell" id="intExtraC_3"></div>
+                <div class="grid-data-row_con">
+                    <div class="grid-cell_con" id="numObligacion_3"></div>
+                    <div class="grid-cell_con" id="saldoTotal_3"></div>
+                    <div class="grid-cell_con" id="intCorrientes_3"></div>
+                    <div class="grid-cell_con" id="intMora_3"></div>
+                    <div class="grid-cell_con" id="intExtraC_3"></div>
                 </div>
-                <div class="grid-data-row">
-                    <div class="grid-cell" id="numObligacion_4"></div>
-                    <div class="grid-cell" id="saldoTotal_4"></div>
-                    <div class="grid-cell" id="intCorrientes_4"></div>
-                    <div class="grid-cell" id="intMora_4"></div>
-                    <div class="grid-cell" id="intExtraC_4"></div>
+                <div class="grid-data-row_con">
+                    <div class="grid-cell_con" id="numObligacion_4"></div>
+                    <div class="grid-cell_con" id="saldoTotal_4"></div>
+                    <div class="grid-cell_con" id="intCorrientes_4"></div>
+                    <div class="grid-cell_con" id="intMora_4"></div>
+                    <div class="grid-cell_con" id="intExtraC_4"></div>
                 </div>
-                <div class="grid-data-row">
-                    <div class="grid-cell" id="numObligacion_5"></div>
-                    <div class="grid-cell" id="saldoTotal_5"></div>
-                    <div class="grid-cell" id="intCorrientes_5"></div>
-                    <div class="grid-cell" id="intMora_5"></div>
-                    <div class="grid-cell" id="intExtraC_5"></div>
+                <div class="grid-data-row_con">
+                    <div class="grid-cell_con" id="numObligacion_5"></div>
+                    <div class="grid-cell_con" id="saldoTotal_5"></div>
+                    <div class="grid-cell_con" id="intCorrientes_5"></div>
+                    <div class="grid-cell_con" id="intMora_5"></div>
+                    <div class="grid-cell_con" id="intExtraC_5"></div>
                 </div>
 
             </div>
 
-            <div class="conditions-panel">
+            <div class="conditions-panel_con">
                 <div
                     style="background: #A6A6A6; color: white; text-align: center; font-size: 9px; font-weight: 700; padding: 2px; margin: -10px -10px 10px -10px; border-bottom: 1px solid #000;">
                     Condiciones negociación</div>
                 <div style="display: grid; justify-content: center; justify-items: anchor-center;">
-                    <div class="condition-item">% Beneficio Int Corrientes: <span id="pctBenIntCorr"></span></div>
-                    <div class="condition-item">% Beneficio Int Mora: <span id="pctBenIntMora"></span></div>
-                    <div class="condition-item">% Beneficio Int ExtraContables: <span id="pctBenIntExtra"></span></div>
-                    <div class="condition-item">% Nuevo Plazo: <span id="nuevoPlazo"></span> Meses</div>
-                    <div class="condition-item">Saldo Total Capital: <span id="saldoTotalCap"></span></div>
-                    <div class="condition-item">Valor Cuota Proyectada: <span id="valCuotaProyectada"></span></div>
-                    <div class="condition-item">Pago para la Negociación: <span id="pagoNegociacionNew"></span></div>
-                    <div class="condition-item">Amortizacion: <span id="amortizacion"></span></div>
-                    <div class="condition-item">Tasa Negociacion: <span id="tasaNegociacion"></span></div>
+                    <div class="condition-item_con">% Beneficio Int Corrientes: <span id="pctBenIntCorr"></span></div>
+                    <div class="condition-item_con">% Beneficio Int Mora: <span id="pctBenIntMora"></span></div>
+                    <div class="condition-item_con">% Beneficio Int ExtraContables: <span id="pctBenIntExtra"></span></div>
+                    <div class="condition-item_con">% Nuevo Plazo: <span id="nuevoPlazo"></span> Meses</div>
+                    <div class="condition-item_con">Saldo Total Capital: <span id="saldoTotalCap"></span></div>
+                    <div class="condition-item_con">Valor Cuota Proyectada: <span id="valCuotaProyectada"></span></div>
+                    <div class="condition-item_con">Pago para la Negociación: <span id="pagoNegociacionNew"></span></div>
+                    <div class="condition-item_con">Amortizacion: <span id="amortizacion"></span></div>
+                    <div class="condition-item_con">Tasa Negociacion: <span id="tasaNegociacion"></span></div>
                 </div>
 
             </div>
         </div>
 
         <!-- Terms and Conditions -->
-        <div class="section-header">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
+        <div class="section-header_con">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
 
-        <div class="terms-text" id="terminosCondiciones">
+        <div class="terms-text_con" id="terminosCondiciones">
             <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
                 esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
                 quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre el
@@ -781,51 +693,51 @@
         </div>
 
         <!-- Questions Section -->
-        <div class="questions-grid">
-            <div class="question-row">
-                <div class="question-text">He permanecido más de 183 días en el último año, o 183 días durante los
+        <div class="questions-grid_con">
+            <div class="question-row_con">
+                <div class="question-text_con">He permanecido más de 183 días en el último año, o 183 días durante los
                     últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia</div>
-                <div class="question-answer" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
+                <div class="question-answer_con" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
             </div>
-            <div class="question-row">
-                <div class="question-text">Soy poseedor de un documento de identificación expedido en un pais diferente
+            <div class="question-row_con">
+                <div class="question-text_con">Soy poseedor de un documento de identificación expedido en un pais diferente
                     a Colombia</div>
-                <div class="question-answer" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
+                <div class="question-answer_con" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
             </div>
-            <div class="question-row">
-                <div class="question-text">Recibo cualquier pago de intereses, dividendos, rentas, salarios, honorario,
+            <div class="question-row_con">
+                <div class="question-text_con">Recibo cualquier pago de intereses, dividendos, rentas, salarios, honorario,
                     primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
                     ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
-                <div class="question-answer" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
+                <div class="question-answer_con" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
             </div>
-            <div class="question-row">
-                <div class="question-text">Recibo cualquier ingreso bruto procedente de la venta u otra disposición de
+            <div class="question-row_con">
+                <div class="question-text_con">Recibo cualquier ingreso bruto procedente de la venta u otra disposición de
                     cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera del
                     territorio Colombiano.</div>
-                <div class="question-answer" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
+                <div class="question-answer_con" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
             </div>
         </div>
 
         <!-- Observations  garantias-->
-        <div class="observations">
+        <div class="observations_con">
 
-            <div class="observations-section">
-                <span class="observations-label">Observaciones:</span>
-                <div class="observaciones-answer" id="observaciones">
+            <div class="observations-section_con">
+                <span class="observations-label_con">Observaciones:</span>
+                <div class="observaciones-answer_con" id="observaciones">
                 </div>
             </div>
 
-            <div class="guarantees-section">
+            <div class="guarantees-section_con">
 
-                <div class="guarantee-row top">
-                    <div class="guarantee-text">Garantia FAG</div>
-                    <div class="guarantee-value" id="garantiaFAG">
+                <div class="guarantee-row_con top">
+                    <div class="guarantee-text_con">Garantia FAG</div>
+                    <div class="guarantee-value_con" id="garantiaFAG">
                     </div>
                 </div>
 
-                <div class="guarantee-row">
-                    <div class="guarantee-text">Garantia FNG</div>
-                    <div class="guarantee-value" id="garantiaFNG">
+                <div class="guarantee-row_con">
+                    <div class="guarantee-text_con">Garantia FNG</div>
+                    <div class="guarantee-value_con" id="garantiaFNG">
                     </div>
                 </div>
 
@@ -834,18 +746,18 @@
 
 
         <!-- Signature Section -->
-        <div class="signature-section">
+        <div class="signature-section_con">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
 
-                    <div class="signature-line"></div>
-                    <div class="signature-label">Firma Cliente o Representante legal</div>
-                    <div class="signature-info">CC/NIT Número:</div>
+                    <div class="signature-line_con"></div>
+                    <div class="signature-label_con">Firma Cliente o Representante legal</div>
+                    <div class="signature-info_con">CC/NIT Número:</div>
                 </div>
-                <div class="fingerprint-box">
+                <div class="fingerprint-box_con">
 
-                    <div class="fingerprint-line"></div>
-                    <div class="fingerprint-label">Huella</div>
+                    <div class="fingerprint-line_con"></div>
+                    <div class="fingerprint-label_con">Huella</div>
                 </div>
             </div>
         </div>

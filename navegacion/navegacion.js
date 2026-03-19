@@ -106,8 +106,8 @@ function inicializarNavegacion() {
 
     $(".right-buttonC").click(() => {
         navegarA(VISTAS.CONSOLIDACION_P2);
-        CalculosConsolidacion();
-        syncSoxCounter();
+        CalculosConsolidacion()
+       
     });
 
     $(".left-buttonC").click(() => {
@@ -157,7 +157,8 @@ function inicializarNavegacion() {
         disableField('d157fb29-fd6f-450b-b637-8fa18c824cd2', true)
         disableField('fad108db-d495-442a-9312-b681e86ac6ba', true)
         abono(getFieldValue('1f7c2b79-87a6-402f-95f2-414aea88a4bf'))
-
+        tasaEspecial();
+        obligacionCU(); 
     });
     $(".left-button").click(() => {
         navegarA(VISTAS.PRINCIPAL);
@@ -190,12 +191,12 @@ function inicializarNavegacion() {
     $(".left-button").click(() => {
         navegarA(VISTAS.PRINCIPAL);
     });
-    $(".right-arrow").click(() => {
+    $(".right-buttonM").click(() => {
         navegarA(VISTAS.PAGO_MORA_P2);
         soxMora();
         syncSoxCounter();
     });
-    $(".left-arrow").click(() => {
+    $(".left-buttonM2").click(() => {
         navegarA(VISTAS.PAGO_MORA_P1);
     });
     $(".right-buttonM2").click(() => {
@@ -240,13 +241,16 @@ function inicializarNavegacion() {
 
     // AMPLIACION
     //Principal
-    $(".ampliacion").click(() => {
+ 
+   $(".ampliacion").click(() => {
         navegarA(VISTAS.AMPLIACION_P1);
         let Int = getFieldValue('70101be7-9330-44e4-913c-e6772c5b8167')
         let mora = getFieldValue('aea118a4-8a99-4d3a-adf9-ffd5151db4f6')
         setFieldValue('70101be7-9330-44e4-913c-e6772c5b8167', Int)
         setFieldValue('aea118a4-8a99-4d3a-adf9-ffd5151db4f6', mora)
+        aplicarCampanaAmpliacion();
     });
+    
     $(".left-button").click(() => {
         navegarA(VISTAS.PRINCIPAL);
     });
@@ -286,6 +290,7 @@ function inicializarNavegacion() {
 
     $(".copiar3").click(() => {
         copiarSoxM();
+        caracters([{id:'b24357e4-d1be-443d-8fa0-5b8790a1c508'}]);
     });
     $(".copiar4").click(() => {
         copiarSoxA();
@@ -298,4 +303,4 @@ function inicializarNavegacion() {
 
 setTimeout(() => {
     inicializarNavegacion()
-}, 7000) 
+},7000) 

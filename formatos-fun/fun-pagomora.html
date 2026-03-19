@@ -7,63 +7,63 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        .layout-especial_Pg * {
+        .layout-especial_Mora * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        .layout-especial_Pg {
+        .layout-especial_Mora {
             font-family: 'Open Sans', sans-serif;
             background: #f5f5f5;
             color: #333;
             padding: 60px;
         }
 
-        .container {
+        .container_Mora {
             width: 780px;
             margin: 0 auto;
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .header-top {
+        .header-top_Mora {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
         }
 
-        .logo-section {
+        .logo-section_Mora {
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .logo-img {
+        .logo-img_Mora {
             width: 57px;
             height: 58px;
             object-fit: contain;
         }
 
-        .bank-name {
+        .bank-name_Mora {
             font-size: 18px;
             font-weight: 700;
             color: #333;
         }
 
-        .date-section {
+        .date-section_Mora {
             margin: 5px;
             display: flex;
             gap: 0;
         }
 
-        .date-box {
+        .date-box_Mora {
             border: 1px solid #000;
             text-align: center;
         }
 
-        .date-label {
+        .date-label_Mora {
             background: white;
             padding: 4px 8px;
             font-size: 10px;
@@ -72,7 +72,7 @@
             min-width: 54px;
         }
 
-        .date-value {
+        .date-value_Mora {
             background: white;
             padding: 4px 8px;
             font-size: 10px;
@@ -82,20 +82,20 @@
             justify-content: center;
         }
 
-        .title {
+        .title_Mora {
             text-align: center;
             font-size: 12px;
             font-weight: 700;
         }
 
-        .subtitle {
+        .subtitle_Mora {
             text-align: center;
             font-size: 12px;
             font-weight: 700;
         }
 
         /* Section Headers */
-        .section-header {
+        .section-header_Mora {
             background: RGBA(56, 96, 178, 1);
             color: white;
             font-size: 10px;
@@ -105,7 +105,7 @@
             padding: 2px 2px;
         }
 
-        .subsection-header {
+        .subsection-header_Mora {
             background: #A6A6A6;
             color: white;
             padding: 6px 15px;
@@ -115,23 +115,14 @@
             border: 1px solid #000;
         }
 
-        /* Form Grid */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            border-left: 1px solid #000;
-            border-top: 1px solid #000;
-
-        }
-
-        .form-field {
+        .form-field_Mora {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             display: flex;
             flex-direction: column;
         }
 
-        .form-label {
+        .form-label_Mora {
             background: white;
             font-size: 9px;
             font-weight: 700;
@@ -144,7 +135,7 @@
 
         }
 
-        .form-value {
+        .form-value_Mora {
             background: white;
             padding: 8px;
             font-size: 9px;
@@ -155,21 +146,8 @@
             justify-content: center;
         }
 
-        /* Special layouts */
-        .field-full {
-            grid-column: 1 / -1;
-        }
-
-        .field-half {
-            grid-column: span 2;
-        }
-
-        .field-third {
-            grid-column: span 1;
-        }
-
         /* Office info section */
-        .office-section {
+        .office-section_Mora {
 
             margin: 2px;
             margin-bottom: 0px;
@@ -180,7 +158,7 @@
         }
 
         /* Client info section */
-        .client-grid {
+        .client-grid_Mora {
             margin: 0px 2px 2px 2px;
             margin-bottom: 0px;
             display: grid;
@@ -190,7 +168,7 @@
         }
 
         /* Activity section */
-        .activity-grid {
+        .activity-grid_Mora {
             margin: 0px 2px 2px 2px;
             display: grid;
             grid-template-columns: 140px 130px 1fr 160px 100px;
@@ -199,7 +177,7 @@
         }
 
         /* Obligations and Conditions Container */
-        .obligations-conditions-container {
+        .obligations-conditions-container_Mora {
             display: grid;
             grid-template-columns: 350px 1fr;
             gap: 0;
@@ -208,13 +186,13 @@
         }
 
 
-        .table-row {
+        .table-row_Mora {
             display: grid;
             grid-template-columns: 1fr 50px 50px;
             border-left: 1px solid #000;
         }
 
-        .table-cell {
+        .table-cell_Mora {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
 
@@ -225,79 +203,15 @@
             justify-content: center;
         }
 
-        .table-header {
+        .table-header_Mora {
             background: white;
             font-weight: 700;
             min-height: 27px;
             border-top: 1px solid #000;
-        }
-
-        /* Payment row */
-        .payment-row {
-            display: grid;
-            grid-template-columns: 100px 81px 74px 74px;
-            border-left: 1px solid #000;
-        }
-
-        .payment-cell {
-            border-right: 1px solid #000;
-            border-bottom: 1px solid #000;
-            padding: 8px;
-            font-size: 7px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-        }
-
-        /* Conditions section */
-        .conditions-section {
-            display: flex;
-            flex-direction: column;
-            margin-left: 40px;
-        }
-
-        .conditions-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            border-left: 1px solid #000;
-            border-top: 1px solid #000;
-        }
-
-        .condition-field {
-            border-right: 1px solid #000;
-            border-bottom: 1px solid #000;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .condition-label {
-            background: white;
-            font-size: 7px;
-            font-weight: 700;
-            text-align: center;
-            border-bottom: 1px solid #000;
-            min-height: 27px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px;
-        }
-
-        .condition-value {
-            background: white;
-            padding: 6px;
-            font-size: 8px;
-            text-align: center;
-            min-height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         /* Terms and conditions */
-        .terms-text {
+        .terms-text_Mora {
             border: 1px solid #000;
             padding: 8px;
             font-size: 6.5px;
@@ -307,24 +221,24 @@
             margin: 0px 2px 0px 2px;
         }
 
-        .terms-text p {
+        .terms-text_Mora p {
             margin-bottom: 1px;
         }
 
         /* Questions section */
-        .questions-grid {
+        .questions-grid_Mora {
 
             margin: 0px 2px 0px 2px;
         }
 
-        .question-row {
+        .question-row_Mora {
             display: grid;
             grid-template-columns: 1fr 26px;
             border-left: 1px solid #000;
 
         }
 
-        .question-text {
+        .question-text_Mora {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             padding: 8px;
@@ -332,7 +246,7 @@
             background: white;
         }
 
-        .question-answer {
+        .question-answer_Mora {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             padding: 1px;
@@ -345,37 +259,37 @@
         }
 
         /* Signature section */
-        .signature-section {
+        .signature-section_Mora {
             padding-bottom: 30px;
             margin: 30px 40px 0px 40px;
 
         }
 
-        .signature-line {
+        .signature-line_Mora {
             width: 270px;
             height: 1px;
             background: #000;
             margin: 20px 0 5px 0;
         }
 
-        .signature-label {
+        .signature-label_Mora {
             font-size: 10px;
             font-weight: 700;
             margin-bottom: 5px;
         }
 
-        .signature-info {
+        .signature-info_Mora {
             font-size: 9px;
             font-weight: 700;
             margin-top: 5px;
         }
 
-        .fingerprint-box {
+        .fingerprint-box_Mora {
             text-align: center;
 
         }
 
-        .fingerprint-line {
+        .fingerprint-line_Mora {
             width: 70px;
             height: 70px;
             border: 1px solid #000;
@@ -389,12 +303,12 @@
             color: #555;
         }
 
-        .fingerprint-label {
+        .fingerprint-label_Mora {
             font-size: 10px;
             font-weight: 700;
         }
 
-        .observations {
+        .observations_Mora {
             margin: 0px 2px 2px 2px;
             display: flex;
             border: 1px solid #000;
@@ -404,7 +318,7 @@
 
         }
 
-        .observations-section {
+        .observations-section_Mora {
             flex: 1;
             padding: 5px;
             font-size: 11px;
@@ -413,34 +327,34 @@
             align-items: center;
         }
 
-        .observations-label {
+        .observations-label_Mora {
 
             font-size: 7px;
         }
 
-        .observaciones-answer {
+        .observaciones-answer_Mora {
             flex: 1;
             padding: 2px;
             font-size: 8px;
         }
 
-        .guarantee-row {
+        .guarantee-row_Mora {
             display: grid;
             grid-template-columns: 1fr 26px;
             height: 50%;
         }
 
-        .guarantee-row.top {
+        .guarantee-row_Mora.top {
             border-bottom: 1px solid #000;
         }
 
-        .guarantee-text {
+        .guarantee-text_Mora {
             padding: 2px;
             font-size: 8px;
             align-self: center;
         }
 
-        .guarantee-value {
+        .guarantee-value_Mora {
             padding: 2px;
             font-size: 9px;
             text-align: center;
@@ -456,21 +370,21 @@
                 padding: 0;
             }
 
-            .container {
+            .container_Mora {
                 box-shadow: none;
                 max-width: 100%;
             }
         }
 
         /* Nuevos ajustes para el grid de obligaciones */
-        .obligations-grid-v3 {
+        .obligations-grid-v3_Mora {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             /* 5 columnas para los datos */
             border-left: 1px solid #000;
         }
 
-        .conditions-panel-v3 {
+        .conditions-panel-v3_Mora {
             border-left: 1px solid #000;
             border-top: 1px solid #000;
             padding: 2px;
@@ -480,7 +394,7 @@
             /* Alineación a la derecha como la imagen */
         }
 
-        .beneficios-row-full {
+        .beneficios-row-full_Mora {
             grid-column: 1 / 3;
             /* Ocupa el espacio de Nro Obligación y Pago Mínimo */
             border-right: 1px solid #000;
@@ -492,137 +406,144 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* Conditions section */
+        .conditions-section_Mora {
+            display: flex;
+            flex-direction: column;
+            margin-left: 40px;
+        }
     </style>
 </head>
 
-<body class="layout-especial_Pg">
-    <div id="contenedor-pdf" class="container">
+<body class="layout-especial_Mora">
+    <div id="contenedor-pdf" class="container_Mora">
         <!-- Header -->
-        <div class="header">
-            <div class="header-top">
-                <div class="logo-section">
+        <div class="header_Mora">
+            <div class="header-top_Mora">
+                <div class="logo-section_Mora">
                     <img src="https://i.postimg.cc/rp9ttPt3/Logo-BDB-removebg-preview.png" alt="Banco de Bogotá"
-                        class="logo-img">
-                    <div class="bank-name">BANCO DE BOGOTÁ</div>
+                        class="logo-img_Mora">
+                    <div class="bank-name_Mora">BANCO DE BOGOTÁ</div>
                 </div>
-                <div class="date-section">
-                    <div class="date-box">
-                        <div class="date-label">DIA</div>
-                        <div class="date-value" id="day"><!-- DYNAMIC: Day --></div>
+                <div class="date-section_Mora">
+                    <div class="date-box_Mora">
+                        <div class="date-label_Mora">DIA</div>
+                        <div class="date-value_Mora" id="day"></div>
                     </div>
-                    <div class="date-box">
-                        <div class="date-label">MES</div>
-                        <div class="date-value" id="month"><!-- DYNAMIC: Month --></div>
+                    <div class="date-box_Mora">
+                        <div class="date-label_Mora">MES</div>
+                        <div class="date-value_Mora" id="month"></div>
                     </div>
-                    <div class="date-box">
-                        <div class="date-label">AÑO</div>
-                        <div class="date-value" id="year"><!-- DYNAMIC: Year --></div>
+                    <div class="date-box_Mora">
+                        <div class="date-label_Mora">AÑO</div>
+                        <div class="date-value_Mora" id="year"></div>
                     </div>
                 </div>
             </div>
-            <div class="title">Solicitud de Normalizacion - Formato Único</div>
+            <div class="title_Mora">Solicitud de Normalizacion - Formato Único</div>
         </div>
 
-        <div class="subtitle">MECANISMO DE NORMALIZACION: PAGO MORA</div>
+        <div class="subtitle_Mora">MECANISMO DE NORMALIZACION: PAGO MORA</div>
 
         <!-- Office Information -->
-        <div class="office-section">
-            <div class="form-field">
-                <div class="form-label">Cód Ofc.</div>
-                <div class="form-value" id="codOficina"><!-- DYNAMIC: Código Oficina --></div>
+        <div class="office-section_Mora">
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Cód Ofc.</div>
+                <div class="form-value_Mora" id="codOficina"><!-- DYNAMIC: Código Oficina --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Oficina en que se realiza<br> la negociación</div>
-                <div class="form-value" id="nombreOficina"><!-- DYNAMIC: Nombre Oficina --></div>
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Oficina en que se realiza<br> la negociación</div>
+                <div class="form-value_Mora" id="nombreOficina"><!-- DYNAMIC: Nombre Oficina --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Cuenta del pago / SNR</div>
-                <div class="form-value" id="cuentaPago"><!-- DYNAMIC: Cuenta Pago --></div>
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Cuenta del pago / SNR</div>
+                <div class="form-value_Mora" id="cuentaPago"><!-- DYNAMIC: Cuenta Pago --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Funcionario de quien efectúa la negociación:</div>
-                <div class="form-value" id="funcionario"><!-- DYNAMIC: Nombre Funcionario --></div>
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Funcionario de quien efectúa la negociación:</div>
+                <div class="form-value_Mora" id="funcionario"><!-- DYNAMIC: Nombre Funcionario --></div>
             </div>
         </div>
 
         <!-- Client Information Section -->
-        <div class="section-header">INFORMACION CLIENTE</div>
+        <div class="section-header_Mora">INFORMACION CLIENTE</div>
 
-        <div class="client-grid">
-            <div class="form-field">
-                <div class="form-label">Nombre Cliente</div>
-                <div class="form-value" id="nombreCliente"><!-- DYNAMIC: Nombre Cliente --></div>
+        <div class="client-grid_Mora">
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Nombre Cliente</div>
+                <div class="form-value_Mora" id="nombreCliente"><!-- DYNAMIC: Nombre Cliente --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Tipo Doc</div>
-                <div class="form-value" id="tipoDoc"><!-- DYNAMIC: Tipo Documento --></div>
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Tipo Doc</div>
+                <div class="form-value_Mora" id="tipoDoc"><!-- DYNAMIC: Tipo Documento --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Num. Documento</div>
-                <div class="form-value" id="numDoc"><!-- DYNAMIC: Número Documento --></div>
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Num. Documento</div>
+                <div class="form-value_Mora" id="numDoc"><!-- DYNAMIC: Número Documento --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Lugar de Expedicion</div>
-                <div class="form-value" id="lugarExp"><!-- DYNAMIC: Lugar Expedición --></div>
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Lugar de Expedicion</div>
+                <div class="form-value_Mora" id="lugarExp"><!-- DYNAMIC: Lugar Expedición --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Fecha De Expedicion</div>
-                <div class="form-value" id="fechaExp"><!-- DYNAMIC: Fecha Expedición --></div>
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Fecha De Expedicion</div>
+                <div class="form-value_Mora" id="fechaExp"><!-- DYNAMIC: Fecha Expedición --></div>
             </div>
         </div>
 
         <!-- Activity and Income Information -->
-        <div class="activity-grid">
-            <div class="form-field">
-                <div class="form-label">Dias Mora</div>
-                <div class="form-value" id="diasMora"><!-- DYNAMIC: Días Mora --></div>
+        <div class="activity-grid_Mora">
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Dias Mora</div>
+                <div class="form-value_Mora" id="diasMora"><!-- DYNAMIC: Días Mora --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Descripcion Actividad</div>
-                <div class="form-value" id="descripcionActividad"><!-- DYNAMIC: Descripción Actividad --></div>
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Descripcion Actividad</div>
+                <div class="form-value_Mora" id="descripcionActividad"><!-- DYNAMIC: Descripción Actividad --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Ingreso Mensual</div>
-                <div class="form-value" id="ingresoMensual"><!-- DYNAMIC: Ingreso Mensual --></div>
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Ingreso Mensual</div>
+                <div class="form-value_Mora" id="ingresoMensual"><!-- DYNAMIC: Ingreso Mensual --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Ocupación Ingresos Adicional</div>
-                <div class="form-value" id="ocupacionAdicional"><!-- DYNAMIC: Ocupación Adicional --></div>
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Ocupación Ingresos Adicional</div>
+                <div class="form-value_Mora" id="ocupacionAdicional"><!-- DYNAMIC: Ocupación Adicional --></div>
             </div>
-            <div class="form-field">
-                <div class="form-label">Ingresos Adicionales</div>
-                <div class="form-value" id="ingresosAdicionales"><!-- DYNAMIC: Ingresos Adicionales --></div>
+            <div class="form-field_Mora">
+                <div class="form-label_Mora">Ingresos Adicionales</div>
+                <div class="form-value_Mora" id="ingresosAdicionales"><!-- DYNAMIC: Ingresos Adicionales --></div>
             </div>
         </div>
 
-        <div class="section-header">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
+        <div class="section-header_Mora">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
 
-        <div class="obligations-conditions-container" style="grid-template-columns: 340px 1fr;">
-            <div class="obligations-table">
-                <div class="subsection-header">Datos Obligaciones</div>
+        <div class="obligations-conditions-container_Mora" style="grid-template-columns: 340px 1fr;">
+            <div class="obligations-table_Mora">
+                <div class="subsection-header_Mora">Datos Obligaciones</div>
 
-                <div class="obligations-grid-v3">
-                    <div class="table-cell table-header">Nro. Obligación (4 ultimos)</div>
-                    <div class="table-cell table-header">Pago Mínimo</div>
-                    <div class="table-cell table-header">Int Corrientes</div>
-                    <div class="table-cell table-header">int mora</div>
-                    <div class="table-cell table-header">Int ExtraC "TC"</div>
+                <div class="obligations-grid-v3_Mora">
+                    <div class="table-cell_Mora table-header_Mora">Nro. Obligación (4 ultimos)</div>
+                    <div class="table-cell_Mora table-header_Mora">Pago Mínimo</div>
+                    <div class="table-cell_Mora table-header_Mora">Int Corrientes</div>
+                    <div class="table-cell_Mora table-header_Mora">int mora</div>
+                    <div class="table-cell_Mora table-header_Mora">Int ExtraC "TC"</div>
                 </div>
 
-                <div class="obligations-grid-v3" style="min-height: 30px;">
-                    <div class="table-cell" id="numObligacion"></div>
-                    <div class="table-cell">$ <span id="pagoMinimo"> </span></div>
-                    <div class="table-cell">$ <span id="intCorrientes"> </span></div>
-                    <div class="table-cell">$ <span id="intMora"> </span></div>
-                    <div class="table-cell">$ <span id="intExtraC"> </span></div>
+                <div class="obligations-grid-v3_Mora" style="min-height: 30px;">
+                    <div class="table-cell_Mora" id="numObligacion"></div>
+                    <div class="table-cell_Mora">$ <span id="pagoMinimo"> </span></div>
+                    <div class="table-cell_Mora">$ <span id="intCorrientes"> </span></div>
+                    <div class="table-cell_Mora">$ <span id="intMora"> </span></div>
+                    <div class="table-cell_Mora">$ <span id="intExtraC"> </span></div>
                 </div>
 
 
             </div>
 
-            <div class="conditions-section" style="margin-left: 0;">
-                <div class="subsection-header" style="border-left: none;">Condiciones negociación</div>
-                <div class="conditions-panel-v3">
+            <div class="conditions-section_Mora" style="margin-left: 0;">
+                <div class="subsection-header_Mora" style="border-left: none;">Condiciones negociación</div>
+                <div class="conditions-panel-v3_Mora">
                     <strong>Beneficio Int Corrientes:</strong> $ <span id="benIntCorr"></span><br>
                     <strong>% Beneficio Int Corrientes:</strong> <span id="porcBenIntCorr"></span><br>
                     <strong>Beneficio Int Mora:</strong> $ <span id="benIntMora"></span><br>
@@ -636,9 +557,9 @@
             </div>
         </div>
         <!-- Terms and Conditions -->
-        <div class="section-header">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
+        <div class="section-header_Mora">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
 
-        <div class="terms-text" id="terminosCondiciones">
+        <div class="terms-text_Mora" id="terminosCondiciones">
             <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
                 esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
                 quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre el
@@ -705,51 +626,54 @@
         </div>
 
         <!-- Questions Section -->
-        <div class="questions-grid">
-            <div class="question-row">
-                <div class="question-text">He permanecido más de 183 días en el último año, o 183 días durante los
+        <div class="questions-grid_Mora">
+            <div class="question-row_Mora">
+                <div class="question-text_Mora">He permanecido más de 183 días en el último año, o 183 días durante los
                     últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia</div>
-                <div class="question-answer" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
+                <div class="question-answer_Mora" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
             </div>
-            <div class="question-row">
-                <div class="question-text">Soy poseedor de un documento de identificación expedido en un pais diferente
+            <div class="question-row_Mora">
+                <div class="question-text_Mora">Soy poseedor de un documento de identificación expedido en un pais
+                    diferente
                     a Colombia</div>
-                <div class="question-answer" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
+                <div class="question-answer_Mora" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
             </div>
-            <div class="question-row">
-                <div class="question-text">Recibo cualquier pago de intereses, dividendos, rentas, salarios, honorario,
+            <div class="question-row_Mora">
+                <div class="question-text_Mora">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
+                    honorario,
                     primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
                     ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
-                <div class="question-answer" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
+                <div class="question-answer_Mora" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
             </div>
-            <div class="question-row">
-                <div class="question-text">Recibo cualquier ingreso bruto procedente de la venta u otra disposición de
+            <div class="question-row_Mora">
+                <div class="question-text_Mora">Recibo cualquier ingreso bruto procedente de la venta u otra disposición
+                    de
                     cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera del
                     territorio Colombiano.</div>
-                <div class="question-answer" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
+                <div class="question-answer_Mora" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
             </div>
         </div>
 
         <!-- Observations  garantias-->
-        <div class="observations">
+        <div class="observations_Mora">
 
-            <div class="observations-section">
-                <span class="observations-label">Observaciones:</span>
-                <div class="observaciones-answer" id="observaciones">
+            <div class="observations-section_Mora">
+                <span class="observations-label_Mora">Observaciones:</span>
+                <div class="observaciones-answer_Mora" id="observaciones">
                 </div>
             </div>
 
-            <div class="guarantees-section">
+            <div class="guarantees-section_Mora">
 
-                <div class="guarantee-row top">
-                    <div class="guarantee-text">Garantia FAG</div>
-                    <div class="guarantee-value" id="garantiaFAG">
+                <div class="guarantee-row_Mora top">
+                    <div class="guarantee-text_Mora">Garantia FAG</div>
+                    <div class="guarantee-value_Mora" id="garantiaFAG">
                     </div>
                 </div>
 
-                <div class="guarantee-row">
-                    <div class="guarantee-text">Garantia FNG</div>
-                    <div class="guarantee-value" id="garantiaFNG">
+                <div class="guarantee-row_Mora">
+                    <div class="guarantee-text_Mora">Garantia FNG</div>
+                    <div class="guarantee-value_Mora" id="garantiaFNG">
                     </div>
                 </div>
 
@@ -758,18 +682,18 @@
 
 
         <!-- Signature Section -->
-        <div class="signature-section">
+        <div class="signature-section_Mora">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
 
-                    <div class="signature-line"></div>
-                    <div class="signature-label">Firma Cliente o Representante legal</div>
-                    <div class="signature-info">CC/NIT Número:</div>
+                    <div class="signature-line_Mora"></div>
+                    <div class="signature-label_Mora">Firma Cliente o Representante legal</div>
+                    <div class="signature-info_Mora">CC/NIT Número:</div>
                 </div>
-                <div class="fingerprint-box">
+                <div class="fingerprint-box_Mora">
 
-                    <div class="fingerprint-line"></div>
-                    <div class="fingerprint-label">Huella</div>
+                    <div class="fingerprint-line_Mora"></div>
+                    <div class="fingerprint-label_Mora">Huella</div>
                 </div>
             </div>
         </div>
@@ -793,7 +717,7 @@
                 nombreCliente: 'Carlos Gómez',
                 tipoDoc: 'CC',
                 numDoc: '987654321',
-                lugarExp: 'Bogotá',
+                lugarExp: 'Bogotá - Bogotá D.C.',
                 fechaExp: '01/01/2010',
                 diasMora: '30 dias',
                 descripcionActividad: 'Comerciante',
