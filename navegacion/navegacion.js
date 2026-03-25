@@ -97,6 +97,7 @@ function inicializarNavegacion() {
     // Consolidacion de productos
     //Principal
     $(".consolidacion").click(() => {
+        sessionStorage.mecanismo = "consolidacion"
         navegarA(VISTAS.CONSOLIDACION_P1);
         let cantidad = getFieldValue('0ab23e22-1c3c-4a43-8c58-207b83625867')
         if (cantidad > 0) {
@@ -151,6 +152,7 @@ function inicializarNavegacion() {
     // NOVACIONES
     //Principal
     $(".novaciones").click(() => {
+        sessionStorage.mecanismo = "novacion"
         navegarA(VISTAS.NOVACIONES_P1);
         disableField('4cbf2d64-0442-4c98-964f-e741a6a4e6a1', true)
         disableField('c6923383-8eec-4efe-81a5-954ce52b8882', true)
@@ -186,6 +188,7 @@ function inicializarNavegacion() {
     // PAGO MORA
     //Principal
     $(".pagomora").click(() => {
+        sessionStorage.mecanismo = "pagoMora"
         navegarA(VISTAS.PAGO_MORA_P1);
     });
     $(".left-button").click(() => {
@@ -211,6 +214,7 @@ function inicializarNavegacion() {
     // Cancelacion Total
     //Principal
     $(".cancelacion").click(() => {
+        sessionStorage.mecanismo = "cancelacion"
         navegarA(VISTAS.CANCELACION_TOTAL_PAG1);
     });
     $(".right-buttonCA1").click(() => {
@@ -243,6 +247,7 @@ function inicializarNavegacion() {
     //Principal
  
    $(".ampliacion").click(() => {
+        sessionStorage.mecanismo = "ampliacion"
         navegarA(VISTAS.AMPLIACION_P1);
         let Int = getFieldValue('70101be7-9330-44e4-913c-e6772c5b8167')
         let mora = getFieldValue('aea118a4-8a99-4d3a-adf9-ffd5151db4f6')

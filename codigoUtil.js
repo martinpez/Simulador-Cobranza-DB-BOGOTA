@@ -1,17 +1,59 @@
-// obtener el valor de un select 
-// obtener el estado de el select
-const selectElement = document.getElementById("8235c54b-36bd-4880-a29e-fa021ff71595").value;
-// obtener el estado de los botones 
-console.log("Valor del select BtnNavegacionFun:", selectElement);
- const selectElement2 = document.getElementById("BtnNavegacionFun");
- console.log("Elemento del botón BtnNavegacionFun:", selectElement2);
-if (selectElement === 'no'){
-    setTimeout(() => {
-         selectElement2.style.visibility = 'visible';
-    }, 300);
-   
-}else{
-    setTimeout(() => {
-    selectElement2.style.visibility = 'hidden';
-    }, 300);
+// Envolvemos todo en DOMContentLoaded para esperar a que el HTML cargue
+document.addEventListener('DOMContentLoaded', () => {
+
+    const modal = document.getElementById('modalAmpliacion');
+    const btnAbrir = document.getElementById('btnAbrir');
+
+    // VERIFICACIÓN DE SEGURIDAD: Solo añade eventos si los elementos existen
+    if (btnAbrir && modal) {
+
+        // 1. Abrir el modal
+        btnAbrir.addEventListener('click', () => {
+            modal.showModal();
+        });
+
+        // 2. TRUCO: Cerrar al hacer clic fuera (en el backdrop)
+        modal.addEventListener('click', (event) => {
+            // En la etiqueta <dialog>, el clic en el fondo oscuro cuenta como clic en el 'modal'
+            // pero NO en su contenido interno.
+            if (event.target === modal) {
+                modal.close();
+            }
+        });
+
+        console.log("Sistema de modal listo 🚀");
+
+    } else {
+        // Esto te avisará en la consola (F12) si te falta algún ID
+        if (!btnAbrir) console.error("Error: No se encontró el botón con id='btnAbrir'");
+        if (!modal) console.error("Error: No se encontró el dialog con id='modalAmpliacion'");
+    }
+});
+
+function descargarPDF() {
+    const element = document.getElementById('contenedorAmpliacionPDF');
+
+    const options = {
+        margin: [2, 2, 2, 2],                    // márgenes pequeños pero limpios
+        filename: 'Solicitud_Normalizacion_Ampliacion_Plazo.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,
+            useCORS: true,
+            letterRendering: true,
+            allowTaint: true,
+            scrollY: 0
+        },
+        jsPDF: {
+            unit: 'mm',
+            format: 'a4',           // ← Cambio clave (A4 es más alto)
+            orientation: 'portrait'
+        }
+    };
+
+    html2pdf()
+        .set(options)
+        .from(element)
+        .save()
+        .catch(err => console.error("Error al generar PDF:", err));
 }

@@ -1,63 +1,65 @@
-<style>
-  .button-containerC4 {
-    display: flex;
-    justify-content: center;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .button-containerCA2 {
+            display: flex;
+            justify-content: center;
+        }
 
-  /*  buttonC4 */
-  .buttonC4 {
-    background-size: contain;
+        .button {
+      background-size: contain;
     background-color: white;
     background-repeat: no-repeat;
     background-position: center;
     height: 8vh;
-    width: 15vh;
+    width: 15vh;  
     border-radius: 15px;
     transition: all 0.3s ease-in-out;
     border: solid 1px #ddd7d7;
   }
-
-  .buttonC4:hover {
+  .button:hover {
     transform: translateY(-5px);
     box-shadow: 0 0 10px #6f6466;
   }
+        .left-buttonCA2 {
+            justify-content: flex-end;
+        }
 
-  .left-buttonC4 {
-    justify-content: flex-end;
-  }
+        .right-buttonCA2 {
+          margin-left: 58px;
+            justify-content: flex-start;
+        }
 
-  .right-buttonC4 {
-    margin-left: 58px;
-    justify-content: flex-start;
-  }
+        .arrowCA2 {
+            width: 30px;
+            height: 20px;
+            margin-right: 10px;
+        }
 
-  .arrowC4 {
-    width: 30px;
-    height: 20px;
-    margin-right: 10px;
-  }
+        .left-arrowCA2 {
+            background: url('https://i.postimg.cc/4dTT6c7m/izquierda.png') no-repeat center center;
+        }
 
-  .left-arrowC4 {
-    background: url('https://i.postimg.cc/4dTT6c7m/izquierda.png') no-repeat center center;
-  }
-
-  .right-arrowC4 {
-    background: url('https://i.postimg.cc/2jcKmvkh/derecha.png') no-repeat center center;
-    margin-left: 55px;
-  }
-</style>
-
-<div class="button-containerC4">
-  <button class="buttonC4 left-buttonC4">
-    <div class="arrowC4 left-arrowC4"></div>
-  </button>
-  <!-- button navegacion al Fun -->
-  <button id="BtnNavegacionFun" style="visibility: hidden;" class="buttonC4 right-buttonC4">
-    <div class="arrowC4 right-arrowC4"></div>
-  </button>
-</div>
-<script>    
-const BtnNavegacionFun = document.getElementById('BtnNavegacionFun');
-BtnNavegacionFun.style.visibility = 'hidden'; 
-
-</script>
+        .right-arrowCA2 {
+            background: url('https://i.postimg.cc/2jcKmvkh/derecha.png') no-repeat center center;
+            margin-left: 55px;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-containerCA2">
+        <button class="button left-buttonCA2">
+            <div class="arrowCA2 left-arrowCA2"></div>
+           
+        </button>
+        <button  style="visibility: hidden;" class="   BtnNavegacionFun button right-buttonCA2">
+            <div class="arrowCA2 right-arrowCA2"></div>
+           
+        </button>
+    </div>
+</body>
+</html>

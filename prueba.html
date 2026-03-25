@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="codigoUtil.js"></script>
     <style>
         .layout-especial_Am * {
             margin: 0;
@@ -20,8 +21,8 @@
             padding: 60px;
         }
 
-        .container_AM {
-            width: 780px;
+        .container_Am {
+            width: auto;
             margin: 0 auto;
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -391,13 +392,47 @@
                 max-width: 100%;
             }
         }
-        
+
+        /* ====================== ESTILOS DEL MODAL ====================== */
+        #modalAmpliacion {
+            border: none;
+            border-radius: 8px;
+            padding: 0;
+            width: 850px;
+            /* ancho exacto del formulario */
+            max-width: 92vw;
+            max-height: 95vh;
+            /* importante: no más de la pantalla */
+            margin: auto;
+            overflow-y: auto;
+            /* ← ESTO ES LO QUE FALTABA */
+            overflow-x: hidden;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        #modalAmpliacion::backdrop {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Contenedor interno del PDF */
+        #contenedorAmpliacionPDF {
+            margin: 0 !important;
+            padding: 20px 0 20px 0 !important;
+            /* un poco de aire arriba y abajo */
+            box-shadow: none !important;
+            width: 100%;
+            min-height: 100%;
+            /* ayuda al scroll */
+        }
     </style>
 </head>
 
 <body class="layout-especial_Am">
     <dialog id="modalAmpliacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
         <div id="contenedorAmpliacionPDF" class="container_Am" style="margin: 0; box-shadow: none;">
+
             <!-- Header -->
             <div class="header_Am">
                 <div class="header-top_Am">
@@ -700,133 +735,9 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </dialog>
-    <script>
-        // Función para establecer la fecha actual
-        function setCurrentDate() {
-            const today = new Date();
-            document.getElementById('day').textContent = today.getDate();
-            document.getElementById('month').textContent = today.getMonth() + 1;
-            document.getElementById('year').textContent = today.getFullYear();
-        }
-
-        function data() {
-            return {
-                // ... (campos anteriores se mantienen igual)
-                codOficina: '001',
-                nombreOficina: 'Oficina Prinx|cipal',
-                cuentaPago: '1234567890',
-                funcionario: 'Martin Elias Perez',
-                nombreCliente: 'Carlos Gómez',
-                tipoDoc: 'CC',
-                numDoc: '987654321',
-                lugarExp: 'Bogotá',
-                fechaExp: '01/01/2010',
-                diasMora: '30 dias',
-                
-                descripcionActividad: 'Comerciante',
-                ingresoMensual: ' 5000000',
-                ocupacionAdicional: 'Freelance',
-                ingresosAdicionales: ' 2000000',
-
-                // CAMPOS ACTUALIZADOS SEGÚN LA IMAGEN
-                numObligacion: '5678',
-                saldoTotal: '15.000.000',
-                intCorrientes: '200.000',
-                intMora: '50.000',
-
-                beneficioIntCorr: '$ 100.000',
-                porcentajeBenIntCorr: '50%',
-                beneficioIntMora: '$ 25.000',
-                porcentajeBenIntMora: '50%',
-                totalBeneficio: '$ 125.000',
-                pagoRealizar: '$ 500.000',
-                fechaPagoNuevo: '12 febrero 2026',
-                plazoNuevo: '24 meses',
-                tasaInteresNuevo: '1.5%',
-                cuotaProyectadaNueva: '450.000',
-
-                pregunta1: 'No',
-                pregunta2: 'No',
-                pregunta3: 'Sí',
-                pregunta4: 'No',
-                garantiaFAG: 'Sí',
-                garantiaFNG: 'No',
-                observaciones: 'Cliente con buen historial de pagos.',
-            };
-        }
-
-        // Función para cargar datos del formulario
-        function loadFormData(data) {
-            // ... (Carga de cabecera y cliente igual)
-            document.getElementById('codOficina').textContent = data.codOficina || '';
-            document.getElementById('nombreOficina').textContent = data.nombreOficina || '';
-            document.getElementById('cuentaPago').textContent = data.cuentaPago || '';
-            document.getElementById('funcionario').textContent = data.funcionario || '';
-            document.getElementById('nombreCliente').textContent = data.nombreCliente || '';
-            document.getElementById('nombreClienteTerminos').textContent = data.nombreCliente || '';
-            document.getElementById('tipoDoc').textContent = data.tipoDoc || '';
-            document.getElementById('numDoc').textContent = data.numDoc || '';
-            document.getElementById('lugarExp').textContent = data.lugarExp || '';
-            document.getElementById('fechaExp').textContent = data.fechaExp || '';
-            document.getElementById('diasMora').textContent = data.diasMora || '';
-            document.getElementById('descripcionActividad').textContent = data.descripcionActividad || '';
-            document.getElementById('ingresoMensual').textContent = '$ ' + data.ingresoMensual || '';
-            document.getElementById('ocupacionAdicional').textContent = data.ocupacionAdicional || '';
-            document.getElementById('ingresosAdicionales').textContent = '$ ' + data.ingresosAdicionales || '';
-
-            // CARGA DE OBLIGACIONES (ACTUALIZADO)
-            document.getElementById('numObligacion').textContent = data.numObligacion || '';
-            document.getElementById('saldoTotal').textContent = '$ ' + data.saldoTotal || '';
-            document.getElementById('intCorrientes').textContent = '$ ' + data.intCorrientes || '';
-            document.getElementById('intMora').textContent = '$ ' + data.intMora || '';
-
-            // CARGA DE CONDICIONES (ACTUALIZADO)
-            document.getElementById('beneficioIntCorr').textContent = data.beneficioIntCorr || '';
-            document.getElementById('porcentajeBenIntCorr').textContent = data.porcentajeBenIntCorr || '';
-            document.getElementById('beneficioIntMora').textContent = data.beneficioIntMora || '';
-            document.getElementById('porcentajeBenIntMora').textContent = data.porcentajeBenIntMora || '';
-            document.getElementById('totalBeneficio').textContent = data.totalBeneficio || '';
-            document.getElementById('pagoRealizar').textContent = data.pagoRealizar || '';
-            document.getElementById('fechaPagoNuevo').textContent = data.fechaPagoNuevo || '';
-            document.getElementById('plazoNuevo').textContent = data.plazoNuevo || '';
-            document.getElementById('tasaInteresNuevo').textContent = data.tasaInteresNuevo || '';
-            document.getElementById('cuotaProyectadaNueva').textContent = data.cuotaProyectadaNueva || '';
-
-            // ... (Carga de preguntas y firmas igual)
-            document.getElementById('pregunta1').textContent = data.pregunta1 || '';
-            document.getElementById('pregunta2').textContent = data.pregunta2 || '';
-            document.getElementById('pregunta3').textContent = data.pregunta3 || '';
-            document.getElementById('pregunta4').textContent = data.pregunta4 || '';
-            document.getElementById('garantiaFAG').textContent = data.garantiaFAG || '';
-            document.getElementById('garantiaFNG').textContent = data.garantiaFNG || '';
-            document.getElementById('observaciones').textContent = data.observaciones || '';
-        }
-
-        setCurrentDate();
-        loadFormData(data());
-
-        function formatFun() {
-            let respuesta = confirm("¿Estás seguro de que deseas eliminar este elemento?");
-            if (respuesta) {
-                const element = document.getElementById('contenedor-pdf');
-                // Configuración de html2pdf
-                const options = {
-                    margin: 0,
-                    filename: 'documento.pdf',
-                    image: { type: 'jpeg', quality: 1 },
-                    html2canvas: { scale: 2, useCORS: true },
-                    jsPDf: { unit: 'in', format: 'letter', orientation: 'portrait' }
-                };
-
-                // Generar el PDF
-                html2pdf().set(options).from(element).save();
-
-            }
-
-        }
-        formatFun();
-    </script>
 </body>
+
 </html>
