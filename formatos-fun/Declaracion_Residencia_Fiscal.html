@@ -31,13 +31,14 @@
             width: 120px;
         }
 
-        select {
+        .select_declaration {
             width: 100%;
             padding: 6px 10px;
             font-size: 14px;
             border-radius: 4px;
-            border: 1px solid #ccc;
+            border: 1px solid black;
             cursor: pointer;
+            color: black
         }
 
         /* Responsive */
@@ -52,12 +53,7 @@
             }
         }
 
-        hr {
-            border: none;
-            height: 2px;
-            background-color: rgb(0, 44, 118);
-            width: 100%;
-        }
+
 
         .form-section-title {
             font-weight: 500;
@@ -70,8 +66,6 @@
 </head>
 
 <body>
-    <hr>
-    </hr>
     <div class="form-section-title">Declaración de Residencia Fiscal:</div>
     <div class="container_declaration">
         <div class="question_declaration">
@@ -81,7 +75,7 @@
                 dentro del territorio de los Estados Unidos o fuera del territorio de Colombia.
             </div>
             <div class="question-select_declaration  ">
-                <select id="pregunta1">
+                <select id="pregunta1" class="select_declaration">
                     <option value="NO">NO</option>
                     <option value="SI">SI</option>
 
@@ -94,7 +88,7 @@
                 Soy poseedor de un documento de identificación expedido en un país diferente a Colombia.
             </div>
             <div class="question-select_declaration">
-                <select id="pregunta2">
+                <select id="pregunta2" class="select_declaration">
                     <option value="NO">NO</option>
                     <option value="SI">SI</option>
                 </select>
@@ -108,7 +102,7 @@
                 ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.
             </div>
             <div class="question-select_declaration">
-                <select id="pregunta3">
+                <select id="pregunta3" class="select_declaration">
                     <option value="NO">NO</option>
                     <option value="SI">SI</option>
                 </select>
@@ -122,7 +116,7 @@
                 del territorio Colombiano.
             </div>
             <div class="question-select_declaration">
-                <select id="pregunta4">
+                <select id="pregunta4" class="select_declaration">
                     <option value="NO">NO</option>
                     <option value="SI">SI</option>
                 </select>
@@ -164,15 +158,6 @@
             width: 120px;
         }
 
-        select {
-            width: 100%;
-            padding: 6px 10px;
-            font-size: 14px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            cursor: pointer;
-        }
-
         /* Responsive */
         @media (max-width: 600px) {
             .question_declaration {
@@ -197,8 +182,6 @@
 </head>
 
 <body>
-    <hr>
-    </hr>
     <div class="form-section-title_garantias">Fondo de Garantias</div>
     <div class="container_declaration_garantias">
         <div class="question_declaration_garantias">
@@ -207,7 +190,7 @@
                 GARANTÍA FNG
             </div>
             <div class="question-select_declaration_garantias">
-                <select id="garantiaFAG">
+                <select id="garantiaFAG" class="select_declaration">
                     <option value="NO">NO</option>
                     <option value="SI">SI</option>
 
@@ -220,7 +203,7 @@
                 GARANTÍA FAG
             </div>
             <div class="question-select_declaration_garantias">
-                <select id="garantiaFNG">
+                <select id="garantiaFNG" class="select_declaration">
                     <option value="NO">NO</option>
                     <option value="SI">SI</option>
                 </select>

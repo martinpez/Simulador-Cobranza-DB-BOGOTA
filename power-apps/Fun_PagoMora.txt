@@ -517,7 +517,7 @@ Screens:
             Size: =6.5
             Text: |-
               ="Desde ahora acepto las nuevas  condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas, esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá, quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre el resultado de mi solicitud.
-              Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones, comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha establecida, sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio,  los valores consignados sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en la ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los beneficios ofrecidos anteriormente.
+              Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones, comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha establecida, sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio,  los valores consignados sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en la ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Baja en cuentas ofrecidos anteriormente.
               Acepto que existe la posibilidad que la amortización de las primeras cuotas pueda no incluir abono a capital (ejemplo: ajuste del plan de amortización al valor de la cuota propuesta por mí).  
               En caso de existir inconsistencias en el diligenciamiento del formato, el Banco le informará  y si usted no las subsana en el término de tres (3) días,  la presente solicitud podrá  ser cancelada y se continuará con el proceso de cobro en la instancia correspondiente.
               Acepto que:
@@ -528,7 +528,7 @@ Screens:
               d. Hasta cuando no se haya perfeccionado la negociación en trámite, se mantienen vigentes las condiciones actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos y en las fechas acordadas.
 
               Manifiesto que he recibido la información adecuada sobre las implicaciones en términos de costos, nueva forma de pago y calificación crediticia, así como un comparativo entre las condiciones actuales y las del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la Circular Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia Financiera de Colombia.
-              En caso  de  incumplimiento de las nuevas condiciones del crédito se perderan  los beneficios otorgados, pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia Financiera de Colombia. Si la (s) obligación (es)  castigada (s) durante el trámite solicitado, el Banco hara el respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede  proceder a la destrucción de los documentos aportados.
+              En caso  de  incumplimiento de las nuevas condiciones del crédito se perderan  los Baja en cuentas otorgados, pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia Financiera de Colombia. Si la (s) obligación (es)  castigada (s) durante el trámite solicitado, el Banco hara el respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede  proceder a la destrucción de los documentos aportados.
 
               Yo " &inicio_inputtext_Nombre.Text &" identificado con No. " &app_combobox_identificacion_ics.Text& " manifiesto que  la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente acuerdo, son de origen lícito y corresponde a ________________________________________________________________________Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la negociación el Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me será reintegrado y la negociación se tramitará con los nuevos saldos vigentes a la fecha de aplicación de la misma.
 
@@ -1107,19 +1107,19 @@ Screens:
             Height: =123
             Size: =8
             Text: |+
-              ="Beneficio Int Corrientes: $" & pm_inputtext_desc_int_cte.Text &"
+              ="Baja en cuenta Int Corrientes: $" & pm_inputtext_desc_int_cte.Text &"
               "& 
-              "% Beneficio Int Corrientes: " & pm_inputtext_porc_int_cte_ics.Text &"
+              "% Baja en cuenta Int Corrientes: " & pm_inputtext_porc_int_cte_ics.Text &"
               "&
-              "Beneficio Int Mora: $" & pm_inputtext_porc_int_mora.Text &"
+              "Baja en cuenta Int Mora: $" & pm_inputtext_porc_int_mora.Text &"
               "&  
-              "% Beneficio Int Mora: " & pm_inputtext_porc_int_mora_ics.Text &"
+              "% Baja en cuenta Int Mora: " & pm_inputtext_porc_int_mora_ics.Text &"
               "& 
-              "Beneficio Int ExtraContables: $" & pm_inputtext_porc_int_ext.Text &"
+              "Baja en cuenta Int ExtraContables: $" & pm_inputtext_porc_int_ext.Text &"
               "& 
-              "% Beneficio Int ExtraContables: " & pm_inputtext_porc_int_ext_ics.Text &"
+              "% Baja en cuenta Int ExtraContables: " & pm_inputtext_porc_int_ext_ics.Text &"
               "& 
-              "Total Beneficio: $" & pm_inputtext_desc_aplic.Text &"
+              "Total Baja en cuenta: $" & pm_inputtext_desc_aplic.Text &"
               "& 
               "Pago a Realizar: $ " & pm_inputtext_snr.Text &"
               "& 

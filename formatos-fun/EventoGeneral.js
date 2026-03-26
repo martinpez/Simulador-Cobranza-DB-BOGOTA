@@ -1,27 +1,27 @@
-async function DataEventoGeneral() {
-    await sessionStorage.getItem("mecanismo").then(mecanismo => {
-        switch (mecanismo) {
-            case "consolidacion":
-                funDataGenerica();
-                break;
-            case "novacion":
-                funDataGenerica();
-                DataFunNovacion();
-                loadModalFun("novacion", "btnEvnFun");
-                break;
-            case "pagoMora":
-                funDataGenerica();
-                break;
-            case "cancelacion":
-                funDataGenerica();
-                break;
-            case "ampliacion":
-                funDataGenerica();
-                break;
-            default:
-                console.warn("Mecanismo no reconocido:", mecanismo);
-        }
-    }).catch(err => console.error("Error al obtener mecanismo:", err));
+function DataEventoGeneral() {
+    var mecanismo = sessionStorage.getItem("mecanismo").toLowerCase()
+    switch (mecanismo) {
+        case "consolidacion":
+            funDataGenerica();
+            break;
+        case "novacion":
+            funDataGenerica();
+            DataFunNovacion();
+            loadModalFun("novacion");
+            break;
+        case "pagoMora":
+            funDataGenerica();
+            break;
+        case "cancelacion":
+            funDataGenerica();
+            break;
+        case "ampliacion":
+            funDataGenerica();
+            break;
+        default:
+            console.warn("Mecanismo no reconocido:", mecanismo);
+    }
+
 }
 
 
@@ -41,7 +41,7 @@ function funDataGenerica() {
         let userObj = JSON.parse(sessionStorage.getItem("LappizUser") || "{}");
         if (userObj.FullName) {
             // 2. Dividimos por la coma
-            let partes = userObj.FullName.split(','); // ["Perez Mercado", " Martin Elias"]
+            let partes = userObj.FullName.split(',');
 
             if (partes.length === 2) {
                 // 3. Limpiamos espacios y reordenamos: Nombre + " " + Apellido
@@ -61,6 +61,8 @@ function funDataGenerica() {
             '[id="64b5c3a4-2d66-4e35-97af-8a9405f0cf63"] input'
         ).value.replaceAll('-', ' ');
         var edadMora = sessionStorage.getItem("EdadMoraCl") || "";
+        var numDocTerd = numeroDoc;
+        var nombreClienteTerd = nombreCliente;
         return {
             codOficina: Oficina,
             nombreOficina: NomOficina,
@@ -71,7 +73,9 @@ function funDataGenerica() {
             numDoc: numeroDoc,
             lugarExp: lugarExp,
             fechaExp: fechaExp,
-            diasMora: edadMora
+            diasMora: edadMora,
+            numDocTerd: numDocTerd,
+            nombreClienteTerd: nombreClienteTerd,
         }
     }
     function loadFormData(data) {
@@ -85,6 +89,8 @@ function funDataGenerica() {
         document.getElementById("lugarExp").textContent = data.lugarExp;
         document.getElementById("fechaExp").textContent = data.fechaExp;
         document.getElementById("diasMora").textContent = data.diasMora;
+        document.getElementById("nombreClienteTerd").textContent = data.nombreClienteTerd;
+        document.getElementById("numDocTerd").textContent = data.numDocTerd;
     }
     setTimeout(() => {
         loadFormData(data());
@@ -102,22 +108,22 @@ function DataFunNovacion() {
         var ocupacionAdicional = document.getElementById("10d62ee5-6dc2-4452-9a91-e8acae95a3d3").selectedOptions[0].innerText || "";
         var ingresosAdicionales = document.getElementById("3f181299-b8fb-437e-aaa1-e21af8c747d1").value || "$";
         var numObligacion = document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value == "" ? document.getElementById("caae86ca-b4e0-4e59-918e-8f7a1a4d4114").selectedOptions[0].innerText : document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value;
-        var saldoTotal = document.getElementById("616e6102-56e5-48e9-bfc2-fce8497e629d").getAttribute("aria-valuenow") || "$"
-        var pagoMinimo = document.getElementById("1f7c2b79-87a6-402f-95f2-414aea88a4bf").getAttribute("aria-valuenow") || "$"
+        var saldoTotal = document.getElementById("616e6102-56e5-48e9-bfc2-fce8497e629d").getAttribute("aria-valuenow") || "$";
+        var pagoMinimo = document.getElementById("1f7c2b79-87a6-402f-95f2-414aea88a4bf").getAttribute("aria-valuenow") || "$";
         var fechaPago =
             document.querySelector("#\\35 c6f6251-9091-496a-966a-9bf0fb0eedcf input")
                 .value.replaceAll('-', ' ');
-        var pagoNegociacion = document.getElementById("92bcba6d-4dab-459e-bd8f-164da7eeb526").getAttribute("aria-valuenow") || "$"
+        var pagoNegociacion = document.getElementById("92bcba6d-4dab-459e-bd8f-164da7eeb526").getAttribute("aria-valuenow") || "$";
         var plazo = document.getElementById("9382c5a1-0445-4ed9-a785-850d06da2cd2").selectedOptions[0].innerText || "";
         var tasaMV = document.getElementById("b76668b5-0710-4eee-9718-a2633605c35e").value || "";
         var saldoDiferir = document.getElementById("c6923383-8eec-4efe-81a5-954ce52b8882").value || "$";
         var cuotaProyectada = document.getElementById("d157fb29-fd6f-450b-b637-8fa18c824cd2").value || "$";
-        var pregunta1 = document.getElementById("pregunta1").value || "";
-        var pregunta2 = document.getElementById("pregunta2").value || "";
-        var pregunta3 = document.getElementById("pregunta3").value || "";
-        var pregunta4 = document.getElementById("pregunta4").value || "";
-        var garantiaFAG = document.getElementById("garantiaFAG").value || "";
-        var garantiaFNG = document.getElementById("garantiaFNG").value || "";
+        var pregunta1 = document.getElementById("pregunta1").selectedOptions[0].innerText || "NO";
+        var pregunta2 = document.getElementById("pregunta2").selectedOptions[0].innerText || "NO";
+        var pregunta3 = document.getElementById("pregunta3").selectedOptions[0].innerText || "NO";
+        var pregunta4 = document.getElementById("pregunta4").selectedOptions[0].innerText || "NO";
+        var garantiaFAG = document.getElementById("garantiaFAG").selectedOptions[0].innerText || "NO";
+        var garantiaFNG = document.getElementById("garantiaFNG").selectedOptions[0].innerText || "NO";
         var observaciones = document.getElementById("4b025de3-4404-41f3-8ba8-ac9b0988391e").value || "";
 
         return {
@@ -170,7 +176,35 @@ function DataFunNovacion() {
         loadFormData(dataNova());
         console.log("Datos para novacion cargados");
         console.log("Datos:", dataNova());
+
     }, 500);
+}
+function loadModalFun(mecanismo) {
+
+    const modal = document.getElementById('modal' + mecanismo);
+
+    if (modal) {
+        // con esto se asegura que la data se haya cargado antes de abrir el modal
+        setTimeout(() => {
+            modal.showModal();
+        }, 700);
+
+        // Cerrar al hacer clic fuera (en el backdrop)
+        modal.addEventListener('click', (event) => {
+
+            if (event.target === modal) {
+                modal.close();
+                toastr.info("Recuerda Revisar bien tu fun antes ")
+            }
+        });
+
+        console.log("Sistema de modal listo");
+
+    } else {
+
+        console.error("Error: No se encontró el dialog con id='modal" + mecanismo + "'");
+    }
+
 }
 
 $(document).on('click', '#btnEvnFun', function () {
@@ -182,46 +216,22 @@ $(document).on('click', '#btnEvnFun', function () {
     }
 });
 
-function loadModalFun(mecanismo) {
-    document.addEventListener('DOMContentLoaded', () => {
 
-        const modal = document.getElementById('modal' + mecanismo);
-
-        if (modal) {
-            // con esto se asegura que la data se haya cargado antes de abrir el modal
-            setTimeout(() => {
-                modal.showModal();
-            }, 700);
-
-            // Cerrar al hacer clic fuera (en el backdrop)
-            modal.addEventListener('click', (event) => {
-
-                if (event.target === modal) {
-                    modal.close();
-                }
-            });
-
-            console.log("Sistema de modal listo");
-
-        } else {
-
-            console.error("Error: No se encontró el dialog con id='modal" + mecanismo + "'");
-        }
-    });
-}
-
-
-$(document).on('click', '#btnConfirmaFun', function () {
-    console.log("Btn confirma pulsado");
-    var mecanismo = sessionStorage.getItem("mecanismo").toLocaleLowerCase();
-    sendDataFunPDF(mecanismo);
+$(document).on('click', '#btnConfirmarFun', function () {
+    console.log("Btn fun pulsado");
+    try {
+        sendDataFunPDF();
+    } catch (error) {
+        console.error("Error al enviar los datos:", error);
+    }
 });
+
 
 function sendDataFunPDF(mecanismo) {
     const element = document.getElementById('contenedor' + mecanismo + 'PDF');
 
     const options = {
-        margin: [2, 2, 2, 2],                    // márgenes pequeños pero limpios
+        margin: [2, 2, 2, 2],
         filename: 'Solicitud_Normalizacion_' + mecanismo + '.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
@@ -233,33 +243,56 @@ function sendDataFunPDF(mecanismo) {
         },
         jsPDF: {
             unit: 'mm',
-            format: 'a4',           // ← Cambio clave (A4 es más alto)
+            format: 'a4',
             orientation: 'portrait'
         }
     };
 
+    // Encadenamos el guardado y pedimos el Base64 de forma segura
     html2pdf()
         .set(options)
         .from(element)
-        .save()
-        .catch(err => console.error("Error al generar PDF:", err));
+        .save() // Descarga el local
+        .outputPdf('datauristring') // Extrae un STRING Base64 para adjuntar
+        .then(function (pdfBase64) {
 
-    var cc = document.getElementById("75fda36b-9317-4062-93d7-26d45e6188d6").value
-    let email = document.getElementById("75fda36b-9317-4062-93d7-26d45e6188d6").value;
-    let subject = mecanismo + 'fun cliente' + cc;
-    let text = 'Se ha generado una solicitud de normalización para el cliente ' + cc + ' con el mecanismo ' + mecanismo;
-    let HTML = `<h1>Design great ideas with HTML to personalize the different 
-emails you will send to your team.
-Worry about your business, leave the code to Lapiz</h1>`;
-    let cc = ["PVELEZ@bancodebogota.com.co"];
-    let bcc = ["andrei.valencia@lappiz.io"];
-    let smtpsender = 'aws';
+            // Cuando termina exitosamente, YA tenemos el pdfBase64, configuramos correo:
+            var cedula = document.getElementById("75fda36b-9317-4062-93d7-26d45e6188d6").value;
+            // para traer el sox que le corresponda al mecanismo
+            const SOX_ID = {
+                "novacion": "07b4e087-95c8-4867-b91f-1f9e9a4a1ea0",
+                "pagoMora": "b24357e4-d1be-443d-8fa0-5b8790a1c508",
+                "consolidacion": "f3979225-f563-48a2-a206-6b5866a7dc6c",
+                "cancelacion": "d4f89a7c-0207-4756-9bd7-e2e669ac3ce0",
+                "ampliacion": "eec3136d-46bf-438c-b7cc-4aaa5fba776b"
+            }
+            var sox = document.getElementById(SOX_ID[mecanismo]).value;
+            let email = localStorage.getItem("userName");
 
-    sendEmail(smtpsender, email, subject, text, HTML, null, cc, bcc).then(function (response) {
-        toastr.info('Se ha enviado el correo');
-    }, function (error) {
-        toastr.warning('Ha ocurrido un error al enviar el correo');
-    });
+            let subject = mecanismo + ' fun cliente ' + cedula;
+            let text = 'Buenos días anexo el formato Fun del ' + mecanismo + ' del cliente ' + cedula + '\n' + sox;
+
+            let attachments = [
+                {
+                    filename: 'Solicitud_Normalizacion_' + mecanismo + '.pdf',
+                    path: pdfBase64
+                    // Se manda la cadena base64 en la propiedad 'path' (o 'content' si la API lo exige así)
+                }
+            ];
+
+            // Usamos una variable de nombre distinto a 'cedula' o 'var cc' para evitar el SyntaxError
+            let correosCC = email ? [email] : [];
+            let bcc = []; // Lo ideal es mandar un array vacío en vez de ""
+            let smtpsender = 'aws';
+
+            // Enviamos el correo
+            sendEmail(smtpsender, email, subject, text, null, attachments, correosCC, bcc)
+                .then(function (response) {
+                    toastr.info('Se ha enviado el correo con su adjunto');
+                }, function (error) {
+                    toastr.warning('Ha ocurrido un error al enviar el correo');
+                });
+
+        })
+        .catch(err => console.error("Error al generar PDF y enviar correo:", err));
 }
-
-

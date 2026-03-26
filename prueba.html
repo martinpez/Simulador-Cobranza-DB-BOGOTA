@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="codigoUtil.js"></script>
     <style>
         .layout-especial_Am * {
             margin: 0;
@@ -430,8 +428,15 @@
 </head>
 
 <body class="layout-especial_Am">
-    <dialog id="modalampliacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
-        <div id="contenedorampliacionPDF" class="container_Am" style="margin: 0; box-shadow: none;">
+    <button onclick="descargarPDF()" style="position: absolute; top: 15px; right: 15px; z-index: 100; 
+               padding: 8px 16px; background: #2e7d32; color: white; 
+               border: none; border-radius: 4px; cursor: pointer;">
+        📥 Descargar PDF
+    </button>
+    <button id="btnAbrir">Abrir Modal</button>
+
+    <dialog id="modalAmpliacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
+        <div id="contenedorAmpliacionPDF" class="container_Am" style="margin: 0; box-shadow: none;">
 
             <!-- Header -->
             <div class="header_Am">
@@ -554,14 +559,15 @@
                     <div class="subsection-header_Am">Condiciones negocioación</div>
                     <div class="terms-text_Am" style="margin: 0; font-size: 9px; line-height: 1.6; border-top: none;">
                         <div style="text-align: center; font-weight:bold ;">
-                            Beneficio Int Corrientes: <span style="font-weight:lighter"
-                                id="beneficioIntCorr"></span><br>
-                            % Beneficio Int Corrientes: <span style="font-weight:lighter"
+                            Baja en cuenta Int Corrientes: <span style="font-weight:lighter"
+                                id="Baja en cuentaIntCorr"></span><br>
+                            % Baja en cuenta Int Corrientes: <span style="font-weight:lighter"
                                 id="porcentajeBenIntCorr"></span><br>
-                            Beneficio Int Mora: <span style="font-weight:lighter" id="beneficioIntMora"></span><br>
-                            % Beneficio Int Mora: <span style="font-weight:lighter"
+                            Baja en cuenta Int Mora: <span style="font-weight:lighter"
+                                id="Baja en cuentaIntMora"></span><br>
+                            % Baja en cuenta Int Mora: <span style="font-weight:lighter"
                                 id="porcentajeBenIntMora"></span><br>
-                            Total Beneficio: <span style="font-weight:lighter" id="totalBeneficio"></span><br>
+                            Total Baja en cuenta: <span style="font-weight:lighter" id="totalBaja en cuenta"></span><br>
                             Pago a Realizar: <span style="font-weight:lighter" id="pagoRealizar"></span><br>
                             Fecha del Pago: <span style="font-weight:lighter" id="fechaPagoNuevo"></span><br>
                             Plazo: <span style="font-weight:lighter" id="plazoNuevo"></span><br>
@@ -588,7 +594,7 @@
                     sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
                     sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en
                     la
-                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los beneficios
+                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Baja en cuentas
                     ofrecidos
                     anteriormente.</p>
 
@@ -625,7 +631,8 @@
                     Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
                     Financiera de Colombia.</p>
 
-                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los beneficios otorgados,
+                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los Baja en cuentas
+                    otorgados,
                     pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
                     realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
                     Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
@@ -741,3 +748,25 @@
 </body>
 
 </html>
+
+<!--
+document.getElementById("descripcionActividad").textContent = data.descripcionActividad;
+document.getElementById("ingresoMensual").textContent = data.ingresoMensual;
+document.getElementById("ocupacionAdicional").textContent = data.ocupacionAdicional;
+document.getElementById("ingresosAdicionales").textContent = data.ingresosAdicionales;
+document.getElementById("numObligacion").textContent = data.numObligacion;
+document.getElementById("saldoTotal").textContent = data.saldoTotal;
+document.getElementById("pagoMinimo").textContent = data.pagoMinimo;
+document.getElementById("fechaPago").textContent = data.fechaPago;
+document.getElementById("pagoNegociacion").textContent = data.pagoNegociacion;
+document.getElementById("plazo").textContent = data.plazo;
+document.getElementById("tasaMV").textContent = data.tasaMV;
+document.getElementById("saldoDiferir").textContent = data.saldoDiferir;
+document.getElementById("cuotaProyectada").textContent = data.cuotaProyectada;
+document.getElementById("pregunta1").textContent = data.pregunta1;
+document.getElementById("pregunta2").textContent = data.pregunta2;
+document.getElementById("pregunta3").textContent = data.pregunta3;
+document.getElementById("pregunta4").textContent = data.pregunta4;
+document.getElementById("garantiaFAG").textContent = data.garantiaFAG;
+document.getElementById("garantiaFNG").textContent = data.garantiaFNG;
+document.getElementById("observaciones").textContent = data.observaciones;-->

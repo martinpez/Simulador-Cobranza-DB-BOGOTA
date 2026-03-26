@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
+<!-- Formato Fun Novacion -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         .layout-especial_Nova * {
@@ -21,7 +21,7 @@
         }
 
         .container_Nova {
-            width: 780px;
+            width: auto;
             margin: 0 auto;
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -430,310 +430,386 @@
                 max-width: 100%;
             }
         }
+
+        /* ====================== ESTILOS DEL MODAL ====================== */
+        #modalNovacion {
+            border: none;
+            border-radius: 8px;
+            padding: 0;
+            width: 850px;
+            /* ancho exacto del formulario */
+            max-width: 92vw;
+            max-height: 95vh;
+            /* importante: no más de la pantalla */
+            margin: auto;
+            overflow-y: auto;
+            /* ← ESTO ES LO QUE FALTABA */
+            overflow-x: hidden;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        #modalNovacion::backdrop {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Contenedor interno del PDF */
+        #contenedorNovacionPDF {
+            margin: 0 !important;
+            padding: 20px 0 20px 0 !important;
+            /* un poco de aire arriba y abajo */
+            box-shadow: none !important;
+            width: 100%;
+            min-height: 100%;
+            /* ayuda al scroll */
+        }
     </style>
 </head>
 
-<body class="layout-especial_No">
-    <div id="contenedor-pdf" class="container_Nova">
-        <!-- Header -->
-        <div class="header_Nova">
-            <div class="header-top_Nova">
-                <div class="logo-section_Nova">
-                    <img src="https://i.postimg.cc/rp9ttPt3/Logo-BDB-removebg-preview.png" alt="Banco de Bogotá"
-                        class="logo-img_Nova">
-                    <div class="bank-name_Nova">BANCO DE BOGOTÁ</div>
+<body class="layout-especial_Nova">
+    <!--
+    <button onclick="descargarPDF()" style="position: absolute; top: 15px; right: 15px; z-index: 100; 
+               padding: 8px 16px; background: #2e7d32; color: white; 
+               border: none; border-radius: 4px; cursor: pointer;">
+        📥 Descargar PDF
+    </button>
+    <button id="btnAbrir">Abrir Modal</button>
+    -->
+    <dialog id="modalnovacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
+        <div id="contenedornovacionPDF" class="container_Nova" style="margin: 0; box-shadow: none;">
+            <!-- Header -->
+            <div class="header_Nova">
+                <div class="header-top_Nova">
+                    <div class="logo-section_Nova">
+                        <img src="https://i.postimg.cc/rp9ttPt3/Logo-BDB-removebg-preview.png" alt="Banco de Bogotá"
+                            class="logo-img_Nova">
+                        <div class="bank-name_Nova">BANCO DE BOGOTÁ</div>
+                    </div>
+                    <div class="date-section_Nova">
+                        <div class="date-box_Nova">
+                            <div class="date-label_Nova">DIA</div>
+                            <div class="date-value_Nova" id="day"></div>
+                        </div>
+                        <div class="date-box_Nova">
+                            <div class="date-label_Nova">MES</div>
+                            <div class="date-value_Nova" id="month"></div>
+                        </div>
+                        <div class="date-box_Nova">
+                            <div class="date-label_Nova">AÑO</div>
+                            <div class="date-value_Nova" id="year"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="date-section_Nova">
-                    <div class="date-box">
-                        <div class="date-label_Nova">DIA</div>
-                        <div class="date-value_Nova" id="day"></div>
+                <div class="title_Nova">Solicitud de Normalizacion - Formato Único</div>
+            </div>
+
+            <div class="subtitle_Nova">MECANISMO DE NORMALIZACION: NOVACIÓN</div>
+
+            <!-- Office Information -->
+            <div class="office-section_Nova">
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Cód Ofc.</div>
+                    <div class="form-value_Nova" id="codOficina"><!-- DYNAMIC: Código Oficina --></div>
+                </div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Oficina en que se realiza<br> la negociación</div>
+                    <div class="form-value_Nova" id="nombreOficina"><!-- DYNAMIC: Nombre Oficina --></div>
+                </div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Cuenta del pago / SNR</div>
+                    <div class="form-value_Nova" id="cuentaPago"><!-- DYNAMIC: Cuenta Pago --></div>
+                </div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Funcionario de quien efectúa la negociación:</div>
+                    <div class="form-value_Nova" id="funcionario"><!-- DYNAMIC: Nombre Funcionario --></div>
+                </div>
+            </div>
+
+            <!-- Client Information Section -->
+            <div class="section-header_Nova">INFORMACION CLIENTE</div>
+
+            <div class="client-grid_Nova">
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Nombre Cliente</div>
+                    <div class="form-value_Nova" id="nombreCliente"><!-- DYNAMIC: Nombre Cliente --></div>
+                </div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Tipo Doc</div>
+                    <div class="form-value_Nova" id="tipoDoc"><!-- DYNAMIC: Tipo Documento --></div>
+                </div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Num. Documento</div>
+                    <div class="form-value_Nova" id="numDoc"><!-- DYNAMIC: Número Documento --></div>
+                </div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Lugar de Expedicion</div>
+                    <div class="form-value_Nova" id="lugarExp"><!-- DYNAMIC: Lugar Expedición --></div>
+                </div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Fecha De Expedicion</div>
+                    <div class="form-value_Nova" id="fechaExp"><!-- DYNAMIC: Fecha Expedición --></div>
+                </div>
+            </div>
+
+            <!-- Activity and Income Information -->
+            <div class="activity-grid_Nova">
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Dias Mora</div>
+                    <div class="form-value_Nova" id="diasMora"><!-- DYNAMIC: Días Mora --></div>
+                </div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Descripcion Actividad</div>
+                    <div class="form-value_Nova" id="descripcionActividad"><!-- DYNAMIC: Descripción Actividad --></div>
+                </div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Ingreso Mensual</div>
+                    <div class="form-value_Nova" id="ingresoMensual"><!-- DYNAMIC: Ingreso Mensual --></div>
+                </div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Ocupación Ingresos Adicional</div>
+                    <div class="form-value_Nova" id="ocupacionAdicional"><!-- DYNAMIC: Ocupación Adicional --></div>
+                </div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Ingresos Adicionales</div>
+                    <div class="form-value_Nova" id="ingresosAdicionales"><!-- DYNAMIC: Ingresos Adicionales --></div>
+                </div>
+            </div>
+
+            <!-- Obligations Section -->
+            <div class="section-header_Nova">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
+
+            <!-- Obligations and Conditions Side by Side -->
+            <div class="obligations-conditions-container_Nova">
+                <!-- Left side: Obligations -->
+                <div class="obligations-table_Nova">
+                    <div class="subsection-header_Nova">Datos Obligación</div>
+
+                    <div class="table-row_Nova">
+                        <div class="table-cell_Nova table-header_Nova">Nro. Obligación (4 ultimos)</div>
+                        <div class="table-cell_Nova table-header_Nova">Saldo total</div>
+                        <div class="table-cell_Nova table-header_Nova">Pago Minimo</div>
+
                     </div>
-                    <div class="date-box">
-                        <div class="date-label_Nova">MES</div>
-                        <div class="date-value_Nova" id="month"></div>
+
+                    <div class="table-row_Nova">
+                        <div class="table-cell_Nova" id="numObligacion"><!-- DYNAMIC: Número Obligación --></div>
+                        <div class="table-cell_Nova" id="saldoTotal"><!-- DYNAMIC: Saldo Total --></div>
+                        <div class="table-cell_Nova" id="pagoMinimo"><!-- DYNAMIC: Pago Mínimo --></div>
+
                     </div>
-                    <div class="date-box">
-                        <div class="date-label_Nova">AÑO</div>
-                        <div class="date-value_Nova" id="year"></div>
+
+                </div>
+
+                <!-- Right side: Conditions -->
+                <div class="conditions-section_Nova">
+                    <div class="subsection-header_Nova">Condiciones negocioación</div>
+
+                    <div class="conditions-grid_Nova">
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Cuota Proyectada</div>
+                            <div class="condition-value_Nova" id="cuotaProyectada"><!-- DYNAMIC: Cuota Proyectada -->
+                            </div>
+                        </div>
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Pago Para la Negociacion</div>
+                            <div class="condition-value_Nova" id="pagoNegociacion"><!-- DYNAMIC: Pago Negociación -->
+                            </div>
+                        </div>
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Plazo</div>
+                            <div class="condition-value_Nova" id="plazo"><!-- DYNAMIC: Plazo --></div>
+                        </div>
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Fecha Pago</div>
+                            <div class="condition-value_Nova" id="fechaPago"><!-- DYNAMIC: Fecha Pago --></div>
+                        </div>
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Saldo a Diferir</div>
+                            <div class="condition-value_Nova" id="saldoDiferir"><!-- DYNAMIC: Saldo a Diferir --></div>
+                        </div>
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Tasa (MV)</div>
+                            <div class="condition-value_Nova" id="tasaMV"><!-- DYNAMIC: Tasa MV --></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="title_Nova">Solicitud de Normalizacion - Formato Único</div>
+
+            <!-- Terms and Conditions -->
+            <div class="section-header_Nova">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
+
+            <div class="terms-text_Nova" id="terminosCondiciones">
+                <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
+                    esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
+                    quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre
+                    el
+                    resultado de mi solicitud.</p>
+
+                <p>Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones,
+                    comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha
+                    establecida,
+                    sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
+                    sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en
+                    la
+                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Baja en cuentas
+                    ofrecidos
+                    anteriormente.</p>
+
+                <p>Acepto que existe la posibilidad que la amortización de las primeras cuotas pueda no incluir abono a
+                    capital (ejemplo: ajuste del plan de amortización al valor de la cuota propuesta por mí).</p>
+
+                <p>En caso de existir inconsistencias en el diligenciamiento del formato, el Banco le informará y si
+                    usted
+                    no las subsana en el término de tres (3) días, la presente solicitud podrá ser cancelada y se
+                    continuará
+                    con el proceso de cobro en la instancia correspondiente.</p>
+
+                <p>Acepto que:</p>
+                <p>a. Esta solicitud puede implicar el bloqueo de mis productos con cupo en el tiempo que establezcan
+                    las
+                    políticas vigentes.</p>
+                <p>b. La operación solicitada puede generar marcación ante las Centrales de Riesgo por lo que autorizo
+                    al
+                    Banco a actualizar el reporte respectivo.</p>
+                <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la negociación
+                    podrá ser tramitada el mes siguiente.</p>
+                <p>d. Hasta cuando no se haya perfeccionado la negociación en trámite, se mantienen vigentes las
+                    condiciones
+                    actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos y en las
+                    fechas
+                    acordadas.</p>
+                <br>
+                <p>Manifiesto que he recibido la información adecuada sobre las implicaciones en términos de costos,
+                    nueva
+                    forma de pago y calificación crediticia, así como un comparativo entre las condiciones actuales y
+                    las
+                    del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la
+                    Circular
+                    Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
+                    Financiera de Colombia.</p>
+
+                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los Baja en cuentas
+                    otorgados,
+                    pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
+                    realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
+                    Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
+                    Financiera
+                    de Colombia. Si la (s) obligación (es) castigada (s) durante el trámite solicitado, el Banco hara el
+                    respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
+                    destrucción de los documentos aportados.</p><br>
+
+                <p>Yo <strong><span id="nombreClienteTerd"><!-- DYNAMIC: Nombre Cliente --></span></strong>
+                    identificado
+                    con No. <strong><span id="numDocTerd"><!-- DYNAMIC: Número Documento --></span></strong>
+                    manifiesto
+                    que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente
+                    acuerdo,
+                    son de origen lícito y corresponde a
+                    <span>________________________________________________________________________</span>
+                    Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la negociación
+                    el
+                    Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me será
+                    reintegrado y la negociación se tramitará con los nuevos saldos vigentes a la fecha de aplicación de
+                    la
+                    misma.
+                </p><br>
+
+                <p>Para saber más sobre tiempo de permanencia y reporte negativo en las Centrales de Información:
+                    ingresa a
+                    la pagina del Banco de Bogotá www.bancodebogota.com, en la siguiente ruta: Inicio / Nuestra
+                    Organización
+                    / Transparencia / Ley Habeas Data.</p><br>
+
+                <p>Declaro que conozco y acepto los términos y condiciones de esta negociación, los cuales pueden ser
+                    consultados a través de
+                    https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
+                    condiciones - políticas de cobro</p>
+            </div>
+
+            <!-- Questions Section -->
+            <div class="questions-grid_Nova">
+                <div class="question-row_Nova">
+                    <div class="question-text_Nova">He permanecido más de 183 días en el último año, o 183 días durante
+                        los
+                        últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia
+                    </div>
+                    <div class="question-answer_Nova" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
+                </div>
+                <div class="question-row_Nova">
+                    <div class="question-text_Nova">Soy poseedor de un documento de identificación expedido en un pais
+                        diferente
+                        a Colombia</div>
+                    <div class="question-answer_Nova" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
+                </div>
+                <div class="question-row_Nova">
+                    <div class="question-text_Nova">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
+                        honorario,
+                        primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
+                        ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
+                    <div class="question-answer_Nova" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
+                </div>
+                <div class="question-row_Nova">
+                    <div class="question-text_Nova">Recibo cualquier ingreso bruto procedente de la venta u otra
+                        disposición
+                        de
+                        cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera
+                        del
+                        territorio Colombiano.</div>
+                    <div class="question-answer_Nova" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
+                </div>
+            </div>
+
+            <!-- Observations  garantias-->
+            <div class="observations_Nova">
+
+                <div class="observations-section_Nova">
+                    <span class="observations-label_Nova">Observaciones:</span>
+                    <div class="observaciones-answer_Nova" id="observaciones">
+                    </div>
+                </div>
+
+                <div class="guarantees-section_Nova">
+
+                    <div class="guarantee-row_Nova top">
+                        <div class="guarantee-text_Nova">Garantia FAG</div>
+                        <div class="guarantee-value_Nova" id="garantiaFAG">
+                        </div>
+                    </div>
+
+                    <div class="guarantee-row_Nova">
+                        <div class="guarantee-text_Nova">Garantia FNG</div>
+                        <div class="guarantee-value_Nova" id="garantiaFNG">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Signature Section -->
+            <div class="signature-section_Nova">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+
+                        <div class="signature-line_Nova"></div>
+                        <div class="signature-label_Nova">Firma Cliente o Representante legal</div>
+                        <div class="signature-info_Nova">CC/NIT Número:</div>
+                    </div>
+                    <div class="fingerprint-box_Nova">
+
+                        <div class="fingerprint-line_Nova"></div>
+                        <div class="fingerprint-label_Nova">Huella</div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </dialog>
+</body>
 
-        <div class="subtitle_Nova">MECANISMO DE NORMALIZACION: NOVACIÓN</div>
+</html>
 
-        <!-- Office Information -->
-        <div class="office-section_Nova">
-            <div class="form-field_Nova">
-                <div class="form-label_Nova">Cód Ofc.</div>
-                <div class="form-value_Nova" id="codOficina"><!-- DYNAMIC: Código Oficina --></div>
-            </div>
-            <div class="form-field_Nova">
-                <div class="form-label_Nova">Oficina en que se realiza<br> la negociación</div>
-                <div class="form-value_Nova" id="nombreOficina"><!-- DYNAMIC: Nombre Oficina --></div>
-            </div>
-            <div class="form-field_Nova">
-                <div class="form-label_Nova">Cuenta del pago / SNR</div>
-                <div class="form-value_Nova" id="cuentaPago"><!-- DYNAMIC: Cuenta Pago --></div>
-            </div>
-            <div class="form-field_Nova">
-                <div class="form-label_Nova">Funcionario de quien efectúa la negociación:</div>
-                <div class="form-value_Nova" id="funcionario"><!-- DYNAMIC: Nombre Funcionario --></div>
-            </div>
-        </div>
-
-        <!-- Client Information Section -->
-        <div class="section-header_Nova">INFORMACION CLIENTE</div>
-
-        <div class="client-grid_Nova">
-            <div class="form-field">
-                <div class="form-label">Nombre Cliente</div>
-                <div class="form-value" id="nombreCliente"><!-- DYNAMIC: Nombre Cliente --></div>
-            </div>
-            <div class="form-field">
-                <div class="form-label">Tipo Doc</div>
-                <div class="form-value" id="tipoDoc"><!-- DYNAMIC: Tipo Documento --></div>
-            </div>
-            <div class="form-field">
-                <div class="form-label">Num. Documento</div>
-                <div class="form-value" id="numDoc"><!-- DYNAMIC: Número Documento --></div>
-            </div>
-            <div class="form-field">
-                <div class="form-label">Lugar de Expedicion</div>
-                <div class="form-value" id="lugarExp"><!-- DYNAMIC: Lugar Expedición --></div>
-            </div>
-            <div class="form-field">
-                <div class="form-label">Fecha De Expedicion</div>
-                <div class="form-value" id="fechaExp"><!-- DYNAMIC: Fecha Expedición --></div>
-            </div>
-        </div>
-
-        <!-- Activity and Income Information -->
-        <div class="activity-grid_Nova">
-            <div class="form-field">
-                <div class="form-label">Dias Mora</div>
-                <div class="form-value" id="diasMora"><!-- DYNAMIC: Días Mora --></div>
-            </div>
-            <div class="form-field">
-                <div class="form-label">Descripcion Actividad</div>
-                <div class="form-value" id="descripcionActividad"><!-- DYNAMIC: Descripción Actividad --></div>
-            </div>
-            <div class="form-field">
-                <div class="form-label">Ingreso Mensual</div>
-                <div class="form-value" id="ingresoMensual"><!-- DYNAMIC: Ingreso Mensual --></div>
-            </div>
-            <div class="form-field">
-                <div class="form-label">Ocupación Ingresos Adicional</div>
-                <div class="form-value" id="ocupacionAdicional"><!-- DYNAMIC: Ocupación Adicional --></div>
-            </div>
-            <div class="form-field">
-                <div class="form-label">Ingresos Adicionales</div>
-                <div class="form-value" id="ingresosAdicionales"><!-- DYNAMIC: Ingresos Adicionales --></div>
-            </div>
-        </div>
-
-        <!-- Obligations Section -->
-        <div class="section-header_Nova">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
-
-        <!-- Obligations and Conditions Side by Side -->
-        <div class="obligations-conditions-container_Nova">
-            <!-- Left side: Obligations -->
-            <div class="obligations-table_Nova">
-                <div class="subsection-header_Nova">Datos Obligación</div>
-
-                <div class="table-row_Nova">
-                    <div class="table-cell_Nova table-header_Nova">Nro. Obligación (4 ultimos)</div>
-                    <div class="table-cell_Nova table-header_Nova">Saldo total</div>
-                    <div class="table-cell_Nova table-header_Nova">Pago Minimo</div>
-
-                </div>
-
-                <div class="table-row_Nova">
-                    <div class="table-cell_Nova" id="numObligacion"><!-- DYNAMIC: Número Obligación --></div>
-                    <div class="table-cell_Nova" id="saldoTotal"><!-- DYNAMIC: Saldo Total --></div>
-                    <div class="table-cell_Nova" id="pagoMinimo"><!-- DYNAMIC: Pago Mínimo --></div>
-
-                </div>
-
-            </div>
-
-            <!-- Right side: Conditions -->
-            <div class="conditions-section_Nova">
-                <div class="subsection-header_Nova">Condiciones negocioación</div>
-
-                <div class="conditions-grid_Nova">
-                    <div class="condition-field_Nova">
-                        <div class="condition-label_Nova">Cuota Proyectada</div>
-                        <div class="condition-value_Nova" id="cuotaProyectada"><!-- DYNAMIC: Cuota Proyectada --></div>
-                    </div>
-                    <div class="condition-field_Nova">
-                        <div class="condition-label_Nova">Pago Para la Negociacion</div>
-                        <div class="condition-value_Nova" id="pagoNegociacion"><!-- DYNAMIC: Pago Negociación --></div>
-                    </div>
-                    <div class="condition-field_Nova">
-                        <div class="condition-label_Nova">Plazo</div>
-                        <div class="condition-value_Nova" id="plazo"><!-- DYNAMIC: Plazo --></div>
-                    </div>
-                    <div class="condition-field_Nova">
-                        <div class="condition-label_Nova">Fecha Pago</div>
-                        <div class="condition-value_Nova" id="fechaPago"><!-- DYNAMIC: Fecha Pago --></div>
-                    </div>
-                    <div class="condition-field_Nova">
-                        <div class="condition-label_Nova">Saldo a Diferir</div>
-                        <div class="condition-value_Nova" id="saldoDiferir"><!-- DYNAMIC: Saldo a Diferir --></div>
-                    </div>
-                    <div class="condition-field_Nova">
-                        <div class="condition-label_Nova">Tasa (MV)</div>
-                        <div class="condition-value_Nova" id="tasaMV"><!-- DYNAMIC: Tasa MV --></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Terms and Conditions -->
-        <div class="section-header_Nova">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
-
-        <div class="terms-text_Nova" id="terminosCondiciones">
-            <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
-                esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
-                quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre el
-                resultado de mi solicitud.</p>
-
-            <p>Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones,
-                comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha establecida,
-                sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
-                sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en la
-                ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los beneficios ofrecidos
-                anteriormente.</p>
-
-            <p>Acepto que existe la posibilidad que la amortización de las primeras cuotas pueda no incluir abono a
-                capital (ejemplo: ajuste del plan de amortización al valor de la cuota propuesta por mí).</p>
-
-            <p>En caso de existir inconsistencias en el diligenciamiento del formato, el Banco le informará y si usted
-                no las subsana en el término de tres (3) días, la presente solicitud podrá ser cancelada y se continuará
-                con el proceso de cobro en la instancia correspondiente.</p>
-
-            <p>Acepto que:</p>
-            <p>a. Esta solicitud puede implicar el bloqueo de mis productos con cupo en el tiempo que establezcan las
-                políticas vigentes.</p>
-            <p>b. La operación solicitada puede generar marcación ante las Centrales de Riesgo por lo que autorizo al
-                Banco a actualizar el reporte respectivo.</p>
-            <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la negociación
-                podrá ser tramitada el mes siguiente.</p>
-            <p>d. Hasta cuando no se haya perfeccionado la negociación en trámite, se mantienen vigentes las condiciones
-                actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos y en las fechas
-                acordadas.</p>
-            <br>
-            <p>Manifiesto que he recibido la información adecuada sobre las implicaciones en términos de costos, nueva
-                forma de pago y calificación crediticia, así como un comparativo entre las condiciones actuales y las
-                del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la Circular
-                Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
-                Financiera de Colombia.</p>
-
-            <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los beneficios otorgados,
-                pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
-                realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
-                Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia Financiera
-                de Colombia. Si la (s) obligación (es) castigada (s) durante el trámite solicitado, el Banco hara el
-                respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
-                destrucción de los documentos aportados.</p><br>
-
-            <p>Yo <strong><span id="nombreClienteTerminos"><!-- DYNAMIC: Nombre Cliente --></span></strong> identificado
-                con No. <strong><span id="numDocTerminos"><!-- DYNAMIC: Número Documento --></span></strong> manifiesto
-                que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente acuerdo,
-                son de origen lícito y corresponde a
-                <span>________________________________________________________________________</span>
-                Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la negociación el
-                Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me será
-                reintegrado y la negociación se tramitará con los nuevos saldos vigentes a la fecha de aplicación de la
-                misma.
-            </p><br>
-
-            <p>Para saber más sobre tiempo de permanencia y reporte negativo en las Centrales de Información: ingresa a
-                la pagina del Banco de Bogotá www.bancodebogota.com, en la siguiente ruta: Inicio / Nuestra Organización
-                / Transparencia / Ley Habeas Data.</p><br>
-
-            <p>Declaro que conozco y acepto los términos y condiciones de esta negociación, los cuales pueden ser
-                consultados a través de
-                https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
-                condiciones - políticas de cobro</p>
-        </div>
-
-        <!-- Questions Section -->
-        <div class="questions-grid_Nova">
-            <div class="question-row_Nova">
-                <div class="question-text_Nova">He permanecido más de 183 días en el último año, o 183 días durante los
-                    últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia</div>
-                <div class="question-answer_Nova" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
-            </div>
-            <div class="question-row_Nova">
-                <div class="question-text_Nova">Soy poseedor de un documento de identificación expedido en un pais
-                    diferente
-                    a Colombia</div>
-                <div class="question-answer_Nova" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
-            </div>
-            <div class="question-row_Nova">
-                <div class="question-text_Nova">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
-                    honorario,
-                    primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
-                    ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
-                <div class="question-answer_Nova" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
-            </div>
-            <div class="question-row_Nova">
-                <div class="question-text_Nova">Recibo cualquier ingreso bruto procedente de la venta u otra disposición
-                    de
-                    cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera del
-                    territorio Colombiano.</div>
-                <div class="question-answer_Nova" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
-            </div>
-        </div>
-
-        <!-- Observations  garantias-->
-        <div class="observations_Nova">
-
-            <div class="observations-section_Nova">
-                <span class="observations-label_Nova">Observaciones:</span>
-                <div class="observaciones-answer_Nova" id="observaciones">
-                </div>
-            </div>
-
-            <div class="guarantees-section_Nova">
-
-                <div class="guarantee-row_Nova top">
-                    <div class="guarantee-text_Nova">Garantia FAG</div>
-                    <div class="guarantee-value_Nova" id="garantiaFAG">
-                    </div>
-                </div>
-
-                <div class="guarantee-row_Nova">
-                    <div class="guarantee-text_Nova">Garantia FNG</div>
-                    <div class="guarantee-value_Nova" id="garantiaFNG">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-        <!-- Signature Section -->
-        <div class="signature-section_Nova">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
-
-                    <div class="signature-line_Nova"></div>
-                    <div class="signature-label_Nova">Firma Cliente o Representante legal</div>
-                    <div class="signature-info_Nova">CC/NIT Número:</div>
-                </div>
-                <div class="fingerprint-box_Nova">
-
-                    <div class="fingerprint-line_Nova"></div>
-                    <div class="fingerprint-label_Nova">Huella</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<!--
     <script>
 
 
@@ -879,6 +955,4 @@
         formatFun();
 
     </script>
-</body>
-
-</html>
+    -->
