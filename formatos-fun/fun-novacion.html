@@ -668,18 +668,21 @@
                 <div class="question-answer_Nova" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
             </div>
             <div class="question-row_Nova">
-                <div class="question-text_Nova">Soy poseedor de un documento de identificación expedido en un pais diferente
+                <div class="question-text_Nova">Soy poseedor de un documento de identificación expedido en un pais
+                    diferente
                     a Colombia</div>
                 <div class="question-answer_Nova" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
             </div>
             <div class="question-row_Nova">
-                <div class="question-text_Nova">Recibo cualquier pago de intereses, dividendos, rentas, salarios, honorario,
+                <div class="question-text_Nova">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
+                    honorario,
                     primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
                     ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
                 <div class="question-answer_Nova" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
             </div>
             <div class="question-row_Nova">
-                <div class="question-text_Nova">Recibo cualquier ingreso bruto procedente de la venta u otra disposición de
+                <div class="question-text_Nova">Recibo cualquier ingreso bruto procedente de la venta u otra disposición
+                    de
                     cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera del
                     territorio Colombiano.</div>
                 <div class="question-answer_Nova" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
@@ -747,12 +750,12 @@
             setTimeout(() => {
                 data = data();
             }, 500);
-            
+
         } catch (error) {
             console.error('Error al obtener los datos del formulario:', error);
         }
         function data() {
-            
+
 
             return {
                 codOficina: '001',
@@ -862,9 +865,9 @@
                 const options = {
                     margin: 0,
                     filename: 'documento.pdf',
-                    image: { type: 'jpeg', quality: 1},
-                    html2canvas: { scale: 2, useCORS:true},
-                    jsPDf:{ unit: 'in', format: 'letter', orientation: 'portrait' }
+                    image: { type: 'jpeg', quality: 1 },
+                    html2canvas: { scale: 2, useCORS: true },
+                    jsPDf: { unit: 'in', format: 'letter', orientation: 'portrait' }
                 };
 
                 // Generar el PDF

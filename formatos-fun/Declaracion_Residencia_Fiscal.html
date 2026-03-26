@@ -1,0 +1,232 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container_declaration {
+            max-width: 804px;
+            margin: auto;
+            margin-top: 20px;
+            /* background: rgb(230, 228, 228);*/
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .question_declaration {
+            display: flex;
+            gap: 16px;
+            text-align: left;
+            align-items: center;
+            margin-bottom: 20px;
+
+        }
+
+        .question-text_declaration {
+            flex: 1;
+            line-height: 1.9;
+            ;
+        }
+
+        .question-select_declaration {
+            width: 120px;
+        }
+
+        select {
+            width: 100%;
+            padding: 6px 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .question_declaration {
+                flex-direction: column;
+            }
+
+            .question-select_declaration {
+                width: 100%;
+
+            }
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background-color: rgb(0, 44, 118);
+            width: 100%;
+        }
+
+        .form-section-title {
+            font-weight: 500;
+            font-size: 1.2em;
+            white-space: pre-wrap;
+            margin-left: 20px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <hr>
+    </hr>
+    <div class="form-section-title">Declaración de Residencia Fiscal:</div>
+    <div class="container_declaration">
+        <div class="question_declaration">
+
+            <div class="question-text_declaration">
+                He permanecido más de 183 días en el último año, o 183 días durante los últimos 3 años,
+                dentro del territorio de los Estados Unidos o fuera del territorio de Colombia.
+            </div>
+            <div class="question-select_declaration  ">
+                <select id="pregunta1">
+                    <option value="NO">NO</option>
+                    <option value="SI">SI</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="question_declaration">
+            <div class="question-text_declaration">
+                Soy poseedor de un documento de identificación expedido en un país diferente a Colombia.
+            </div>
+            <div class="question-select_declaration">
+                <select id="pregunta2">
+                    <option value="NO">NO</option>
+                    <option value="SI">SI</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="question_declaration">
+            <div class="question-text_declaration">
+                Recibo cualquier pago de intereses, dividendos, rentas, salarios, honorarios, primas,
+                anualidades, compensaciones, remuneraciones, emolumentos u otras ganancias fijas u
+                ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.
+            </div>
+            <div class="question-select_declaration">
+                <select id="pregunta3">
+                    <option value="NO">NO</option>
+                    <option value="SI">SI</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="question_declaration">
+            <div class="question-text_declaration">
+                Recibo cualquier ingreso bruto procedente de la venta u otra disposición de cualquier
+                propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera
+                del territorio Colombiano.
+            </div>
+            <div class="question-select_declaration">
+                <select id="pregunta4">
+                    <option value="NO">NO</option>
+                    <option value="SI">SI</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container_declaration_garantias {
+            max-width: 804px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .question_declaration_garantias {
+            display: inline-flex;
+            gap: 16px;
+            text-align: left;
+            align-items: center;
+            margin-bottom: 20px;
+
+        }
+
+        .question-text_declaration_garantias {
+            flex: 1;
+            line-height: 1.9;
+            margin-left: 50px;
+        }
+
+        .question-select_declaration_garantias {
+            width: 120px;
+        }
+
+        select {
+            width: 100%;
+            padding: 6px 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .question_declaration {
+                flex-direction: column;
+            }
+
+            .question-select_declaration {
+                width: 100%;
+
+            }
+        }
+
+
+        .form-section-title_garantias {
+            font-weight: 500;
+            font-size: 1.2em;
+            white-space: pre-wrap;
+            margin-left: 20px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <hr>
+    </hr>
+    <div class="form-section-title_garantias">Fondo de Garantias</div>
+    <div class="container_declaration_garantias">
+        <div class="question_declaration_garantias">
+
+            <div class="question-text_declaration_garantias">
+                GARANTÍA FNG
+            </div>
+            <div class="question-select_declaration_garantias">
+                <select id="garantiaFAG">
+                    <option value="NO">NO</option>
+                    <option value="SI">SI</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="question_declaration_garantias">
+            <div class="question-text_declaration_garantias">
+                GARANTÍA FAG
+            </div>
+            <div class="question-select_declaration_garantias">
+                <select id="garantiaFNG">
+                    <option value="NO">NO</option>
+                    <option value="SI">SI</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

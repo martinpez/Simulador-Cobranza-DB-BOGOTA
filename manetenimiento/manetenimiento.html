@@ -1,0 +1,273 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+        <script src="mante.js" crossorigin="anonymous"></script>
+    <style>
+    
+        .bbmnt-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            z-index: 2147483647 !important;
+            background-color: #0A1628 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-family: 'DM Sans', sans-serif !important;
+            overflow: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        @keyframes bbmnt-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1.25;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 1.25;
+                /* Se ilumina un poco al expandirse */
+            }
+        }
+
+        .bbmnt-ring {
+            position: absolute !important;
+            border-radius: 50% !important;
+            border: 1px solid rgba(212, 168, 67, .12) !important;
+            pointer-events: none !important;
+            top: 50% !important;
+            left: 50% !important;
+            /* Es vital para que la pulsación parta del centro */
+            transform-origin: center center !important;
+        }
+
+        .bbmnt-ring-2 {
+            width: 900px !important;
+            height: 900px !important;
+            margin-top: -450px !important;
+            margin-left: -450px !important;
+            /* Animación de 8 segundos */
+            animation: bbmnt-pulse 8s ease-in-out infinite !important;
+        }
+
+        .bbmnt-ring-3 {
+            width: 1200px !important;
+            height: 1200px !important;
+            margin-top: -600px !important;
+            margin-left: -600px !important;
+            /* Animación de 12 segundos y un pequeño retraso para que no vayan a la par */
+            animation: bbmnt-pulse 12s ease-in-out infinite !important;
+            animation-delay: 2s !important;
+        }
+
+        .bbmnt-card {
+            position: relative !important;
+            z-index: 2 !important;
+            background-color: #122040 !important;
+            border: 1px solid rgba(212, 168, 67, .25) !important;
+            border-radius: 28px !important;
+            padding: 56px 68px !important;
+            max-width: 640px !important;
+            width: 90% !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
+        }
+
+        .bbmnt-logo {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin: 0 0 40px 0 !important;
+            padding: 0 !important;
+        }
+
+        .bbmnt-logo img {
+            height: 40px !important;
+            width: auto !important;
+            object-fit: contain !important;
+            display: block !important;
+        }
+
+        .bbmnt-logo-text {
+            font-family: 'Playfair Display', serif !important;
+            font-size: 18px !important;
+            color: #D4A843 !important;
+            letter-spacing: .03em !important;
+            line-height: 1 !important;
+            margin: 0 0 0 10px !important;
+            padding: 0 !important;
+        }
+
+        .bbmnt-logo-text b {
+            color: #C8102E !important;
+            font-weight: 700 !important;
+        }
+
+        .bbmnt-img-wrap {
+            margin: 0 auto 32px auto !important;
+            padding: 0 !important;
+        }
+
+        .bbmnt-img-wrap img {
+            width: 130px !important;
+            height: 130px !important;
+            object-fit: contain !important;
+            display: block !important;
+            margin: 0 auto !important;
+        }
+
+        .bbmnt-badge {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            background-color: rgba(200, 16, 46, .2) !important;
+            border: 1px solid rgba(200, 16, 46, .45) !important;
+            border-radius: 999px !important;
+            padding: 5px 18px !important;
+            font-size: 11px !important;
+            font-weight: 600 !important;
+            letter-spacing: .14em !important;
+            text-transform: uppercase !important;
+            color: #e8637a !important;
+            margin: 0 0 26px 0 !important;
+        }
+
+        .bbmnt-dot {
+            width: 7px !important;
+            height: 7px !important;
+            border-radius: 50% !important;
+            background-color: #C8102E !important;
+            flex-shrink: 0 !important;
+            display: inline-block !important;
+            animation: bbmnt-blink 1.4s ease-in-out infinite !important;
+        }
+
+        @keyframes bbmnt-blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .15;
+            }
+        }
+
+        .bbmnt-title {
+            font-family: 'Playfair Display', serif !important;
+            font-size: 32px !important;
+            color: #F7F2EB !important;
+            line-height: 1.25 !important;
+            margin: 0 0 18px 0 !important;
+            padding: 0 !important;
+            font-weight: 700 !important;
+            display: block !important;
+        }
+
+        .bbmnt-title i {
+            font-style: italic !important;
+            color: #D4A843 !important;
+            font-weight: 400 !important;
+        }
+
+        .bbmnt-desc {
+            font-size: 15px !important;
+            color: #9aa0ad !important;
+            line-height: 1.8 !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+            max-width: 480px !important;
+            display: block !important;
+        }
+
+        .bbmnt-desc b {
+            color: #F7F2EB !important;
+            font-weight: 500 !important;
+        }
+
+        .bbmnt-sep {
+            margin: 36px auto 24px auto !important;
+            border: none !important;
+            border-top: 1px solid rgba(255, 255, 255, .1) !important;
+            display: block !important;
+        }
+
+        .bbmnt-footer {
+            font-size: 12px !important;
+            color: rgba(138, 143, 154, .7) !important;
+            line-height: 1.6 !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .bbmnt-footer a {
+            color: #D4A843 !important;
+            text-decoration: none !important;
+        }
+
+        .bbmnt-footer a:hover {
+            text-decoration: underline !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bbmnt-overlay">
+
+        <div class="bbmnt-ring bbmnt-ring-2"></div>
+        <div class="bbmnt-ring bbmnt-ring-3"></div>
+
+        <div class="bbmnt-card">
+
+            <!-- LOGO: reemplaza con la ruta real del logo del banco -->
+            <div class="bbmnt-logo">
+                <img src="https://i.postimg.cc/rp9ttPt3/Logo-BDB-removebg-preview.png" alt="Banco de Bogotá" />
+                <span class="bbmnt-logo-text"><b>Banco</b> de Bogotá</span>
+            </div>
+
+            <!-- ICONO: reemplaza con la ruta de tu imagen -->
+            <div class="bbmnt-img-wrap">
+                <img src="https://cdn-icons-png.flaticon.com/512/11494/11494033.png" alt="En mantenimiento" />
+            </div>
+
+            <div class="bbmnt-badge">
+                <span class="bbmnt-dot"></span>
+                En mantenimiento
+            </div>
+
+            <p class="bbmnt-title">Tómate un <i>respiro</i> ☕</p>
+
+            <p class="bbmnt-desc">
+                El <b>Simulador de Cobranza</b> no está disponible en este momento.<br />
+                Estamos trabajando para traerte una versión <b>actualizada y mejorada</b>
+                que hará tu gestión aún más eficiente. ¡Regresa pronto!
+            </p>
+
+            <hr class="bbmnt-sep" />
+
+            <!-- CORREO: reemplaza con el correo de soporte real -->
+            <div class="bbmnt-footer">
+                ¿Necesitas ayuda? Escríbenos a
+                <a href="DiaDiaGEC@bancodebogota.com.co">DiaDiaGEC@bancodebogota.com.co</a>
+                &nbsp;·&nbsp; © 2025 Banco de Bogotá
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
