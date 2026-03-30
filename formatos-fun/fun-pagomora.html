@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
+<!--MECANISMOS PAGO MORA-->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         .layout-especial_Mora * {
@@ -413,293 +413,372 @@
             flex-direction: column;
             margin-left: 40px;
         }
+
+        /* ====================== ESTILOS DEL MODAL ====================== */
+        #modalpagomora {
+            border: none;
+            border-radius: 8px;
+            padding: 0;
+            width: 850px;
+            /* ancho exacto del formulario */
+            max-width: 92vw;
+            max-height: 95vh;
+            /* importante: no más de la pantalla */
+            margin: auto;
+            overflow-y: auto;
+            /* ← ESTO ES LO QUE FALTABA */
+            overflow-x: hidden;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        #modalpagomora::backdrop {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Contenedor interno del PDF */
+        #contenedorpagomoraPDF {
+            margin: 0 !important;
+            padding: 20px 0 20px 0 !important;
+            /* un poco de aire arriba y abajo */
+            box-shadow: none !important;
+            width: 100%;
+            min-height: 100%;
+            /* ayuda al scroll */
+        }
     </style>
 </head>
 
 <body class="layout-especial_Mora">
-    <div id="contenedor-pdf" class="container_Mora">
-        <!-- Header -->
-        <div class="header_Mora">
-            <div class="header-top_Mora">
-                <div class="logo-section_Mora">
-                    <img src="https://i.postimg.cc/rp9ttPt3/Logo-BDB-removebg-preview.png" alt="Banco de Bogotá"
-                        class="logo-img_Mora">
-                    <div class="bank-name_Mora">BANCO DE BOGOTÁ</div>
-                </div>
-                <div class="date-section_Mora">
-                    <div class="date-box_Mora">
-                        <div class="date-label_Mora">DIA</div>
-                        <div class="date-value_Mora" id="day"></div>
+    <!-- 
+    <button onclick="descargarPDF()" style="position: absolute; top: 15px; right: 15px; z-index: 100; 
+               padding: 8px 16px; background: #2e7d32; color: white; 
+               border: none; border-radius: 4px; cursor: pointer;">
+        📥 Descargar PDF
+    </button>
+    <button id="btnAbrir">Abrir Modal</button>
+-->
+    <dialog id="modalpagomora" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
+        <div id="contenedorpagomoraPDF" class="container_Mora" style="margin: 0; box-shadow: none;">
+            <!-- Header -->
+            <div class="header_Mora">
+                <div class="header-top_Mora">
+                    <div class="logo-section_Mora">
+                        <img src="https://i.postimg.cc/rp9ttPt3/Logo-BDB-removebg-preview.png" alt="Banco de Bogotá"
+                            class="logo-img_Mora">
+                        <div class="bank-name_Mora">BANCO DE BOGOTÁ</div>
                     </div>
-                    <div class="date-box_Mora">
-                        <div class="date-label_Mora">MES</div>
-                        <div class="date-value_Mora" id="month"></div>
-                    </div>
-                    <div class="date-box_Mora">
-                        <div class="date-label_Mora">AÑO</div>
-                        <div class="date-value_Mora" id="year"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="title_Mora">Solicitud de Normalizacion - Formato Único</div>
-        </div>
-
-        <div class="subtitle_Mora">MECANISMO DE NORMALIZACION: PAGO MORA</div>
-
-        <!-- Office Information -->
-        <div class="office-section_Mora">
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Cód Ofc.</div>
-                <div class="form-value_Mora" id="codOficina"><!-- DYNAMIC: Código Oficina --></div>
-            </div>
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Oficina en que se realiza<br> la negociación</div>
-                <div class="form-value_Mora" id="nombreOficina"><!-- DYNAMIC: Nombre Oficina --></div>
-            </div>
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Cuenta del pago / SNR</div>
-                <div class="form-value_Mora" id="cuentaPago"><!-- DYNAMIC: Cuenta Pago --></div>
-            </div>
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Funcionario de quien efectúa la negociación:</div>
-                <div class="form-value_Mora" id="funcionario"><!-- DYNAMIC: Nombre Funcionario --></div>
-            </div>
-        </div>
-
-        <!-- Client Information Section -->
-        <div class="section-header_Mora">INFORMACION CLIENTE</div>
-
-        <div class="client-grid_Mora">
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Nombre Cliente</div>
-                <div class="form-value_Mora" id="nombreCliente"><!-- DYNAMIC: Nombre Cliente --></div>
-            </div>
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Tipo Doc</div>
-                <div class="form-value_Mora" id="tipoDoc"><!-- DYNAMIC: Tipo Documento --></div>
-            </div>
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Num. Documento</div>
-                <div class="form-value_Mora" id="numDoc"><!-- DYNAMIC: Número Documento --></div>
-            </div>
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Lugar de Expedicion</div>
-                <div class="form-value_Mora" id="lugarExp"><!-- DYNAMIC: Lugar Expedición --></div>
-            </div>
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Fecha De Expedicion</div>
-                <div class="form-value_Mora" id="fechaExp"><!-- DYNAMIC: Fecha Expedición --></div>
-            </div>
-        </div>
-
-        <!-- Activity and Income Information -->
-        <div class="activity-grid_Mora">
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Dias Mora</div>
-                <div class="form-value_Mora" id="diasMora"><!-- DYNAMIC: Días Mora --></div>
-            </div>
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Descripcion Actividad</div>
-                <div class="form-value_Mora" id="descripcionActividad"><!-- DYNAMIC: Descripción Actividad --></div>
-            </div>
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Ingreso Mensual</div>
-                <div class="form-value_Mora" id="ingresoMensual"><!-- DYNAMIC: Ingreso Mensual --></div>
-            </div>
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Ocupación Ingresos Adicional</div>
-                <div class="form-value_Mora" id="ocupacionAdicional"><!-- DYNAMIC: Ocupación Adicional --></div>
-            </div>
-            <div class="form-field_Mora">
-                <div class="form-label_Mora">Ingresos Adicionales</div>
-                <div class="form-value_Mora" id="ingresosAdicionales"><!-- DYNAMIC: Ingresos Adicionales --></div>
-            </div>
-        </div>
-
-        <div class="section-header_Mora">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
-
-        <div class="obligations-conditions-container_Mora" style="grid-template-columns: 340px 1fr;">
-            <div class="obligations-table_Mora">
-                <div class="subsection-header_Mora">Datos Obligaciones</div>
-
-                <div class="obligations-grid-v3_Mora">
-                    <div class="table-cell_Mora table-header_Mora">Nro. Obligación (4 ultimos)</div>
-                    <div class="table-cell_Mora table-header_Mora">Pago Mínimo</div>
-                    <div class="table-cell_Mora table-header_Mora">Int Corrientes</div>
-                    <div class="table-cell_Mora table-header_Mora">int mora</div>
-                    <div class="table-cell_Mora table-header_Mora">Int ExtraC "TC"</div>
-                </div>
-
-                <div class="obligations-grid-v3_Mora" style="min-height: 30px;">
-                    <div class="table-cell_Mora" id="numObligacion"></div>
-                    <div class="table-cell_Mora">$ <span id="pagoMinimo"> </span></div>
-                    <div class="table-cell_Mora">$ <span id="intCorrientes"> </span></div>
-                    <div class="table-cell_Mora">$ <span id="intMora"> </span></div>
-                    <div class="table-cell_Mora">$ <span id="intExtraC"> </span></div>
-                </div>
-
-
-            </div>
-
-            <div class="conditions-section_Mora" style="margin-left: 0;">
-                <div class="subsection-header_Mora" style="border-left: none;">Condiciones negociación</div>
-                <div class="conditions-panel-v3_Mora">
-                    <strong>Beneficio Int Corrientes:</strong> $ <span id="benIntCorr"></span><br>
-                    <strong>% Beneficio Int Corrientes:</strong> <span id="porcBenIntCorr"></span><br>
-                    <strong>Beneficio Int Mora:</strong> $ <span id="benIntMora"></span><br>
-                    <strong>% Beneficio Int Mora:</strong> <span id="porcBenIntMora"></span><br>
-                    <strong>Beneficio Int ExtraContables:</strong> $ <span id="benIntExtra"></span><br>
-                    <strong>% Beneficio Int ExtraContables:</strong> <span id="porcBenIntExtra"></span><br>
-                    <strong>Total Beneficio:</strong> $ <span id="totalBeneficio"></span><br>
-                    <strong>Pago a Realizar:</strong> $ <span id="pagoRealizar"></span><br>
-                    <strong>Fecha del Pago:</strong> <span id="fechaPago"></span>
-                </div>
-            </div>
-        </div>
-        <!-- Terms and Conditions -->
-        <div class="section-header_Mora">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
-
-        <div class="terms-text_Mora" id="terminosCondiciones">
-            <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
-                esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
-                quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre el
-                resultado de mi solicitud.</p>
-
-            <p>Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones,
-                comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha establecida,
-                sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
-                sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en la
-                ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los beneficios ofrecidos
-                anteriormente.</p>
-
-            <p>Acepto que existe la posibilidad que la amortización de las primeras cuotas pueda no incluir abono a
-                capital (ejemplo: ajuste del plan de amortización al valor de la cuota propuesta por mí).</p>
-
-            <p>En caso de existir inconsistencias en el diligenciamiento del formato, el Banco le informará y si usted
-                no las subsana en el término de tres (3) días, la presente solicitud podrá ser cancelada y se continuará
-                con el proceso de cobro en la instancia correspondiente.</p>
-
-            <p>Acepto que:</p>
-            <p>a. Esta solicitud puede implicar el bloqueo de mis productos con cupo en el tiempo que establezcan las
-                políticas vigentes.</p>
-            <p>b. La operación solicitada puede generar marcación ante las Centrales de Riesgo por lo que autorizo al
-                Banco a actualizar el reporte respectivo.</p>
-            <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la negociación
-                podrá ser tramitada el mes siguiente.</p>
-            <p>d. Hasta cuando no se haya perfeccionado la negociación en trámite, se mantienen vigentes las condiciones
-                actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos y en las fechas
-                acordadas.</p>
-            <br>
-            <p>Manifiesto que he recibido la información adecuada sobre las implicaciones en términos de costos, nueva
-                forma de pago y calificación crediticia, así como un comparativo entre las condiciones actuales y las
-                del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la Circular
-                Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
-                Financiera de Colombia.</p>
-
-            <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los beneficios otorgados,
-                pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
-                realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
-                Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia Financiera
-                de Colombia. Si la (s) obligación (es) castigada (s) durante el trámite solicitado, el Banco hara el
-                respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
-                destrucción de los documentos aportados.</p><br>
-
-            <p>Yo <strong><span id="nombreClienteTerminos"><!-- DYNAMIC: Nombre Cliente --></span></strong> identificado
-                con No. <strong><span id="numDocTerminos"><!-- DYNAMIC: Número Documento --></span></strong> manifiesto
-                que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente acuerdo,
-                son de origen lícito y corresponde a
-                <span>________________________________________________________________________</span>
-                Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la negociación el
-                Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me será
-                reintegrado y la negociación se tramitará con los nuevos saldos vigentes a la fecha de aplicación de la
-                misma.
-            </p><br>
-
-            <p>Para saber más sobre tiempo de permanencia y reporte negativo en las Centrales de Información: ingresa a
-                la pagina del Banco de Bogotá www.bancodebogota.com, en la siguiente ruta: Inicio / Nuestra Organización
-                / Transparencia / Ley Habeas Data.</p><br>
-
-            <p>Declaro que conozco y acepto los términos y condiciones de esta negociación, los cuales pueden ser
-                consultados a través de
-                https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
-                condiciones - políticas de cobro</p>
-        </div>
-
-        <!-- Questions Section -->
-        <div class="questions-grid_Mora">
-            <div class="question-row_Mora">
-                <div class="question-text_Mora">He permanecido más de 183 días en el último año, o 183 días durante los
-                    últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia</div>
-                <div class="question-answer_Mora" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
-            </div>
-            <div class="question-row_Mora">
-                <div class="question-text_Mora">Soy poseedor de un documento de identificación expedido en un pais
-                    diferente
-                    a Colombia</div>
-                <div class="question-answer_Mora" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
-            </div>
-            <div class="question-row_Mora">
-                <div class="question-text_Mora">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
-                    honorario,
-                    primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
-                    ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
-                <div class="question-answer_Mora" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
-            </div>
-            <div class="question-row_Mora">
-                <div class="question-text_Mora">Recibo cualquier ingreso bruto procedente de la venta u otra disposición
-                    de
-                    cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera del
-                    territorio Colombiano.</div>
-                <div class="question-answer_Mora" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
-            </div>
-        </div>
-
-        <!-- Observations  garantias-->
-        <div class="observations_Mora">
-
-            <div class="observations-section_Mora">
-                <span class="observations-label_Mora">Observaciones:</span>
-                <div class="observaciones-answer_Mora" id="observaciones">
-                </div>
-            </div>
-
-            <div class="guarantees-section_Mora">
-
-                <div class="guarantee-row_Mora top">
-                    <div class="guarantee-text_Mora">Garantia FAG</div>
-                    <div class="guarantee-value_Mora" id="garantiaFAG">
+                    <div class="date-section_Mora">
+                        <div class="date-box_Mora">
+                            <div class="date-label_Mora">DIA</div>
+                            <div class="date-value_Mora" id="day_pagomora"></div>
+                        </div>
+                        <div class="date-box_Mora">
+                            <div class="date-label_Mora">MES</div>
+                            <div class="date-value_Mora" id="month_pagomora"></div>
+                        </div>
+                        <div class="date-box_Mora">
+                            <div class="date-label_Mora">AÑO</div>
+                            <div class="date-value_Mora" id="year_pagomora"></div>
+                        </div>
                     </div>
                 </div>
+                <div class="title_Mora">Solicitud de Normalizacion - Formato Único</div>
+            </div>
 
-                <div class="guarantee-row_Mora">
-                    <div class="guarantee-text_Mora">Garantia FNG</div>
-                    <div class="guarantee-value_Mora" id="garantiaFNG">
+            <div class="subtitle_Mora">MECANISMO DE NORMALIZACION: PAGO MORA</div>
+
+            <!-- Office Information -->
+            <div class="office-section_Mora">
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Cód Ofc.</div>
+                    <div class="form-value_Mora" id="codOficina_pagomora"><!-- DYNAMIC: Código Oficina --></div>
+                </div>
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Oficina en que se realiza<br> la negociación</div>
+                    <div class="form-value_Mora" id="nombreOficina_pagomora"><!-- DYNAMIC: Nombre Oficina --></div>
+                </div>
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Cuenta del pago / SNR</div>
+                    <div class="form-value_Mora" id="cuentaPago_pagomora"><!-- DYNAMIC: Cuenta Pago --></div>
+                </div>
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Funcionario de quien efectúa la negociación:</div>
+                    <div class="form-value_Mora" id="funcionario_pagomora"><!-- DYNAMIC: Nombre Funcionario --></div>
+                </div>
+            </div>
+
+            <!-- Client Information Section -->
+            <div class="section-header_Mora">INFORMACION CLIENTE</div>
+
+            <div class="client-grid_Mora">
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Nombre Cliente</div>
+                    <div class="form-value_Mora" id="nombreCliente_pagomora"><!-- DYNAMIC: Nombre Cliente --></div>
+                </div>
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Tipo Doc</div>
+                    <div class="form-value_Mora" id="tipoDoc_pagomora"><!-- DYNAMIC: Tipo Documento --></div>
+                </div>
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Num. Documento</div>
+                    <div class="form-value_Mora" id="numDoc_pagomora"><!-- DYNAMIC: Número Documento --></div>
+                </div>
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Lugar de Expedicion</div>
+                    <div class="form-value_Mora" id="lugarExp_pagomora"><!-- DYNAMIC: Lugar Expedición --></div>
+                </div>
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Fecha De Expedicion</div>
+                    <div class="form-value_Mora" id="fechaExp_pagomora"><!-- DYNAMIC: Fecha Expedición --></div>
+                </div>
+            </div>
+
+            <!-- Activity and Income Information -->
+            <div class="activity-grid_Mora">
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Dias Mora</div>
+                    <div class="form-value_Mora" id="diasMora_pagomora"><!-- DYNAMIC: Días Mora --></div>
+                </div>
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Descripcion Actividad</div>
+                    <div class="form-value_Mora" id="descripcionActividad_pagomora">
+                        <!-- DYNAMIC: Descripción Actividad -->
+                    </div>
+                </div>
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Ingreso Mensual</div>
+                    <div class="form-value_Mora" id="ingresoMensual_pagomora"><!-- DYNAMIC: Ingreso Mensual --></div>
+                </div>
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Ocupación Ingresos Adicional</div>
+                    <div class="form-value_Mora" id="ocupacionAdicional_pagomora"><!-- DYNAMIC: Ocupación Adicional -->
+                    </div>
+                </div>
+                <div class="form-field_Mora">
+                    <div class="form-label_Mora">Ingresos Adicionales</div>
+                    <div class="form-value_Mora" id="ingresosAdicionales_pagomora">
+                        <!-- DYNAMIC: Ingresos Adicionales -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header_Mora">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
+
+            <div class="obligations-conditions-container_Mora" style="grid-template-columns: 340px 1fr;">
+                <div class="obligations-table_Mora">
+                    <div class="subsection-header_Mora">Datos Obligaciones</div>
+
+                    <div class="obligations-grid-v3_Mora">
+                        <div class="table-cell_Mora table-header_Mora">Nro. Obligación (4 ultimos)</div>
+                        <div class="table-cell_Mora table-header_Mora">Pago Mínimo</div>
+                        <div class="table-cell_Mora table-header_Mora">Int Corrientes</div>
+                        <div class="table-cell_Mora table-header_Mora">int mora</div>
+                        <div class="table-cell_Mora table-header_Mora">Int ExtraC "TC"</div>
+                    </div>
+
+                    <div class="obligations-grid-v3_Mora" style="min-height: 30px;">
+                        <div class="table-cell_Mora" id="numObligacion_pagomora"></div>
+                        <div class="table-cell_Mora">$ <span id="pagoMinimo_pagomora"> </span></div>
+                        <div class="table-cell_Mora">$ <span id="intCorrientes_pagomora"> </span></div>
+                        <div class="table-cell_Mora">$ <span id="intMora_pagomora"> </span></div>
+                        <div class="table-cell_Mora">$ <span id="intExtraC_pagomora"> </span></div>
+                    </div>
+
+
+                </div>
+
+                <div class="conditions-section_Mora" style="margin-left: 0;">
+                    <div class="subsection-header_Mora" style="border-left: none;">Condiciones negociación</div>
+                    <div class="conditions-panel-v3_Mora">
+                        <strong>Beneficio Int Corrientes:</strong> $ <span id="benIntCorr_pagomora"></span><br>
+                        <strong>% Beneficio Int Corrientes:</strong> <span id="porcBenIntCorr_pagomora"></span><br>
+                        <strong>Beneficio Int Mora:</strong> $ <span id="benIntMora_pagomora"></span><br>
+                        <strong>% Beneficio Int Mora:</strong> <span id="porcBenIntMora_pagomora"></span><br>
+                        <strong>Beneficio Int ExtraContables:</strong> $ <span id="benIntExtra_pagomora"></span><br>
+                        <strong>% Beneficio Int ExtraContables:</strong> <span id="porcBenIntExtra_pagomora"></span><br>
+                        <strong>Total Beneficio:</strong> $ <span id="totalBeneficio_pagomora"></span><br>
+                        <strong>Pago a Realizar:</strong> $ <span id="pagoRealizar_pagomora"></span><br>
+                        <strong>Fecha del Pago:</strong> <span id="fechaPago_pagomora"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- Terms and Conditions -->
+            <div class="section-header_Mora">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
+
+            <div class="terms-text_Mora" id="terminosCondiciones_pagomora">
+                <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
+                    esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
+                    quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre
+                    el
+                    resultado de mi solicitud.</p>
+
+                <p>Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones,
+                    comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha
+                    establecida,
+                    sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
+                    sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en
+                    la
+                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los beneficios
+                    ofrecidos
+                    anteriormente.</p>
+
+                <p>Acepto que existe la posibilidad que la amortización de las primeras cuotas pueda no incluir abono a
+                    capital (ejemplo: ajuste del plan de amortización al valor de la cuota propuesta por mí).</p>
+
+                <p>En caso de existir inconsistencias en el diligenciamiento del formato, el Banco le informará y si
+                    usted
+                    no las subsana en el término de tres (3) días, la presente solicitud podrá ser cancelada y se
+                    continuará
+                    con el proceso de cobro en la instancia correspondiente.</p>
+
+                <p>Acepto que:</p>
+                <p>a. Esta solicitud puede implicar el bloqueo de mis productos con cupo en el tiempo que establezcan
+                    las
+                    políticas vigentes.</p>
+                <p>b. La operación solicitada puede generar marcación ante las Centrales de Riesgo por lo que autorizo
+                    al
+                    Banco a actualizar el reporte respectivo.</p>
+                <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la negociación
+                    podrá ser tramitada el mes siguiente.</p>
+                <p>d. Hasta cuando no se haya perfeccionado la negociación en trámite, se mantienen vigentes las
+                    condiciones
+                    actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos y en las
+                    fechas
+                    acordadas.</p>
+                <br>
+                <p>Manifiesto que he recibido la información adecuada sobre las implicaciones en términos de costos,
+                    nueva
+                    forma de pago y calificación crediticia, así como un comparativo entre las condiciones actuales y
+                    las
+                    del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la
+                    Circular
+                    Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
+                    Financiera de Colombia.</p>
+
+                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los beneficios otorgados,
+                    pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
+                    realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
+                    Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
+                    Financiera
+                    de Colombia. Si la (s) obligación (es) castigada (s) durante el trámite solicitado, el Banco hara el
+                    respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
+                    destrucción de los documentos aportados.</p><br>
+
+                <p>Yo <strong><span id="nombreClienteTerminos_pagomora"><!-- DYNAMIC: Nombre Cliente --></span></strong>
+                    identificado
+                    con No. <strong><span
+                            id="numDocTerminos_pagomora"><!-- DYNAMIC: Número Documento --></span></strong> manifiesto
+                    que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente
+                    acuerdo,
+                    son de origen lícito y corresponde a
+                    <span>________________________________________________________________________</span>
+                    Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la negociación
+                    el
+                    Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me será
+                    reintegrado y la negociación se tramitará con los nuevos saldos vigentes a la fecha de aplicación de
+                    la
+                    misma.
+                </p><br>
+
+                <p>Para saber más sobre tiempo de permanencia y reporte negativo en las Centrales de Información:
+                    ingresa a
+                    la pagina del Banco de Bogotá www.bancodebogota.com, en la siguiente ruta: Inicio / Nuestra
+                    Organización
+                    / Transparencia / Ley Habeas Data.</p><br>
+
+                <p>Declaro que conozco y acepto los términos y condiciones de esta negociación, los cuales pueden ser
+                    consultados a través de
+                    https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
+                    condiciones - políticas de cobro</p>
+            </div>
+
+            <!-- Questions Section -->
+            <div class="questions-grid_Mora">
+                <div class="question-row_Mora">
+                    <div class="question-text_Mora">He permanecido más de 183 días en el último año, o 183 días durante
+                        los
+                        últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia
+                    </div>
+                    <div class="question-answer_Mora" id="pregunta1_pagomora"><!-- DYNAMIC: Respuesta 1 --></div>
+                </div>
+                <div class="question-row_Mora">
+                    <div class="question-text_Mora">Soy poseedor de un documento de identificación expedido en un pais
+                        diferente
+                        a Colombia</div>
+                    <div class="question-answer_Mora" id="pregunta2_pagomora"><!-- DYNAMIC: Respuesta 2 --></div>
+                </div>
+                <div class="question-row_Mora">
+                    <div class="question-text_Mora">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
+                        honorario,
+                        primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
+                        ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
+                    <div class="question-answer_Mora" id="pregunta3_pagomora"><!-- DYNAMIC: Respuesta 3 --></div>
+                </div>
+                <div class="question-row_Mora">
+                    <div class="question-text_Mora">Recibo cualquier ingreso bruto procedente de la venta u otra
+                        disposición
+                        de
+                        cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera
+                        del
+                        territorio Colombiano.</div>
+                    <div class="question-answer_Mora" id="pregunta4_pagomora"><!-- DYNAMIC: Respuesta 4 --></div>
+                </div>
+            </div>
+
+            <!-- Observations  garantias-->
+            <div class="observations_Mora">
+
+                <div class="observations-section_Mora">
+                    <span class="observations-label_Mora">Observaciones:</span>
+                    <div class="observaciones-answer_Mora" id="observaciones_pagomora">
                     </div>
                 </div>
 
-            </div>
-        </div>
+                <div class="guarantees-section_Mora">
 
+                    <div class="guarantee-row_Mora top">
+                        <div class="guarantee-text_Mora">Garantia FAG</div>
+                        <div class="guarantee-value_Mora" id="garantiaFAG_pagomora">
+                        </div>
+                    </div>
 
-        <!-- Signature Section -->
-        <div class="signature-section_Mora">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
+                    <div class="guarantee-row_Mora">
+                        <div class="guarantee-text_Mora">Garantia FNG</div>
+                        <div class="guarantee-value_Mora" id="garantiaFNG_pagomora">
+                        </div>
+                    </div>
 
-                    <div class="signature-line_Mora"></div>
-                    <div class="signature-label_Mora">Firma Cliente o Representante legal</div>
-                    <div class="signature-info_Mora">CC/NIT Número:</div>
-                </div>
-                <div class="fingerprint-box_Mora">
-
-                    <div class="fingerprint-line_Mora"></div>
-                    <div class="fingerprint-label_Mora">Huella</div>
                 </div>
             </div>
-        </div>
-    </div>
 
+
+            <!-- Signature Section -->
+            <div class="signature-section_Mora">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+
+                        <div class="signature-line_Mora"></div>
+                        <div class="signature-label_Mora">Firma Cliente o Representante legal</div>
+                        <div class="signature-info_Mora">CC/NIT Número:</div>
+                    </div>
+                    <div class="fingerprint-box_Mora">
+
+                        <div class="fingerprint-line_Mora"></div>
+                        <div class="fingerprint-label_Mora">Huella</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+</body>
+
+</html>
+<!--
     <script>
+
         // Función para establecer la fecha actual
         function setCurrentDate() {
             const today = new Date();
@@ -859,6 +938,4 @@
         }
         formatFun();
     </script>
-</body>
-
-</html>
+    -->

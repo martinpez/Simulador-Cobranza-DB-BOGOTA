@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+<!-- Formato Fun Ampliacion -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="../codigoUtil.js"></script>
     <style>
         .layout-especial_Am * {
             margin: 0;
@@ -428,6 +430,7 @@
 </head>
 
 <body class="layout-especial_Am">
+
     <button onclick="descargarPDF()" style="position: absolute; top: 15px; right: 15px; z-index: 100; 
                padding: 8px 16px; background: #2e7d32; color: white; 
                border: none; border-radius: 4px; cursor: pointer;">
@@ -435,8 +438,8 @@
     </button>
     <button id="btnAbrir">Abrir Modal</button>
 
-    <dialog id="modalAmpliacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
-        <div id="contenedorAmpliacionPDF" class="container_Am" style="margin: 0; box-shadow: none;">
+    <dialog id="modalampliacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
+        <div id="contenedorampliacionPDF" class="container_Am" style="margin: 0; box-shadow: none;">
 
             <!-- Header -->
             <div class="header_Am">
@@ -559,15 +562,14 @@
                     <div class="subsection-header_Am">Condiciones negocioación</div>
                     <div class="terms-text_Am" style="margin: 0; font-size: 9px; line-height: 1.6; border-top: none;">
                         <div style="text-align: center; font-weight:bold ;">
-                            Baja en cuenta Int Corrientes: <span style="font-weight:lighter"
-                                id="Baja en cuentaIntCorr"></span><br>
-                            % Baja en cuenta Int Corrientes: <span style="font-weight:lighter"
+                            Beneficio Int Corrientes: <span style="font-weight:lighter"
+                                id="BeneficioIntCorr"></span><br>
+                            % Beneficio Int Corrientes: <span style="font-weight:lighter"
                                 id="porcentajeBenIntCorr"></span><br>
-                            Baja en cuenta Int Mora: <span style="font-weight:lighter"
-                                id="Baja en cuentaIntMora"></span><br>
-                            % Baja en cuenta Int Mora: <span style="font-weight:lighter"
+                            Beneficio Int Mora: <span style="font-weight:lighter" id="BeneficioIntMora"></span><br>
+                            % Beneficio Int Mora: <span style="font-weight:lighter"
                                 id="porcentajeBenIntMora"></span><br>
-                            Total Baja en cuenta: <span style="font-weight:lighter" id="totalBaja en cuenta"></span><br>
+                            Total Beneficio: <span style="font-weight:lighter" id="totalBeneficio"></span><br>
                             Pago a Realizar: <span style="font-weight:lighter" id="pagoRealizar"></span><br>
                             Fecha del Pago: <span style="font-weight:lighter" id="fechaPagoNuevo"></span><br>
                             Plazo: <span style="font-weight:lighter" id="plazoNuevo"></span><br>
@@ -594,7 +596,7 @@
                     sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
                     sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en
                     la
-                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Baja en cuentas
+                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Beneficios
                     ofrecidos
                     anteriormente.</p>
 
@@ -631,7 +633,7 @@
                     Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
                     Financiera de Colombia.</p>
 
-                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los Baja en cuentas
+                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los Beneficios
                     otorgados,
                     pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
                     realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
@@ -641,8 +643,8 @@
                     respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
                     destrucción de los documentos aportados.</p><br>
 
-                <p>Yo <strong><span id="nombreClienteTerminos"></span></strong> identificado
-                    con No. <strong><span id="numDocTerminos"></span></strong> manifiesto
+                <p>Yo <strong><span id="nombreCliente"></span></strong> identificado
+                    con No. <strong><span id="numDoc"></span></strong> manifiesto
                     que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente
                     acuerdo,
                     son de origen lícito y corresponde a
@@ -748,25 +750,131 @@
 </body>
 
 </html>
-
 <!--
-document.getElementById("descripcionActividad").textContent = data.descripcionActividad;
-document.getElementById("ingresoMensual").textContent = data.ingresoMensual;
-document.getElementById("ocupacionAdicional").textContent = data.ocupacionAdicional;
-document.getElementById("ingresosAdicionales").textContent = data.ingresosAdicionales;
-document.getElementById("numObligacion").textContent = data.numObligacion;
-document.getElementById("saldoTotal").textContent = data.saldoTotal;
-document.getElementById("pagoMinimo").textContent = data.pagoMinimo;
-document.getElementById("fechaPago").textContent = data.fechaPago;
-document.getElementById("pagoNegociacion").textContent = data.pagoNegociacion;
-document.getElementById("plazo").textContent = data.plazo;
-document.getElementById("tasaMV").textContent = data.tasaMV;
-document.getElementById("saldoDiferir").textContent = data.saldoDiferir;
-document.getElementById("cuotaProyectada").textContent = data.cuotaProyectada;
-document.getElementById("pregunta1").textContent = data.pregunta1;
-document.getElementById("pregunta2").textContent = data.pregunta2;
-document.getElementById("pregunta3").textContent = data.pregunta3;
-document.getElementById("pregunta4").textContent = data.pregunta4;
-document.getElementById("garantiaFAG").textContent = data.garantiaFAG;
-document.getElementById("garantiaFNG").textContent = data.garantiaFNG;
-document.getElementById("observaciones").textContent = data.observaciones;-->
+    <script>
+        // Función para establecer la fecha actual
+        function setCurrentDate() {
+            const today = new Date();
+            document.getElementById('day').textContent = today.getDate();
+            document.getElementById('month').textContent = today.getMonth() + 1;
+            document.getElementById('year').textContent = today.getFullYear();
+        }
+
+        function data() {
+            return {
+                // ... (campos anteriores se mantienen igual)
+                codOficina: '001',
+                nombreOficina: 'Oficina Prinx|cipal',
+                cuentaPago: '1234567890',
+                funcionario: 'Martin Elias Perez',
+                nombreCliente: 'Carlos Gómez',
+                tipoDoc: 'CC',
+                numDoc: '987654321',
+                lugarExp: 'Bogotá',
+                fechaExp: '01/01/2010',
+                diasMora: '30 dias',
+
+                descripcionActividad: 'Comerciante',
+                ingresoMensual: ' 5000000',
+                ocupacionAdicional: 'Freelance',
+                ingresosAdicionales: ' 2000000',
+
+                // CAMPOS ACTUALIZADOS SEGÚN LA IMAGEN
+                numObligacion: '5678',
+                saldoTotal: '15.000.000',
+                intCorrientes: '200.000',
+                intMora: '50.000',
+
+                BeneficioIntCorr: '$ 100.000',
+                porcentajeBenIntCorr: '50%',
+                BeneficioIntMora: '$ 25.000',
+                porcentajeBenIntMora: '50%',
+                totalBeneficio: '$ 125.000',
+                pagoRealizar: '$ 500.000',
+                fechaPagoNuevo: '12 febrero 2026',
+                plazoNuevo: '24 meses',
+                tasaInteresNuevo: '1.5%',
+                cuotaProyectadaNueva: '450.000',
+
+                pregunta1: 'No',
+                pregunta2: 'No',
+                pregunta3: 'Sí',
+                pregunta4: 'No',
+                garantiaFAG: 'Sí',
+                garantiaFNG: 'No',
+                observaciones: 'Cliente con buen historial de pagos.',
+            };
+        }
+
+        // Función para cargar datos del formulario
+        function loadFormData(data) {
+            // ... (Carga de cabecera y cliente igual)
+            document.getElementById('codOficina').textContent = data.codOficina || '';
+            document.getElementById('nombreOficina').textContent = data.nombreOficina || '';
+            document.getElementById('cuentaPago').textContent = data.cuentaPago || '';
+            document.getElementById('funcionario').textContent = data.funcionario || '';
+            document.getElementById('nombreCliente').textContent = data.nombreCliente || '';
+            document.getElementById('nombreClienteTerminos').textContent = data.nombreCliente || '';
+            document.getElementById('tipoDoc').textContent = data.tipoDoc || '';
+            document.getElementById('numDoc').textContent = data.numDoc || '';
+            document.getElementById('lugarExp').textContent = data.lugarExp || '';
+            document.getElementById('fechaExp').textContent = data.fechaExp || '';
+            document.getElementById('diasMora').textContent = data.diasMora || '';
+            document.getElementById('descripcionActividad').textContent = data.descripcionActividad || '';
+            document.getElementById('ingresoMensual').textContent = '$ ' + data.ingresoMensual || '';
+            document.getElementById('ocupacionAdicional').textContent = data.ocupacionAdicional || '';
+            document.getElementById('ingresosAdicionales').textContent = '$ ' + data.ingresosAdicionales || '';
+
+            // CARGA DE OBLIGACIONES (ACTUALIZADO)
+            document.getElementById('numObligacion').textContent = data.numObligacion || '';
+            document.getElementById('saldoTotal').textContent = '$ ' + data.saldoTotal || '';
+            document.getElementById('intCorrientes').textContent = '$ ' + data.intCorrientes || '';
+            document.getElementById('intMora').textContent = '$ ' + data.intMora || '';
+
+            // CARGA DE CONDICIONES (ACTUALIZADO)
+            document.getElementById('BeneficioIntCorr').textContent = data.BeneficioIntCorr || '';
+            document.getElementById('porcentajeBenIntCorr').textContent = data.porcentajeBenIntCorr || '';
+            document.getElementById('BeneficioIntMora').textContent = data.BeneficioIntMora || '';
+            document.getElementById('porcentajeBenIntMora').textContent = data.porcentajeBenIntMora || '';
+            document.getElementById('totalBeneficio').textContent = data.totalBeneficio || '';
+            document.getElementById('pagoRealizar').textContent = data.pagoRealizar || '';
+            document.getElementById('fechaPagoNuevo').textContent = data.fechaPagoNuevo || '';
+            document.getElementById('plazoNuevo').textContent = data.plazoNuevo || '';
+            document.getElementById('tasaInteresNuevo').textContent = data.tasaInteresNuevo || '';
+            document.getElementById('cuotaProyectadaNueva').textContent = data.cuotaProyectadaNueva || '';
+
+            // ... (Carga de preguntas y firmas igual)
+            document.getElementById('pregunta1').textContent = data.pregunta1 || '';
+            document.getElementById('pregunta2').textContent = data.pregunta2 || '';
+            document.getElementById('pregunta3').textContent = data.pregunta3 || '';
+            document.getElementById('pregunta4').textContent = data.pregunta4 || '';
+            document.getElementById('garantiaFAG').textContent = data.garantiaFAG || '';
+            document.getElementById('garantiaFNG').textContent = data.garantiaFNG || '';
+            document.getElementById('observaciones').textContent = data.observaciones || '';
+        }
+
+        setCurrentDate();
+        loadFormData(data());
+
+        function formatFun() {
+            let respuesta = confirm("¿Estás seguro de que deseas eliminar este elemento?");
+            if (respuesta) {
+                const element = document.getElementById('contenedor-pdf');
+                // Configuración de html2pdf
+                const options = {
+                    margin: 0,
+                    filename: 'documento.pdf',
+                    image: { type: 'jpeg', quality: 1 },
+                    html2canvas: { scale: 2, useCORS: true },
+                    jsPDf: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+
+                // Generar el PDF
+                html2pdf().set(options).from(element).save();
+
+            }
+
+        }
+        formatFun();
+    </script>
+    -->

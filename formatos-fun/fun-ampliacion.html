@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
         .layout-especial_Am * {
             margin: 0;
@@ -429,7 +430,7 @@
 </head>
 
 <body class="layout-especial_Am">
-    <!--
+    <!-- 
     <button onclick="descargarPDF()" style="position: absolute; top: 15px; right: 15px; z-index: 100; 
                padding: 8px 16px; background: #2e7d32; color: white; 
                border: none; border-radius: 4px; cursor: pointer;">
@@ -451,15 +452,15 @@
                     <div class="date-section_Am">
                         <div class="date-box_Am">
                             <div class="date-label_Am">DIA</div>
-                            <div class="date-value_Am" id="day"></div>
+                            <div class="date-value_Am" id="day_ampliacion"></div>
                         </div>
                         <div class="date-box_Am">
                             <div class="date-label_Am">MES</div>
-                            <div class="date-value_Am" id="month"></div>
+                            <div class="date-value_Am" id="month_ampliacion"></div>
                         </div>
                         <div class="date-box_Am">
                             <div class="date-label_Am">AÑO</div>
-                            <div class="date-value_Am" id="year"></div>
+                            <div class="date-value_Am" id="year_ampliacion"></div>
                         </div>
                     </div>
                 </div>
@@ -472,19 +473,19 @@
             <div class="office-section_Am">
                 <div class="form-field_Am">
                     <div class="form-label_Am">Cód Ofc.</div>
-                    <div class="form-value_Am" id="codOficina"><!-- DYNAMIC: Código Oficina --></div>
+                    <div class="form-value_Am" id="codOficina_ampliacion"><!-- DYNAMIC: Código Oficina --></div>
                 </div>
                 <div class="form-field_Am">
                     <div class="form-label_Am">Oficina en que se realiza<br> la negociación</div>
-                    <div class="form-value_Am" id="nombreOficina"><!-- DYNAMIC: Nombre Oficina --></div>
+                    <div class="form-value_Am" id="nombreOficina_ampliacion"><!-- DYNAMIC: Nombre Oficina --></div>
                 </div>
                 <div class="form-field_Am">
                     <div class="form-label_Am">Cuenta del pago / SNR</div>
-                    <div class="form-value_Am" id="cuentaPago"><!-- DYNAMIC: Cuenta Pago --></div>
+                    <div class="form-value_Am" id="cuentaPago_ampliacion"><!-- DYNAMIC: Cuenta Pago --></div>
                 </div>
                 <div class="form-field_Am">
                     <div class="form-label_Am">Funcionario de quien efectúa la negociación:</div>
-                    <div class="form-value_Am" id="funcionario"><!-- DYNAMIC: Nombre Funcionario --></div>
+                    <div class="form-value_Am" id="funcionario_ampliacion"><!-- DYNAMIC: Nombre Funcionario --></div>
                 </div>
             </div>
 
@@ -494,23 +495,23 @@
             <div class="client-grid_Am">
                 <div class="form-field_Am">
                     <div class="form-label_Am">Nombre Cliente</div>
-                    <div class="form-value_Am" id="nombreCliente"><!-- DYNAMIC: Nombre Cliente --></div>
+                    <div class="form-value_Am" id="nombreCliente_ampliacion"><!-- DYNAMIC: Nombre Cliente --></div>
                 </div>
                 <div class="form-field_Am">
                     <div class="form-label_Am">Tipo Doc</div>
-                    <div class="form-value_Am" id="tipoDoc"><!-- DYNAMIC: Tipo Documento --></div>
+                    <div class="form-value_Am" id="tipoDoc_ampliacion"><!-- DYNAMIC: Tipo Documento --></div>
                 </div>
                 <div class="form-field_Am">
                     <div class="form-label_Am">Num. Documento</div>
-                    <div class="form-value_Am" id="numDoc"><!-- DYNAMIC: Número Documento --></div>
+                    <div class="form-value_Am" id="numDoc_ampliacion"><!-- DYNAMIC: Número Documento --></div>
                 </div>
                 <div class="form-field_Am">
                     <div class="form-label_Am">Lugar de Expedicion</div>
-                    <div class="form-value_Am" id="lugarExp"><!-- DYNAMIC: Lugar Expedición --></div>
+                    <div class="form-value_Am" id="lugarExp_ampliacion"><!-- DYNAMIC: Lugar Expedición --></div>
                 </div>
                 <div class="form-field_Am">
                     <div class="form-label_Am">Fecha De Expedicion</div>
-                    <div class="form-value_Am" id="fechaExp"><!-- DYNAMIC: Fecha Expedición --></div>
+                    <div class="form-value_Am" id="fechaExp_ampliacion"><!-- DYNAMIC: Fecha Expedición --></div>
                 </div>
             </div>
 
@@ -518,23 +519,28 @@
             <div class="activity-grid_Am">
                 <div class="form-field_Am">
                     <div class="form-label_Am">Dias Mora</div>
-                    <div class="form-value_Am" id="diasMora"><!-- DYNAMIC: Días Mora --></div>
+                    <div class="form-value_Am" id="diasMora_ampliacion"><!-- DYNAMIC: Días Mora --></div>
                 </div>
                 <div class="form-field_Am">
                     <div class="form-label_Am">Descripcion Actividad</div>
-                    <div class="form-value_Am" id="descripcionActividad"><!-- DYNAMIC: Descripción Actividad --></div>
+                    <div class="form-value_Am" id="descripcionActividad_ampliacion">
+                        <!-- DYNAMIC: Descripción Actividad -->
+                    </div>
                 </div>
                 <div class="form-field_Am">
                     <div class="form-label_Am">Ingreso Mensual</div>
-                    <div class="form-value_Am" id="ingresoMensual"><!-- DYNAMIC: Ingreso Mensual --></div>
+                    <div class="form-value_Am" id="ingresoMensual_ampliacion"><!-- DYNAMIC: Ingreso Mensual --></div>
                 </div>
                 <div class="form-field_Am">
                     <div class="form-label_Am">Ocupación Ingresos Adicional</div>
-                    <div class="form-value_Am" id="ocupacionAdicional"><!-- DYNAMIC: Ocupación Adicional --></div>
+                    <div class="form-value_Am" id="ocupacionAdicional_ampliacion"><!-- DYNAMIC: Ocupación Adicional -->
+                    </div>
                 </div>
                 <div class="form-field_Am">
                     <div class="form-label_Am">Ingresos Adicionales</div>
-                    <div class="form-value_Am" id="ingresosAdicionales"><!-- DYNAMIC: Ingresos Adicionales --></div>
+                    <div class="form-value_Am" id="ingresosAdicionales_ampliacion">
+                        <!-- DYNAMIC: Ingresos Adicionales -->
+                    </div>
                 </div>
             </div>
 
@@ -550,10 +556,10 @@
                         <div class="table-cell_Am table-header_Am">int mora</div>
                     </div>
                     <div class="table-row_Am" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
-                        <div class="table-cell_Am" id="numObligacion"></div>
-                        <div class="table-cell_Am" id="saldoTotal"></div>
-                        <div class="table-cell_Am" id="intCorrientes"></div>
-                        <div class="table-cell_Am" id="intMora"></div>
+                        <div class="table-cell_Am" id="numObligacion_ampliacion"></div>
+                        <div class="table-cell_Am" id="saldoTotal_ampliacion"></div>
+                        <div class="table-cell_Am" id="intCorrientes_ampliacion"></div>
+                        <div class="table-cell_Am" id="intMora_ampliacion"></div>
                     </div>
                 </div>
 
@@ -561,20 +567,23 @@
                     <div class="subsection-header_Am">Condiciones negocioación</div>
                     <div class="terms-text_Am" style="margin: 0; font-size: 9px; line-height: 1.6; border-top: none;">
                         <div style="text-align: center; font-weight:bold ;">
-                            Baja en cuenta Int Corrientes: <span style="font-weight:lighter"
-                                id="Baja en cuentaIntCorr"></span><br>
-                            % Baja en cuenta Int Corrientes: <span style="font-weight:lighter"
-                                id="porcentajeBenIntCorr"></span><br>
-                            Baja en cuenta Int Mora: <span style="font-weight:lighter"
-                                id="Baja en cuentaIntMora"></span><br>
-                            % Baja en cuenta Int Mora: <span style="font-weight:lighter"
-                                id="porcentajeBenIntMora"></span><br>
-                            Total Baja en cuenta: <span style="font-weight:lighter" id="totalBaja en cuenta"></span><br>
-                            Pago a Realizar: <span style="font-weight:lighter" id="pagoRealizar"></span><br>
-                            Fecha del Pago: <span style="font-weight:lighter" id="fechaPagoNuevo"></span><br>
-                            Plazo: <span style="font-weight:lighter" id="plazoNuevo"></span><br>
-                            tasa de interes: <span style="font-weight:lighter" id="tasaInteresNuevo"></span><br>
-                            Cuota Proyectada: <span style="font-weight:lighter" id="cuotaProyectadaNueva"></span>
+                            Beneficio Int Corrientes: <span style="font-weight:lighter"
+                                id="BeneficioIntCorr_ampliacion"></span><br>
+                            % Beneficio Int Corrientes: <span style="font-weight:lighter"
+                                id="porcentajeBenIntCorr_ampliacion"></span><br>
+                            Beneficio Int Mora: <span style="font-weight:lighter"
+                                id="BeneficioIntMora_ampliacion"></span><br>
+                            % Beneficio Int Mora: <span style="font-weight:lighter"
+                                id="porcentajeBenIntMora_ampliacion"></span><br>
+                            Total Beneficio: <span style="font-weight:lighter"
+                                id="totalBeneficio_ampliacion"></span><br>
+                            Pago a Realizar: <span style="font-weight:lighter" id="pagoRealizar_ampliacion"></span><br>
+                            Fecha del Pago: <span style="font-weight:lighter" id="fechaPagoNuevo_ampliacion"></span><br>
+                            Plazo: <span style="font-weight:lighter" id="plazoNuevo_ampliacion"></span><br>
+                            tasa de interes: <span style="font-weight:lighter"
+                                id="tasaInteresNuevo_ampliacion"></span><br>
+                            Cuota Proyectada: <span style="font-weight:lighter"
+                                id="cuotaProyectadaNueva_ampliacion"></span>
                         </div>
                     </div>
                 </div>
@@ -583,7 +592,7 @@
             <!-- Terms and Conditions -->
             <div class="section-header_Am">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
 
-            <div class="terms-text_Am" id="terminosCondiciones">
+            <div class="terms-text_Am" id="terminosCondiciones_ampliacion">
                 <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
                     esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
                     quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre
@@ -596,7 +605,7 @@
                     sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
                     sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en
                     la
-                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Baja en cuentas
+                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Beneficios
                     ofrecidos
                     anteriormente.</p>
 
@@ -633,7 +642,7 @@
                     Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
                     Financiera de Colombia.</p>
 
-                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los Baja en cuentas
+                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los Beneficios
                     otorgados,
                     pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
                     realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
@@ -643,8 +652,8 @@
                     respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
                     destrucción de los documentos aportados.</p><br>
 
-                <p>Yo <strong><span id="nombreCliente"></span></strong> identificado
-                    con No. <strong><span id="numDoc"></span></strong> manifiesto
+                <p>Yo <strong><span id="nombreCliente_ampliacion"></span></strong> identificado
+                    con No. <strong><span id="numDoc_ampliacion"></span></strong> manifiesto
                     que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente
                     acuerdo,
                     son de origen lícito y corresponde a
@@ -676,20 +685,20 @@
                         los
                         últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia
                     </div>
-                    <div class="question-answer_Am" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
+                    <div class="question-answer_Am" id="pregunta1_ampliacion"><!-- DYNAMIC: Respuesta 1 --></div>
                 </div>
                 <div class="question-row_Am">
                     <div class="question-text_Am">Soy poseedor de un documento de identificación expedido en un pais
                         diferente
                         a Colombia</div>
-                    <div class="question-answer_Am" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
+                    <div class="question-answer_Am" id="pregunta2_ampliacion"><!-- DYNAMIC: Respuesta 2 --></div>
                 </div>
                 <div class="question-row_Am">
                     <div class="question-text_Am">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
                         honorario,
                         primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
                         ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
-                    <div class="question-answer_Am" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
+                    <div class="question-answer_Am" id="pregunta3_ampliacion"><!-- DYNAMIC: Respuesta 3 --></div>
                 </div>
                 <div class="question-row_Am">
                     <div class="question-text_Am">Recibo cualquier ingreso bruto procedente de la venta u otra
@@ -697,7 +706,7 @@
                         cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera
                         del
                         territorio Colombiano.</div>
-                    <div class="question-answer_Am" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
+                    <div class="question-answer_Am" id="pregunta4_ampliacion"><!-- DYNAMIC: Respuesta 4 --></div>
                 </div>
             </div>
 
@@ -706,7 +715,7 @@
 
                 <div class="observations-section_Am">
                     <span class="observations-label_Am">Observaciones:</span>
-                    <div class="observaciones-answer_Am" id="observaciones">
+                    <div class="observaciones-answer_Am" id="observaciones_ampliacion">
                     </div>
                 </div>
 
@@ -714,13 +723,13 @@
 
                     <div class="guarantee-row_Am top">
                         <div class="guarantee-text_Am">Garantia FAG</div>
-                        <div class="guarantee-value_Am" id="garantiaFAG">
+                        <div class="guarantee-value_Am" id="garantiaFAG_ampliacion">
                         </div>
                     </div>
 
                     <div class="guarantee-row_Am">
                         <div class="guarantee-text_Am">Garantia FNG</div>
-                        <div class="guarantee-value_Am" id="garantiaFNG">
+                        <div class="guarantee-value_Am" id="garantiaFNG_ampliacion">
                         </div>
                     </div>
 
@@ -785,11 +794,11 @@
                 intCorrientes: '200.000',
                 intMora: '50.000',
 
-                Baja en cuentaIntCorr: '$ 100.000',
+                BeneficioIntCorr: '$ 100.000',
                 porcentajeBenIntCorr: '50%',
-                Baja en cuentaIntMora: '$ 25.000',
+                BeneficioIntMora: '$ 25.000',
                 porcentajeBenIntMora: '50%',
-                totalBaja en cuenta: '$ 125.000',
+                totalBeneficio: '$ 125.000',
                 pagoRealizar: '$ 500.000',
                 fechaPagoNuevo: '12 febrero 2026',
                 plazoNuevo: '24 meses',
@@ -832,11 +841,11 @@
             document.getElementById('intMora').textContent = '$ ' + data.intMora || '';
 
             // CARGA DE CONDICIONES (ACTUALIZADO)
-            document.getElementById('Baja en cuentaIntCorr').textContent = data.Baja en cuentaIntCorr || '';
+            document.getElementById('BeneficioIntCorr').textContent = data.BeneficioIntCorr || '';
             document.getElementById('porcentajeBenIntCorr').textContent = data.porcentajeBenIntCorr || '';
-            document.getElementById('Baja en cuentaIntMora').textContent = data.Baja en cuentaIntMora || '';
+            document.getElementById('BeneficioIntMora').textContent = data.BeneficioIntMora || '';
             document.getElementById('porcentajeBenIntMora').textContent = data.porcentajeBenIntMora || '';
-            document.getElementById('totalBaja en cuenta').textContent = data.totalBaja en cuenta || '';
+            document.getElementById('totalBeneficio').textContent = data.totalBeneficio || '';
             document.getElementById('pagoRealizar').textContent = data.pagoRealizar || '';
             document.getElementById('fechaPagoNuevo').textContent = data.fechaPagoNuevo || '';
             document.getElementById('plazoNuevo').textContent = data.plazoNuevo || '';

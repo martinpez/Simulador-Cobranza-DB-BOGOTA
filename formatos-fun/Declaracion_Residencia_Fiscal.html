@@ -68,17 +68,16 @@
 <body>
     <div class="form-section-title">Declaración de Residencia Fiscal:</div>
     <div class="container_declaration">
-        <div class="question_declaration">
 
+        <div class="question_declaration">
             <div class="question-text_declaration">
                 He permanecido más de 183 días en el último año, o 183 días durante los últimos 3 años,
                 dentro del territorio de los Estados Unidos o fuera del territorio de Colombia.
             </div>
-            <div class="question-select_declaration  ">
+            <div class="question-select_declaration">
                 <select id="pregunta1" class="select_declaration">
                     <option value="NO">NO</option>
                     <option value="SI">SI</option>
-
                 </select>
             </div>
         </div>
@@ -122,6 +121,7 @@
                 </select>
             </div>
         </div>
+
     </div>
 </body>
 
@@ -184,8 +184,8 @@
 <body>
     <div class="form-section-title_garantias">Fondo de Garantias</div>
     <div class="container_declaration_garantias">
-        <div class="question_declaration_garantias">
 
+        <div class="question_declaration_garantias">
             <div class="question-text_declaration_garantias">
                 GARANTÍA FNG
             </div>
@@ -193,7 +193,6 @@
                 <select id="garantiaFAG" class="select_declaration">
                     <option value="NO">NO</option>
                     <option value="SI">SI</option>
-
                 </select>
             </div>
         </div>
@@ -209,7 +208,18 @@
                 </select>
             </div>
         </div>
+
     </div>
 </body>
 
 </html>
+
+<div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+    <h3>Resumen de Declaración</h3>
+    <p><strong>Pregunta 1:</strong> <span id="pregunta1_display">-</span></p>
+    <p><strong>Pregunta 2:</strong> <span id="pregunta2_display">-</span></p>
+    <p><strong>Pregunta 3:</strong> <span id="pregunta3_display">-</span></p>
+    <p><strong>Pregunta 4:</strong> <span id="pregunta4_display">-</span></p>
+    <p><strong>Garantía FAG:</strong> <span id="garantiaFAG_display">-</span></p>
+    <p><strong>Garantía FNG:</strong> <span id="garantiaFNG_display">-</span></p>
+</div>

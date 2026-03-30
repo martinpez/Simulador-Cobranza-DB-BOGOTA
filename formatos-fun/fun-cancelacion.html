@@ -1,9 +1,9 @@
 <html lang="es">
+<!-- MECANISMOS CANCELACION-->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         .layout-especial_Can * {
@@ -432,307 +432,387 @@
                 max-width: 100%;
             }
         }
+
+        /* ====================== ESTILOS DEL MODAL ====================== */
+        #modalcancelacion {
+            border: none;
+            border-radius: 8px;
+            padding: 0;
+            width: 850px;
+            /* ancho exacto del formulario */
+            max-width: 92vw;
+            max-height: 95vh;
+            /* importante: no más de la pantalla */
+            margin: auto;
+            overflow-y: auto;
+            /* ← ESTO ES LO QUE FALTABA */
+            overflow-x: hidden;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        #modalcancelacion::backdrop {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Contenedor interno del PDF */
+        #contenedorcancelacionPDF {
+            margin: 0 !important;
+            padding: 20px 0 20px 0 !important;
+            /* un poco de aire arriba y abajo */
+            box-shadow: none !important;
+            width: 100%;
+            min-height: 100%;
+            /* ayuda al scroll */
+        }
     </style>
 </head>
 
 <body class="layout-especial_Can">
-    <div id="contenedor-pdf" class="container_Can">
-        <!-- Header -->
-        <div class="header_Can">
-            <div class="header-top_Can">
-                <div class="logo-section_Can">
-                    <img src="https://i.postimg.cc/rp9ttPt3/Logo-BDB-removebg-preview.png" alt="Banco de Bogotá"
-                        class="logo-img_Can">
-                    <div class="bank-name_Can">BANCO DE BOGOTÁ</div>
-                </div>
-                <div class="date-section_Can">
-                    <div class="date-box_Can">
-                        <div class="date-label_Can">DIA</div>
-                        <div class="date-value_Can" id="day"></div>
+    <!-- 
+    <button onclick="descargarPDF()" style="position: absolute; top: 15px; right: 15px; z-index: 100; 
+               padding: 8px 16px; background: #2e7d32; color: white; 
+               border: none; border-radius: 4px; cursor: pointer;">
+        📥 Descargar PDF
+    </button>
+    <button id="btnAbrir">Abrir Modal</button>
+-->
+    <dialog id="modalcancelacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
+        <div id="contenedorcancelacionPDF" class="container_Can" style="margin: 0; box-shadow: none;">
+            <!-- Header -->
+            <div class="header_Can">
+                <div class="header-top_Can">
+                    <div class="logo-section_Can">
+                        <img src="https://i.postimg.cc/rp9ttPt3/Logo-BDB-removebg-preview.png" alt="Banco de Bogotá"
+                            class="logo-img_Can">
+                        <div class="bank-name_Can">BANCO DE BOGOTÁ</div>
                     </div>
-                    <div class="date-box_Can">
-                        <div class="date-label_Can">MES</div>
-                        <div class="date-value_Can" id="month"></div>
-                    </div>
-                    <div class="date-box_Can">
-                        <div class="date-label_Can">AÑO</div>
-                        <div class="date-value_Can" id="year"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="title_Can">Solicitud de Normalizacion - Formato Único</div>
-        </div>
-
-        <div class="subtitle_Can">MECANISMO DE NORMALIZACION: CANCELACIÓN TOTAL</div>
-
-        <!-- Office Information -->
-        <div class="office-section_Can">
-            <div class="form-field_Can">
-                <div class="form-label_Can">Cód Ofc.</div>
-                <div class="form-value_Can" id="codOficina"><!-- DYNAMIC: Código Oficina --></div>
-            </div>
-            <div class="form-field_Can">
-                <div class="form-label_Can">Oficina en que se realiza<br> la negociación</div>
-                <div class="form-value_Can" id="nombreOficina"><!-- DYNAMIC: Nombre Oficina --></div>
-            </div>
-            <div class="form-field_Can">
-                <div class="form-label_Can">Cuenta del pago / SNR</div>
-                <div class="form-value_Can" id="cuentaPago"><!-- DYNAMIC: Cuenta Pago --></div>
-            </div>
-            <div class="form-field_Can">
-                <div class="form-label_Can">Funcionario de quien efectúa la negociación:</div>
-                <div class="form-value_Can" id="funcionario"><!-- DYNAMIC: Nombre Funcionario --></div>
-            </div>
-        </div>
-
-        <!-- Client Information Section -->
-        <div class="section-header_Can">INFORMACION CLIENTE</div>
-
-        <div class="client-grid_Can">
-            <div class="form-field_Can">
-                <div class="form-label_Can">Nombre Cliente</div>
-                <div class="form-value_Can" id="nombreCliente"><!-- DYNAMIC: Nombre Cliente --></div>
-            </div>
-            <div class="form-field_Can">
-                <div class="form-label_Can">Tipo Doc</div>
-                <div class="form-value_Can" id="tipoDoc"><!-- DYNAMIC: Tipo Documento --></div>
-            </div>
-            <div class="form-field_Can">
-                <div class="form-label_Can">Num. Documento</div>
-                <div class="form-value_Can" id="numDoc"><!-- DYNAMIC: Número Documento --></div>
-            </div>
-            <div class="form-field_Can">
-                <div class="form-label_Can">Lugar de Expedicion</div>
-                <div class="form-value_Can" id="lugarExp"><!-- DYNAMIC: Lugar Expedición --></div>
-            </div>
-            <div class="form-field_Can">
-                <div class="form-label_Can">Fecha De Expedicion</div>
-                <div class="form-value_Can" id="fechaExp"><!-- DYNAMIC: Fecha Expedición --></div>
-            </div>
-        </div>
-
-        <!-- Activity and Income Information -->
-        <div class="activity-grid_Can">
-            <div class="form-field_Can">
-                <div class="form-label_Can">Dias Mora</div>
-                <div class="form-value_Can" id="diasMora"><!-- DYNAMIC: Días Mora --></div>
-            </div>
-            <div class="form-field_Can">
-                <div class="form-label_Can">Descripcion Actividad</div>
-                <div class="form-value_Can" id="descripcionActividad"><!-- DYNAMIC: Descripción Actividad --></div>
-            </div>
-            <div class="form-field_Can">
-                <div class="form-label_Can">Ingreso Mensual</div>
-                <div class="form-value_Can" id="ingresoMensual"><!-- DYNAMIC: Ingreso Mensual --></div>
-            </div>
-            <div class="form-field_Can">
-                <div class="form-label_Can">Ocupación Ingresos Adicional</div>
-                <div class="form-value_Can" id="ocupacionAdicional"><!-- DYNAMIC: Ocupación Adicional --></div>
-            </div>
-            <div class="form-field_Can">
-                <div class="form-label_Can">Ingresos Adicionales</div>
-                <div class="form-value_Can" id="ingresosAdicionales"><!-- DYNAMIC: Ingresos Adicionales --></div>
-            </div>
-        </div>
-
-        <div class="section-header_Can">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
-
-        <div class="obligations-conditions-container_Can" style="display: block; margin: 0 2px 20px;">
-            <div class="subsection-header_Can" style="border-bottom: none;">
-                Datos Obligaciones Condiciones negociación
-            </div>
-
-            <table class="table-obligaciones_Can">
-                <tr class="header-celda_Can">
-                    <td style="width: 15%;">Nro. Obligación (4 ultimos)</td>
-                    <td style="width: 12%;">Saldo Total</td>
-                    <td style="width: 12%;">Saldo Total</td>
-                    <td style="width: 12%;">Int Corrientes</td>
-                    <td style="width: 12%;">int mora</td>
-                    <td style="width: 12%;">Int ExtraC "TC"</td>
-                    <td rowspan="3" class="panel-pago_Can">
-                        Pago a Realizar: <span style="font-weight:200" id="pagoRealizar"></span><br><br>
-                        Fecha del Pago: <span style="font-weight:200" id="fechaPagoNuevo"></span>
-                    </td>
-                </tr>
-
-                <tr style="height: 30px;">
-                    <td id="numObligacion"></td>
-                    <td>$ <span id="saldoTotal1"></span></td>
-                    <td>$ <span id="saldoTotal2"></span></td>
-                    <td>$ <span id="intCorrientes"></span></td>
-                    <td>$ <span id="intMora"></span></td>
-                    <td>$ <span id="intExtraC"></span></td>
-                </tr>
-
-                <tr>
-                    <td colspan="2" class="Baja en cuentas-label_Can">Baja en cuentas Aplicados</td>
-
-                    <td class="celda-dividida_Can">
-                        <div class="sub-valor_Can">$ <span id="benSaldo"></span></div>
-                        <div class="sub-porcentaje_Can"><span id="porcBenSaldo"></span></div>
-                    </td>
-                    <td class="celda-dividida_Can">
-                        <div class="sub-valor_Can">$ <span id="benIntCorr"></span></div>
-                        <div class="sub-porcentaje_Can"><span id="porcBenIntCorr"></span></div>
-                    </td>
-                    <td class="celda-dividida_Can">
-                        <div class="sub-valor_Can">$ <span id="benIntMora"></span></div>
-                        <div class="sub-porcentaje_Can"><span id="porcBenIntMora"></span></div>
-                    </td>
-                    <td class="celda-dividida_Can">
-                        <div class="sub-valor_Can">$ <span id="benIntExtra"></span></div>
-                        <div class="sub-porcentaje_Can"><span id="porcBenIntExtra"></span></div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <!-- Terms and Conditions -->
-        <div class="section-header_Can">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
-
-        <div class="terms-text_Can" id="terminosCondiciones">
-            <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
-                esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
-                quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre el
-                resultado de mi solicitud.</p>
-
-            <p>Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones,
-                comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha establecida,
-                sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
-                sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en la
-                ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Baja en cuentas
-                ofrecidos
-                anteriormente.</p>
-
-            <p>Acepto que existe la posibilidad que la amortización de las primeras cuotas pueda no incluir abono a
-                capital (ejemplo: ajuste del plan de amortización al valor de la cuota propuesta por mí).</p>
-
-            <p>En caso de existir inconsistencias en el diligenciamiento del formato, el Banco le informará y si usted
-                no las subsana en el término de tres (3) días, la presente solicitud podrá ser cancelada y se continuará
-                con el proceso de cobro en la instancia correspondiente.</p>
-
-            <p>Acepto que:</p>
-            <p>a. Esta solicitud puede implicar el bloqueo de mis productos con cupo en el tiempo que establezcan las
-                políticas vigentes.</p>
-            <p>b. La operación solicitada puede generar marcación ante las Centrales de Riesgo por lo que autorizo al
-                Banco a actualizar el reporte respectivo.</p>
-            <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la negociación
-                podrá ser tramitada el mes siguiente.</p>
-            <p>d. Hasta cuando no se haya perfeccionado la negociación en trámite, se mantienen vigentes las condiciones
-                actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos y en las fechas
-                acordadas.</p>
-            <br>
-            <p>Manifiesto que he recibido la información adecuada sobre las implicaciones en términos de costos, nueva
-                forma de pago y calificación crediticia, así como un comparativo entre las condiciones actuales y las
-                del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la Circular
-                Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
-                Financiera de Colombia.</p>
-
-            <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los Baja en cuentas
-                otorgados,
-                pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
-                realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
-                Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia Financiera
-                de Colombia. Si la (s) obligación (es) castigada (s) durante el trámite solicitado, el Banco hara el
-                respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
-                destrucción de los documentos aportados.</p><br>
-
-            <p>Yo <strong><span id="nombreClienteTerminos"><!-- DYNAMIC: Nombre Cliente --></span></strong> identificado
-                con No. <strong><span id="numDocTerminos"><!-- DYNAMIC: Número Documento --></span></strong> manifiesto
-                que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente acuerdo,
-                son de origen lícito y corresponde a
-                <span>________________________________________________________________________</span>
-                Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la negociación el
-                Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me será
-                reintegrado y la negociación se tramitará con los nuevos saldos vigentes a la fecha de aplicación de la
-                misma.
-            </p><br>
-
-            <p>Para saber más sobre tiempo de permanencia y reporte negativo en las Centrales de Información: ingresa a
-                la pagina del Banco de Bogotá www.bancodebogota.com, en la siguiente ruta: Inicio / Nuestra Organización
-                / Transparencia / Ley Habeas Data.</p><br>
-
-            <p>Declaro que conozco y acepto los términos y condiciones de esta negociación, los cuales pueden ser
-                consultados a través de
-                https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
-                condiciones - políticas de cobro</p>
-        </div>
-
-        <!-- Questions Section -->
-        <div class="questions-grid_Can">
-            <div class="question-row_Can">
-                <div class="question-text_Can">He permanecido más de 183 días en el último año, o 183 días durante los
-                    últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia</div>
-                <div class="question-answer_Can" id="pregunta1"><!-- DYNAMIC: Respuesta 1 --></div>
-            </div>
-            <div class="question-row_Can">
-                <div class="question-text_Can">Soy poseedor de un documento de identificación expedido en un pais
-                    diferente
-                    a Colombia</div>
-                <div class="question-answer_Can" id="pregunta2"><!-- DYNAMIC: Respuesta 2 --></div>
-            </div>
-            <div class="question-row_Can">
-                <div class="question-text_Can">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
-                    honorario,
-                    primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
-                    ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
-                <div class="question-answer_Can" id="pregunta3"><!-- DYNAMIC: Respuesta 3 --></div>
-            </div>
-            <div class="question-row_Can">
-                <div class="question-text_Can">Recibo cualquier ingreso bruto procedente de la venta u otra disposición
-                    de
-                    cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera del
-                    territorio Colombiano.</div>
-                <div class="question-answer_Can" id="pregunta4"><!-- DYNAMIC: Respuesta 4 --></div>
-            </div>
-        </div>
-
-        <!-- Observations  garantias-->
-        <div class="observations_Can">
-
-            <div class="observations-section_Can">
-                <span class="observations-label_Can">Observaciones:</span>
-                <div class="observaciones-answer_Can" id="observaciones">
-                </div>
-            </div>
-
-            <div class="guarantees-section_Can">
-
-                <div class="guarantee-row_Can top">
-                    <div class="guarantee-text_Can">Garantia FAG</div>
-                    <div class="guarantee-value_Can" id="garantiaFAG">
+                    <div class="date-section_Can">
+                        <div class="date-box_Can">
+                            <div class="date-label_Can">DIA</div>
+                            <div class="date-value_Can" id="day_cancelacion"></div>
+                        </div>
+                        <div class="date-box_Can">
+                            <div class="date-label_Can">MES</div>
+                            <div class="date-value_Can" id="month_cancelacion"></div>
+                        </div>
+                        <div class="date-box_Can">
+                            <div class="date-label_Can">AÑO</div>
+                            <div class="date-value_Can" id="year_cancelacion"></div>
+                        </div>
                     </div>
                 </div>
+                <div class="title_Can">Solicitud de Normalizacion - Formato Único</div>
+            </div>
 
-                <div class="guarantee-row_Can">
-                    <div class="guarantee-text_Can">Garantia FNG</div>
-                    <div class="guarantee-value_Can" id="garantiaFNG">
+            <div class="subtitle_Can">MECANISMO DE NORMALIZACION: CANCELACIÓN TOTAL</div>
+
+            <!-- Office Information -->
+            <div class="office-section_Can">
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Cód Ofc.</div>
+                    <div class="form-value_Can" id="codOficina_cancelacion"><!-- DYNAMIC: Código Oficina --></div>
+                </div>
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Oficina en que se realiza<br> la negociación</div>
+                    <div class="form-value_Can" id="nombreOficina_cancelacion"><!-- DYNAMIC: Nombre Oficina --></div>
+                </div>
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Cuenta del pago / SNR</div>
+                    <div class="form-value_Can" id="cuentaPago_cancelacion"><!-- DYNAMIC: Cuenta Pago --></div>
+                </div>
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Funcionario de quien efectúa la negociación:</div>
+                    <div class="form-value_Can" id="funcionario_cancelacion"><!-- DYNAMIC: Nombre Funcionario --></div>
+                </div>
+            </div>
+
+            <!-- Client Information Section -->
+            <div class="section-header_Can">INFORMACION CLIENTE</div>
+
+            <div class="client-grid_Can">
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Nombre Cliente</div>
+                    <div class="form-value_Can" id="nombreCliente_cancelacion"><!-- DYNAMIC: Nombre Cliente --></div>
+                </div>
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Tipo Doc</div>
+                    <div class="form-value_Can" id="tipoDoc_cancelacion"><!-- DYNAMIC: Tipo Documento --></div>
+                </div>
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Num. Documento</div>
+                    <div class="form-value_Can" id="numDoc_cancelacion"><!-- DYNAMIC: Número Documento --></div>
+                </div>
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Lugar de Expedicion</div>
+                    <div class="form-value_Can" id="lugarExp_cancelacion"><!-- DYNAMIC: Lugar Expedición --></div>
+                </div>
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Fecha De Expedicion</div>
+                    <div class="form-value_Can" id="fechaExp_cancelacion"><!-- DYNAMIC: Fecha Expedición --></div>
+                </div>
+            </div>
+
+            <!-- Activity and Income Information -->
+            <div class="activity-grid_Can">
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Dias Mora</div>
+                    <div class="form-value_Can" id="diasMora_cancelacion"><!-- DYNAMIC: Días Mora --></div>
+                </div>
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Descripcion Actividad</div>
+                    <div class="form-value_Can" id="descripcionActividad_cancelacion">
+                        <!-- DYNAMIC: Descripción Actividad -->
+                    </div>
+                </div>
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Ingreso Mensual</div>
+                    <div class="form-value_Can" id="ingresoMensual_cancelacion"><!-- DYNAMIC: Ingreso Mensual --></div>
+                </div>
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Ocupación Ingresos Adicional</div>
+                    <div class="form-value_Can" id="ocupacionAdicional_cancelacion">
+                        <!-- DYNAMIC: Ocupación Adicional -->
+                    </div>
+                </div>
+                <div class="form-field_Can">
+                    <div class="form-label_Can">Ingresos Adicionales</div>
+                    <div class="form-value_Can" id="ingresosAdicionales_cancelacion">
+                        <!-- DYNAMIC: Ingresos Adicionales -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header_Can">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
+
+            <div class="obligations-conditions-container_Can" style="display: block; margin: 0 2px 20px;">
+                <div class="subsection-header_Can" style="border-bottom: none;">
+                    Datos Obligaciones Condiciones negociación
+                </div>
+
+                <table class="table-obligaciones_Can">
+                    <tr class="header-celda_Can">
+                        <td style="width: 15%;">Nro. Obligación (4 ultimos)</td>
+                        <td style="width: 12%;">Saldo Total</td>
+                        <td style="width: 12%;">Saldo Total</td>
+                        <td style="width: 12%;">Int Corrientes</td>
+                        <td style="width: 12%;">int mora</td>
+                        <td style="width: 12%;">Int ExtraC "TC"</td>
+                        <td rowspan="3" class="panel-pago_Can">
+                            Pago a Realizar: <span style="font-weight:200" id="pagoRealizar_cancelacion"></span><br><br>
+                            Fecha del Pago: <span style="font-weight:200" id="fechaPagoNuevo_cancelacion"></span>
+                        </td>
+                    </tr>
+
+                    <tr style="height: 30px;">
+                        <td id="numObligacion_cancelacion"></td>
+                        <td>$ <span id="saldoTotal1_cancelacion"></span></td>
+                        <td>$ <span id="saldoTotal2_cancelacion"></span></td>
+                        <td>$ <span id="intCorrientes_cancelacion"></span></td>
+                        <td>$ <span id="intMora_cancelacion"></span></td>
+                        <td>$ <span id="intExtraC_cancelacion"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" class="Baja en cuentas-label_Can">Baja en cuentas Aplicados</td>
+
+                        <td class="celda-dividida_Can">
+                            <div class="sub-valor_Can">$ <span id="benSaldo_cancelacion"></span></div>
+                            <div class="sub-porcentaje_Can"><span id="porcBenSaldo_cancelacion"></span></div>
+                        </td>
+                        <td class="celda-dividida_Can">
+                            <div class="sub-valor_Can">$ <span id="benIntCorr_cancelacion"></span></div>
+                            <div class="sub-porcentaje_Can"><span id="porcBenIntCorr_cancelacion"></span></div>
+                        </td>
+                        <td class="celda-dividida_Can">
+                            <div class="sub-valor_Can">$ <span id="benIntMora_cancelacion"></span></div>
+                            <div class="sub-porcentaje_Can"><span id="porcBenIntMora_cancelacion"></span></div>
+                        </td>
+                        <td class="celda-dividida_Can">
+                            <div class="sub-valor_Can">$ <span id="benIntExtra_cancelacion"></span></div>
+                            <div class="sub-porcentaje_Can"><span id="porcBenIntExtra_cancelacion"></span></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="section-header_Can">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
+
+            <div class="terms-text_Can" id="terminosCondiciones_cancelacion">
+                <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
+                    esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
+                    quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre
+                    el
+                    resultado de mi solicitud.</p>
+
+                <p>Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones,
+                    comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha
+                    establecida,
+                    sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
+                    sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en
+                    la
+                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Baja en cuentas
+                    ofrecidos
+                    anteriormente.</p>
+
+                <p>Acepto que existe la posibilidad que la amortización de las primeras cuotas pueda no incluir abono a
+                    capital (ejemplo: ajuste del plan de amortización al valor de la cuota propuesta por mí).</p>
+
+                <p>En caso de existir inconsistencias en el diligenciamiento del formato, el Banco le informará y si
+                    usted
+                    no las subsana en el término de tres (3) días, la presente solicitud podrá ser cancelada y se
+                    continuará
+                    con el proceso de cobro en la instancia correspondiente.</p>
+
+                <p>Acepto que:</p>
+                <p>a. Esta solicitud puede implicar el bloqueo de mis productos con cupo en el tiempo que establezcan
+                    las
+                    políticas vigentes.</p>
+                <p>b. La operación solicitada puede generar marcación ante las Centrales de Riesgo por lo que autorizo
+                    al
+                    Banco a actualizar el reporte respectivo.</p>
+                <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la negociación
+                    podrá ser tramitada el mes siguiente.</p>
+                <p>d. Hasta cuando no se haya perfeccionado la negociación en trámite, se mantienen vigentes las
+                    condiciones
+                    actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos y en las
+                    fechas
+                    acordadas.</p>
+                <br>
+                <p>Manifiesto que he recibido la información adecuada sobre las implicaciones en términos de costos,
+                    nueva
+                    forma de pago y calificación crediticia, así como un comparativo entre las condiciones actuales y
+                    las
+                    del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la
+                    Circular
+                    Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
+                    Financiera de Colombia.</p>
+
+                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los Baja en cuentas
+                    otorgados,
+                    pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
+                    realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
+                    Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
+                    Financiera
+                    de Colombia. Si la (s) obligación (es) castigada (s) durante el trámite solicitado, el Banco hara el
+                    respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
+                    destrucción de los documentos aportados.</p><br>
+
+                <p>Yo <strong><span
+                            id="nombreClienteTerminos_cancelacion"><!-- DYNAMIC: Nombre Cliente --></span></strong>
+                    identificado
+                    con No. <strong><span
+                            id="numDocTerminos_cancelacion"><!-- DYNAMIC: Número Documento --></span></strong>
+                    manifiesto
+                    que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente
+                    acuerdo,
+                    son de origen lícito y corresponde a
+                    <span>________________________________________________________________________</span>
+                    Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la negociación
+                    el
+                    Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me será
+                    reintegrado y la negociación se tramitará con los nuevos saldos vigentes a la fecha de aplicación de
+                    la
+                    misma.
+                </p><br>
+
+                <p>Para saber más sobre tiempo de permanencia y reporte negativo en las Centrales de Información:
+                    ingresa a
+                    la pagina del Banco de Bogotá www.bancodebogota.com, en la siguiente ruta: Inicio / Nuestra
+                    Organización
+                    / Transparencia / Ley Habeas Data.</p><br>
+
+                <p>Declaro que conozco y acepto los términos y condiciones de esta negociación, los cuales pueden ser
+                    consultados a través de
+                    https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
+                    condiciones - políticas de cobro</p>
+            </div>
+
+            <!-- Questions Section -->
+            <div class="questions-grid_Can">
+                <div class="question-row_Can">
+                    <div class="question-text_Can">He permanecido más de 183 días en el último año, o 183 días durante
+                        los
+                        últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia
+                    </div>
+                    <div class="question-answer_Can" id="pregunta1_cancelacion"><!-- DYNAMIC: Respuesta 1 --></div>
+                </div>
+                <div class="question-row_Can">
+                    <div class="question-text_Can">Soy poseedor de un documento de identificación expedido en un pais
+                        diferente
+                        a Colombia</div>
+                    <div class="question-answer_Can" id="pregunta2_cancelacion"><!-- DYNAMIC: Respuesta 2 --></div>
+                </div>
+                <div class="question-row_Can">
+                    <div class="question-text_Can">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
+                        honorario,
+                        primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
+                        ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
+                    <div class="question-answer_Can" id="pregunta3_cancelacion"><!-- DYNAMIC: Respuesta 3 --></div>
+                </div>
+                <div class="question-row_Can">
+                    <div class="question-text_Can">Recibo cualquier ingreso bruto procedente de la venta u otra
+                        disposición
+                        de
+                        cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera
+                        del
+                        territorio Colombiano.</div>
+                    <div class="question-answer_Can" id="pregunta4_cancelacion"><!-- DYNAMIC: Respuesta 4 --></div>
+                </div>
+            </div>
+
+            <!-- Observations  garantias-->
+            <div class="observations_Can">
+
+                <div class="observations-section_Can">
+                    <span class="observations-label_Can">Observaciones:</span>
+                    <div class="observaciones-answer_Can" id="observaciones_cancelacion">
                     </div>
                 </div>
 
-            </div>
-        </div>
+                <div class="guarantees-section_Can">
 
+                    <div class="guarantee-row_Can top">
+                        <div class="guarantee-text_Can">Garantia FAG</div>
+                        <div class="guarantee-value_Can" id="garantiaFAG_cancelacion">
+                        </div>
+                    </div>
 
-        <!-- Signature Section -->
-        <div class="signature-section_Can">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
+                    <div class="guarantee-row_Can">
+                        <div class="guarantee-text_Can">Garantia FNG</div>
+                        <div class="guarantee-value_Can" id="garantiaFNG_cancelacion">
+                        </div>
+                    </div>
 
-                    <div class="signature-line_Can"></div>
-                    <div class="signature-label_Can">Firma Cliente o Representante legal</div>
-                    <div class="signature-info_Can">CC/NIT Número:</div>
-                </div>
-                <div class="fingerprint-box_Can">
-
-                    <div class="fingerprint-line_Can"></div>
-                    <div class="fingerprint-label_Can">Huella</div>
                 </div>
             </div>
-        </div>
-    </div>
 
+
+            <!-- Signature Section -->
+            <div class="signature-section_Can">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+
+                        <div class="signature-line_Can"></div>
+                        <div class="signature-label_Can">Firma Cliente o Representante legal</div>
+                        <div class="signature-info_Can">CC/NIT Número:</div>
+                    </div>
+                    <div class="fingerprint-box_Can">
+
+                        <div class="fingerprint-line_Can"></div>
+                        <div class="fingerprint-label_Can">Huella</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+</body>
+
+</html>
+<!--
     <script>
         // Función para establecer la fecha actual
         function setCurrentDate() {
@@ -878,6 +958,4 @@
         }
         formatFun();
     </script>
-</body>
-
-</html>
+    -->

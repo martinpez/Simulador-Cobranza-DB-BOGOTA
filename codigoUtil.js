@@ -1,7 +1,7 @@
 // Envolvemos todo en DOMContentLoaded para esperar a que el HTML cargue
 document.addEventListener('DOMContentLoaded', () => {
 
-    const modal = document.getElementById('modalNovacion');
+    const modal = document.getElementById('modalampliacion');
     const btnAbrir = document.getElementById('btnAbrir');
 
     // VERIFICACIÓN DE SEGURIDAD: Solo añade eventos si los elementos existen
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function descargarPDF() {
-    const element = document.getElementById('contenedorNovacionPDF');
+    const element = document.getElementById('contenedorampliacionPDF');
 
     const options = {
         margin: [2, 2, 2, 2],                    // márgenes pequeños pero limpios
