@@ -666,10 +666,10 @@
                     respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
                     destrucción de los documentos aportados.</p><br>
 
-                <p>Yo <strong><span id="nombreClienteTerminos_pagomora"><!-- DYNAMIC: Nombre Cliente --></span></strong>
+                <p>Yo <strong><span id="nombreClienteTerd_pagomora"><!-- DYNAMIC: Nombre Cliente --></span></strong>
                     identificado
                     con No. <strong><span
-                            id="numDocTerminos_pagomora"><!-- DYNAMIC: Número Documento --></span></strong> manifiesto
+                            id="numDocTerd_pagomora"><!-- DYNAMIC: Número Documento --></span></strong> manifiesto
                     que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente
                     acuerdo,
                     son de origen lícito y corresponde a
@@ -701,20 +701,20 @@
                         los
                         últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia
                     </div>
-                    <div class="question-answer_Mora" id="pregunta1_pagomora"><!-- DYNAMIC: Respuesta 1 --></div>
+                    <div class="question-answer_Mora" id="pregunta1_display_pagomora"><!-- DYNAMIC: Respuesta 1 --></div>
                 </div>
                 <div class="question-row_Mora">
                     <div class="question-text_Mora">Soy poseedor de un documento de identificación expedido en un pais
                         diferente
                         a Colombia</div>
-                    <div class="question-answer_Mora" id="pregunta2_pagomora"><!-- DYNAMIC: Respuesta 2 --></div>
+                    <div class="question-answer_Mora" id="pregunta2_display_pagomora"><!-- DYNAMIC: Respuesta 2 --></div>
                 </div>
                 <div class="question-row_Mora">
                     <div class="question-text_Mora">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
                         honorario,
                         primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
                         ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
-                    <div class="question-answer_Mora" id="pregunta3_pagomora"><!-- DYNAMIC: Respuesta 3 --></div>
+                    <div class="question-answer_Mora" id="pregunta3_display_pagomora"><!-- DYNAMIC: Respuesta 3 --></div>
                 </div>
                 <div class="question-row_Mora">
                     <div class="question-text_Mora">Recibo cualquier ingreso bruto procedente de la venta u otra
@@ -723,7 +723,7 @@
                         cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera
                         del
                         territorio Colombiano.</div>
-                    <div class="question-answer_Mora" id="pregunta4_pagomora"><!-- DYNAMIC: Respuesta 4 --></div>
+                    <div class="question-answer_Mora" id="pregunta4_display_pagomora"><!-- DYNAMIC: Respuesta 4 --></div>
                 </div>
             </div>
 
@@ -740,13 +740,13 @@
 
                     <div class="guarantee-row_Mora top">
                         <div class="guarantee-text_Mora">Garantia FAG</div>
-                        <div class="guarantee-value_Mora" id="garantiaFAG_pagomora">
+                        <div class="guarantee-value_Mora" id="garantiaFAG_display_pagomora">
                         </div>
                     </div>
 
                     <div class="guarantee-row_Mora">
                         <div class="guarantee-text_Mora">Garantia FNG</div>
-                        <div class="guarantee-value_Mora" id="garantiaFNG_pagomora">
+                        <div class="guarantee-value_Mora" id="garantiaFNG_display_pagomora">
                         </div>
                     </div>
 
@@ -763,17 +763,37 @@
                         <div class="signature-label_Mora">Firma Cliente o Representante legal</div>
                         <div class="signature-info_Mora">CC/NIT Número:</div>
                     </div>
-                    <div class="fingerprint-box_Mora">
-
-                        <div class="fingerprint-line_Mora"></div>
-                        <div class="fingerprint-label_Mora">Huella</div>
-                    </div>
                 </div>
             </div>
         </div>
     </dialog>
 
 </body>
+        document.getElementById("descripcionActividad_" + mecanismo).textContent = data.descripcionActividad;
+        document.getElementById("ingresoMensual_" + mecanismo).textContent = formateador.format(data.ingresoMensual);
+        document.getElementById("ocupacionAdicional_" + mecanismo).textContent = data.ocupacionAdicional;
+        document.getElementById("ingresosAdicionales_" + mecanismo).textContent = formateador.format(data.ingresosAdicionales);
+        document.getElementById("numObligacion_" + mecanismo).textContent = data.numObligacion;
+
+        document.getElementById('pagoMinimo').textContent = formateador.format(data.pagoMinimo || 0);
+        document.getElementById('intCorrientes').textContent = formateador.format(data.intCorrientes || 0);
+        document.getElementById('intMora').textContent = formateador.format(data.intMora || 0);
+        document.getElementById('intExtraC').textContent = formateador.format(data.intExtraC || 0);
+        document.getElementById('benIntCorr').textContent = formateador.format(data.benValorCorr || 0);
+        document.getElementById('porcBenIntCorr').textContent = data.porcBenIntCorr || '';
+        document.getElementById('porcBenIntMora').textContent = data.porcBenIntMora || '';
+        document.getElementById('benIntExtra').textContent = formateador.format(data.benValorExtra || 0);
+        document.getElementById('porcBenIntExtra').textContent = data.porcBenIntExtra || '';
+        document.getElementById('totalBeneficio').textContent = data.totalBeneficio || '';
+        document.getElementById('pagoRealizar').textContent = data.pagoRealizar || '';
+        document.getElementById('fechaPago').textContent = data.fechaPago || '';
+        document.getElementById("pregunta1_display_" + mecanismo).textContent = data.pregunta1;
+        document.getElementById("pregunta2_display_" + mecanismo).textContent = data.pregunta2;
+        document.getElementById("pregunta3_display_" + mecanismo).textContent = data.pregunta3;
+        document.getElementById("pregunta4_display_" + mecanismo).textContent = data.pregunta4;
+        document.getElementById("garantiaFAG_display_" + mecanismo).textContent = data.garantiaFAG;
+        document.getElementById("garantiaFNG_display_" + mecanismo).textContent = data.garantiaFNG;
+        document.getElementById("observaciones_" + mecanismo).textContent = data.observaciones;
 
 </html>
 <!--
@@ -827,10 +847,7 @@
                 intMora: '45.000',
                 intExtraC: '0',
 
-                // Fila inferior
-                benValorCorr: '10.000',
-                benValorMora: '45.000',
-                benValorExtra: '0',
+            
 
                 // Panel Derecho
                 benIntCorr: '10.000',

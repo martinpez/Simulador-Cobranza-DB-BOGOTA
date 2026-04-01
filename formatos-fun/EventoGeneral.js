@@ -10,9 +10,10 @@ function DataEventoGeneral() {
             DataFunNovacion("novacion");
             loadModalFun("novacion");
             break;
-        case "pagoMora":
-            funDataGenerica("pagoMora");
-            loadModalFun("pagoMora");
+        case "pagomora":
+            funDataGenerica("pagomora");
+            DataFunMora("pagomora");
+            loadModalFun("pagomora");
             break;
         case "cancelacion":
             funDataGenerica("cancelacion");
@@ -313,6 +314,125 @@ function DataFunAmpliacion(mecanismo) {
 
     }, 500);
 }
+
+function DataFunMora(mecanismo) {
+
+    function dataMora() {
+        function getSelectText(id, defaultValue = "NO") {
+            const el = document.getElementById(id);
+            if (!el) {
+                console.warn(`Elemento no encontrado: ${id}`);
+                return defaultValue;
+            }
+            if (el.selectedIndex >= 0) {
+                return el.options[el.selectedIndex].innerText.trim();
+            }
+            return defaultValue;
+        }
+
+        var descripcionActividad = document.getElementById("c852f2a7-6f9c-48f6-96b5-6fdc26c399ef").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("c852f2a7-6f9c-48f6-96b5-6fdc26c399ef").selectedOptions[0].innerText || "";
+        var ingresoMensual = document.getElementById("67631aed-75e4-4b23-8601-17cadd1c7003").value || "$";
+        var ocupacionAdicional = document.getElementById("b54af750-167e-4831-bb8c-c374e7f45202").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("b54af750-167e-4831-bb8c-c374e7f45202").selectedOptions[0].innerText || "";
+        var ingresosAdicionales = document.getElementById("1a47c2c1-4551-4d13-89ca-82e89ce655c0").value || "$";
+        var numObligacion = document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value === "" ? document.getElementById("caae86ca-b4e0-4e59-918e-8f7a1a4d4114").selectedOptions[0].innerText : document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value;
+        var pagoMinimo = document.getElementById("af9911f8-4a06-4483-b25d-6bec9e1647fe").getAttribute("aria-valuenow") || "$";
+        var intCorrientes = document.getElementById("9b3ac68c-68ff-4928-864d-906e9d851621").getAttribute("aria-valuenow") || "$";
+        var intMora = document.getElementById("c13b3910-1960-422f-835d-7ea89982f8b6").getAttribute("aria-valuenow") || "$";
+        var intExtraC = document.getElementById("aef7fd98-0a00-4ec8-95d9-37840df1fe67").getAttribute("aria-valuenow") || "$";
+        var benValorCorr = document.getElementById("49ed37fa-10f7-46d1-b2d3-bd4e28bef0db").getAttribute("aria-valuenow") || "$";
+        var benValorMora = document.getElementById("db8c0e77-0029-4bf9-ba9a-ebc141721c33").getAttribute("aria-valuenow") || "$";
+        var benValorExtra = document.getElementById("a01eeadb-b99e-4e08-9d93-3fe44b9e1cf8").getAttribute("aria-valuenow") || "$";
+        var porcBenIntCorr = document.getElementById("e076d650-c5d6-48b1-920b-295d431604b0").getAttribute("aria-valuenow") || "$";
+        var porcBenIntMora = document.getElementById("64fcdf9f-c6b3-4742-b4b2-e259759290d9").getAttribute("aria-valuenow") || "$";
+        var porcBenIntExtra = document.getElementById("0456eeb3-8809-48a5-8726-87e416efdcb3").getAttribute("aria-valuenow") || "$";
+        var pagoRealizar = document.getElementById("8f7266d7-dfc0-4ff4-afad-c50fbfa67062").getAttribute("aria-valuenow") || "$";
+        var totalBeneficio = document.getElementById("6cfd4b2c-6ef4-4821-95d5-364657fda787").getAttribute("aria-valuenow") || "$";
+        var fechaPago = document.querySelector("#ee8b70aa-2712-408c-a87a-b121e20564b3 > div.dx-dropdowneditor-input-wrapper > div > div.dx-texteditor-input-container > input").value.replaceAll('-', '')
+        var pregunta1 = getSelectText("pregunta1");
+        var pregunta2 = getSelectText("pregunta2");
+        var pregunta3 = getSelectText("pregunta3");
+        var pregunta4 = getSelectText("pregunta4");
+        var garantiaFAG = getSelectText("garantiaFAG");
+        var garantiaFNG = getSelectText("garantiaFNG");
+        var observaciones = document.getElementById("4b025de3-4404-41f3-8ba8-ac9b0988391e").value || "";
+
+        return {
+            descripcionActividad,
+            ingresoMensual,
+            ocupacionAdicional,
+            ingresosAdicionales,
+            numObligacion,
+
+            pagoMinimo,
+            intCorrientes,
+            intMora,
+            intExtraC,
+
+            // Panel Derecho
+            benValorCorr,
+            porcBenIntCorr,
+            benValorMora,
+            porcBenIntMora,
+            benValorExtra,
+            porcBenIntExtra,
+            totalBeneficio,
+            pagoRealizar,
+            fechaPago,
+
+
+            pregunta1,
+            pregunta2,
+            pregunta3,
+            pregunta4,
+            garantiaFAG,
+            garantiaFNG,
+            observaciones,
+
+        }
+    }
+    const formateador = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0
+    });
+    function loadFormData(data) {
+
+        document.getElementById("descripcionActividad_" + mecanismo).textContent = data.descripcionActividad;
+        document.getElementById("ingresoMensual_" + mecanismo).textContent = formateador.format(data.ingresoMensual);
+        document.getElementById("ocupacionAdicional_" + mecanismo).textContent = data.ocupacionAdicional;
+        document.getElementById("ingresosAdicionales_" + mecanismo).textContent = formateador.format(data.ingresosAdicionales);
+        document.getElementById("numObligacion_" + mecanismo).textContent = data.numObligacion;
+
+        document.getElementById('pagoMinimo').textContent = formateador.format(data.pagoMinimo || 0);
+        document.getElementById('intCorrientes').textContent = formateador.format(data.intCorrientes || 0);
+        document.getElementById('intMora').textContent = formateador.format(data.intMora || 0);
+        document.getElementById('intExtraC').textContent = formateador.format(data.intExtraC || 0);
+        document.getElementById('benIntCorr').textContent = formateador.format(data.benValorCorr || 0);
+        document.getElementById('porcBenIntCorr').textContent = data.porcBenIntCorr || '';
+        document.getElementById('porcBenIntMora').textContent = data.porcBenIntMora || '';
+        document.getElementById('benIntExtra').textContent = formateador.format(data.benValorExtra || 0);
+        document.getElementById('porcBenIntExtra').textContent = data.porcBenIntExtra || '';
+        document.getElementById('totalBeneficio').textContent = data.totalBeneficio || '';
+        document.getElementById('pagoRealizar').textContent = data.pagoRealizar || '';
+        document.getElementById('fechaPago').textContent = data.fechaPago || '';
+        document.getElementById("pregunta1_display_" + mecanismo).textContent = data.pregunta1;
+        document.getElementById("pregunta2_display_" + mecanismo).textContent = data.pregunta2;
+        document.getElementById("pregunta3_display_" + mecanismo).textContent = data.pregunta3;
+        document.getElementById("pregunta4_display_" + mecanismo).textContent = data.pregunta4;
+        document.getElementById("garantiaFAG_display_" + mecanismo).textContent = data.garantiaFAG;
+        document.getElementById("garantiaFNG_display_" + mecanismo).textContent = data.garantiaFNG;
+        document.getElementById("observaciones_" + mecanismo).textContent = data.observaciones;
+
+    }
+    setTimeout(() => {
+        loadFormData(dataMora());
+        console.log("Datos para novacion cargados");
+        console.log("Datos:", dataMora());
+
+    }, 500);
+}
+
+
 
 function loadModalFun(mecanismo) {
 

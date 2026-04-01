@@ -172,7 +172,7 @@ function inicializarNavegacion() {
     // PAGO MORA
     //Principal
     $(".pagomora").click(() => {
-        sessionStorage.mecanismo = "pagoMora"
+        sessionStorage.mecanismo = "pagomora"
         navegarA(VISTAS.PAGOMORA_P1);
     });
     $(".left-button").click(() => {
@@ -300,9 +300,7 @@ function inicializarNavegacion() {
                 syncSoxCounter();
                 break;
             case "pagoMora":
-                navegarA(VISTAS.PAGOMORA_P2);
-                soxMora();
-                syncSoxCounter();
+                navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
                 break;
             case "cancelacion":
                 navegarA(VISTAS.CANCELACION_P3);
