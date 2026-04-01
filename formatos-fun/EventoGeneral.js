@@ -143,26 +143,26 @@ function DataFunNovacion(mecanismo) {
         var observaciones = document.getElementById("4b025de3-4404-41f3-8ba8-ac9b0988391e").value || "";
 
         return {
-            descripcionActividad: descripcionActividad,
-            ingresoMensual: ingresoMensual,
-            ocupacionAdicional: ocupacionAdicional,
-            ingresosAdicionales: ingresosAdicionales,
-            numObligacion: numObligacion,
-            saldoTotal: saldoTotal,
-            pagoMinimo: pagoMinimo,
-            fechaPago: fechaPago,
-            pagoNegociacion: pagoNegociacion,
+            descripcionActividad,
+            ingresoMensual,
+            ocupacionAdicional,
+            ingresosAdicionales,
+            numObligacion,
+            saldoTotal,
+            pagoMinimo,
+            fechaPago,
+            pagoNegociacion,
             plazo: plazo + ' meses',
-            tasaMV: tasaMV,
-            saldoDiferir: saldoDiferir,
-            cuotaProyectada: cuotaProyectada,
-            pregunta1: pregunta1,
-            pregunta2: pregunta2,
-            pregunta3: pregunta3,
-            pregunta4: pregunta4,
-            garantiaFAG: garantiaFAG,
-            garantiaFNG: garantiaFNG,
-            observaciones: observaciones,
+            tasaMV,
+            saldoDiferir,
+            cuotaProyectada,
+            pregunta1,
+            pregunta2,
+            pregunta3,
+            pregunta4,
+            garantiaFAG,
+            garantiaFNG,
+            observaciones,
 
         }
     }
@@ -215,16 +215,22 @@ function DataFunAmpliacion(mecanismo) {
             return defaultValue;
         }
 
-        var descripcionActividad = document.getElementById("51550b53-1a9f-49cd-8274-abd718d04b51").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("13a8a1c2-3026-481b-bddb-d62c2f321d2c").selectedOptions[0].innerText || "";
+        var descripcionActividad = document.getElementById("51550b53-1a9f-49cd-8274-abd718d04b51").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("51550b53-1a9f-49cd-8274-abd718d04b51").selectedOptions[0].innerText || "";
         var ingresoMensual = document.getElementById("f51fe08e-3b3b-4064-9ae0-fb9584fd93b3").value || "$";
-        var ocupacionAdicional = document.getElementById("3a3c6541-bfed-459a-9a8d-608eebb2ad63").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("10d62ee5-6dc2-4452-9a91-e8acae95a3d3").selectedOptions[0].innerText || "";
+        var ocupacionAdicional = document.getElementById("3a3c6541-bfed-459a-9a8d-608eebb2ad63").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("3a3c6541-bfed-459a-9a8d-608eebb2ad63").selectedOptions[0].innerText || "";
         var ingresosAdicionales = document.getElementById("ee3c91d9-9f6c-4ea5-bd31-047686ce4c76").value || "$";
         var numObligacion = document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value === "" ? document.getElementById("caae86ca-b4e0-4e59-918e-8f7a1a4d4114").selectedOptions[0].innerText : document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value;
         var saldoTotal = document.getElementById("12671e00-a829-472f-b644-be49ea7ebdbf").getAttribute("aria-valuenow") || "$";
-        var intc = document.getElementById("70101be7-9330-44e4-913c-e6772c5b8167").getAttribute("aria-valuenow") || "$";
+        var intCorrientes = document.getElementById("70101be7-9330-44e4-913c-e6772c5b8167").getAttribute("aria-valuenow") || "$";
         var intMora = document.getElementById("aea118a4-8a99-4d3a-adf9-ffd5151db4f6").getAttribute("aria-valuenow") || "$";
-        var pagoMinimo = document.getElementById("1f7c2b79-87a6-402f-95f2-414aea88a4bf").getAttribute("aria-valuenow") || "$";
-        let fechaPago = document.querySelector(
+        var BeneficioIntCorr = document.getElementById("15a75d66-7dc0-4e25-b3e3-213a984a22fe").getAttribute("aria-valuenow") || "$";
+        var porcentajeBenIntCorr = document.getElementById("d8e6669a-3079-4248-88d5-5f01cca53106").getAttribute("aria-valuenow") || "$";
+        var BeneficioIntMora = document.getElementById("e4b7cc87-de9e-4fa1-9d65-d9595ed2cca2").getAttribute("aria-valuenow") || "$";
+        var porcentajeBenIntMora = document.getElementById("4f9627f2-7ada-415b-bf0c-cf308407c82a").getAttribute("aria-valuenow") || "$";
+        var totalBeneficio = document.getElementById("312df4ed-17a6-4e38-899a-e075171f9d84").getAttribute("aria-valuenow") || "$";
+        var pagoRealizar = document.getElementById("9b88d521-a3dd-4948-8c3f-6dece97a17a5").getAttribute("aria-valuenow") || "$";
+        var cuotaProyectada = document.getElementById("2edec98b-a7b5-49a8-8cae-623f05fe0cd5").getAttribute("aria-valuenow") || "$";
+        var fechaPago = document.querySelector(
             "#\\33 d0f4be2-1bb6-446c-9ebb-b38a7eba0d5c > div.dx-dropdowneditor-input-wrapper > div > div.dx-texteditor-input-container > input"
         ).value.replaceAll('-', '') || '';
         var plazo = document.getElementById("f43686aa-8f4e-4203-9733-b483660e6ab1").getAttribute("aria-valuenow") || "";
@@ -238,18 +244,26 @@ function DataFunAmpliacion(mecanismo) {
         var observaciones = document.getElementById("4b025de3-4404-41f3-8ba8-ac9b0988391e").value || "";
 
         return {
+
+
             descripcionActividad,
             ingresoMensual,
             ocupacionAdicional,
             ingresosAdicionales,
             numObligacion,
             saldoTotal,
-            intc,
+            intCorrientes,
             intMora,
-            pagoMinimo,
+            BeneficioIntCorr,
+            porcentajeBenIntCorr: porcentajeBenIntCorr + " %",
+            BeneficioIntMora,
+            porcentajeBenIntMora: porcentajeBenIntMora + " %",
+            totalBeneficio,
+            pagoRealizar,
             fechaPago,
-            plazo: plazo + ' meses',
+            plazo: plazo + " meses",
             tasaEA,
+            cuotaProyectada,
             pregunta1,
             pregunta2,
             pregunta3,
@@ -272,11 +286,18 @@ function DataFunAmpliacion(mecanismo) {
         document.getElementById("ingresosAdicionales_" + mecanismo).textContent = formateador.format(data.ingresosAdicionales);
         document.getElementById("numObligacion_" + mecanismo).textContent = data.numObligacion;
         document.getElementById("saldoTotal_" + mecanismo).textContent = formateador.format(data.saldoTotal);
-        document.getElementById("intCorrientes" + mecanismo).textContent = formateador.format(data.intc);
-        document.getElementById("intMora" + mecanismo).textContent = formateador.format(data.intMora);
+        document.getElementById("intCorrientes_" + mecanismo).textContent = formateador.format(data.intCorrientes);
+        document.getElementById("intMora_" + mecanismo).textContent = formateador.format(data.intMora);
         document.getElementById("fechaPago_" + mecanismo).textContent = data.fechaPago;
+        document.getElementById("BeneficioIntCorr_" + mecanismo).textContent = formateador.format(data.BeneficioIntCorr);
+        document.getElementById("porcentajeBenIntCorr_" + mecanismo).textContent = data.porcentajeBenIntCorr;
+        document.getElementById("BeneficioIntMora_" + mecanismo).textContent = formateador.format(data.BeneficioIntMora);
+        document.getElementById("porcentajeBenIntMora_" + mecanismo).textContent = data.porcentajeBenIntMora;
+        document.getElementById("totalBeneficio_" + mecanismo).textContent = formateador.format(data.totalBeneficio);
+        document.getElementById("pagoRealizar_" + mecanismo).textContent = formateador.format(data.pagoRealizar);
+        document.getElementById("cuotaProyectada_" + mecanismo).textContent = formateador.format(data.cuotaProyectada);
         document.getElementById("plazo_" + mecanismo).textContent = data.plazo;
-        document.getElementById("tasaMV_" + mecanismo).textContent = data.tasaEA;
+        document.getElementById("tasaInteres_" + mecanismo).textContent = data.tasaEA;
         document.getElementById("pregunta1_display_" + mecanismo).textContent = data.pregunta1;
         document.getElementById("pregunta2_display_" + mecanismo).textContent = data.pregunta2;
         document.getElementById("pregunta3_display_" + mecanismo).textContent = data.pregunta3;

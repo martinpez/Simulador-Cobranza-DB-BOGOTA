@@ -26,12 +26,12 @@ const VISTAS = {
 
     CONSOLIDACION_P1: 14,
     CONSOLIDACION_P2: 9,
-    CONSOLIDACION_P3: 11,
     CONSOLIDACION_P4: 8,
 
     PAGOMORA_P1: 15,
     PAGOMORA_P2: 10,
 
+    CLIENTE_INFO_ECONOMICA: 11,
     INFORMACION_CLIENTE: 13
 };
 
@@ -117,7 +117,7 @@ function inicializarNavegacion() {
     });
 
     $(".right-buttonC2").click(() => {
-        navegarA(VISTAS.CONSOLIDACION_P3);
+        navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
 
     });
 
@@ -125,15 +125,8 @@ function inicializarNavegacion() {
         navegarA(VISTAS.CONSOLIDACION_P1);
     });
 
-    $(".right-buttonC3").click(() => {
-        navegarA(VISTAS.CONSOLIDACION_P4);
-        observacionConsolidado();
-        syncSoxCounter();
-    });
 
-    $(".left-buttonC3").click(() => {
-        navegarA(VISTAS.CONSOLIDACION_P2);
-    });
+
 
     $(".right-buttonC4").click(() => {
         navegarA(VISTAS.INFORMACION_CLIENTE);
@@ -141,7 +134,7 @@ function inicializarNavegacion() {
     });
 
     $(".left-buttonC4").click(() => {
-        navegarA(VISTAS.CONSOLIDACION_P3);
+        navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
     });
 
 
@@ -172,8 +165,7 @@ function inicializarNavegacion() {
         navegarA(VISTAS.NOVACIONES_P1);
     });
     $(".right-button2").click(() => {
-
-        navegarA(VISTAS.INFORMACION_CLIENTE);
+        navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
     });
 
 
@@ -195,7 +187,7 @@ function inicializarNavegacion() {
         navegarA(VISTAS.PAGOMORA_P1);
     });
     $(".right-buttonM2").click(() => {
-        navegarA(VISTAS.INFORMACION_CLIENTE);
+        navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
     });
 
 
@@ -264,6 +256,34 @@ function inicializarNavegacion() {
     $(".right-buttonAM3").click(() => {
         navegarA(VISTAS.INFORMACION_CLIENTE);
     });
+
+    $(".left-buttonC3").click(() => {
+        switch (sessionStorage.mecanismo) {
+            case "consolidacion":
+                navegarA(VISTAS.CONSOLIDACION_P2);
+                break;
+            case "pagoMora":
+                navegarA(VISTAS.PAGOMORA_P2);
+                soxMora();
+                syncSoxCounter();
+                break;
+        }
+    })
+    $(".right-buttonC3").click(() => {
+        switch (sessionStorage.mecanismo) {
+            case "consolidacion":
+                navegarA(VISTAS.CONSOLIDACION_P4);
+                observacionConsolidado();
+                syncSoxCounter();
+                break;
+            case "pagoMora":
+                navegarA(VISTAS.INFORMACION_CLIENTE);
+                break;
+        }
+    })
+
+
+
 
 
     // navegacion al volver de la pagina de informacion cliente

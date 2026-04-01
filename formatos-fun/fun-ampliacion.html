@@ -564,7 +564,7 @@
                 </div>
 
                 <div class="conditions-section_Am">
-                    <div class="subsection-header_Am">Condiciones negocioación</div>
+                    <div class="subsection-header_Am">Condiciones negociación</div>
                     <div class="terms-text_Am" style="margin: 0; font-size: 9px; line-height: 1.6; border-top: none;">
                         <div style="text-align: center; font-weight:bold ;">
                             Beneficio Int Corrientes: <span style="font-weight:lighter"
@@ -578,12 +578,10 @@
                             Total Beneficio: <span style="font-weight:lighter"
                                 id="totalBeneficio_ampliacion"></span><br>
                             Pago a Realizar: <span style="font-weight:lighter" id="pagoRealizar_ampliacion"></span><br>
-                            Fecha del Pago: <span style="font-weight:lighter" id="fechaPagoNuevo_ampliacion"></span><br>
-                            Plazo: <span style="font-weight:lighter" id="plazoNuevo_ampliacion"></span><br>
-                            tasa de interes: <span style="font-weight:lighter"
-                                id="tasaInteresNuevo_ampliacion"></span><br>
-                            Cuota Proyectada: <span style="font-weight:lighter"
-                                id="cuotaProyectadaNueva_ampliacion"></span>
+                            Fecha del Pago: <span style="font-weight:lighter" id="fechaPago_ampliacion"></span><br>
+                            Plazo: <span style="font-weight:lighter" id="plazo_ampliacion"></span><br>
+                            tasa de interes: <span style="font-weight:lighter" id="tasaInteres_ampliacion"></span><br>
+                            Cuota Proyectada: <span style="font-weight:lighter" id="cuotaProyectada_ampliacion"></span>
                         </div>
                     </div>
                 </div>
@@ -652,8 +650,8 @@
                     respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
                     destrucción de los documentos aportados.</p><br>
 
-                <p>Yo <strong><span id="nombreCliente_ampliacion"></span></strong> identificado
-                    con No. <strong><span id="numDoc_ampliacion"></span></strong> manifiesto
+                <p>Yo <strong><span id="nombreClienteTerd_ampliacion"></span></strong> identificado
+                    con No. <strong><span id="numDocTerd_ampliacion"></span></strong> manifiesto
                     que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente
                     acuerdo,
                     son de origen lícito y corresponde a
@@ -685,20 +683,23 @@
                         los
                         últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia
                     </div>
-                    <div class="question-answer_Am" id="pregunta1_ampliacion"><!-- DYNAMIC: Respuesta 1 --></div>
+                    <div class="question-answer_Am" id="pregunta1_display_ampliacion"><!-- DYNAMIC: Respuesta 1 -->
+                    </div>
                 </div>
                 <div class="question-row_Am">
                     <div class="question-text_Am">Soy poseedor de un documento de identificación expedido en un pais
                         diferente
                         a Colombia</div>
-                    <div class="question-answer_Am" id="pregunta2_ampliacion"><!-- DYNAMIC: Respuesta 2 --></div>
+                    <div class="question-answer_Am" id="pregunta2_display_ampliacion"><!-- DYNAMIC: Respuesta 2 -->
+                    </div>
                 </div>
                 <div class="question-row_Am">
                     <div class="question-text_Am">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
                         honorario,
                         primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
                         ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
-                    <div class="question-answer_Am" id="pregunta3_ampliacion"><!-- DYNAMIC: Respuesta 3 --></div>
+                    <div class="question-answer_Am" id="pregunta3_display_ampliacion"><!-- DYNAMIC: Respuesta 3 -->
+                    </div>
                 </div>
                 <div class="question-row_Am">
                     <div class="question-text_Am">Recibo cualquier ingreso bruto procedente de la venta u otra
@@ -706,7 +707,8 @@
                         cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera
                         del
                         territorio Colombiano.</div>
-                    <div class="question-answer_Am" id="pregunta4_ampliacion"><!-- DYNAMIC: Respuesta 4 --></div>
+                    <div class="question-answer_Am" id="pregunta4_display_ampliacion"><!-- DYNAMIC: Respuesta 4 -->
+                    </div>
                 </div>
             </div>
 
@@ -723,13 +725,13 @@
 
                     <div class="guarantee-row_Am top">
                         <div class="guarantee-text_Am">Garantia FAG</div>
-                        <div class="guarantee-value_Am" id="garantiaFAG_ampliacion">
+                        <div class="guarantee-value_Am" id="garantiaFAG_display_ampliacion">
                         </div>
                     </div>
 
                     <div class="guarantee-row_Am">
                         <div class="guarantee-text_Am">Garantia FNG</div>
-                        <div class="guarantee-value_Am" id="garantiaFNG_ampliacion">
+                        <div class="guarantee-value_Am" id="garantiaFNG_display_ampliacion">
                         </div>
                     </div>
 
@@ -746,11 +748,7 @@
                         <div class="signature-label_Am">Firma Cliente o Representante legal</div>
                         <div class="signature-info_Am">CC/NIT Número:</div>
                     </div>
-                    <div class="fingerprint-box_Am">
 
-                        <div class="fingerprint-line_Am"></div>
-                        <div class="fingerprint-label_Am">Huella</div>
-                    </div>
                 </div>
             </div>
 
@@ -759,6 +757,10 @@
 </body>
 
 </html>
+
+
+
+
 <!--
     <script>
         // Función para establecer la fecha actual
