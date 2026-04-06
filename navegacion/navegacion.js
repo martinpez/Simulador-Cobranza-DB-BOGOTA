@@ -126,8 +126,6 @@ function inicializarNavegacion() {
     });
 
 
-
-
     $(".right-buttonC4").click(() => {
         navegarA(VISTAS.INFORMACION_CLIENTE);
 
@@ -165,7 +163,7 @@ function inicializarNavegacion() {
         navegarA(VISTAS.NOVACIONES_P1);
     });
     $(".right-button2").click(() => {
-        navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
+        navegarA(VISTAS.INFORMACION_CLIENTE);
     });
 
 
@@ -221,7 +219,6 @@ function inicializarNavegacion() {
 
     // AMPLIACION
     //Principal
-
     $(".ampliacion").click(() => {
         sessionStorage.mecanismo = "ampliacion"
         navegarA(VISTAS.AMPLIACION_P1);
@@ -262,7 +259,7 @@ function inicializarNavegacion() {
             case "consolidacion":
                 navegarA(VISTAS.CONSOLIDACION_P2);
                 break;
-            case "pagoMora":
+            case "pagomora":
                 navegarA(VISTAS.PAGOMORA_P2);
                 soxMora();
                 syncSoxCounter();
@@ -276,14 +273,11 @@ function inicializarNavegacion() {
                 observacionConsolidado();
                 syncSoxCounter();
                 break;
-            case "pagoMora":
+            case "pagomora":
                 navegarA(VISTAS.INFORMACION_CLIENTE);
                 break;
         }
     })
-
-
-
 
 
     // navegacion al volver de la pagina de informacion cliente
@@ -299,7 +293,7 @@ function inicializarNavegacion() {
                 llenarCampos();
                 syncSoxCounter();
                 break;
-            case "pagoMora":
+            case "pagomora":
                 navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
                 break;
             case "cancelacion":

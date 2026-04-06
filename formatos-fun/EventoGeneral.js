@@ -370,11 +370,11 @@ function DataFunMora(mecanismo) {
 
             // Panel Derecho
             benValorCorr,
-            porcBenIntCorr,
+            porcBenIntCorr: porcBenIntCorr + " %",
             benValorMora,
-            porcBenIntMora,
+            porcBenIntMora: porcBenIntMora + " %",
             benValorExtra,
-            porcBenIntExtra,
+            porcBenIntExtra: porcBenIntExtra + " %",
             totalBeneficio,
             pagoRealizar,
             fechaPago,
@@ -403,18 +403,20 @@ function DataFunMora(mecanismo) {
         document.getElementById("ingresosAdicionales_" + mecanismo).textContent = formateador.format(data.ingresosAdicionales);
         document.getElementById("numObligacion_" + mecanismo).textContent = data.numObligacion;
 
-        document.getElementById('pagoMinimo').textContent = formateador.format(data.pagoMinimo || 0);
-        document.getElementById('intCorrientes').textContent = formateador.format(data.intCorrientes || 0);
-        document.getElementById('intMora').textContent = formateador.format(data.intMora || 0);
-        document.getElementById('intExtraC').textContent = formateador.format(data.intExtraC || 0);
-        document.getElementById('benIntCorr').textContent = formateador.format(data.benValorCorr || 0);
-        document.getElementById('porcBenIntCorr').textContent = data.porcBenIntCorr || '';
-        document.getElementById('porcBenIntMora').textContent = data.porcBenIntMora || '';
-        document.getElementById('benIntExtra').textContent = formateador.format(data.benValorExtra || 0);
-        document.getElementById('porcBenIntExtra').textContent = data.porcBenIntExtra || '';
-        document.getElementById('totalBeneficio').textContent = data.totalBeneficio || '';
-        document.getElementById('pagoRealizar').textContent = data.pagoRealizar || '';
-        document.getElementById('fechaPago').textContent = data.fechaPago || '';
+        document.getElementById('pagoMinimo_' + mecanismo).textContent = formateador.format(data.pagoMinimo || 0);
+        document.getElementById('intCorrientes_' + mecanismo).textContent = formateador.format(data.intCorrientes || 0);
+        document.getElementById('intMora_' + mecanismo).textContent = formateador.format(data.intMora || 0);
+        document.getElementById('intExtraC_' + mecanismo).textContent = formateador.format(data.intExtraC || 0);
+
+        document.getElementById('benIntCorr_' + mecanismo).textContent = formateador.format(data.benValorCorr || 0);
+        document.getElementById('porcBenIntCorr_' + mecanismo).textContent = data.porcBenIntCorr || '';
+        document.getElementById('benIntMora_' + mecanismo).textContent = formateador.format(data.benValorMora || 0);
+        document.getElementById('porcBenIntMora_' + mecanismo).textContent = data.porcBenIntMora || '';
+        document.getElementById('benIntExtra_' + mecanismo).textContent = formateador.format(data.benValorExtra || 0);
+        document.getElementById('porcBenIntExtra_' + mecanismo).textContent = data.porcBenIntExtra || '';
+        document.getElementById('totalBeneficio_' + mecanismo).textContent = formateador.format(data.totalBeneficio || 0);
+        document.getElementById('pagoRealizar_' + mecanismo).textContent = formateador.format(data.pagoRealizar || 0);
+        document.getElementById('fechaPago_' + mecanismo).textContent = data.fechaPago || '';
         document.getElementById("pregunta1_display_" + mecanismo).textContent = data.pregunta1;
         document.getElementById("pregunta2_display_" + mecanismo).textContent = data.pregunta2;
         document.getElementById("pregunta3_display_" + mecanismo).textContent = data.pregunta3;
@@ -536,7 +538,7 @@ function sendDataFunPDF(mecanismo) {
             // para traer el sox que le corresponda al mecanismo
             const SOX_ID = {
                 "novacion": "07b4e087-95c8-4867-b91f-1f9e9a4a1ea0",
-                "pagoMora": "b24357e4-d1be-443d-8fa0-5b8790a1c508",
+                "pagomora": "b24357e4-d1be-443d-8fa0-5b8790a1c508",
                 "consolidacion": "f3979225-f563-48a2-a206-6b5866a7dc6c",
                 "cancelacion": "d4f89a7c-0207-4756-9bd7-e2e669ac3ce0",
                 "ampliacion": "eec3136d-46bf-438c-b7cc-4aaa5fba776b"

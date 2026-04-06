@@ -580,10 +580,10 @@
 
                     <div class="obligations-grid-v3_Mora" style="min-height: 30px;">
                         <div class="table-cell_Mora" id="numObligacion_pagomora"></div>
-                        <div class="table-cell_Mora">$ <span id="pagoMinimo_pagomora"> </span></div>
-                        <div class="table-cell_Mora">$ <span id="intCorrientes_pagomora"> </span></div>
-                        <div class="table-cell_Mora">$ <span id="intMora_pagomora"> </span></div>
-                        <div class="table-cell_Mora">$ <span id="intExtraC_pagomora"> </span></div>
+                        <div class="table-cell_Mora"><span id="pagoMinimo_pagomora"> </span></div>
+                        <div class="table-cell_Mora"><span id="intCorrientes_pagomora"> </span></div>
+                        <div class="table-cell_Mora"><span id="intMora_pagomora"> </span></div>
+                        <div class="table-cell_Mora"><span id="intExtraC_pagomora"> </span></div>
                     </div>
 
 
@@ -592,14 +592,14 @@
                 <div class="conditions-section_Mora" style="margin-left: 0;">
                     <div class="subsection-header_Mora" style="border-left: none;">Condiciones negociación</div>
                     <div class="conditions-panel-v3_Mora">
-                        <strong>Beneficio Int Corrientes:</strong> $ <span id="benIntCorr_pagomora"></span><br>
+                        <strong>Beneficio Int Corrientes:</strong>  <span id="benIntCorr_pagomora"></span><br>
                         <strong>% Beneficio Int Corrientes:</strong> <span id="porcBenIntCorr_pagomora"></span><br>
-                        <strong>Beneficio Int Mora:</strong> $ <span id="benIntMora_pagomora"></span><br>
+                        <strong>Beneficio Int Mora:</strong> <span id="benIntMora_pagomora"></span><br>
                         <strong>% Beneficio Int Mora:</strong> <span id="porcBenIntMora_pagomora"></span><br>
-                        <strong>Beneficio Int ExtraContables:</strong> $ <span id="benIntExtra_pagomora"></span><br>
+                        <strong>Beneficio Int ExtraContables:</strong><span id="benIntExtra_pagomora"></span><br>
                         <strong>% Beneficio Int ExtraContables:</strong> <span id="porcBenIntExtra_pagomora"></span><br>
-                        <strong>Total Beneficio:</strong> $ <span id="totalBeneficio_pagomora"></span><br>
-                        <strong>Pago a Realizar:</strong> $ <span id="pagoRealizar_pagomora"></span><br>
+                        <strong>Total Beneficio:</strong>  <span id="totalBeneficio_pagomora"></span><br>
+                        <strong>Pago a Realizar:</strong>  <span id="pagoRealizar_pagomora"></span><br>
                         <strong>Fecha del Pago:</strong> <span id="fechaPago_pagomora"></span>
                     </div>
                 </div>
@@ -769,31 +769,6 @@
     </dialog>
 
 </body>
-        document.getElementById("descripcionActividad_" + mecanismo).textContent = data.descripcionActividad;
-        document.getElementById("ingresoMensual_" + mecanismo).textContent = formateador.format(data.ingresoMensual);
-        document.getElementById("ocupacionAdicional_" + mecanismo).textContent = data.ocupacionAdicional;
-        document.getElementById("ingresosAdicionales_" + mecanismo).textContent = formateador.format(data.ingresosAdicionales);
-        document.getElementById("numObligacion_" + mecanismo).textContent = data.numObligacion;
-
-        document.getElementById('pagoMinimo').textContent = formateador.format(data.pagoMinimo || 0);
-        document.getElementById('intCorrientes').textContent = formateador.format(data.intCorrientes || 0);
-        document.getElementById('intMora').textContent = formateador.format(data.intMora || 0);
-        document.getElementById('intExtraC').textContent = formateador.format(data.intExtraC || 0);
-        document.getElementById('benIntCorr').textContent = formateador.format(data.benValorCorr || 0);
-        document.getElementById('porcBenIntCorr').textContent = data.porcBenIntCorr || '';
-        document.getElementById('porcBenIntMora').textContent = data.porcBenIntMora || '';
-        document.getElementById('benIntExtra').textContent = formateador.format(data.benValorExtra || 0);
-        document.getElementById('porcBenIntExtra').textContent = data.porcBenIntExtra || '';
-        document.getElementById('totalBeneficio').textContent = data.totalBeneficio || '';
-        document.getElementById('pagoRealizar').textContent = data.pagoRealizar || '';
-        document.getElementById('fechaPago').textContent = data.fechaPago || '';
-        document.getElementById("pregunta1_display_" + mecanismo).textContent = data.pregunta1;
-        document.getElementById("pregunta2_display_" + mecanismo).textContent = data.pregunta2;
-        document.getElementById("pregunta3_display_" + mecanismo).textContent = data.pregunta3;
-        document.getElementById("pregunta4_display_" + mecanismo).textContent = data.pregunta4;
-        document.getElementById("garantiaFAG_display_" + mecanismo).textContent = data.garantiaFAG;
-        document.getElementById("garantiaFNG_display_" + mecanismo).textContent = data.garantiaFNG;
-        document.getElementById("observaciones_" + mecanismo).textContent = data.observaciones;
 
 </html>
 <!--
