@@ -1,70 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Formato Fun Ampliacion -->
+<!-- Formato Fun Novacion -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
     <style>
-        .layout-especial_Am * {
+        .layout-especial_Nova * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        .layout-especial_Am {
+        .layout-especial_Nova {
             font-family: 'Open Sans', sans-serif;
             background: #f5f5f5;
             color: #333;
             padding: 60px;
         }
 
-        .container_Am {
+        .container_Nova {
             width: auto;
             margin: 0 auto;
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .header-top_Am {
+
+        .header-top_Nova {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
         }
 
-        .logo-section_Am {
+        .logo-section_Nova {
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .logo-img_Am {
+        .logo-img_Nova {
             width: 57px;
             height: 58px;
             object-fit: contain;
         }
 
-        .bank-name_Am {
+        .bank-name_Nova {
             font-size: 18px;
             font-weight: 700;
             color: #333;
         }
 
-        .date-section_Am {
+        .date-section_Nova {
             margin: 5px;
             display: flex;
             gap: 0;
         }
 
-        .date-box_Am {
+        .date-box_Nova {
             border: 1px solid #000;
             text-align: center;
         }
 
-        .date-label_Am {
+        .date-label_Nova {
             background: white;
             padding: 4px 8px;
             font-size: 10px;
@@ -73,7 +73,7 @@
             min-width: 54px;
         }
 
-        .date-value_Am {
+        .date-value_Nova {
             background: white;
             padding: 4px 8px;
             font-size: 10px;
@@ -83,20 +83,20 @@
             justify-content: center;
         }
 
-        .title_Am {
+        .title_Nova {
             text-align: center;
             font-size: 12px;
             font-weight: 700;
         }
 
-        .subtitle_Am {
+        .subtitle_Nova {
             text-align: center;
             font-size: 12px;
             font-weight: 700;
         }
 
         /* Section Headers */
-        .section-header_Am {
+        .section-header_Nova {
             background: RGBA(56, 96, 178, 1);
             color: white;
             font-size: 10px;
@@ -106,7 +106,7 @@
             padding: 2px 2px;
         }
 
-        .subsection-header_Am {
+        .subsection-header_Nova {
             background: #A6A6A6;
             color: white;
             padding: 6px 15px;
@@ -116,14 +116,14 @@
             border: 1px solid #000;
         }
 
-        .form-field_Am {
+        .form-field_Nova {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             display: flex;
             flex-direction: column;
         }
 
-        .form-label_Am {
+        .form-label_Nova {
             background: white;
             font-size: 9px;
             font-weight: 700;
@@ -136,7 +136,7 @@
 
         }
 
-        .form-value_Am {
+        .form-value_Nova {
             background: white;
             padding: 8px;
             font-size: 9px;
@@ -148,7 +148,7 @@
         }
 
         /* Office info section */
-        .office-section_Am {
+        .office-section_Nova {
 
             margin: 2px;
             margin-bottom: 0px;
@@ -159,7 +159,7 @@
         }
 
         /* Client info section */
-        .client-grid_Am {
+        .client-grid_Nova {
             margin: 0px 2px 2px 2px;
             margin-bottom: 0px;
             display: grid;
@@ -169,7 +169,7 @@
         }
 
         /* Activity section */
-        .activity-grid_Am {
+        .activity-grid_Nova {
             margin: 0px 2px 2px 2px;
             display: grid;
             grid-template-columns: 140px 130px 1fr 160px 100px;
@@ -178,22 +178,22 @@
         }
 
         /* Obligations and Conditions Container */
-        .obligations-conditions-container_Am {
+        .obligations-conditions-container_Nova {
             display: grid;
-            grid-template-columns: 350px 1fr;
+            grid-template-columns: 200px 400px;
             gap: 0;
             margin-right: 45px;
             margin: 0px 2px 2px 2px;
         }
 
 
-        .table-row_Am {
+        .table-row_Nova {
             display: grid;
-            grid-template-columns: 1fr 50px 50px;
+            grid-template-columns: 1fr 1fr 50px;
             border-left: 1px solid #000;
         }
 
-        .table-cell_Am {
+        .table-cell_Nova {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
 
@@ -204,7 +204,7 @@
             justify-content: center;
         }
 
-        .table-header_Am {
+        .table-header_Nova {
             background: white;
             font-weight: 700;
             min-height: 27px;
@@ -212,14 +212,52 @@
         }
 
         /* Conditions section */
-        .conditions-section_Am {
+        .conditions-section_Nova {
             display: flex;
             flex-direction: column;
             margin-left: 40px;
         }
 
+        .conditions-grid_Nova {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            border-left: 1px solid #000;
+            border-top: 1px solid #000;
+        }
+
+        .condition-field_Nova {
+            border-right: 1px solid #000;
+            border-bottom: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .condition-label_Nova {
+            background: white;
+            font-size: 7px;
+            font-weight: 700;
+            text-align: center;
+            border-bottom: 1px solid #000;
+            min-height: 27px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        .condition-value_Nova {
+            background: white;
+            padding: 6px;
+            font-size: 8px;
+            text-align: center;
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         /* Terms and conditions */
-        .terms-text_Am {
+        .terms-text_Nova {
             border: 1px solid #000;
             padding: 8px;
             font-size: 6.5px;
@@ -229,24 +267,24 @@
             margin: 0px 2px 0px 2px;
         }
 
-        .terms-text_Am p {
+        .terms-text_Nova p {
             margin-bottom: 1px;
         }
 
         /* Questions section */
-        .questions-grid_Am {
+        .questions-grid_Nova {
 
             margin: 0px 2px 0px 2px;
         }
 
-        .question-row_Am {
+        .question-row_Nova {
             display: grid;
             grid-template-columns: 1fr 26px;
             border-left: 1px solid #000;
 
         }
 
-        .question-text_Am {
+        .question-text_Nova {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             padding: 8px;
@@ -254,7 +292,7 @@
             background: white;
         }
 
-        .question-answer_Am {
+        .question-answer_Nova {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             padding: 1px;
@@ -267,37 +305,37 @@
         }
 
         /* Signature section */
-        .signature-section_Am {
+        .signature-section_Nova {
             padding-bottom: 30px;
             margin: 30px 40px 0px 40px;
 
         }
 
-        .signature-line_Am {
+        .signature-line_Nova {
             width: 270px;
             height: 1px;
             background: #000;
             margin: 20px 0 5px 0;
         }
 
-        .signature-label_Am {
+        .signature-label_Nova {
             font-size: 10px;
             font-weight: 700;
             margin-bottom: 5px;
         }
 
-        .signature-info_Am {
+        .signature-info_Nova {
             font-size: 9px;
             font-weight: 700;
             margin-top: 5px;
         }
 
-        .fingerprint-box_Am {
+        .fingerprint-box_Nova {
             text-align: center;
 
         }
 
-        .fingerprint-line_Am {
+        .fingerprint-line_Nova {
             width: 70px;
             height: 70px;
             border: 1px solid #000;
@@ -311,13 +349,13 @@
             color: #555;
         }
 
-        .fingerprint-label_Am {
+        .fingerprint-label_Nova {
             font-size: 10px;
             font-weight: 700;
         }
 
         /* Observations */
-        .observations_Am {
+        .observations_Nova {
             margin: 0px 2px 2px 2px;
             display: flex;
             border: 1px solid #000;
@@ -327,7 +365,7 @@
 
         }
 
-        .observations-section_Am {
+        .observations-section_Nova {
             flex: 1;
             padding: 5px;
             font-size: 11px;
@@ -336,42 +374,42 @@
             align-items: center;
         }
 
-        .observations-label_Am {
+        .observations-label_Nova {
 
             font-size: 7px;
         }
 
-        .observaciones-answer_Am {
+        .observaciones-answer_Nova {
             flex: 1;
             padding: 2px;
             font-size: 8px;
         }
 
         /* Sección de Garantías (Derecha) */
-        .guarantees-section_Am {
+        .guarantees-section_Nova {
             width: 160px;
             /* Ajusta este ancho según necesites */
             display: flex;
             flex-direction: column;
         }
 
-        .guarantee-row_Am {
+        .guarantee-row_Nova {
             display: grid;
             grid-template-columns: 1fr 26px;
             height: 50%;
         }
 
-        .guarantee-row_Am.top {
+        .guarantee-row_Nova.top {
             border-bottom: 1px solid #000;
         }
 
-        .guarantee-text_Am {
+        .guarantee-text_Nova {
             padding: 2px;
             font-size: 8px;
             align-self: center;
         }
 
-        .guarantee-value_Am {
+        .guarantee-value_Nova {
             padding: 2px;
             font-size: 9px;
             text-align: center;
@@ -387,14 +425,14 @@
                 padding: 0;
             }
 
-            .container {
+            .container_Nova {
                 box-shadow: none;
                 max-width: 100%;
             }
         }
 
         /* ====================== ESTILOS DEL MODAL ====================== */
-        #modalAmpliacion {
+        #modalNovacion {
             border: none;
             border-radius: 8px;
             padding: 0;
@@ -411,13 +449,13 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
         }
 
-        #modalAmpliacion::backdrop {
+        #modalNovacion::backdrop {
             background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(4px);
         }
 
         /* Contenedor interno del PDF */
-        #contenedorAmpliacionPDF {
+        #contenedorNovacionPDF {
             margin: 0 !important;
             padding: 20px 0 20px 0 !important;
             /* un poco de aire arriba y abajo */
@@ -429,309 +467,322 @@
     </style>
 </head>
 
-<body class="layout-especial_Am">
-    <!-- 
+<body class="layout-especial_Nova">
+    <!--
     <button onclick="descargarPDF()" style="position: absolute; top: 15px; right: 15px; z-index: 100; 
                padding: 8px 16px; background: #2e7d32; color: white; 
                border: none; border-radius: 4px; cursor: pointer;">
         📥 Descargar PDF
     </button>
     <button id="btnAbrir">Abrir Modal</button>
--->
-    <dialog id="modalampliacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
-        <div id="contenedorampliacionPDF" class="container_Am" style="margin: 0; box-shadow: none;">
-
+    -->
+    <dialog id="modalnovacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
+        <div id="contenedornovacionPDF" class="container_Nova" style="margin: 0; box-shadow: none;">
             <!-- Header -->
-            <div class="header_Am">
-                <div class="header-top_Am">
-                    <div class="logo-section_Am">
+            <div class="header_Nova">
+                <div class="header-top_Nova">
+                    <div class="logo-section_Nova">
                         <img src="https://i.postimg.cc/rp9ttPt3/Logo-BDB-removebg-preview.png" alt="Banco de Bogotá"
-                            class="logo-img_Am">
-                        <div class="bank-name_Am">BANCO DE BOGOTÁ</div>
+                            class="logo-img_Nova">
+                        <div class="bank-name_Nova">BANCO DE BOGOTÁ</div>
                     </div>
-                    <div class="date-section_Am">
-                        <div class="date-box_Am">
-                            <div class="date-label_Am">DIA</div>
-                            <div class="date-value_Am" id="day_ampliacion"></div>
+                    <div class="date-section_Nova">
+                        <div class="date-box_Nova">
+                            <div class="date-label_Nova">DIA</div>
+                            <div class="date-value_Nova" id="day_novacion"></div>
                         </div>
-                        <div class="date-box_Am">
-                            <div class="date-label_Am">MES</div>
-                            <div class="date-value_Am" id="month_ampliacion"></div>
+                        <div class="date-box_Nova">
+                            <div class="date-label_Nova">MES</div>
+                            <div class="date-value_Nova" id="month_novacion"></div>
                         </div>
-                        <div class="date-box_Am">
-                            <div class="date-label_Am">AÑO</div>
-                            <div class="date-value_Am" id="year_ampliacion"></div>
+                        <div class="date-box_Nova">
+                            <div class="date-label_Nova">AÑO</div>
+                            <div class="date-value_Nova" id="year_novacion"></div>
                         </div>
                     </div>
                 </div>
-                <div class="title_Am">Solicitud de Normalizacion - Formato Único</div>
+                <div class="title_Nova">Solicitud de Normalizacion - Formato Único</div>
             </div>
 
-            <div class="subtitle_Am">MECANISMO DE NORMALIZACION: AMPLIACION DE PLAZO</div>
+            <div class="subtitle_Nova">MECANISMO DE NORMALIZACION: NOVACIÓN</div>
 
             <!-- Office Information -->
-            <div class="office-section_Am">
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Cód Ofc.</div>
-                    <div class="form-value_Am" id="codOficina_ampliacion"><!-- DYNAMIC: Código Oficina --></div>
+            <div class="office-section_Nova">
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Cód Ofc.</div>
+                    <div class="form-value_Nova" id="codOficina_novacion"><!-- DYNAMIC: Código Oficina --></div>
                 </div>
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Oficina en que se realiza<br> la negociación</div>
-                    <div class="form-value_Am" id="nombreOficina_ampliacion"><!-- DYNAMIC: Nombre Oficina --></div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Oficina en que se realiza<br> la negociación</div>
+                    <div class="form-value_Nova" id="nombreOficina_novacion"><!-- DYNAMIC: Nombre Oficina --></div>
                 </div>
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Cuenta del pago / SNR</div>
-                    <div class="form-value_Am" id="cuentaPago_ampliacion"><!-- DYNAMIC: Cuenta Pago --></div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Cuenta del pago / SNR</div>
+                    <div class="form-value_Nova" id="cuentaPago_novacion"><!-- DYNAMIC: Cuenta Pago --></div>
                 </div>
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Funcionario de quien efectúa la negociación:</div>
-                    <div class="form-value_Am" id="funcionario_ampliacion"><!-- DYNAMIC: Nombre Funcionario --></div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Funcionario de quien efectúa la negociación:</div>
+                    <div class="form-value_Nova" id="funcionario_novacion"><!-- DYNAMIC: Nombre Funcionario --></div>
                 </div>
             </div>
 
             <!-- Client Information Section -->
-            <div class="section-header_Am">INFORMACION CLIENTE</div>
+            <div class="section-header_Nova">INFORMACION CLIENTE</div>
 
-            <div class="client-grid_Am">
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Nombre Cliente</div>
-                    <div class="form-value_Am" id="nombreCliente_ampliacion"><!-- DYNAMIC: Nombre Cliente --></div>
+            <div class="client-grid_Nova">
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Nombre Cliente</div>
+                    <div class="form-value_Nova" id="nombreCliente_novacion"><!-- DYNAMIC: Nombre Cliente --></div>
                 </div>
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Tipo Doc</div>
-                    <div class="form-value_Am" id="tipoDoc_ampliacion"><!-- DYNAMIC: Tipo Documento --></div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Tipo Doc</div>
+                    <div class="form-value_Nova" id="tipoDoc_novacion"><!-- DYNAMIC: Tipo Documento --></div>
                 </div>
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Num. Documento</div>
-                    <div class="form-value_Am" id="numDoc_ampliacion"><!-- DYNAMIC: Número Documento --></div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Num. Documento</div>
+                    <div class="form-value_Nova" id="numDoc_novacion"><!-- DYNAMIC: Número Documento --></div>
                 </div>
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Lugar de Expedicion</div>
-                    <div class="form-value_Am" id="lugarExp_ampliacion"><!-- DYNAMIC: Lugar Expedición --></div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Lugar de Expedicion</div>
+                    <div class="form-value_Nova" id="lugarExp_novacion"><!-- DYNAMIC: Lugar Expedición --></div>
                 </div>
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Fecha De Expedicion</div>
-                    <div class="form-value_Am" id="fechaExp_ampliacion"><!-- DYNAMIC: Fecha Expedición --></div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Fecha De Expedicion</div>
+                    <div class="form-value_Nova" id="fechaExp_novacion"><!-- DYNAMIC: Fecha Expedición --></div>
                 </div>
             </div>
 
             <!-- Activity and Income Information -->
-            <div class="activity-grid_Am">
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Dias Mora</div>
-                    <div class="form-value_Am" id="diasMora_ampliacion"><!-- DYNAMIC: Días Mora --></div>
+            <div class="activity-grid_Nova">
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Dias Mora</div>
+                    <div class="form-value_Nova" id="diasMora_novacion"><!-- DYNAMIC: Días Mora --></div>
                 </div>
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Descripcion Actividad</div>
-                    <div class="form-value_Am" id="descripcionActividad_ampliacion">
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Descripcion Actividad</div>
+                    <div class="form-value_Nova" id="descripcionActividad_novacion">
                         <!-- DYNAMIC: Descripción Actividad -->
                     </div>
                 </div>
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Ingreso Mensual</div>
-                    <div class="form-value_Am" id="ingresoMensual_ampliacion"><!-- DYNAMIC: Ingreso Mensual --></div>
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Ingreso Mensual</div>
+                    <div class="form-value_Nova" id="ingresoMensual_novacion"><!-- DYNAMIC: Ingreso Mensual --></div>
                 </div>
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Ocupación Ingresos Adicional</div>
-                    <div class="form-value_Am" id="ocupacionAdicional_ampliacion"><!-- DYNAMIC: Ocupación Adicional -->
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Ocupación Ingresos Adicional</div>
+                    <div class="form-value_Nova" id="ocupacionAdicional_novacion"><!-- DYNAMIC: Ocupación Adicional -->
                     </div>
                 </div>
-                <div class="form-field_Am">
-                    <div class="form-label_Am">Ingresos Adicionales</div>
-                    <div class="form-value_Am" id="ingresosAdicionales_ampliacion">
+                <div class="form-field_Nova">
+                    <div class="form-label_Nova">Ingresos Adicionales</div>
+                    <div class="form-value_Nova" id="ingresosAdicionales_novacion">
                         <!-- DYNAMIC: Ingresos Adicionales -->
                     </div>
                 </div>
             </div>
 
-            <div class="section-header_Am">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
+            <!-- Obligations Section -->
+            <div class="section-header_Nova">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
 
-            <div class="obligations-conditions-container_Am">
-                <div class="obligations-table_Am">
-                    <div class="subsection-header_Am">Datos Obligaciones</div>
-                    <div class="table-row_Am" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
-                        <div class="table-cell_Am table-header_Am">Nro. Obligación (4 ultimos)</div>
-                        <div class="table-cell_Am table-header_Am">Saldo total</div>
-                        <div class="table-cell_Am table-header_Am">Int Corrientes</div>
-                        <div class="table-cell_Am table-header_Am">int mora</div>
+            <!-- Obligations and Conditions Side by Side -->
+            <div class="obligations-conditions-container_Nova">
+                <!-- Left side: Obligations -->
+                <div class="obligations-table_Nova">
+                    <div class="subsection-header_Nova">Datos Obligación</div>
+
+                    <div class="table-row_Nova">
+                        <div class="table-cell_Nova table-header_Nova">Nro. Obligación (4 ultimos)</div>
+                        <div class="table-cell_Nova table-header_Nova">Saldo total</div>
+                        <div class="table-cell_Nova table-header_Nova">Pago Minimo</div>
+
                     </div>
-                    <div class="table-row_Am" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
-                        <div class="table-cell_Am" id="numObligacion_ampliacion"></div>
-                        <div class="table-cell_Am" id="saldoTotal_ampliacion"></div>
-                        <div class="table-cell_Am" id="intCorrientes_ampliacion"></div>
-                        <div class="table-cell_Am" id="intMora_ampliacion"></div>
+
+                    <div class="table-row_Nova">
+                        <div class="table-cell_Nova" id="numObligacion_novacion"><!-- DYNAMIC: Número Obligación -->
+                        </div>
+                        <div class="table-cell_Nova" id="saldoTotal_novacion"><!-- DYNAMIC: Saldo Total --></div>
+                        <div class="table-cell_Nova" id="pagoMinimo_novacion"><!-- DYNAMIC: Pago Mínimo --></div>
+
                     </div>
+
                 </div>
 
-                <div class="conditions-section_Am">
-                    <div class="subsection-header_Am">Condiciones negociación</div>
-                    <div class="terms-text_Am" style="margin: 0; font-size: 9px; line-height: 1.6; border-top: none;">
-                        <div style="text-align: center; font-weight:bold ;">
-                            Beneficio Int Corrientes: <span style="font-weight:lighter"
-                                id="BeneficioIntCorr_ampliacion"></span><br>
-                            % Beneficio Int Corrientes: <span style="font-weight:lighter"
-                                id="porcentajeBenIntCorr_ampliacion"></span><br>
-                            Beneficio Int Mora: <span style="font-weight:lighter"
-                                id="BeneficioIntMora_ampliacion"></span><br>
-                            % Beneficio Int Mora: <span style="font-weight:lighter"
-                                id="porcentajeBenIntMora_ampliacion"></span><br>
-                            Total Beneficio: <span style="font-weight:lighter"
-                                id="totalBeneficio_ampliacion"></span><br>
-                            Pago a Realizar: <span style="font-weight:lighter" id="pagoRealizar_ampliacion"></span><br>
-                            Fecha del Pago: <span style="font-weight:lighter" id="fechaPago_ampliacion"></span><br>
-                            Plazo: <span style="font-weight:lighter" id="plazo_ampliacion"></span><br>
-                            tasa de interes: <span style="font-weight:lighter" id="tasaInteres_ampliacion"></span><br>
-                            Cuota Proyectada: <span style="font-weight:lighter" id="cuotaProyectada_ampliacion"></span>
+                <!-- Right side: Conditions -->
+                <div class="conditions-section_Nova">
+                    <div class="subsection-header_Nova">Condiciones negociación</div>
+
+                    <div class="conditions-grid_Nova">
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Cuota Proyectada</div>
+                            <div class="condition-value_Nova" id="cuotaProyectada_novacion">
+                                <!-- DYNAMIC: Cuota Proyectada -->
+                            </div>
+                        </div>
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Pago Para la Negociacion</div>
+                            <div class="condition-value_Nova" id="pagoNegociacion_novacion">
+                                <!-- DYNAMIC: Pago Negociación -->
+                            </div>
+                        </div>
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Plazo</div>
+                            <div class="condition-value_Nova" id="plazo_novacion"><!-- DYNAMIC: Plazo --></div>
+                        </div>
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Fecha Pago</div>
+                            <div class="condition-value_Nova" id="fechaPago_novacion"><!-- DYNAMIC: Fecha Pago --></div>
+                        </div>
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Saldo a Diferir</div>
+                            <div class="condition-value_Nova" id="saldoDiferir_novacion">
+                                <!-- DYNAMIC: Saldo a Diferir -->
+                            </div>
+                        </div>
+                        <div class="condition-field_Nova">
+                            <div class="condition-label_Nova">Tasa (MV)</div>
+                            <div class="condition-value_Nova" id="tasaMV_novacion"><!-- DYNAMIC: Tasa MV --></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Terms and Conditions -->
-            <div class="section-header_Am">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
-
-            <div class="terms-text_Am" id="terminosCondiciones_ampliacion">
+            <div class="section-header_Nova">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
+            <div class="terms-text_Nova" id="terminosCondiciones_novacion">
                 <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
                     esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
                     quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre
-                    el
-                    resultado de mi solicitud.</p>
+                    el resultado de mi solicitud.</p>
 
                 <p>Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones,
-                    comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha
-                    establecida,
-                    sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
-                    sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en
-                    la
-                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Beneficios
-                    ofrecidos
-                    anteriormente.</p>
+                    comprometiéndome a cancelar el valor requerido para el trámite de gestión de
+                    recuperación en la fecha
+                    establecida, sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los
+                    valores
+                    consignados sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden
+                    previsto en la ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva la
+                    baja en cuenta de cartera ofrecida anteriormente.
+                </p>
 
                 <p>Acepto que existe la posibilidad que la amortización de las primeras cuotas pueda no incluir abono a
                     capital (ejemplo: ajuste del plan de amortización al valor de la cuota propuesta por mí).</p>
 
                 <p>En caso de existir inconsistencias en el diligenciamiento del formato, el Banco le informará y si
-                    usted
-                    no las subsana en el término de tres (3) días, la presente solicitud podrá ser cancelada y se
-                    continuará
-                    con el proceso de cobro en la instancia correspondiente.</p>
+                    usted no las subsana en el término de tres (3) días, la presente solicitud podrá ser cancelada y se
+                    continuará con el proceso de cobro en la instancia correspondiente.</p>
 
                 <p>Acepto que:</p>
                 <p>a. Esta solicitud puede implicar el bloqueo de mis productos con cupo en el tiempo que establezcan
-                    las
-                    políticas vigentes.</p>
+                    las políticas vigentes.</p>
                 <p>b. La operación solicitada puede generar marcación ante las Centrales de Riesgo por lo que autorizo
-                    al
-                    Banco a actualizar el reporte respectivo.</p>
-                <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la negociación
-                    podrá ser tramitada el mes siguiente.</p>
-                <p>d. Hasta cuando no se haya perfeccionado la negociación en trámite, se mantienen vigentes las
-                    condiciones
-                    actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos y en las
-                    fechas
-                    acordadas.</p>
+                    al Banco a actualizar el reporte respectivo.</p>
+                <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la
+                    gestión de recuperación podrá ser tramitada el mes siguiente.
+                </p>
+                <p>d. Hasta cuando no se haya perfeccionado la gestión de recuperación en trámite, se
+                    mantienen vigentes las
+                    condiciones actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos
+                    y en las
+                    fechas acordadas.</p>
                 <br>
                 <p>Manifiesto que he recibido la información adecuada sobre las implicaciones en términos de costos,
-                    nueva
-                    forma de pago y calificación crediticia, así como un comparativo entre las condiciones actuales y
-                    las
-                    del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la
-                    Circular
-                    Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
+                    nueva forma de pago y calificación crediticia, así como un comparativo entre las condiciones
+                    actuales y
+                    las del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la
+                    Circular Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017
+                    Superintendencia
                     Financiera de Colombia.</p>
 
-                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los Beneficios
-                    otorgados,
-                    pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
+                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderá la baja en cuenta
+                    de cartera
+                    otorgada, pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los
+                    títulos y
                     realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
                     Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
-                    Financiera
-                    de Colombia. Si la (s) obligación (es) castigada (s) durante el trámite solicitado, el Banco hara el
+                    Financiera de Colombia. Si la (s) obligación (es) castigada (s) durante el trámite solicitado, el
+                    Banco hará el
                     respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
                     destrucción de los documentos aportados.</p><br>
 
-                <p>Yo <strong><span id="nombreClienteTerd_ampliacion"></span></strong> identificado
-                    con No. <strong><span id="numDocTerd_ampliacion"></span></strong> manifiesto
-                    que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente
-                    acuerdo,
-                    son de origen lícito y corresponde a
+                <p>Yo <strong><span id="nombreClienteTerd_novacion"></span></strong>
+                    identificado con No. <strong><span id="numDocTerd_novacion"></span></strong>
+                    manifiesto que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del
+                    presente
+                    acuerdo, son de origen lícito y corresponde a
                     <span>________________________________________________________________________</span>
-                    Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la negociación
-                    el
-                    Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me será
-                    reintegrado y la negociación se tramitará con los nuevos saldos vigentes a la fecha de aplicación de
-                    la
-                    misma.
+                </p>
+
+                <p>Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la
+                    gestión de recuperación
+                    el Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me
+                    será
+                    reintegrado y la gestión de recuperación se tramitará con los nuevos saldos
+                    vigentes a la fecha de aplicación de
+                    la misma.
                 </p><br>
 
                 <p>Para saber más sobre tiempo de permanencia y reporte negativo en las Centrales de Información:
-                    ingresa a
-                    la pagina del Banco de Bogotá www.bancodebogota.com, en la siguiente ruta: Inicio / Nuestra
-                    Organización
-                    / Transparencia / Ley Habeas Data.</p><br>
-
-                <p>Declaro que conozco y acepto los términos y condiciones de esta negociación, los cuales pueden ser
-                    consultados a través de
-                    https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
-                    condiciones - políticas de cobro</p>
+                    ingresa a la página del Banco de Bogotá www.bancodebogota.com, en la siguiente ruta: Inicio /
+                    Nuestra
+                    Organización / Transparencia / Ley Habeas Data.</p>
             </div>
-
             <!-- Questions Section -->
-            <div class="questions-grid_Am">
-                <div class="question-row_Am">
-                    <div class="question-text_Am">He permanecido más de 183 días en el último año, o 183 días durante
+            <div class="questions-grid_Nova">
+                <div class="question-row_Nova">
+                    <div class="question-text_Nova">He permanecido más de 183 días en el último año, o 183 días durante
                         los
                         últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia
                     </div>
-                    <div class="question-answer_Am" id="pregunta1_display_ampliacion"><!-- DYNAMIC: Respuesta 1 -->
+                    <div class="question-answer_Nova" id="pregunta1_display_novacion"><!-- DYNAMIC: Respuesta 1 -->
                     </div>
                 </div>
-                <div class="question-row_Am">
-                    <div class="question-text_Am">Soy poseedor de un documento de identificación expedido en un pais
+                <div class="question-row_Nova">
+                    <div class="question-text_Nova">Soy poseedor de un documento de identificación expedido en un pais
                         diferente
                         a Colombia</div>
-                    <div class="question-answer_Am" id="pregunta2_display_ampliacion"><!-- DYNAMIC: Respuesta 2 -->
+                    <div class="question-answer_Nova" id="pregunta2_display_novacion"><!-- DYNAMIC: Respuesta 2 -->
                     </div>
                 </div>
-                <div class="question-row_Am">
-                    <div class="question-text_Am">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
+                <div class="question-row_Nova">
+                    <div class="question-text_Nova">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
                         honorario,
                         primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
                         ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
-                    <div class="question-answer_Am" id="pregunta3_display_ampliacion"><!-- DYNAMIC: Respuesta 3 -->
+                    <div class="question-answer_Nova" id="pregunta3_display_novacion"><!-- DYNAMIC: Respuesta 3 -->
                     </div>
                 </div>
-                <div class="question-row_Am">
-                    <div class="question-text_Am">Recibo cualquier ingreso bruto procedente de la venta u otra
-                        disposición de
+                <div class="question-row_Nova">
+                    <div class="question-text_Nova">Recibo cualquier ingreso bruto procedente de la venta u otra
+                        disposición
+                        de
                         cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera
                         del
                         territorio Colombiano.</div>
-                    <div class="question-answer_Am" id="pregunta4_display_ampliacion"><!-- DYNAMIC: Respuesta 4 -->
+                    <div class="question-answer_Nova" id="pregunta4_display_novacion"><!-- DYNAMIC: Respuesta 4 -->
                     </div>
                 </div>
             </div>
 
             <!-- Observations  garantias-->
-            <div class="observations_Am">
+            <div class="observations_Nova">
 
-                <div class="observations-section_Am">
-                    <span class="observations-label_Am">Observaciones:</span>
-                    <div class="observaciones-answer_Am" id="observaciones_ampliacion">
+                <div class="observations-section_Nova">
+                    <span class="observations-label_Nova">Observaciones:</span>
+                    <div class="observaciones-answer_Nova" id="observaciones_novacion">
                     </div>
                 </div>
 
-                <div class="guarantees-section_Am">
+                <div class="guarantees-section_Nova">
 
-                    <div class="guarantee-row_Am top">
-                        <div class="guarantee-text_Am">Garantia FAG</div>
-                        <div class="guarantee-value_Am" id="garantiaFAG_display_ampliacion">
+                    <div class="guarantee-row_Nova top">
+                        <div class="guarantee-text_Nova">Garantia FAG</div>
+                        <div class="guarantee-value_Nova" id="garantiaFAG_display_novacion">
                         </div>
                     </div>
 
-                    <div class="guarantee-row_Am">
-                        <div class="guarantee-text_Am">Garantia FNG</div>
-                        <div class="guarantee-value_Am" id="garantiaFNG_display_ampliacion">
+                    <div class="guarantee-row_Nova">
+                        <div class="guarantee-text_Nova">Garantia FNG</div>
+                        <div class="guarantee-value_Nova" id="garantiaFNG_display_novacion">
                         </div>
                     </div>
 
@@ -740,23 +791,22 @@
 
 
             <!-- Signature Section -->
-            <div class="signature-section_Am">
+            <div class="signature-section_Nova">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                     <div>
 
-                        <div class="signature-line_Am"></div>
-                        <div class="signature-label_Am">Firma Cliente o Representante legal</div>
-                        <div class="signature-info_Am">CC/NIT Número:</div>
+                        <div class="signature-line_Nova"></div>
+                        <div class="signature-label_Nova">Firma Cliente o Representante legal</div>
+                        <div class="signature-info_Nova">CC/NIT Número:</div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </dialog>
 </body>
 
 </html>
+
 
 
 
