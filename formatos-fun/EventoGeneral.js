@@ -29,7 +29,6 @@ function DataEventoGeneral() {
 
 }
 
-
 function funDataGenerica(mecanismo) {
     // Evento de la fecha
     function setCurrentDate() {
@@ -351,7 +350,6 @@ $(document).on('click', '#btnEvnFun', function () {
     }
 });
 
-
 $(document).on('click', '#btnconfirmar', function () {
     console.log("Btn fun pulsado");
     try {
@@ -379,7 +377,6 @@ $(document).on('click', '#btnconfirmar', function () {
         console.error("Error al enviar los datos:", error);
     }
 });
-
 
 function sendDataFunPDF(mecanismo) {
 
