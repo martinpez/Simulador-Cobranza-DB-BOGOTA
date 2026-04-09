@@ -1,7 +1,7 @@
-// Envolvemos todo en DOMContentLoaded para esperar a que el HTML cargue
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    const modal = document.getElementById('modalampliacion');
+    const modal = document.getElementById('modalnovacion');
     const btnAbrir = document.getElementById('btnAbrir');
 
     // VERIFICACIÓN DE SEGURIDAD: Solo añade eventos si los elementos existen
@@ -9,7 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Abrir el modal
         btnAbrir.addEventListener('click', () => {
+
             modal.showModal();
+
+
         });
 
         // 2. TRUCO: Cerrar al hacer clic fuera (en el backdrop)
@@ -31,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function descargarPDF() {
-    const element = document.getElementById('contenedorampliacionPDF');
+    const element = document.getElementById('contenedornovacionPDF');
 
     const options = {
         margin: [2, 2, 2, 2],                    // márgenes pequeños pero limpios
@@ -46,7 +49,7 @@ function descargarPDF() {
         },
         jsPDF: {
             unit: 'mm',
-            format: 'a4',           // ← Cambio clave (A4 es más alto)
+            format: 'letter',           // ← Cambio clave (A4 es más alto)
             orientation: 'portrait'
         }
     };
@@ -57,3 +60,4 @@ function descargarPDF() {
         .save()
         .catch(err => console.error("Error al generar PDF:", err));
 }
+

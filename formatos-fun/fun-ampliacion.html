@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="../codigoUtil.js"></script>
 
     <style>
         .layout-especial_Am * {
@@ -318,7 +319,7 @@
 
         /* Observations */
         .observations_Am {
-            margin: 0px 2px 2px 2px;
+            margin: 0px 2px 0px 2px;
             display: flex;
             border: 1px solid #000;
             border-top: none;
@@ -379,6 +380,11 @@
 
             align-self: center;
         }
+        .declara_cliente_Am{
+            margin: 0px 2px 2px 2px; 
+            grid-template-columns: 1fr 26px; 
+            border-left: 1px solid #000;
+        }
 
         /* Print styles */
         @media print {
@@ -430,14 +436,14 @@
 </head>
 
 <body class="layout-especial_Am">
-    <!-- 
+    
     <button onclick="descargarPDF()" style="position: absolute; top: 15px; right: 15px; z-index: 100; 
                padding: 8px 16px; background: #2e7d32; color: white; 
                border: none; border-radius: 4px; cursor: pointer;">
         📥 Descargar PDF
     </button>
     <button id="btnAbrir">Abrir Modal</button>
--->
+
     <dialog id="modalampliacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
         <div id="contenedorampliacionPDF" class="container_Am" style="margin: 0; box-shadow: none;">
 
@@ -736,6 +742,16 @@
                     </div>
 
                 </div>
+            </div>
+
+            <div class="declara_cliente_Am">
+                <div class="question-text_Am">
+                    Me (nos)  obligamos a firmar Otro SI o un nuevo Pagare que recoja las nuevas condiciones de pago convenidas.<br>
+                    Declaro que he leido y acepto las condiciones de la presente solicitud 
+                    consultados a través de
+                    https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
+                    condiciones - políticas de cobro</div>
+
             </div>
 
 

@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
         .layout-especial_Nova * {
             margin: 0;
@@ -129,7 +130,7 @@
             font-weight: 700;
             text-align: center;
             border-bottom: 1px solid #000;
-            min-height: 30px;
+            min-height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -138,7 +139,7 @@
 
         .form-value_Nova {
             background: white;
-            padding: 8px;
+            padding: 2px;
             font-size: 9px;
             text-align: center;
             min-height: 20px;
@@ -163,7 +164,7 @@
             margin: 0px 2px 2px 2px;
             margin-bottom: 0px;
             display: grid;
-            grid-template-columns: 1fr 30px 130px 1fr 130px;
+            grid-template-columns: 1fr 45px 130px 1fr 130px;
             border-left: 1px solid #000;
             border-top: 1px solid #000;
         }
@@ -207,7 +208,7 @@
         .table-header_Nova {
             background: white;
             font-weight: 700;
-            min-height: 27px;
+            min-height: 2px;
             border-top: 1px solid #000;
         }
 
@@ -238,19 +239,18 @@
             font-weight: 700;
             text-align: center;
             border-bottom: 1px solid #000;
-            min-height: 27px;
+            min-height: 2px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4px;
+            padding: 2px;
         }
 
         .condition-value_Nova {
             background: white;
             padding: 6px;
-            font-size: 8px;
+            font-size: 2x;
             text-align: center;
-            min-height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -259,9 +259,10 @@
         /* Terms and conditions */
         .terms-text_Nova {
             border: 1px solid #000;
-            padding: 8px;
-            font-size: 6.5px;
-            line-height: 1.4;
+            padding: 2px;
+            font-weight: 500;
+            font-size: 9px;
+            line-height: 1.2;
             text-align: justify;
             background: white;
             margin: 0px 2px 0px 2px;
@@ -287,8 +288,8 @@
         .question-text_Nova {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
-            padding: 8px;
-            font-size: 6.5px;
+            padding: 2px;
+            font-size: 9px;
             background: white;
         }
 
@@ -306,9 +307,8 @@
 
         /* Signature section */
         .signature-section_Nova {
-            padding-bottom: 30px;
-            margin: 30px 40px 0px 40px;
-
+            padding-bottom: 20px;
+            margin: 15px 0px 0px 40px
         }
 
         .signature-line_Nova {
@@ -356,13 +356,19 @@
 
         /* Observations */
         .observations_Nova {
-            margin: 0px 2px 2px 2px;
+            margin: 0px 2px 0px 2px;
             display: flex;
             border: 1px solid #000;
             border-top: none;
             min-height: 50px;
             align-items: stretch;
 
+        }
+
+        .declara_cliente_Nova {
+            margin: 0px 2px 2px 2px;
+            grid-template-columns: 1fr 26px;
+            border-left: 1px solid #000;
         }
 
         .observations-section_Nova {
@@ -376,7 +382,7 @@
 
         .observations-label_Nova {
 
-            font-size: 7px;
+            font-size: 8.5px;
         }
 
         .observaciones-answer_Nova {
@@ -468,7 +474,7 @@
 </head>
 
 <body class="layout-especial_Nova">
-    <!--
+    <!-- 
     <button onclick="descargarPDF()" style="position: absolute; top: 15px; right: 15px; z-index: 100; 
                padding: 8px 16px; background: #2e7d32; color: white; 
                border: none; border-radius: 4px; cursor: pointer;">
@@ -478,6 +484,7 @@
     -->
     <dialog id="modalnovacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
         <div id="contenedornovacionPDF" class="container_Nova" style="margin: 0; box-shadow: none;">
+
             <!-- Header -->
             <div class="header_Nova">
                 <div class="header-top_Nova">
@@ -513,7 +520,7 @@
                     <div class="form-value_Nova" id="codOficina_novacion"><!-- DYNAMIC: Código Oficina --></div>
                 </div>
                 <div class="form-field_Nova">
-                    <div class="form-label_Nova">Oficina en que se realiza<br> la negociación</div>
+                    <div class="form-label_Nova">Oficina en que se realiza la negociación</div>
                     <div class="form-value_Nova" id="nombreOficina_novacion"><!-- DYNAMIC: Nombre Oficina --></div>
                 </div>
                 <div class="form-field_Nova">
@@ -787,7 +794,19 @@
                     </div>
 
                 </div>
+
             </div>
+
+            <div class="declara_cliente_Nova">
+                <div class="question-text_Nova">Declaro que conozco y acepto los términos y condiciones de esta
+                    negociación, los cuales pueden ser
+                    consultados a través de
+                    https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
+                    condiciones - políticas de cobro</div>
+
+            </div>
+
+
 
 
             <!-- Signature Section -->
@@ -800,156 +819,10 @@
                         <div class="signature-info_Nova">CC/NIT Número:</div>
                     </div>
                 </div>
+
             </div>
         </div>
     </dialog>
 </body>
 
 </html>
-<!--
-    <script>
-
-
-        // Función para establecer la fecha actual
-        function setCurrentDate() {
-            const today = new Date();
-            document.getElementById('day').textContent = today.getDate();
-            document.getElementById('month').textContent = today.getMonth() + 1;
-            document.getElementById('year').textContent = today.getFullYear();
-        }
-
-
-        try {
-            setTimeout(() => {
-                data = data();
-            }, 500);
-
-        } catch (error) {
-            console.error('Error al obtener los datos del formulario:', error);
-        }
-        function data() {
-
-
-            return {
-                codOficina: '001',
-                nombreOficina: 'Oficina Principal',
-                cuentaPago: '1234567890',
-                funcionario: 'Martin Elias Perez',
-                nombreCliente: 'Carlos Gómez',
-                tipoDoc: 'CC',
-                numDoc: '987654321',
-                lugarExp: 'Bogotá - Bogotá D.C.',
-                fechaExp: '01/01/2010',
-                diasMora: '30 dias',
-                descripcionActividad: 'Comerciante',
-                ingresoMensual: ' 5000000',
-                ocupacionAdicional: 'Freelance',
-                ingresosAdicionales: ' 2000000',
-
-
-                numObligacion: '5678',
-                saldoTotal: '15000000',
-                pagoMinimo: '500000',
-                fechaPago: '15/10/2024',
-                pagoNegociacion: '500000',
-                plazo: '24 meses',
-                tasaMV: '1.5%',
-                saldoDiferir: '10000000',
-                tasaInteres: '1.5% mensual',
-                saldoDiferir: '10000000',
-                cuotaProyectada: '450000',
-                pregunta1: 'No',
-                pregunta2: 'No',
-                pregunta3: 'Sí',
-                pregunta4: 'No',
-                garantiaFAG: 'Sí',
-                garantiaFNG: 'No',
-                observaciones: 'Cliente con buen historial de pagos atrasados. Cliente con buen historial de pagos atrasados.Cliente con buen historial de pagos atrasados.Cliente cCliente con buen historial de pagos atrasados. Cliente con buen historial de pagos atrasados.Cliente con buen historial de pagos atrasados.Cliente con buen historial de pagos atrasados.',
-
-            };
-        }
-
-        // Función para cargar datos del formulario
-        function loadFormData(data) {
-            // Información de oficina
-            if (data.codOficina) document.getElementById('codOficina').textContent = data.codOficina || '';
-            if (data.nombreOficina) document.getElementById('nombreOficina').textContent = data.nombreOficina || '';
-            if (data.cuentaPago) document.getElementById('cuentaPago').textContent = data.cuentaPago || '';
-            if (data.funcionario) document.getElementById('funcionario').textContent = data.funcionario || '';
-
-            // Información del cliente
-            if (data.nombreCliente) {
-                document.getElementById('nombreCliente').textContent = data.nombreCliente || '';
-                document.getElementById('nombreClienteTerminos').textContent = data.nombreCliente || '';
-            }
-            if (data.tipoDoc) document.getElementById('tipoDoc').textContent = data.tipoDoc || '';
-            if (data.numDoc) {
-                document.getElementById('numDoc').textContent = data.numDoc || '';
-            }
-            if (data.lugarExp) document.getElementById('lugarExp').textContent = data.lugarExp || '';
-            if (data.fechaExp) document.getElementById('fechaExp').textContent = data.fechaExp || '';
-
-            // Actividad e ingresos
-            if (data.diasMora) document.getElementById('diasMora').textContent = data.diasMora || '';
-            if (data.descripcionActividad) document.getElementById('descripcionActividad').textContent = data.descripcionActividad || '';
-            if (data.ingresoMensual) document.getElementById('ingresoMensual').textContent = '$ ' + data.ingresoMensual || '';
-            if (data.ocupacionAdicional) document.getElementById('ocupacionAdicional').textContent = data.ocupacionAdicional || '';
-            if (data.ingresosAdicionales) document.getElementById('ingresosAdicionales').textContent = '$ ' + data.ingresosAdicionales || '';
-
-            // Obligaciones
-            if (data.numObligacion) document.getElementById('numObligacion').textContent = data.numObligacion || '';
-            if (data.saldoTotal) document.getElementById('saldoTotal').textContent = '$ ' + data.saldoTotal || '';
-            if (data.pagoMinimo) document.getElementById('pagoMinimo').textContent = '$ ' + data.pagoMinimo || '';
-
-
-            // Condiciones de negociación
-            if (data.plazo) document.getElementById('plazo').textContent = data.plazo || '';
-            if (data.saldoDiferir) document.getElementById('saldoDiferir').textContent = '$ ' + data.saldoDiferir || '';
-            if (data.cuotaProyectada) document.getElementById('cuotaProyectada').textContent = '$ ' + data.cuotaProyectada || '';
-            if (data.pagoNegociacion) document.getElementById('pagoNegociacion').textContent = '$ ' + data.pagoNegociacion || '';
-            if (data.fechaPago) document.getElementById('fechaPago').textContent = data.fechaPago || '';
-            if (data.tasaMV) document.getElementById('tasaMV').textContent = data.tasaMV || '';
-
-            // Preguntas
-            if (data.pregunta1) document.getElementById('pregunta1').textContent = data.pregunta1 || '';;
-            if (data.pregunta2) document.getElementById('pregunta2').textContent = data.pregunta2 || '';;
-            if (data.pregunta3) document.getElementById('pregunta3').textContent = data.pregunta3 || '';
-            if (data.pregunta4) document.getElementById('pregunta4').textContent = data.pregunta4 || '';
-
-            // Garantías
-            if (data.garantiaFAG) document.getElementById('garantiaFAG').textContent = data.garantiaFAG || '';
-            if (data.garantiaFNG) document.getElementById('garantiaFNG').textContent = data.garantiaFNG || '';
-
-            // Observaciones
-            if (data.observaciones) document.getElementById('observaciones').textContent = data.observaciones || '';
-
-        }
-
-        // Inicializar con fecha actual si se desea
-        setCurrentDate();
-
-        // EJEMPLO DE USO:
-        loadFormData(data());
-        function formatFun() {
-            let respuesta = confirm("¿Estás seguro de que deseas eliminar este elemento?");
-            if (respuesta) {
-                const element = document.getElementById('contenedor-pdf');
-                // Configuración de html2pdf
-                const options = {
-                    margin: 0,
-                    filename: 'documento.pdf',
-                    image: { type: 'jpeg', quality: 1 },
-                    html2canvas: { scale: 2, useCORS: true },
-                    jsPDf: { unit: 'in', format: 'letter', orientation: 'portrait' }
-                };
-
-                // Generar el PDF
-                html2pdf().set(options).from(element).save();
-
-            }
-
-        }
-        formatFun();
-
-    </script>
-    -->

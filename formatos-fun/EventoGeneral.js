@@ -488,7 +488,11 @@ $(document).on('click', '#btnconfirmar', function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 if (mecanismo) {
-                    sendDataFunPDF(mecanismo);
+                    DataEventoGeneral(); // Aseguramos que los datos estén actualizados antes de generar el PDF
+                    setTimeout((() => {
+                        sendDataFunPDF(mecanismo);
+                    }), 400);
+
                 } else {
                     console.error("Mecanismo no establecido");
                 }
@@ -517,7 +521,7 @@ function sendDataFunPDF(mecanismo) {
         },
         jsPDF: {
             unit: 'mm',
-            format: 'a4',
+            format: 'letter',
             orientation: 'portrait'
         }
     };
