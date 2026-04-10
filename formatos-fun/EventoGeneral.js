@@ -30,6 +30,32 @@ function DataEventoGeneral() {
 
 }
 
+function DataEventoenv() {
+    var mecanismo = sessionStorage.getItem("mecanismo").toLowerCase()
+        switch (mecanismo) {
+            case "consolidacion":
+                funDataGenerica("consolidacion");
+                break;
+            case "novacion":
+                funDataGenerica("novacion");
+                DataFunNovacion("novacion");
+                break;
+            case "pagomora":
+                funDataGenerica("pagomora");
+                DataFunMora("pagomora");
+                break;
+            case "cancelacion":
+                funDataGenerica("cancelacion");
+                break;
+            case "ampliacion":
+                funDataGenerica("ampliacion");
+                DataFunAmpliacion("ampliacion");
+                break;
+            default:
+                console.warn("Mecanismo no reconocido:", mecanismo);
+        }
+}
+
 function funDataGenerica(mecanismo) {
     // Evento de la fecha
     function setCurrentDate() {
@@ -39,7 +65,7 @@ function funDataGenerica(mecanismo) {
         document.getElementById('year_' + mecanismo).textContent = today.getFullYear();
     }
     function data() {
-        var Oficina = document.getElementById("9552efdb-f91c-4e51-9f55-230282926b12").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("9552efdb-f91c-4e51-9f55-230282926b12").selectedOptions[0].innerText || "";
+        var Oficina = document.getElementById("9552efdb-f91c-4e51-9f55-230282926b12").selectedOptions[0].inner === "Seleccione un registro..." ? "" : document.getElementById("9552efdb-f91c-4e51-9f55-230282926b12").selectedOptions[0].innerText || "";
         var NomOficina = document.getElementById("bd198dd5-328d-4ded-a3b4-b23adfad423a").value || "";
         var cuetapago = document.getElementById("685c5e9d-4409-4d4c-a11e-a0c17dcedb02").value || "";
         // 1. Obtenemos el objeto del sessionStorage
@@ -474,6 +500,8 @@ $(document).on('click', '#btnEvnFun', function () {
 
 $(document).on('click', '#btnconfirmar', function () {
     console.log("Btn fun pulsado");
+    DataEventoenv(); // Aseguramos que los datos carguen al hacer clic en confirmar, por si hay cambios de última hora
+
     try {
         var mecanismo = sessionStorage.getItem("mecanismo") ? sessionStorage.getItem("mecanismo").toLowerCase() : "";
         Swal.fire({
@@ -488,11 +516,7 @@ $(document).on('click', '#btnconfirmar', function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 if (mecanismo) {
-                    DataEventoGeneral(); // Aseguramos que los datos estén actualizados antes de generar el PDF
-                    setTimeout((() => {
-                        sendDataFunPDF(mecanismo);
-                    }), 400);
-
+                    sendDataFunPDF(mecanismo);
                 } else {
                     console.error("Mecanismo no establecido");
                 }
@@ -503,6 +527,7 @@ $(document).on('click', '#btnconfirmar', function () {
         console.error("Error al enviar los datos:", error);
     }
 });
+
 
 function sendDataFunPDF(mecanismo) {
 
