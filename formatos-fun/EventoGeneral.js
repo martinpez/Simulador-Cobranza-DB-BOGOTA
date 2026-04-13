@@ -30,6 +30,8 @@ function DataEventoGeneral() {
 
 }
 
+
+
 function DataEventoenv() {
     var mecanismo = sessionStorage.getItem("mecanismo").toLowerCase()
         switch (mecanismo) {
