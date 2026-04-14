@@ -138,6 +138,7 @@ function inicializarNavegacion() {
 
     // NOVACIONES
     //Principal
+
     $(".novaciones").click(() => {
         sessionStorage.mecanismo = "novacion"
         navegarA(VISTAS.NOVACIONES_P1);

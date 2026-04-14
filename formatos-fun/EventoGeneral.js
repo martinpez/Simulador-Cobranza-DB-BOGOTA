@@ -30,32 +30,30 @@ function DataEventoGeneral() {
 
 }
 
-
-
 function DataEventoenv() {
     var mecanismo = sessionStorage.getItem("mecanismo").toLowerCase()
-        switch (mecanismo) {
-            case "consolidacion":
-                funDataGenerica("consolidacion");
-                break;
-            case "novacion":
-                funDataGenerica("novacion");
-                DataFunNovacion("novacion");
-                break;
-            case "pagomora":
-                funDataGenerica("pagomora");
-                DataFunMora("pagomora");
-                break;
-            case "cancelacion":
-                funDataGenerica("cancelacion");
-                break;
-            case "ampliacion":
-                funDataGenerica("ampliacion");
-                DataFunAmpliacion("ampliacion");
-                break;
-            default:
-                console.warn("Mecanismo no reconocido:", mecanismo);
-        }
+    switch (mecanismo) {
+        case "consolidacion":
+            funDataGenerica("consolidacion");
+            break;
+        case "novacion":
+            funDataGenerica("novacion");
+            DataFunNovacion("novacion");
+            break;
+        case "pagomora":
+            funDataGenerica("pagomora");
+            DataFunMora("pagomora");
+            break;
+        case "cancelacion":
+            funDataGenerica("cancelacion");
+            break;
+        case "ampliacion":
+            funDataGenerica("ampliacion");
+            DataFunAmpliacion("ampliacion");
+            break;
+        default:
+            console.warn("Mecanismo no reconocido:", mecanismo);
+    }
 }
 
 function funDataGenerica(mecanismo) {
