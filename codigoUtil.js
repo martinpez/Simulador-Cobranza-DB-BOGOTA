@@ -1,7 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const modal = document.getElementById('modalnovacion');
+    const modal = document.getElementById('modalpagomora');
     const btnAbrir = document.getElementById('btnAbrir');
 
     // VERIFICACIÓN DE SEGURIDAD: Solo añade eventos si los elementos existen
@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function descargarPDF() {
-    const element = document.getElementById('contenedornovacionPDF');
+    const element = document.getElementById('contenedorpagomoraPDF');
 
     const options = {
         margin: [2, 2, 2, 2],                    // márgenes pequeños pero limpios
-        filename: 'Solicitud_Normalizacion_Novacion.pdf',
+        filename: 'Solicitud_Normalizacion_Pagomora.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
             scale: 2,

@@ -1,20 +1,20 @@
-function cargarvacia() {}
+function cargarvacia() { }
 async function CargarExcelOficinas() {
-   
-    try{
-         let nameFunction = 'EliminarArchivo';
-            let lappizFunctionId = 'd2ebec8e-ab1c-4569-b900-eb457a889990';
-            let method = "POST"//POST
-            let ruta = `C:/BancoBogota/oficina/datos_oficina.csv`
-            let body = {ruta:ruta}
-            let config = {nameFunction, lappizFunctionId, body, method}
-            execLF(config)
-    }catch(err){
-        
+
+    try {
+        let nameFunction = 'EliminarArchivo';
+        let lappizFunctionId = 'd2ebec8e-ab1c-4569-b900-eb457a889990';
+        let method = "POST"//POST
+        let ruta = `C:/BancoBogota/oficina/datos_oficina.csv`
+        let body = { ruta: ruta }
+        let config = { nameFunction, lappizFunctionId, body, method }
+        execLF(config)
+    } catch (err) {
+
     }
-    
-    
-    
+
+
+
     Swal.fire({
         title: 'Procesando información',
         text: 'Recuerda no cerrar el aplicativo o refrescar la página, este proceso puede tardar unos minutos.',
@@ -22,9 +22,9 @@ async function CargarExcelOficinas() {
         confirmButtonColor: '#ee7402',
     });
 
-     
 
-    
+
+
     const input = document.getElementById('inputPoblamientoOficina');
     const file = input.files[0];
 
@@ -162,10 +162,10 @@ async function CargarExcelOficinas() {
                 icon: 'success',
                 confirmButtonColor: '#ee7402',
             });
-           let query = `EXEC msdb.dbo.sp_start_job @job_name = 'Job_SimiladorDNC_Lappiz_EmailConfirmed'`
-           await execQuery(query)
-    
-          
+            let query = `EXEC msdb.dbo.sp_start_job @job_name = 'Job_SimiladorDNC_Lappiz_EmailConfirmed'`
+            await execQuery(query)
+
+
         }
 
         if (message.type === 'error') {
@@ -191,7 +191,7 @@ async function CargarExcelOficinas() {
     };
 
     // Enviar el archivo y la configuración al Worker para procesarlo
-    worker.postMessage({ file: file, headers: myHeaders, retryOptions: retryOptions, chunkSize: 1024 * 1024 * 10, id:sessionStorage.userId });
+    worker.postMessage({ file: file, headers: myHeaders, retryOptions: retryOptions, chunkSize: 1024 * 1024 * 10, id: sessionStorage.userId });
 }
 
 
@@ -206,38 +206,38 @@ const tempDir = path.join('C:/BancoBogota/', "oficina");
 
 // Verificar si la carpeta existe, si no, crearla
 if (!fs.existsSync(tempDir)) {
-  fs.mkdirSync(tempDir);
+    fs.mkdirSync(tempDir);
 }
 
 // Función para procesar cada fragmento de base64
 async function writeChunkToFile(binaryFile, fileName, chunkIndex) {
-  try {
-    const filePath = path.join(tempDir, fileName); // Ruta completa del archivo
+    try {
+        const filePath = path.join(tempDir, fileName); // Ruta completa del archivo
 
-    // Convertir el base64 a un buffer de datos binarios
-    const buffer = Buffer.from(binaryFile, 'base64');
+        // Convertir el base64 a un buffer de datos binarios
+        const buffer = Buffer.from(binaryFile, 'base64');
 
-    // Escribir el fragmento en el archivo correspondiente
-    fs.appendFileSync(filePath, buffer); // appendFileSync agrega el fragmento al archivo
+        // Escribir el fragmento en el archivo correspondiente
+        fs.appendFileSync(filePath, buffer); // appendFileSync agrega el fragmento al archivo
 
-    return `Fragmento ${chunkIndex + 1} recibido y escrito correctamente.`;
-  } catch (error) {
-    return res.status(400).send("Error al escribir el fragmento:", error);
-    return "Error al escribir el fragmento: " + error.message;
-  }
+        return `Fragmento ${chunkIndex + 1} recibido y escrito correctamente.`;
+    } catch (error) {
+        return res.status(400).send("Error al escribir el fragmento:", error);
+        return "Error al escribir el fragmento: " + error.message;
+    }
 }
 
 // Función autoejecutable de prueba
 (async () => {
-  try {
-    // Reemplaza con tu base64 de prueba y modelo
-    const binaryFile = obj.body.binary;
-    const filename = obj.body.fileName;
-    const chunkIndex = obj.body.chunkIndex
-    
-    const result = await writeChunkToFile(binaryFile, filename, chunkIndex);
-    return res.status(200).send(result);
-  } catch (error) {
-    return res.status(400).send(error.message);
-  }
+    try {
+        // Reemplaza con tu base64 de prueba y modelo
+        const binaryFile = obj.body.binary;
+        const filename = obj.body.fileName;
+        const chunkIndex = obj.body.chunkIndex
+
+        const result = await writeChunkToFile(binaryFile, filename, chunkIndex);
+        return res.status(200).send(result);
+    } catch (error) {
+        return res.status(400).send(error.message);
+    }
 })();

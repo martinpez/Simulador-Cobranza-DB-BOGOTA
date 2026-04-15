@@ -29,7 +29,6 @@ function DataEventoGeneral() {
     }
 
 }
-
 function DataEventoenv() {
     var mecanismo = sessionStorage.getItem("mecanismo").toLowerCase()
     switch (mecanismo) {
@@ -55,6 +54,9 @@ function DataEventoenv() {
             console.warn("Mecanismo no reconocido:", mecanismo);
     }
 }
+
+//-------------------------------------------------------------------------------
+
 
 function funDataGenerica(mecanismo) {
     // Evento de la fecha
@@ -131,6 +133,8 @@ function funDataGenerica(mecanismo) {
     }, 500);
 
 }
+//-------------------------------------------------------------------------------
+
 
 function DataFunNovacion(mecanismo) {
     function dataNova() {
@@ -226,6 +230,10 @@ function DataFunNovacion(mecanismo) {
 
     }, 500);
 }
+
+//-------------------------------------------------------------------------------
+
+
 
 function DataFunAmpliacion(mecanismo) {
     function dataAmpliacion() {
@@ -340,6 +348,9 @@ function DataFunAmpliacion(mecanismo) {
     }, 500);
 }
 
+
+//-------------------------------------------------------------------------------
+
 function DataFunMora(mecanismo) {
 
     function dataMora() {
@@ -370,7 +381,7 @@ function DataFunMora(mecanismo) {
         var porcBenIntCorr = document.getElementById("e076d650-c5d6-48b1-920b-295d431604b0").getAttribute("aria-valuenow") || "$";
         var porcBenIntMora = document.getElementById("64fcdf9f-c6b3-4742-b4b2-e259759290d9").getAttribute("aria-valuenow") || "$";
         var porcBenIntExtra = document.getElementById("0456eeb3-8809-48a5-8726-87e416efdcb3").getAttribute("aria-valuenow") || "$";
-        var pagoRealizar = document.getElementById("8f7266d7-dfc0-4ff4-afad-c50fbfa67062").getAttribute("aria-valuenow") || "$";
+        var pagoRealizar = document.getElementById("3539dba8-0c22-491e-a05b-84642d675d59").getAttribute("aria-valuenow") || "$";
         var totalBeneficio = document.getElementById("6cfd4b2c-6ef4-4821-95d5-364657fda787").getAttribute("aria-valuenow") || "$";
         var fechaPago = document.querySelector("#ee8b70aa-2712-408c-a87a-b121e20564b3 > div.dx-dropdowneditor-input-wrapper > div > div.dx-texteditor-input-container > input").value.replaceAll('-', '')
         var pregunta1 = getSelectText("pregunta1");
@@ -439,7 +450,7 @@ function DataFunMora(mecanismo) {
         document.getElementById('porcBenIntMora_' + mecanismo).textContent = data.porcBenIntMora || '';
         document.getElementById('benIntExtra_' + mecanismo).textContent = formateador.format(data.benValorExtra || 0);
         document.getElementById('porcBenIntExtra_' + mecanismo).textContent = data.porcBenIntExtra || '';
-        document.getElementById('totalBeneficio_' + mecanismo).textContent = formateador.format(data.totalBeneficio || 0);
+        document.getElementById('totalBen_' + mecanismo).textContent = formateador.format(data.totalBeneficio || 0);
         document.getElementById('pagoRealizar_' + mecanismo).textContent = formateador.format(data.pagoRealizar || 0);
         document.getElementById('fechaPago_' + mecanismo).textContent = data.fechaPago || '';
         document.getElementById("pregunta1_display_" + mecanismo).textContent = data.pregunta1;
@@ -459,7 +470,7 @@ function DataFunMora(mecanismo) {
     }, 500);
 }
 
-
+//-------------------------------------------------------------------------------
 
 function loadModalFun(mecanismo) {
 
@@ -489,6 +500,9 @@ function loadModalFun(mecanismo) {
 
 }
 
+
+//-------------------------------------------------------------------------------
+
 $(document).on('click', '#btnEvnFun', function () {
     console.log("Btn fun pulsado");
     try {
@@ -497,6 +511,11 @@ $(document).on('click', '#btnEvnFun', function () {
         console.error("Error al cargar los datos:", error);
     }
 });
+
+
+
+//-------------------------------------------------------------------------------
+
 
 $(document).on('click', '#btnconfirmar', function () {
     console.log("Btn fun pulsado");
@@ -528,6 +547,7 @@ $(document).on('click', '#btnconfirmar', function () {
     }
 });
 
+//-------------------------------------------------------------------------------
 
 function sendDataFunPDF(mecanismo) {
 

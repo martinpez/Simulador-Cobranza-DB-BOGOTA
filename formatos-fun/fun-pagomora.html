@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="../codigoUtil.js"></script>
     <style>
         .layout-especial_Mora * {
             margin: 0;
@@ -21,7 +22,7 @@
         }
 
         .container_Mora {
-            width: 780px;
+            width: auto;
             margin: 0 auto;
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -106,9 +107,9 @@
         }
 
         .subsection-header_Mora {
-            background: #A6A6A6;
+            background: #595555;
             color: white;
-            padding: 6px 15px;
+            padding: 2px 2px;
             font-size: 8px;
             font-weight: 700;
             text-align: center;
@@ -128,7 +129,7 @@
             font-weight: 700;
             text-align: center;
             border-bottom: 1px solid #000;
-            min-height: 30px;
+            min-height: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -137,9 +138,11 @@
 
         .form-value_Mora {
             background: white;
-            padding: 8px;
+            padding: 2px;
             font-size: 9px;
             text-align: center;
+
+            font-weight: 500;
             min-height: 20px;
             display: flex;
             align-items: center;
@@ -162,7 +165,7 @@
             margin: 0px 2px 2px 2px;
             margin-bottom: 0px;
             display: grid;
-            grid-template-columns: 1fr 30px 130px 1fr 130px;
+            grid-template-columns: 1fr 45px 130px 1fr 130px;
             border-left: 1px solid #000;
             border-top: 1px solid #000;
         }
@@ -179,18 +182,14 @@
         /* Obligations and Conditions Container */
         .obligations-conditions-container_Mora {
             display: grid;
-            grid-template-columns: 350px 1fr;
+            grid-template-columns: 1fr 400px;
             gap: 0;
             margin-right: 45px;
             margin: 0px 2px 2px 2px;
         }
 
 
-        .table-row_Mora {
-            display: grid;
-            grid-template-columns: 1fr 50px 50px;
-            border-left: 1px solid #000;
-        }
+
 
         .table-cell_Mora {
             border-right: 1px solid #000;
@@ -213,9 +212,10 @@
         /* Terms and conditions */
         .terms-text_Mora {
             border: 1px solid #000;
-            padding: 8px;
-            font-size: 6.5px;
-            line-height: 1.4;
+            padding: 2px;
+            font-size: 9px;
+            font-weight: 700;
+            line-height: 1.2;
             text-align: justify;
             background: white;
             margin: 0px 2px 0px 2px;
@@ -241,8 +241,9 @@
         .question-text_Mora {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
-            padding: 8px;
-            font-size: 6.5px;
+            padding: 2px;
+            font-weight: 700;
+            font-size: 8.3px;
             background: white;
         }
 
@@ -260,8 +261,8 @@
 
         /* Signature section */
         .signature-section_Mora {
-            padding-bottom: 30px;
-            margin: 30px 40px 0px 40px;
+            padding-bottom: 20px;
+            margin: 15px 0px 0px 40px;
 
         }
 
@@ -309,7 +310,7 @@
         }
 
         .observations_Mora {
-            margin: 0px 2px 2px 2px;
+            margin: 0px 2px 0px 2px;
             display: flex;
             border: 1px solid #000;
             border-top: none;
@@ -328,8 +329,8 @@
         }
 
         .observations-label_Mora {
-
-            font-size: 7px;
+            font-weight: 700;
+            font-size: 8.5px;
         }
 
         .observaciones-answer_Mora {
@@ -351,6 +352,7 @@
         .guarantee-text_Mora {
             padding: 2px;
             font-size: 8px;
+            font-weight: 700;
             align-self: center;
         }
 
@@ -386,7 +388,7 @@
 
         .conditions-panel-v3_Mora {
             border-left: 1px solid #000;
-            border-top: 1px solid #000;
+            border-right: 1px solid #000;
             padding: 2px;
             font-size: 9px;
             line-height: 1.4;
@@ -394,24 +396,19 @@
             /* Alineación a la derecha como la imagen */
         }
 
-        .beneficios-row-full_Mora {
-            grid-column: 1 / 3;
-            /* Ocupa el espacio de Nro Obligación y Pago Mínimo */
-            border-right: 1px solid #000;
-            border-bottom: 1px solid #000;
-            background: white;
-            font-weight: 700;
-            font-size: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+
 
         /* Conditions section */
         .conditions-section_Mora {
             display: flex;
             flex-direction: column;
             margin-left: 40px;
+        }
+
+        .declara_cliente_Mora {
+            margin: 0px 2px 2px 2px;
+            grid-template-columns: 1fr 26px;
+            border-left: 1px solid #000;
         }
 
         /* ====================== ESTILOS DEL MODAL ====================== */
@@ -451,14 +448,14 @@
 </head>
 
 <body class="layout-especial_Mora">
-    <!-- 
+
     <button onclick="descargarPDF()" style="position: absolute; top: 15px; right: 15px; z-index: 100; 
                padding: 8px 16px; background: #2e7d32; color: white; 
                border: none; border-radius: 4px; cursor: pointer;">
         📥 Descargar PDF
     </button>
     <button id="btnAbrir">Abrir Modal</button>
--->
+
     <dialog id="modalpagomora" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
         <div id="contenedorpagomoraPDF" class="container_Mora" style="margin: 0; box-shadow: none;">
             <!-- Header -->
@@ -496,7 +493,7 @@
                     <div class="form-value_Mora" id="codOficina_pagomora"><!-- DYNAMIC: Código Oficina --></div>
                 </div>
                 <div class="form-field_Mora">
-                    <div class="form-label_Mora">Oficina en que se realiza<br> la negociación</div>
+                    <div class="form-label_Mora">Oficina en que se realiza la gestión de recuperación</div>
                     <div class="form-value_Mora" id="nombreOficina_pagomora"><!-- DYNAMIC: Nombre Oficina --></div>
                 </div>
                 <div class="form-field_Mora">
@@ -504,7 +501,7 @@
                     <div class="form-value_Mora" id="cuentaPago_pagomora"><!-- DYNAMIC: Cuenta Pago --></div>
                 </div>
                 <div class="form-field_Mora">
-                    <div class="form-label_Mora">Funcionario de quien efectúa la negociación:</div>
+                    <div class="form-label_Mora">Funcionario de quien efectúa la gestión de recuperación:</div>
                     <div class="form-value_Mora" id="funcionario_pagomora"><!-- DYNAMIC: Nombre Funcionario --></div>
                 </div>
             </div>
@@ -566,7 +563,7 @@
 
             <div class="section-header_Mora">INFORMACION DE LAS OBLIGACIONES A NORMALIZAR</div>
 
-            <div class="obligations-conditions-container_Mora" style="grid-template-columns: 340px 1fr;">
+            <div class="obligations-conditions-container_Mora">
                 <div class="obligations-table_Mora">
                     <div class="subsection-header_Mora">Datos Obligaciones</div>
 
@@ -590,22 +587,24 @@
                 </div>
 
                 <div class="conditions-section_Mora" style="margin-left: 0;">
-                    <div class="subsection-header_Mora" style="border-left: none;">Condiciones negociación</div>
+                    <div class="subsection-header_Mora" style="border-left: none;">Condiciones gestión de recuperación
+                    </div>
                     <div class="conditions-panel-v3_Mora">
-                        <strong>Beneficio Int Corrientes:</strong>  <span id="benIntCorr_pagomora"></span><br>
-                        <strong>% Beneficio Int Corrientes:</strong> <span id="porcBenIntCorr_pagomora"></span><br>
-                        <strong>Beneficio Int Mora:</strong> <span id="benIntMora_pagomora"></span><br>
-                        <strong>% Beneficio Int Mora:</strong> <span id="porcBenIntMora_pagomora"></span><br>
-                        <strong>Beneficio Int ExtraContables:</strong><span id="benIntExtra_pagomora"></span><br>
-                        <strong>% Beneficio Int ExtraContables:</strong> <span id="porcBenIntExtra_pagomora"></span><br>
-                        <strong>Total Beneficio:</strong>  <span id="totalBeneficio_pagomora"></span><br>
-                        <strong>Pago a Realizar:</strong>  <span id="pagoRealizar_pagomora"></span><br>
+                        <strong>Baja en cuenta Int Corrientes:</strong> <span id="benIntCorr_pagomora"></span><br>
+                        <strong>% Baja en cuenta Int Corrientes:</strong> <span id="porcBenIntCorr_pagomora"></span><br>
+                        <strong>Baja en cuenta Int Mora:</strong> <span id="benIntMora_pagomora"></span><br>
+                        <strong>% Baja en cuenta Int Mora:</strong> <span id="porcBenIntMora_pagomora"></span><br>
+                        <strong>Baja en cuenta Int ExtraContables:</strong><span id="benIntExtra_pagomora"></span><br>
+                        <strong>% Baja en cuenta Int ExtraContables:</strong> <span
+                            id="porcBenIntExtra_pagomora"></span><br>
+                        <strong>Total Baja en cuenta :</strong> <span id="totalBen_pagomora"></span><br>
+                        <strong>Pago a Realizar:</strong> <span id="pagoRealizar_pagomora"></span><br>
                         <strong>Fecha del Pago:</strong> <span id="fechaPago_pagomora"></span>
                     </div>
                 </div>
             </div>
             <!-- Terms and Conditions -->
-            <div class="section-header_Mora">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
+            <div class="section-header_Mora">ACEPTACIÓN DE LA GESTIÓN DE RECUPERACIÓN Y AUTORIZACIONES</div>
 
             <div class="terms-text_Mora" id="terminosCondiciones_pagomora">
                 <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
@@ -615,12 +614,14 @@
                     resultado de mi solicitud.</p>
 
                 <p>Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones,
-                    comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha
+                    comprometiéndome a cancelar el valor requerido para el trámite de gestión de recuperación en la
+                    fecha
                     establecida,
                     sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
                     sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en
                     la
-                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los beneficios
+                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Baja en cuenta de
+                    cartera
                     ofrecidos
                     anteriormente.</p>
 
@@ -640,9 +641,11 @@
                 <p>b. La operación solicitada puede generar marcación ante las Centrales de Riesgo por lo que autorizo
                     al
                     Banco a actualizar el reporte respectivo.</p>
-                <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la negociación
+                <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la gestión de
+                    recuperación
                     podrá ser tramitada el mes siguiente.</p>
-                <p>d. Hasta cuando no se haya perfeccionado la negociación en trámite, se mantienen vigentes las
+                <p>d. Hasta cuando no se haya perfeccionado la gestión de recuperación en trámite, se mantienen vigentes
+                    las
                     condiciones
                     actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos y en las
                     fechas
@@ -657,7 +660,8 @@
                     Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
                     Financiera de Colombia.</p>
 
-                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los beneficios otorgados,
+                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los Baja en cuenta de
+                    cartera otorgados,
                     pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
                     realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
                     Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
@@ -668,16 +672,18 @@
 
                 <p>Yo <strong><span id="nombreClienteTerd_pagomora"><!-- DYNAMIC: Nombre Cliente --></span></strong>
                     identificado
-                    con No. <strong><span
-                            id="numDocTerd_pagomora"><!-- DYNAMIC: Número Documento --></span></strong> manifiesto
+                    con No. <strong><span id="numDocTerd_pagomora"><!-- DYNAMIC: Número Documento --></span></strong>
+                    manifiesto
                     que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente
                     acuerdo,
                     son de origen lícito y corresponde a
                     <span>________________________________________________________________________</span>
-                    Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la negociación
+                    Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la gestión de
+                    recuperación
                     el
                     Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me será
-                    reintegrado y la negociación se tramitará con los nuevos saldos vigentes a la fecha de aplicación de
+                    reintegrado y la gestión de recuperación se tramitará con los nuevos saldos vigentes a la fecha de
+                    aplicación de
                     la
                     misma.
                 </p><br>
@@ -688,7 +694,8 @@
                     Organización
                     / Transparencia / Ley Habeas Data.</p><br>
 
-                <p>Declaro que conozco y acepto los términos y condiciones de esta negociación, los cuales pueden ser
+                <p>Declaro que conozco y acepto los términos y condiciones de esta gestión de recuperación, los cuales
+                    pueden ser
                     consultados a través de
                     https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
                     condiciones - políticas de cobro</p>
@@ -701,20 +708,23 @@
                         los
                         últimos 3 años, dentro del territorio de los Estados Unidos o fuera del territorio de Colombia
                     </div>
-                    <div class="question-answer_Mora" id="pregunta1_display_pagomora"><!-- DYNAMIC: Respuesta 1 --></div>
+                    <div class="question-answer_Mora" id="pregunta1_display_pagomora"><!-- DYNAMIC: Respuesta 1 -->
+                    </div>
                 </div>
                 <div class="question-row_Mora">
                     <div class="question-text_Mora">Soy poseedor de un documento de identificación expedido en un pais
                         diferente
                         a Colombia</div>
-                    <div class="question-answer_Mora" id="pregunta2_display_pagomora"><!-- DYNAMIC: Respuesta 2 --></div>
+                    <div class="question-answer_Mora" id="pregunta2_display_pagomora"><!-- DYNAMIC: Respuesta 2 -->
+                    </div>
                 </div>
                 <div class="question-row_Mora">
                     <div class="question-text_Mora">Recibo cualquier pago de intereses, dividendos, rentas, salarios,
                         honorario,
                         primas, anualidades, compensaciones, remuneraciones, emolumentos y otras ganancias fijas u
                         ocasionales e ingresos (Ingresos FDAP), provenientes de territorio fuera de Colombia.</div>
-                    <div class="question-answer_Mora" id="pregunta3_display_pagomora"><!-- DYNAMIC: Respuesta 3 --></div>
+                    <div class="question-answer_Mora" id="pregunta3_display_pagomora"><!-- DYNAMIC: Respuesta 3 -->
+                    </div>
                 </div>
                 <div class="question-row_Mora">
                     <div class="question-text_Mora">Recibo cualquier ingreso bruto procedente de la venta u otra
@@ -723,7 +733,8 @@
                         cualquier propiedad que pueda producir intereses o dividendos o cuya fuente se encuentre fuera
                         del
                         territorio Colombiano.</div>
-                    <div class="question-answer_Mora" id="pregunta4_display_pagomora"><!-- DYNAMIC: Respuesta 4 --></div>
+                    <div class="question-answer_Mora" id="pregunta4_display_pagomora"><!-- DYNAMIC: Respuesta 4 -->
+                    </div>
                 </div>
             </div>
 
@@ -753,6 +764,14 @@
                 </div>
             </div>
 
+            <div class="declara_cliente_Mora">
+                <div class="question-text_Mora">Declaro que conozco y acepto los términos y condiciones de esta
+                    gestión de recuperación, los cuales pueden ser
+                    consultados a través de
+                    www.bancodebogota.com – Términos y condiciones – Consulte los términos y condiciones de las
+                    políticas de cobro</div>
+
+            </div>
 
             <!-- Signature Section -->
             <div class="signature-section_Mora">
@@ -771,163 +790,3 @@
 </body>
 
 </html>
-<!--
-    <script>
-
-        // Función para establecer la fecha actual
-        function setCurrentDate() {
-            const today = new Date();
-            document.getElementById('day').textContent = today.getDate();
-            document.getElementById('month').textContent = today.getMonth() + 1;
-            document.getElementById('year').textContent = today.getFullYear();
-        }
-
-        function data() {
-            return {
-                codOficina: '001',
-                nombreOficina: 'Oficina Principal',
-                cuentaPago: '1234567890',
-                funcionario: 'Martin Elias Perez',
-                nombreCliente: 'Carlos Gómez',
-                tipoDoc: 'CC',
-                numDoc: '987654321',
-                lugarExp: 'Bogotá - Bogotá D.C.',
-                fechaExp: '01/01/2010',
-                diasMora: '30 dias',
-                descripcionActividad: 'Comerciante',
-                ingresoMensual: ' 5000000',
-                ocupacionAdicional: 'Freelance',
-                ingresosAdicionales: ' 2000000',
-
-                // CAMPOS ACTUALIZADOS SEGÚN LA IMAGEN
-                numObligacion: '5678',
-                saldoTotal1: '15.000.000',
-                saldoTotal2: '5.000.000',
-                intCorrientes: '200.000',
-                intMora: '150.000',
-                intExtraC: '0',
-
-                // Datos Obligación
-                numObligacion: '1234',
-                saldoTotal1: '2001',
-                saldoTotal2: '10.000',
-                intCorrientes: '0',
-                intMora: '0',
-                intExtraC: '12',
-
-                // Beneficios Aplicados
-                numObligacion: '4321',
-                pagoMinimo: '120000',
-                intCorrientes: '15.000',
-                intMora: '45.000',
-                intExtraC: '0',
-
-            
-
-                // Panel Derecho
-                benIntCorr: '10.000',
-                porcBenIntCorr: '0%',
-                benIntMora: '45.000',
-                porcBenIntMora: '100%',
-                benIntExtra: '0',
-                porcBenIntExtra: '0%',
-                totalBeneficio: '55.000',
-                pagoRealizar: '120.000',
-                fechaPago: '12 febrero 2026',
-
-
-                pregunta1: 'No',
-                pregunta2: 'No',
-                pregunta3: 'Sí',
-                pregunta4: 'No',
-                garantiaFAG: 'Sí',
-                garantiaFNG: 'No',
-                observaciones: 'Cliente con buen historial de pagos.',
-            };
-        }
-
-
-
-        function loadFormData(data) {
-            // Mapeo Tabla
-            document.getElementById('codOficina').textContent = data.codOficina || '';
-            document.getElementById('nombreOficina').textContent = data.nombreOficina || '';
-            document.getElementById('cuentaPago').textContent = data.cuentaPago || '';
-            document.getElementById('funcionario').textContent = data.funcionario || '';
-            document.getElementById('nombreCliente').textContent = data.nombreCliente || '';
-            document.getElementById('nombreClienteTerminos').textContent = data.nombreCliente || '';
-            document.getElementById('tipoDoc').textContent = data.tipoDoc || '';
-            document.getElementById('numDoc').textContent = data.numDoc || '';
-            document.getElementById('lugarExp').textContent = data.lugarExp || '';
-            document.getElementById('fechaExp').textContent = data.fechaExp || '';
-            document.getElementById('diasMora').textContent = data.diasMora || '';
-            document.getElementById('descripcionActividad').textContent = data.descripcionActividad || '';
-            document.getElementById('ingresoMensual').textContent = '$ ' + data.ingresoMensual || '';
-            document.getElementById('ocupacionAdicional').textContent = data.ocupacionAdicional || '';
-            document.getElementById('ingresosAdicionales').textContent = '$ ' + data.ingresosAdicionales || '';
-
-            document.getElementById('numObligacion').textContent = data.numObligacion || '';
-
-            document.getElementById('intCorrientes').textContent = data.intCorrientes || '';
-            document.getElementById('intMora').textContent = data.intMora || '';
-            document.getElementById('intExtraC').textContent = data.intExtraC || '';
-
-            document.getElementById('numObligacion').textContent = data.numObligacion || '';
-
-            document.getElementById('intCorrientes').textContent = data.intCorrientes || '';
-            document.getElementById('intMora').textContent = data.intMora || '';
-            document.getElementById('intExtraC').textContent = data.intExtraC || '';
-
-            // Mapeo de Beneficios
-
-            document.getElementById('pagoMinimo').textContent = data.pagoMinimo || '';
-            document.getElementById('intCorrientes').textContent = data.intCorrientes || '';
-            document.getElementById('intMora').textContent = data.intMora || '';
-            document.getElementById('intExtraC').textContent = data.intExtraC || '';
-            document.getElementById('benIntCorr').textContent = data.benIntCorr || '';
-            document.getElementById('porcBenIntCorr').textContent = data.porcBenIntCorr || '';
-            document.getElementById('benIntMora').textContent = data.benIntMora || '';
-            document.getElementById('porcBenIntMora').textContent = data.porcBenIntMora || '';
-            document.getElementById('benIntExtra').textContent = data.benIntExtra || '';
-            document.getElementById('porcBenIntExtra').textContent = data.porcBenIntExtra || '';
-            document.getElementById('totalBeneficio').textContent = data.totalBeneficio || '';
-            document.getElementById('pagoRealizar').textContent = data.pagoRealizar || '';
-            document.getElementById('fechaPago').textContent = data.fechaPago || '';
-
-            // Mapeo de Pago
-            document.getElementById('pagoRealizar').textContent = data.pagoRealizar || '';
-
-            document.getElementById('pregunta1').textContent = data.pregunta1 || '';
-            document.getElementById('pregunta2').textContent = data.pregunta2 || '';
-            document.getElementById('pregunta3').textContent = data.pregunta3 || '';
-            document.getElementById('pregunta4').textContent = data.pregunta4 || '';
-            document.getElementById('garantiaFAG').textContent = data.garantiaFAG || '';
-            document.getElementById('garantiaFNG').textContent = data.garantiaFNG || '';
-            document.getElementById('observaciones').textContent = data.observaciones || '';
-        }
-
-        setCurrentDate();
-        loadFormData(data());
-
-        function formatFun() {
-            let respuesta = confirm("¿Estás seguro de que deseas eliminar este elemento?");
-            if (respuesta) {
-                const element = document.getElementById('contenedor-pdf');
-                // Configuración de html2pdf
-                const options = {
-                    margin: 0,
-                    filename: 'documento.pdf',
-                    image: { type: 'jpeg', quality: 1 },
-                    html2canvas: { scale: 2, useCORS: true },
-                    jsPDf: { unit: 'in', format: 'letter', orientation: 'portrait' }
-                };
-
-                // Generar el PDF
-                html2pdf().set(options).from(element).save();
-
-            }
-
-        }
-        formatFun();
-    </script>
-    -->
