@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
         .layout-especial_Mora * {
             margin: 0;
@@ -385,16 +386,48 @@
             border-left: 1px solid #000;
         }
 
+
         .conditions-panel-v3_Mora {
             border-left: 1px solid #000;
             border-right: 1px solid #000;
-            padding: 2px;
+            padding: 4px;
+            display: grid;
+
+            /* 2 pares: label + value | label + value */
+            grid-template-columns: auto 1fr auto 1fr;
+
             font-size: 8px;
-            line-height: 1.1;
-            text-align: center;
-            /* Alineación a la derecha como la imagen */
+            line-height: 1.2;
+            column-gap: 6px;
+            row-gap: 2px;
         }
 
+        .conditions-panel-v3_Mora {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 8px;
+
+            font-size: 8px;
+            line-height: 1.2;
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+            padding: 4px;
+        }
+
+        .item {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .item strong {
+            white-space: nowrap;
+        }
+
+        .item span {
+            text-align: right;
+            white-space: nowrap;
+        }
 
 
         /* Conditions section */
@@ -589,17 +622,54 @@
                     <div class="subsection-header_Mora" style="border-left: none;">Condiciones gestión de recuperación
                     </div>
                     <div class="conditions-panel-v3_Mora">
-                        <strong>Baja en cuenta Int Corrientes:</strong> <span id="benIntCorr_pagomora"></span><br>
-                        <strong>% Baja en cuenta Int Corrientes:</strong> <span id="porcBenIntCorr_pagomora"></span><br>
-                        <strong>Baja en cuenta Int Mora:</strong> <span id="benIntMora_pagomora"></span><br>
-                        <strong>% Baja en cuenta Int Mora:</strong> <span id="porcBenIntMora_pagomora"></span><br>
-                        <strong>Baja en cuenta Int ExtraContables:</strong><span id="benIntExtra_pagomora"></span><br>
-                        <strong>% Baja en cuenta Int ExtraContables:</strong> <span
-                            id="porcBenIntExtra_pagomora"></span><br>
-                        <strong>Total Baja en cuenta :</strong> <span id="totalBen_pagomora"></span><br>
-                        <strong>Pago a Realizar:</strong> <span id="pagoRealizar_pagomora"></span><br>
-                        <strong>Fecha del Pago:</strong> <span id="fechaPago_pagomora"></span>
+
+                        <div class="item">
+                            <strong>Baja Int Corrientes:</strong>
+                            <span id="benIntCorr_pagomora"></span>
+                        </div>
+
+                        <div class="item">
+                            <strong>% Int Corrientes:</strong>
+                            <span id="porcBenIntCorr_pagomora"></span>
+                        </div>
+
+                        <div class="item">
+                            <strong>Baja Int Mora:</strong>
+                            <span id="benIntMora_pagomora"></span>
+                        </div>
+
+                        <div class="item">
+                            <strong>% Int Mora:</strong>
+                            <span id="porcBenIntMora_pagomora"></span>
+                        </div>
+
+                        <div class="item">
+                            <strong>Baja Int Extra:</strong>
+                            <span id="benIntExtra_pagomora"></span>
+                        </div>
+
+                        <div class="item">
+                            <strong>% Int Extra:</strong>
+                            <span id="porcBenIntExtra_pagomora"></span>
+                        </div>
+
+                        <div class="item">
+                            <strong>Total Baja:</strong>
+                            <span id="totalBen_pagomora"></span>
+                        </div>
+
+                        <div class="item">
+                            <strong>Pago a Realizar:</strong>
+                            <span id="pagoRealizar_pagomora"></span>
+                        </div>
+
+                        <div class="item">
+                            <strong>Fecha del Pago:</strong>
+                            <span id="fechaPago_pagomora"></span>
+                        </div>
+
                     </div>
+
                 </div>
             </div>
             <!-- Terms and Conditions -->

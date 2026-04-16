@@ -67,9 +67,14 @@ function funDataGenerica(mecanismo) {
         document.getElementById('year_' + mecanismo).textContent = today.getFullYear();
     }
     function data() {
-        var Oficina = document.getElementById("9552efdb-f91c-4e51-9f55-230282926b12").selectedOptions[0].inner === "Seleccione un registro..." ? "" : document.getElementById("9552efdb-f91c-4e51-9f55-230282926b12").selectedOptions[0].innerText || "";
+        var Oficina = document.getElementById("9552efdb-f91c-4e51-9f55-230282926b12").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("9552efdb-f91c-4e51-9f55-230282926b12").selectedOptions[0].innerText || "";
         var NomOficina = document.getElementById("bd198dd5-328d-4ded-a3b4-b23adfad423a").value || "";
-        var cuetapago = document.getElementById("685c5e9d-4409-4d4c-a11e-a0c17dcedb02").value || "";
+        let pagoProduto = "";
+        if (mecanismo === "novacion" || mecanismo === "consolidacion") {
+            pagoProduto = document.getElementById("685c5e9d-4409-4d4c-a11e-a0c17dcedb02").value || ""
+        } else {
+            pagoProduto = "000-778175"
+        }
         // 1. Obtenemos el objeto del sessionStorage
         let userObj = JSON.parse(sessionStorage.getItem("LappizUser") || "{}");
         if (userObj.FullName) {
@@ -99,7 +104,7 @@ function funDataGenerica(mecanismo) {
         return {
             codOficina: Oficina,
             nombreOficina: NomOficina,
-            cuentaPago: cuetapago,
+            pagoProduto,
             nombreAsesor: nombreAsesor,
             nombreCliente: nombreCliente,
             tipoDoc: tipodoc,
@@ -114,7 +119,7 @@ function funDataGenerica(mecanismo) {
     function loadFormData(data) {
         document.getElementById("codOficina_" + mecanismo).textContent = data.codOficina;
         document.getElementById("nombreOficina_" + mecanismo).textContent = data.nombreOficina;
-        document.getElementById("cuentaPago_" + mecanismo).textContent = data.cuentaPago;
+        document.getElementById("cuentaPago_" + mecanismo).textContent = data.pagoProduto;
         document.getElementById("funcionario_" + mecanismo).textContent = data.nombreAsesor;
         document.getElementById("nombreCliente_" + mecanismo).textContent = data.nombreCliente;
         document.getElementById("tipoDoc_" + mecanismo).textContent = data.tipoDoc;
@@ -379,7 +384,7 @@ function DataFunMora(mecanismo) {
         var benValorExtra = document.getElementById("a01eeadb-b99e-4e08-9d93-3fe44b9e1cf8").getAttribute("aria-valuenow") || "$";
         var porcBenIntCorr = document.getElementById("e076d650-c5d6-48b1-920b-295d431604b0").getAttribute("aria-valuenow") || "$";
         var porcBenIntMora = document.getElementById("64fcdf9f-c6b3-4742-b4b2-e259759290d9").getAttribute("aria-valuenow") || "$";
-        var porcBenIntExtra = document.getElementById("0456eeb3-8809-48a5-8726-87e416efdcb3").getAttribute("aria-valuenow") || "$";
+        var porcBenIntExtra = "0" // document.getElementById("0456eeb3-8809-48a5-8726-87e416efdcb3").getAttribute("aria-valuenow") || "$"; para cuando aplique tarjeta de credito
         var pagoRealizar = document.getElementById("3539dba8-0c22-491e-a05b-84642d675d59").getAttribute("aria-valuenow") || "$";
         var totalBeneficio = document.getElementById("6cfd4b2c-6ef4-4821-95d5-364657fda787").getAttribute("aria-valuenow") || "$";
         var fechaPago = document.querySelector("#ee8b70aa-2712-408c-a87a-b121e20564b3 > div.dx-dropdowneditor-input-wrapper > div > div.dx-texteditor-input-container > input").value.replaceAll('-', '')
@@ -487,10 +492,10 @@ function DataFunCancelacion(mecanismo) {
 
         var descripcionActividad = document.getElementById("e71d8cfa-270b-479b-b521-b19ebf077bb9").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("e71d8cfa-270b-479b-b521-b19ebf077bb9").selectedOptions[0].innerText || "";
         var ingresoMensual = document.getElementById("0f3bb14e-9498-4a89-ad90-020af7f34e16").value || "$";
-        var ocupacionAdicional = document.getElementById("0ec800f1-e949-44a5-9290-84b38df0ed2b").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("b54af750-167e-4831-bb8c-c374e7f45202").selectedOptions[0].innerText || "";
-        var ingresosAdicionales = document.getElementById("1a47c2c1-4551-4d13-89ca-82e89ce655c0").value || "$";
+        var ocupacionAdicional = document.getElementById("0ec800f1-e949-44a5-9290-84b38df0ed2b").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("0ec800f1-e949-44a5-9290-84b38df0ed2b").selectedOptions[0].innerText || "";
+        var ingresosAdicionales = document.getElementById("b456dc67-eccd-4868-a9f0-aeb0c2254b07").value || "$";
         var numObligacion = document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value === "" ? document.getElementById("caae86ca-b4e0-4e59-918e-8f7a1a4d4114").selectedOptions[0].innerText : document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value;
-        var pagoMinimo = document.getElementById("af9911f8-4a06-4483-b25d-6bec9e1647fe").getAttribute("aria-valuenow") || "$";
+        var saldoTotal = document.getElementById("f47f1a89-6743-4f60-9cf6-0696e6c841ca").getAttribute("aria-valuenow") || "$";
         var intCorrientes = document.getElementById("9b3ac68c-68ff-4928-864d-906e9d851621").getAttribute("aria-valuenow") || "$";
         var intMora = document.getElementById("c13b3910-1960-422f-835d-7ea89982f8b6").getAttribute("aria-valuenow") || "$";
         var intExtraC = document.getElementById("aef7fd98-0a00-4ec8-95d9-37840df1fe67").getAttribute("aria-valuenow") || "$";
@@ -518,23 +523,26 @@ function DataFunCancelacion(mecanismo) {
             ingresosAdicionales,
             numObligacion,
 
-            pagoMinimo,
-            intCorrientes,
-            intMora,
-            intExtraC,
-
             // Panel Derecho
-            benValorCorr,
-            porcBenIntCorr: porcBenIntCorr + " %",
-            benValorMora,
-            porcBenIntMora: porcBenIntMora + " %",
-            benValorExtra,
-            porcBenIntExtra: porcBenIntExtra + " %",
-            totalBeneficio,
-            pagoRealizar,
-            fechaPago,
+            saldoTotal,
+            saldoTotal2: '10.000',
+            intCorrientes: '0',
+            intMora: '0',
+            intExtraC: '12',
 
+            // Baja en cuentas Aplicados
+            benSaldo: '10.000',
+            porcBenSaldo: '1%',
+            benIntCorr: '123',
+            porcBenIntCorr: '21%',
+            benIntMora: '2',
+            porcBenIntMora: '100%',
+            benIntExtra: '3',
+            porcBenIntExtra: '12%',
 
+            // Condiciones Pago
+            pagoRealizar: '$ 120.000',
+            fechaPagoNuevo: '12 febrero 2026',
             pregunta1,
             pregunta2,
             pregunta3,
@@ -558,7 +566,7 @@ function DataFunCancelacion(mecanismo) {
         document.getElementById("ingresosAdicionales_" + mecanismo).textContent = formateador.format(data.ingresosAdicionales);
         document.getElementById("numObligacion_" + mecanismo).textContent = data.numObligacion;
 
-        document.getElementById('pagoMinimo_' + mecanismo).textContent = formateador.format(data.pagoMinimo || 0);
+        document.getElementById('saldoTotal_' + mecanismo).textContent = formateador.format(data.saldoTotal || 0);
         document.getElementById('intCorrientes_' + mecanismo).textContent = formateador.format(data.intCorrientes || 0);
         document.getElementById('intMora_' + mecanismo).textContent = formateador.format(data.intMora || 0);
         document.getElementById('intExtraC_' + mecanismo).textContent = formateador.format(data.intExtraC || 0);
