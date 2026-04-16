@@ -6,8 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="../codigoUtil.js"></script>
-
     <style>
         .layout-especial_Am * {
             margin: 0;
@@ -103,14 +101,14 @@
             font-size: 10px;
             font-weight: 700;
             text-align: center;
-            margin-top: 5px;
+          
             padding: 2px 2px;
         }
 
         .subsection-header_Am {
-            background: #A6A6A6;
+            background: #595555;
             color: white;
-            padding: 6px 15px;
+            padding: 2px 2px;
             font-size: 8px;
             font-weight: 700;
             text-align: center;
@@ -130,7 +128,7 @@
             font-weight: 700;
             text-align: center;
             border-bottom: 1px solid #000;
-            min-height: 30px;
+            min-height: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -139,10 +137,12 @@
 
         .form-value_Am {
             background: white;
-            padding: 8px;
+            padding: 2px;
             font-size: 9px;
             text-align: center;
-            min-height: 20px;
+
+            font-weight: 500;
+            min-height: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -164,7 +164,7 @@
             margin: 0px 2px 2px 2px;
             margin-bottom: 0px;
             display: grid;
-            grid-template-columns: 1fr 30px 130px 1fr 130px;
+            grid-template-columns: 1fr 45px 130px 1fr 130px;
             border-left: 1px solid #000;
             border-top: 1px solid #000;
         }
@@ -181,7 +181,7 @@
         /* Obligations and Conditions Container */
         .obligations-conditions-container_Am {
             display: grid;
-            grid-template-columns: 350px 1fr;
+            grid-template-columns: 1fr 400px;
             gap: 0;
             margin-right: 45px;
             margin: 0px 2px 2px 2px;
@@ -222,9 +222,10 @@
         /* Terms and conditions */
         .terms-text_Am {
             border: 1px solid #000;
-            padding: 8px;
-            font-size: 6.5px;
-            line-height: 1.4;
+            padding: 2px;
+            font-size: 9px;
+            font-weight: 700;
+            line-height: 1.2;
             text-align: justify;
             background: white;
             margin: 0px 2px 0px 2px;
@@ -250,8 +251,9 @@
         .question-text_Am {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
-            padding: 8px;
-            font-size: 6.5px;
+            padding: 2px;
+            font-weight: 700;
+            font-size: 8.3px;
             background: white;
         }
 
@@ -269,8 +271,8 @@
 
         /* Signature section */
         .signature-section_Am {
-            padding-bottom: 30px;
-            margin: 30px 40px 0px 40px;
+            padding-bottom: 20px;
+            margin: 15px 0px 0px 40px;
 
         }
 
@@ -338,8 +340,8 @@
         }
 
         .observations-label_Am {
-
-            font-size: 7px;
+            font-weight: 700;
+            font-size: 8.5px;
         }
 
         .observaciones-answer_Am {
@@ -369,6 +371,7 @@
         .guarantee-text_Am {
             padding: 2px;
             font-size: 8px;
+            font-weight: 700;
             align-self: center;
         }
 
@@ -380,9 +383,10 @@
 
             align-self: center;
         }
-        .declara_cliente_Am{
-            margin: 0px 2px 2px 2px; 
-            grid-template-columns: 1fr 26px; 
+
+        .declara_cliente_Am {
+            margin: 0px 2px 2px 2px;
+            grid-template-columns: 1fr 26px;
             border-left: 1px solid #000;
         }
 
@@ -400,7 +404,7 @@
         }
 
         /* ====================== ESTILOS DEL MODAL ====================== */
-        #modalAmpliacion {
+        #modalampliacion {
             border: none;
             border-radius: 8px;
             padding: 0;
@@ -417,13 +421,13 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
         }
 
-        #modalAmpliacion::backdrop {
+        #modalampliacion::backdrop {
             background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(4px);
         }
 
         /* Contenedor interno del PDF */
-        #contenedorAmpliacionPDF {
+        #contenedorampliacionPDF {
             margin: 0 !important;
             padding: 20px 0 20px 0 !important;
             /* un poco de aire arriba y abajo */
@@ -436,17 +440,17 @@
 </head>
 
 <body class="layout-especial_Am">
-    
+    <!--
     <button onclick="descargarPDF()" style="position: absolute; top: 15px; right: 15px; z-index: 100; 
                padding: 8px 16px; background: #2e7d32; color: white; 
                border: none; border-radius: 4px; cursor: pointer;">
         📥 Descargar PDF
     </button>
     <button id="btnAbrir">Abrir Modal</button>
-
+-->
     <dialog id="modalampliacion" style="padding: 0; border: none; border-radius: 8px; max-width: 850px;">
         <div id="contenedorampliacionPDF" class="container_Am" style="margin: 0; box-shadow: none;">
-
+        
             <!-- Header -->
             <div class="header_Am">
                 <div class="header-top_Am">
@@ -482,7 +486,7 @@
                     <div class="form-value_Am" id="codOficina_ampliacion"><!-- DYNAMIC: Código Oficina --></div>
                 </div>
                 <div class="form-field_Am">
-                    <div class="form-label_Am">Oficina en que se realiza<br> la negociación</div>
+                    <div class="form-label_Am">Oficina en que se realiza la gestión de recuperación</div>
                     <div class="form-value_Am" id="nombreOficina_ampliacion"><!-- DYNAMIC: Nombre Oficina --></div>
                 </div>
                 <div class="form-field_Am">
@@ -490,7 +494,7 @@
                     <div class="form-value_Am" id="cuentaPago_ampliacion"><!-- DYNAMIC: Cuenta Pago --></div>
                 </div>
                 <div class="form-field_Am">
-                    <div class="form-label_Am">Funcionario de quien efectúa la negociación:</div>
+                    <div class="form-label_Am">Funcionario de quien efectúa la gestión de recuperación:</div>
                     <div class="form-value_Am" id="funcionario_ampliacion"><!-- DYNAMIC: Nombre Funcionario --></div>
                 </div>
             </div>
@@ -570,19 +574,19 @@
                 </div>
 
                 <div class="conditions-section_Am">
-                    <div class="subsection-header_Am">Condiciones negociación</div>
-                    <div class="terms-text_Am" style="margin: 0; font-size: 9px; line-height: 1.6; border-top: none;">
+                    <div class="subsection-header_Am">Condiciones gestión de recuperación</div>
+                    <div class="terms-text_Am" style="margin: 0; font-size: 8px; line-height: 1.1; border-top: none;">
                         <div style="text-align: center; font-weight:bold ;">
-                            Beneficio Int Corrientes: <span style="font-weight:lighter"
-                                id="BeneficioIntCorr_ampliacion"></span><br>
-                            % Beneficio Int Corrientes: <span style="font-weight:lighter"
-                                id="porcentajeBenIntCorr_ampliacion"></span><br>
-                            Beneficio Int Mora: <span style="font-weight:lighter"
-                                id="BeneficioIntMora_ampliacion"></span><br>
-                            % Beneficio Int Mora: <span style="font-weight:lighter"
-                                id="porcentajeBenIntMora_ampliacion"></span><br>
-                            Total Beneficio: <span style="font-weight:lighter"
-                                id="totalBeneficio_ampliacion"></span><br>
+                            Baja en cuenta Int Corrientes: <span style="font-weight:lighter"
+                                id="bajacuentaIntCorr_ampliacion"></span><br>
+                            % Baja en cuenta Int Corrientes: <span style="font-weight:lighter"
+                                id="porcentajeBajacuentaIntCorr_ampliacion"></span><br>
+                            Baja en cuenta Int Mora: <span style="font-weight:lighter"
+                                id="bajacuentaIntMora_ampliacion"></span><br>
+                            % Baja en cuenta Int Mora: <span style="font-weight:lighter"
+                                id="porcentajeBajacuentaIntMora_ampliacion"></span><br>
+                            Total Baja en cuenta: <span style="font-weight:lighter"
+                                id="totalBajacuenta_ampliacion"></span><br>
                             Pago a Realizar: <span style="font-weight:lighter" id="pagoRealizar_ampliacion"></span><br>
                             Fecha del Pago: <span style="font-weight:lighter" id="fechaPago_ampliacion"></span><br>
                             Plazo: <span style="font-weight:lighter" id="plazo_ampliacion"></span><br>
@@ -594,94 +598,81 @@
             </div>
 
             <!-- Terms and Conditions -->
-            <div class="section-header_Am">ACEPTACIÓN DE LA NEGOCIACIÓN Y AUTORIZACIONES</div>
+            <div class="section-header_Am">ACEPTACIÓN DE LA GESTIÓN DE RECUPERACIÓN Y AUTORIZACIONES</div>
 
             <div class="terms-text_Am" id="terminosCondiciones_ampliacion">
                 <p>Desde ahora acepto las nuevas condiciones de pago en cuanto a plazo tasa y cuotas que sean aprobadas,
                     esta solicitud de modificación de mi crédito será sometida a estudio por parte del Banco de Bogotá,
                     quien tiene la facultad de aprobarla o no; siendo de mi responsabilidad indagar con el Banco sobre
-                    el
-                    resultado de mi solicitud.</p>
+                    el resultado de mi solicitud.</p>
 
                 <p>Autorizo al Banco para efectuar los ajustes necesarios para la normalización de mi(s) obligaciones,
-                    comprometiéndome a cancelar el valor requerido para el trámite de negociación en la fecha
-                    establecida,
-                    sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los valores consignados
-                    sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden previsto en
-                    la
-                    ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva los Beneficios
-                    ofrecidos
-                    anteriormente.</p>
+                    comprometiéndome a cancelar el valor requerido para el trámite de gestión de
+                    recuperación en la fecha
+                    establecida, sin perjuicio que en caso de negación y/o cumplimiento parcial del convenio, los
+                    valores
+                    consignados sean aplicados como abono(s) a la(s) obligación (es) vencida(s) de conformidad al orden
+                    previsto en la ley. La firma de otro acuerdo posterior al incumplimiento de este, no renueva la
+                    baja en cuenta de cartera ofrecida anteriormente.
+                </p>
 
                 <p>Acepto que existe la posibilidad que la amortización de las primeras cuotas pueda no incluir abono a
                     capital (ejemplo: ajuste del plan de amortización al valor de la cuota propuesta por mí).</p>
 
                 <p>En caso de existir inconsistencias en el diligenciamiento del formato, el Banco le informará y si
-                    usted
-                    no las subsana en el término de tres (3) días, la presente solicitud podrá ser cancelada y se
-                    continuará
-                    con el proceso de cobro en la instancia correspondiente.</p>
+                    usted no las subsana en el término de tres (3) días, la presente solicitud podrá ser cancelada y se
+                    continuará con el proceso de cobro en la instancia correspondiente.</p>
 
                 <p>Acepto que:</p>
                 <p>a. Esta solicitud puede implicar el bloqueo de mis productos con cupo en el tiempo que establezcan
-                    las
-                    políticas vigentes.</p>
+                    las políticas vigentes.</p>
                 <p>b. La operación solicitada puede generar marcación ante las Centrales de Riesgo por lo que autorizo
-                    al
-                    Banco a actualizar el reporte respectivo.</p>
-                <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la negociación
-                    podrá ser tramitada el mes siguiente.</p>
-                <p>d. Hasta cuando no se haya perfeccionado la negociación en trámite, se mantienen vigentes las
-                    condiciones
-                    actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos y en las
-                    fechas
-                    acordadas.</p>
-                <br>
+                    al Banco a actualizar el reporte respectivo.</p>
+                <p>c. Si esta solicitud es firmada dentro de los últimos cinco (5) días hábiles del mes, la
+                    gestión de recuperación podrá ser tramitada el mes siguiente.
+                </p>
+                 <p>d. Hasta cuando no se haya perfeccionado la gestión de recuperación en trámite, se
+                    mantienen vigentes las
+                    condiciones actuales del crédito y por lo tanto deberé continuar realizando los pagos por los montos
+                    y en las
+                    fechas acordadas.</p>
                 <p>Manifiesto que he recibido la información adecuada sobre las implicaciones en términos de costos,
-                    nueva
-                    forma de pago y calificación crediticia, así como un comparativo entre las condiciones actuales y
-                    las
-                    del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la
-                    Circular
-                    Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
+                    nueva forma de pago y calificación crediticia, así como un comparativo entre las condiciones
+                    actuales y
+                    las del crédito modificado o reestructurado de acuerdo a lo establecido en el numeral 2.4.4. de la
+                    Circular Básica Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017
+                    Superintendencia
                     Financiera de Colombia.</p>
-
-                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderan los Beneficios
-                    otorgados,
-                    pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los titulos y
+                <p>En caso de incumplimiento de las nuevas condiciones del crédito se perderá la baja en cuenta
+                    de cartera
+                    otorgada, pudiendo este declarar la exigibilidad anticipada, adelantar proceso de cobranza con los
+                    títulos y
                     realizar las marcaciones y reportes de acuerdo con el numeral 1.3.2.3.2.1 literal d. Circular Básica
                     Contable y Financiera (CBCF), modificada por la Circular Externa 026 de 2017 Superintendencia
-                    Financiera
-                    de Colombia. Si la (s) obligación (es) castigada (s) durante el trámite solicitado, el Banco hara el
+                    Financiera de Colombia. Si la (s) obligación (es) castigada (s) durante el trámite solicitado, el
+                    Banco hará el
                     respectivo reporte. En el evento de que esta solicitud sea negada, el Banco puede proceder a la
                     destrucción de los documentos aportados.</p><br>
 
                 <p>Yo <strong><span id="nombreClienteTerd_ampliacion"></span></strong> identificado
-                    con No. <strong><span id="numDocTerd_ampliacion"></span></strong> manifiesto
-                    que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del presente
-                    acuerdo,
-                    son de origen lícito y corresponde a
+                    con No. <strong><span id="numDocTerd_ampliacion"></span></strong> manifiesto que la procedencia de los recursos con los que efectúo el (los) pago (s) objeto del
+                    presente
+                    acuerdo, son de origen lícito y corresponde a
                     <span>________________________________________________________________________</span>
-                    Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la negociación
-                    el
-                    Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me será
-                    reintegrado y la negociación se tramitará con los nuevos saldos vigentes a la fecha de aplicación de
-                    la
-                    misma.
+                </p>
+                <p>Conozco que si durante el tiempo que demore el proceso de aprobación y aplicación de la
+                    gestión de recuperación
+                    el Banco realizará débitos a mis cuentas, para cubrir las obligaciones en mora, dicho valor no me
+                    será
+                    reintegrado y la gestión de recuperación se tramitará con los nuevos saldos
+                    vigentes a la fecha de aplicación de
+                    la misma.
                 </p><br>
-
                 <p>Para saber más sobre tiempo de permanencia y reporte negativo en las Centrales de Información:
-                    ingresa a
-                    la pagina del Banco de Bogotá www.bancodebogota.com, en la siguiente ruta: Inicio / Nuestra
-                    Organización
-                    / Transparencia / Ley Habeas Data.</p><br>
-
-                <p>Declaro que conozco y acepto los términos y condiciones de esta negociación, los cuales pueden ser
-                    consultados a través de
-                    https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
-                    condiciones - políticas de cobro</p>
+                    ingresa a la página del Banco de Bogotá www.bancodebogota.com, en la siguiente ruta: Inicio /
+                    Nuestra
+                    Organización / Transparencia / Ley Habeas Data.</p>
             </div>
-
             <!-- Questions Section -->
             <div class="questions-grid_Am">
                 <div class="question-row_Am">
@@ -746,11 +737,12 @@
 
             <div class="declara_cliente_Am">
                 <div class="question-text_Am">
-                    Me (nos)  obligamos a firmar Otro SI o un nuevo Pagare que recoja las nuevas condiciones de pago convenidas.<br>
-                    Declaro que he leido y acepto las condiciones de la presente solicitud 
+                    Me (nos) obligamos a firmar Otro SI o un nuevo Pagare que recoja las nuevas condiciones de pago
+                    convenidas.<br>
+                    Declaro que he leido y acepto las condiciones de la presente solicitud
                     consultados a través de
-                    https://www.bancodebogota.com/wps/portal/bancodebogota/bogota/terminos-condiciones/ términos y
-                    condiciones - políticas de cobro</div>
+                    www.bancodebogota.com – Términos y condiciones – Consulte los términos y condiciones de las
+                    políticas de cobro</div>
 
             </div>
 
@@ -764,144 +756,11 @@
                         <div class="signature-label_Am">Firma Cliente o Representante legal</div>
                         <div class="signature-info_Am">CC/NIT Número:</div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </dialog>
+
 </body>
 
 </html>
-
-
-
-
-<!--
-    <script>
-        // Función para establecer la fecha actual
-        function setCurrentDate() {
-            const today = new Date();
-            document.getElementById('day').textContent = today.getDate();
-            document.getElementById('month').textContent = today.getMonth() + 1;
-            document.getElementById('year').textContent = today.getFullYear();
-        }
-
-        function data() {
-            return {
-                // ... (campos anteriores se mantienen igual)
-                codOficina: '001',
-                nombreOficina: 'Oficina Prinx|cipal',
-                cuentaPago: '1234567890',
-                funcionario: 'Martin Elias Perez',
-                nombreCliente: 'Carlos Gómez',
-                tipoDoc: 'CC',
-                numDoc: '987654321',
-                lugarExp: 'Bogotá',
-                fechaExp: '01/01/2010',
-                diasMora: '30 dias',
-
-                descripcionActividad: 'Comerciante',
-                ingresoMensual: ' 5000000',
-                ocupacionAdicional: 'Freelance',
-                ingresosAdicionales: ' 2000000',
-
-                // CAMPOS ACTUALIZADOS SEGÚN LA IMAGEN
-                numObligacion: '5678',
-                saldoTotal: '15.000.000',
-                intCorrientes: '200.000',
-                intMora: '50.000',
-
-                BeneficioIntCorr: '$ 100.000',
-                porcentajeBenIntCorr: '50%',
-                BeneficioIntMora: '$ 25.000',
-                porcentajeBenIntMora: '50%',
-                totalBeneficio: '$ 125.000',
-                pagoRealizar: '$ 500.000',
-                fechaPagoNuevo: '12 febrero 2026',
-                plazoNuevo: '24 meses',
-                tasaInteresNuevo: '1.5%',
-                cuotaProyectadaNueva: '450.000',
-
-                pregunta1: 'No',
-                pregunta2: 'No',
-                pregunta3: 'Sí',
-                pregunta4: 'No',
-                garantiaFAG: 'Sí',
-                garantiaFNG: 'No',
-                observaciones: 'Cliente con buen historial de pagos.',
-            };
-        }
-
-        // Función para cargar datos del formulario
-        function loadFormData(data) {
-            // ... (Carga de cabecera y cliente igual)
-            document.getElementById('codOficina').textContent = data.codOficina || '';
-            document.getElementById('nombreOficina').textContent = data.nombreOficina || '';
-            document.getElementById('cuentaPago').textContent = data.cuentaPago || '';
-            document.getElementById('funcionario').textContent = data.funcionario || '';
-            document.getElementById('nombreCliente').textContent = data.nombreCliente || '';
-            document.getElementById('nombreClienteTerminos').textContent = data.nombreCliente || '';
-            document.getElementById('tipoDoc').textContent = data.tipoDoc || '';
-            document.getElementById('numDoc').textContent = data.numDoc || '';
-            document.getElementById('lugarExp').textContent = data.lugarExp || '';
-            document.getElementById('fechaExp').textContent = data.fechaExp || '';
-            document.getElementById('diasMora').textContent = data.diasMora || '';
-            document.getElementById('descripcionActividad').textContent = data.descripcionActividad || '';
-            document.getElementById('ingresoMensual').textContent = '$ ' + data.ingresoMensual || '';
-            document.getElementById('ocupacionAdicional').textContent = data.ocupacionAdicional || '';
-            document.getElementById('ingresosAdicionales').textContent = '$ ' + data.ingresosAdicionales || '';
-
-            // CARGA DE OBLIGACIONES (ACTUALIZADO)
-            document.getElementById('numObligacion').textContent = data.numObligacion || '';
-            document.getElementById('saldoTotal').textContent = '$ ' + data.saldoTotal || '';
-            document.getElementById('intCorrientes').textContent = '$ ' + data.intCorrientes || '';
-            document.getElementById('intMora').textContent = '$ ' + data.intMora || '';
-
-            // CARGA DE CONDICIONES (ACTUALIZADO)
-            document.getElementById('BeneficioIntCorr').textContent = data.BeneficioIntCorr || '';
-            document.getElementById('porcentajeBenIntCorr').textContent = data.porcentajeBenIntCorr || '';
-            document.getElementById('BeneficioIntMora').textContent = data.BeneficioIntMora || '';
-            document.getElementById('porcentajeBenIntMora').textContent = data.porcentajeBenIntMora || '';
-            document.getElementById('totalBeneficio').textContent = data.totalBeneficio || '';
-            document.getElementById('pagoRealizar').textContent = data.pagoRealizar || '';
-            document.getElementById('fechaPagoNuevo').textContent = data.fechaPagoNuevo || '';
-            document.getElementById('plazoNuevo').textContent = data.plazoNuevo || '';
-            document.getElementById('tasaInteresNuevo').textContent = data.tasaInteresNuevo || '';
-            document.getElementById('cuotaProyectadaNueva').textContent = data.cuotaProyectadaNueva || '';
-
-            // ... (Carga de preguntas y firmas igual)
-            document.getElementById('pregunta1').textContent = data.pregunta1 || '';
-            document.getElementById('pregunta2').textContent = data.pregunta2 || '';
-            document.getElementById('pregunta3').textContent = data.pregunta3 || '';
-            document.getElementById('pregunta4').textContent = data.pregunta4 || '';
-            document.getElementById('garantiaFAG').textContent = data.garantiaFAG || '';
-            document.getElementById('garantiaFNG').textContent = data.garantiaFNG || '';
-            document.getElementById('observaciones').textContent = data.observaciones || '';
-        }
-
-        setCurrentDate();
-        loadFormData(data());
-
-        function formatFun() {
-            let respuesta = confirm("¿Estás seguro de que deseas eliminar este elemento?");
-            if (respuesta) {
-                const element = document.getElementById('contenedor-pdf');
-                // Configuración de html2pdf
-                const options = {
-                    margin: 0,
-                    filename: 'documento.pdf',
-                    image: { type: 'jpeg', quality: 1 },
-                    html2canvas: { scale: 2, useCORS: true },
-                    jsPDf: { unit: 'in', format: 'letter', orientation: 'portrait' }
-                };
-
-                // Generar el PDF
-                html2pdf().set(options).from(element).save();
-
-            }
-
-        }
-        formatFun();
-    </script>
-    -->

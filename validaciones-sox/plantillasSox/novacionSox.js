@@ -10,7 +10,7 @@ function llenarCampos() {
     if (obligacion == undefined) {
         obligacion = '';
     } else {
-        obligacion = document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value === "" ? document.getElementById("caae86ca-b4e0-4e59-918e-8f7a1a4d4114").selectedOptions[0].innerText : document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value;
+        obligacion = document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value === "" ? document.getElementById("caae86ca-b4e0-4e59-918e-8f7a1a4d4114").selectedOptions[0]?.innerText || '' : document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value;
     }
     // 
     let saldoDiferir = getFieldValue("c6923383-8eec-4efe-81a5-954ce52b8882") || '';

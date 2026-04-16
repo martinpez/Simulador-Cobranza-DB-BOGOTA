@@ -257,12 +257,12 @@ function DataFunAmpliacion(mecanismo) {
         var saldoTotal = document.getElementById("12671e00-a829-472f-b644-be49ea7ebdbf").getAttribute("aria-valuenow") || "$";
         var intCorrientes = document.getElementById("70101be7-9330-44e4-913c-e6772c5b8167").getAttribute("aria-valuenow") || "$";
         var intMora = document.getElementById("aea118a4-8a99-4d3a-adf9-ffd5151db4f6").getAttribute("aria-valuenow") || "$";
-        var BeneficioIntCorr = document.getElementById("15a75d66-7dc0-4e25-b3e3-213a984a22fe").getAttribute("aria-valuenow") || "$";
-        var porcentajeBenIntCorr = document.getElementById("d8e6669a-3079-4248-88d5-5f01cca53106").getAttribute("aria-valuenow") || "$";
-        var BeneficioIntMora = document.getElementById("e4b7cc87-de9e-4fa1-9d65-d9595ed2cca2").getAttribute("aria-valuenow") || "$";
-        var porcentajeBenIntMora = document.getElementById("4f9627f2-7ada-415b-bf0c-cf308407c82a").getAttribute("aria-valuenow") || "$";
-        var totalBeneficio = document.getElementById("312df4ed-17a6-4e38-899a-e075171f9d84").getAttribute("aria-valuenow") || "$";
-        var pagoRealizar = document.getElementById("9b88d521-a3dd-4948-8c3f-6dece97a17a5").getAttribute("aria-valuenow") || "$";
+        var BajacuentaIntCorr = document.getElementById("15a75d66-7dc0-4e25-b3e3-213a984a22fe").getAttribute("aria-valuenow") || "$";
+        var porcentajeBajacuentaIntCorr = document.getElementById("d8e6669a-3079-4248-88d5-5f01cca53106").getAttribute("aria-valuenow") || "$";
+        var BajacuentaIntMora = document.getElementById("e4b7cc87-de9e-4fa1-9d65-d9595ed2cca2").getAttribute("aria-valuenow") || "$";
+        var porcentajeBajacuentaIntMora = document.getElementById("4f9627f2-7ada-415b-bf0c-cf308407c82a").getAttribute("aria-valuenow") || "$";
+        var totalBajacuenta = document.getElementById("312df4ed-17a6-4e38-899a-e075171f9d84").getAttribute("aria-valuenow") || "$";
+        var pagoRealizar = document.getElementById("44770cdb-4d75-4b2a-957f-400410e65e8d").getAttribute("aria-valuenow") || "$";
         var cuotaProyectada = document.getElementById("2edec98b-a7b5-49a8-8cae-623f05fe0cd5").getAttribute("aria-valuenow") || "$";
         var fechaPago = document.querySelector(
             "#\\33 d0f4be2-1bb6-446c-9ebb-b38a7eba0d5c > div.dx-dropdowneditor-input-wrapper > div > div.dx-texteditor-input-container > input"
@@ -278,8 +278,6 @@ function DataFunAmpliacion(mecanismo) {
         var observaciones = document.getElementById("4b025de3-4404-41f3-8ba8-ac9b0988391e").value || "";
 
         return {
-
-
             descripcionActividad,
             ingresoMensual,
             ocupacionAdicional,
@@ -288,15 +286,15 @@ function DataFunAmpliacion(mecanismo) {
             saldoTotal,
             intCorrientes,
             intMora,
-            BeneficioIntCorr,
-            porcentajeBenIntCorr: porcentajeBenIntCorr + " %",
-            BeneficioIntMora,
-            porcentajeBenIntMora: porcentajeBenIntMora + " %",
-            totalBeneficio,
+            BajacuentaIntCorr,
+            porcentajeBajacuentaIntCorr: porcentajeBajacuentaIntCorr + " %",
+            BajacuentaIntMora,
+            porcentajeBajacuentaIntMora: porcentajeBajacuentaIntMora + " %",
+            totalBajacuenta,
             pagoRealizar,
             fechaPago,
             plazo: plazo + " meses",
-            tasaEA,
+            tasaEA: tasaEA + " %",
             cuotaProyectada,
             pregunta1,
             pregunta2,
@@ -323,11 +321,11 @@ function DataFunAmpliacion(mecanismo) {
         document.getElementById("intCorrientes_" + mecanismo).textContent = formateador.format(data.intCorrientes);
         document.getElementById("intMora_" + mecanismo).textContent = formateador.format(data.intMora);
         document.getElementById("fechaPago_" + mecanismo).textContent = data.fechaPago;
-        document.getElementById("BeneficioIntCorr_" + mecanismo).textContent = formateador.format(data.BeneficioIntCorr);
-        document.getElementById("porcentajeBenIntCorr_" + mecanismo).textContent = data.porcentajeBenIntCorr;
-        document.getElementById("BeneficioIntMora_" + mecanismo).textContent = formateador.format(data.BeneficioIntMora);
-        document.getElementById("porcentajeBenIntMora_" + mecanismo).textContent = data.porcentajeBenIntMora;
-        document.getElementById("totalBeneficio_" + mecanismo).textContent = formateador.format(data.totalBeneficio);
+        document.getElementById("bajacuentaIntCorr_" + mecanismo).textContent = formateador.format(data.BajacuentaIntCorr);
+        document.getElementById("porcentajeBajacuentaIntCorr_" + mecanismo).textContent = data.porcentajeBajacuentaIntCorr;
+        document.getElementById("bajacuentaIntMora_" + mecanismo).textContent = formateador.format(data.BajacuentaIntMora);
+        document.getElementById("porcentajeBajacuentaIntMora_" + mecanismo).textContent = data.porcentajeBajacuentaIntMora;
+        document.getElementById("totalBajacuenta_" + mecanismo).textContent = formateador.format(data.totalBajacuenta);
         document.getElementById("pagoRealizar_" + mecanismo).textContent = formateador.format(data.pagoRealizar);
         document.getElementById("cuotaProyectada_" + mecanismo).textContent = formateador.format(data.cuotaProyectada);
         document.getElementById("plazo_" + mecanismo).textContent = data.plazo;
@@ -352,6 +350,7 @@ function DataFunAmpliacion(mecanismo) {
 //-------------------------------------------------------------------------------
 
 function DataFunMora(mecanismo) {
+
 
     function dataMora() {
         function getSelectText(id, defaultValue = "NO") {
@@ -471,6 +470,129 @@ function DataFunMora(mecanismo) {
 }
 
 //-------------------------------------------------------------------------------
+function DataFunCancelacion(mecanismo) {
+    function dataCancelacion() {
+        function getSelectText(id, defaultValue = "NO") {
+            const el = document.getElementById(id);
+            if (!el) {
+                console.warn(`Elemento no encontrado: ${id}`);
+                return defaultValue;
+            }
+            if (el.selectedIndex >= 0) {
+                return el.options[el.selectedIndex].innerText.trim();
+            }
+            return defaultValue;
+        }
+
+
+        var descripcionActividad = document.getElementById("e71d8cfa-270b-479b-b521-b19ebf077bb9").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("e71d8cfa-270b-479b-b521-b19ebf077bb9").selectedOptions[0].innerText || "";
+        var ingresoMensual = document.getElementById("0f3bb14e-9498-4a89-ad90-020af7f34e16").value || "$";
+        var ocupacionAdicional = document.getElementById("0ec800f1-e949-44a5-9290-84b38df0ed2b").selectedOptions[0].innerText === "Seleccione un registro..." ? "" : document.getElementById("b54af750-167e-4831-bb8c-c374e7f45202").selectedOptions[0].innerText || "";
+        var ingresosAdicionales = document.getElementById("1a47c2c1-4551-4d13-89ca-82e89ce655c0").value || "$";
+        var numObligacion = document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value === "" ? document.getElementById("caae86ca-b4e0-4e59-918e-8f7a1a4d4114").selectedOptions[0].innerText : document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value;
+        var pagoMinimo = document.getElementById("af9911f8-4a06-4483-b25d-6bec9e1647fe").getAttribute("aria-valuenow") || "$";
+        var intCorrientes = document.getElementById("9b3ac68c-68ff-4928-864d-906e9d851621").getAttribute("aria-valuenow") || "$";
+        var intMora = document.getElementById("c13b3910-1960-422f-835d-7ea89982f8b6").getAttribute("aria-valuenow") || "$";
+        var intExtraC = document.getElementById("aef7fd98-0a00-4ec8-95d9-37840df1fe67").getAttribute("aria-valuenow") || "$";
+        var benValorCorr = document.getElementById("49ed37fa-10f7-46d1-b2d3-bd4e28bef0db").getAttribute("aria-valuenow") || "$";
+        var benValorMora = document.getElementById("db8c0e77-0029-4bf9-ba9a-ebc141721c33").getAttribute("aria-valuenow") || "$";
+        var benValorExtra = document.getElementById("a01eeadb-b99e-4e08-9d93-3fe44b9e1cf8").getAttribute("aria-valuenow") || "$";
+        var porcBenIntCorr = document.getElementById("e076d650-c5d6-48b1-920b-295d431604b0").getAttribute("aria-valuenow") || "$";
+        var porcBenIntMora = document.getElementById("64fcdf9f-c6b3-4742-b4b2-e259759290d9").getAttribute("aria-valuenow") || "$";
+        var porcBenIntExtra = document.getElementById("0456eeb3-8809-48a5-8726-87e416efdcb3").getAttribute("aria-valuenow") || "$";
+        var pagoRealizar = document.getElementById("3539dba8-0c22-491e-a05b-84642d675d59").getAttribute("aria-valuenow") || "$";
+        var totalBeneficio = document.getElementById("6cfd4b2c-6ef4-4821-95d5-364657fda787").getAttribute("aria-valuenow") || "$";
+        var fechaPago = document.querySelector("#ee8b70aa-2712-408c-a87a-b121e20564b3 > div.dx-dropdowneditor-input-wrapper > div > div.dx-texteditor-input-container > input").value.replaceAll('-', '')
+        var pregunta1 = getSelectText("pregunta1");
+        var pregunta2 = getSelectText("pregunta2");
+        var pregunta3 = getSelectText("pregunta3");
+        var pregunta4 = getSelectText("pregunta4");
+        var garantiaFAG = getSelectText("garantiaFAG");
+        var garantiaFNG = getSelectText("garantiaFNG");
+        var observaciones = document.getElementById("4b025de3-4404-41f3-8ba8-ac9b0988391e").value || "";
+
+        return {
+            descripcionActividad,
+            ingresoMensual,
+            ocupacionAdicional,
+            ingresosAdicionales,
+            numObligacion,
+
+            pagoMinimo,
+            intCorrientes,
+            intMora,
+            intExtraC,
+
+            // Panel Derecho
+            benValorCorr,
+            porcBenIntCorr: porcBenIntCorr + " %",
+            benValorMora,
+            porcBenIntMora: porcBenIntMora + " %",
+            benValorExtra,
+            porcBenIntExtra: porcBenIntExtra + " %",
+            totalBeneficio,
+            pagoRealizar,
+            fechaPago,
+
+
+            pregunta1,
+            pregunta2,
+            pregunta3,
+            pregunta4,
+            garantiaFAG,
+            garantiaFNG,
+            observaciones,
+
+        }
+    }
+    const formateador = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0
+    });
+    function loadFormData(data) {
+
+        document.getElementById("descripcionActividad_" + mecanismo).textContent = data.descripcionActividad;
+        document.getElementById("ingresoMensual_" + mecanismo).textContent = formateador.format(data.ingresoMensual);
+        document.getElementById("ocupacionAdicional_" + mecanismo).textContent = data.ocupacionAdicional;
+        document.getElementById("ingresosAdicionales_" + mecanismo).textContent = formateador.format(data.ingresosAdicionales);
+        document.getElementById("numObligacion_" + mecanismo).textContent = data.numObligacion;
+
+        document.getElementById('pagoMinimo_' + mecanismo).textContent = formateador.format(data.pagoMinimo || 0);
+        document.getElementById('intCorrientes_' + mecanismo).textContent = formateador.format(data.intCorrientes || 0);
+        document.getElementById('intMora_' + mecanismo).textContent = formateador.format(data.intMora || 0);
+        document.getElementById('intExtraC_' + mecanismo).textContent = formateador.format(data.intExtraC || 0);
+
+        document.getElementById('benIntCorr_' + mecanismo).textContent = formateador.format(data.benValorCorr || 0);
+        document.getElementById('porcBenIntCorr_' + mecanismo).textContent = data.porcBenIntCorr || '';
+        document.getElementById('benIntMora_' + mecanismo).textContent = formateador.format(data.benValorMora || 0);
+        document.getElementById('porcBenIntMora_' + mecanismo).textContent = data.porcBenIntMora || '';
+        document.getElementById('benIntExtra_' + mecanismo).textContent = formateador.format(data.benValorExtra || 0);
+        document.getElementById('porcBenIntExtra_' + mecanismo).textContent = data.porcBenIntExtra || '';
+        document.getElementById('totalBen_' + mecanismo).textContent = formateador.format(data.totalBeneficio || 0);
+        document.getElementById('pagoRealizar_' + mecanismo).textContent = formateador.format(data.pagoRealizar || 0);
+        document.getElementById('fechaPago_' + mecanismo).textContent = data.fechaPago || '';
+        document.getElementById("pregunta1_display_" + mecanismo).textContent = data.pregunta1;
+        document.getElementById("pregunta2_display_" + mecanismo).textContent = data.pregunta2;
+        document.getElementById("pregunta3_display_" + mecanismo).textContent = data.pregunta3;
+        document.getElementById("pregunta4_display_" + mecanismo).textContent = data.pregunta4;
+        document.getElementById("garantiaFAG_display_" + mecanismo).textContent = data.garantiaFAG;
+        document.getElementById("garantiaFNG_display_" + mecanismo).textContent = data.garantiaFNG;
+        document.getElementById("observaciones_" + mecanismo).textContent = data.observaciones;
+
+    }
+    setTimeout(() => {
+        loadFormData(dataMora());
+        console.log("Datos para novacion cargados");
+        console.log("Datos:", dataMora());
+
+    }, 500);
+}
+
+
+
+
+//-------------------------------------------------------------------------------
 
 function loadModalFun(mecanismo) {
 
@@ -568,7 +690,8 @@ function sendDataFunPDF(mecanismo) {
             unit: 'mm',
             format: 'letter',
             orientation: 'portrait'
-        }
+        },
+
     };
 
     // Encadenamos el guardado y pedimos el Base64 de forma segura
