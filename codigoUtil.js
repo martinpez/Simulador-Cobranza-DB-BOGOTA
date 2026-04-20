@@ -1,7 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const modal = document.getElementById('modalampliacion');
+    const modal = document.getElementById('modalcancelacion');
     const btnAbrir = document.getElementById('btnAbrir');
 
     // VERIFICACIÓN DE SEGURIDAD: Solo añade eventos si los elementos existen

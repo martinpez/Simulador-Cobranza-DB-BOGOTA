@@ -186,6 +186,8 @@ function inicializarNavegacion() {
         navegarA(VISTAS.PAGOMORA_P1);
     });
     $(".right-buttonM2").click(() => {
+        // Cambiar el pago a producto a pago nacional de recuado 
+        var pago = document.getElementById("685c5e9d-4409-4d4c-a11e-a0c17dcedb02").value = "000-778175"
         navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
     });
 
@@ -214,6 +216,7 @@ function inicializarNavegacion() {
         navegarA(VISTAS.CANCELACION_P2);
     });
     $(".right-buttonCA3").click(() => {
+        var pago = document.getElementById("685c5e9d-4409-4d4c-a11e-a0c17dcedb02").value = "000-778175"
         navegarA(VISTAS.INFORMACION_CLIENTE);
     });
 
@@ -252,6 +255,7 @@ function inicializarNavegacion() {
     });
 
     $(".right-buttonAM3").click(() => {
+        var pago = document.getElementById("685c5e9d-4409-4d4c-a11e-a0c17dcedb02").value = "000-778175"
         navegarA(VISTAS.INFORMACION_CLIENTE);
     });
 

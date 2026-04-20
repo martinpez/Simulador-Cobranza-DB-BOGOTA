@@ -17,6 +17,7 @@ function DataEventoGeneral() {
             break;
         case "cancelacion":
             funDataGenerica("cancelacion");
+            DataFunCancelacion("cancelacion");
             loadModalFun("cancelacion");
             break;
         case "ampliacion":
@@ -45,6 +46,7 @@ function DataEventoenv() {
             break;
         case "cancelacion":
             funDataGenerica("cancelacion");
+            DataFunCancelacion("cancelacion");
             break;
         case "ampliacion":
             funDataGenerica("ampliacion");
@@ -496,18 +498,21 @@ function DataFunCancelacion(mecanismo) {
         var ingresosAdicionales = document.getElementById("b456dc67-eccd-4868-a9f0-aeb0c2254b07").value || "$";
         var numObligacion = document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value === "" ? document.getElementById("caae86ca-b4e0-4e59-918e-8f7a1a4d4114").selectedOptions[0].innerText : document.getElementById("c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0").value;
         var saldoTotal = document.getElementById("f47f1a89-6743-4f60-9cf6-0696e6c841ca").getAttribute("aria-valuenow") || "$";
-        var intCorrientes = document.getElementById("9b3ac68c-68ff-4928-864d-906e9d851621").getAttribute("aria-valuenow") || "$";
-        var intMora = document.getElementById("c13b3910-1960-422f-835d-7ea89982f8b6").getAttribute("aria-valuenow") || "$";
-        var intExtraC = document.getElementById("aef7fd98-0a00-4ec8-95d9-37840df1fe67").getAttribute("aria-valuenow") || "$";
-        var benValorCorr = document.getElementById("49ed37fa-10f7-46d1-b2d3-bd4e28bef0db").getAttribute("aria-valuenow") || "$";
-        var benValorMora = document.getElementById("db8c0e77-0029-4bf9-ba9a-ebc141721c33").getAttribute("aria-valuenow") || "$";
-        var benValorExtra = document.getElementById("a01eeadb-b99e-4e08-9d93-3fe44b9e1cf8").getAttribute("aria-valuenow") || "$";
-        var porcBenIntCorr = document.getElementById("e076d650-c5d6-48b1-920b-295d431604b0").getAttribute("aria-valuenow") || "$";
-        var porcBenIntMora = document.getElementById("64fcdf9f-c6b3-4742-b4b2-e259759290d9").getAttribute("aria-valuenow") || "$";
-        var porcBenIntExtra = document.getElementById("0456eeb3-8809-48a5-8726-87e416efdcb3").getAttribute("aria-valuenow") || "$";
-        var pagoRealizar = document.getElementById("3539dba8-0c22-491e-a05b-84642d675d59").getAttribute("aria-valuenow") || "$";
-        var totalBeneficio = document.getElementById("6cfd4b2c-6ef4-4821-95d5-364657fda787").getAttribute("aria-valuenow") || "$";
-        var fechaPago = document.querySelector("#ee8b70aa-2712-408c-a87a-b121e20564b3 > div.dx-dropdowneditor-input-wrapper > div > div.dx-texteditor-input-container > input").value.replaceAll('-', '')
+        var CapitalTotal = document.getElementById("9dc154b0-5d64-4682-a76d-5e946415c253").getAttribute("aria-valuenow") || "$";
+        var intCorrientes = document.getElementById("48f8260e-5e81-43d3-b69c-d94808cb229e").getAttribute("aria-valuenow") || "$";
+        var intMora = document.getElementById("d85c85c3-2a7c-44db-b240-2420990d7375").getAttribute("aria-valuenow") || "$";
+        var intExtraC = document.getElementById("a9977387-4683-4d89-9e58-851cb72f9886").getAttribute("aria-valuenow") || "$";
+        var bajacuentaCapital = document.getElementById("60bebeab-d3ca-4547-9eff-00cc8db69b82").getAttribute("aria-valuenow") || "$";
+        var porcBajacuentaCapital = document.getElementById("aa7aeaf3-6bc8-4939-9896-212d5efcd93e").getAttribute("aria-valuenow") || "$";
+        var bajacuentaIntCorr = document.getElementById("86f86bd7-d119-4d2a-a6c0-e711b1d835a6").getAttribute("aria-valuenow") || "$";
+        var porcBajacuentaIntCorr = document.getElementById("bcfd54b6-d1cf-40dc-8677-686652eedbb8").getAttribute("aria-valuenow") || "$";
+        var bajacuentaIntMora = document.getElementById("a6ee4c8b-a6c5-4bd8-8c30-9e29b9c40115").getAttribute("aria-valuenow") || "$";
+        var porcBajacuentaIntMora = document.getElementById("433ffa22-78e7-4004-be47-2b0ccf497ad1").value || "%";
+        var bajacuentaIntExtra = document.getElementById("8ea64929-53a9-41b4-a01f-a14b74293d01").getAttribute("aria-valuenow") || "$";
+        var porcBajacuentaIntExtra = document.getElementById("a724067d-e7bf-435c-94ac-bf44f72575e7").getAttribute("aria-valuenow") || "$";
+        var pagoRealizar = document.getElementById("b5c33a6d-9d65-4920-8a39-e73621b7daa9").getAttribute("aria-valuenow") || "$";
+        let fechaPago = document.querySelector("#\\39 630246d-c683-4104-a141-391c9541b5cd > div > div > div.dx-texteditor-input-container > input").value
+        fechaPago = fechaPago.replaceAll('-', '');
         var pregunta1 = getSelectText("pregunta1");
         var pregunta2 = getSelectText("pregunta2");
         var pregunta3 = getSelectText("pregunta3");
@@ -525,24 +530,24 @@ function DataFunCancelacion(mecanismo) {
 
             // Panel Derecho
             saldoTotal,
-            saldoTotal2: '10.000',
-            intCorrientes: '0',
-            intMora: '0',
-            intExtraC: '12',
+            CapitalTotal,
+            intCorrientes,
+            intMora,
+            intExtraC,
 
             // Baja en cuentas Aplicados
-            benSaldo: '10.000',
-            porcBenSaldo: '1%',
-            benIntCorr: '123',
-            porcBenIntCorr: '21%',
-            benIntMora: '2',
-            porcBenIntMora: '100%',
-            benIntExtra: '3',
-            porcBenIntExtra: '12%',
+            bajacuentaCapital,
+            porcBajacuentaCapital: porcBajacuentaCapital + " %",
+            bajacuentaIntCorr,
+            porcBajacuentaIntCorr: porcBajacuentaIntCorr + " %",
+            bajacuentaIntMora,
+            porcBajacuentaIntMora: porcBajacuentaIntMora + " %",
+            bajacuentaIntExtra,
+            porcBajacuentaIntExtra: porcBajacuentaIntExtra + " %",
 
             // Condiciones Pago
-            pagoRealizar: '$ 120.000',
-            fechaPagoNuevo: '12 febrero 2026',
+            pagoRealizar,
+            fechaPago,
             pregunta1,
             pregunta2,
             pregunta3,
@@ -567,17 +572,19 @@ function DataFunCancelacion(mecanismo) {
         document.getElementById("numObligacion_" + mecanismo).textContent = data.numObligacion;
 
         document.getElementById('saldoTotal_' + mecanismo).textContent = formateador.format(data.saldoTotal || 0);
+        document.getElementById('capitalTotal_' + mecanismo).textContent = formateador.format(data.CapitalTotal || 0);
         document.getElementById('intCorrientes_' + mecanismo).textContent = formateador.format(data.intCorrientes || 0);
         document.getElementById('intMora_' + mecanismo).textContent = formateador.format(data.intMora || 0);
         document.getElementById('intExtraC_' + mecanismo).textContent = formateador.format(data.intExtraC || 0);
 
-        document.getElementById('benIntCorr_' + mecanismo).textContent = formateador.format(data.benValorCorr || 0);
-        document.getElementById('porcBenIntCorr_' + mecanismo).textContent = data.porcBenIntCorr || '';
-        document.getElementById('benIntMora_' + mecanismo).textContent = formateador.format(data.benValorMora || 0);
-        document.getElementById('porcBenIntMora_' + mecanismo).textContent = data.porcBenIntMora || '';
-        document.getElementById('benIntExtra_' + mecanismo).textContent = formateador.format(data.benValorExtra || 0);
-        document.getElementById('porcBenIntExtra_' + mecanismo).textContent = data.porcBenIntExtra || '';
-        document.getElementById('totalBen_' + mecanismo).textContent = formateador.format(data.totalBeneficio || 0);
+        document.getElementById('bajacuentaCapital_' + mecanismo).textContent = formateador.format(data.bajacuentaCapital || 0);
+        document.getElementById('porcBajacuentaCapital_' + mecanismo).textContent = data.porcBajacuentaCapital || '';
+        document.getElementById('bajacuentaIntCorr_' + mecanismo).textContent = formateador.format(data.bajacuentaIntCorr || 0);
+        document.getElementById('porcBajacuentaIntCorr_' + mecanismo).textContent = data.porcBajacuentaIntCorr || '';
+        document.getElementById('bajacuentaIntMora_' + mecanismo).textContent = formateador.format(data.bajacuentaIntMora || 0);
+        document.getElementById('porcBajacuentaIntMora_' + mecanismo).textContent = data.porcBajacuentaIntMora || '';
+        document.getElementById('bajacuentaIntExtra_' + mecanismo).textContent = formateador.format(data.bajacuentaIntExtra || 0);
+        document.getElementById('porcBajacuentaIntExtra_' + mecanismo).textContent = data.porcBajacuentaIntExtra || '';
         document.getElementById('pagoRealizar_' + mecanismo).textContent = formateador.format(data.pagoRealizar || 0);
         document.getElementById('fechaPago_' + mecanismo).textContent = data.fechaPago || '';
         document.getElementById("pregunta1_display_" + mecanismo).textContent = data.pregunta1;
@@ -590,9 +597,9 @@ function DataFunCancelacion(mecanismo) {
 
     }
     setTimeout(() => {
-        loadFormData(dataMora());
-        console.log("Datos para novacion cargados");
-        console.log("Datos:", dataMora());
+        loadFormData(dataCancelacion());
+        console.log("Datos para cancelacion cargados");
+        console.log("Datos:", dataCancelacion());
 
     }, 500);
 }
