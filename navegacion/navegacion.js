@@ -197,6 +197,8 @@ function inicializarNavegacion() {
     $(".cancelacion").click(() => {
         sessionStorage.mecanismo = "cancelacion"
         navegarA(VISTAS.CANCELACION_TOTAL_PAG1);
+        DescuentoInteresCte();
+        recalcularcancelacion();
     });
     $(".right-buttonCA1").click(() => {
         navegarA(VISTAS.CANCELACION_P2);
