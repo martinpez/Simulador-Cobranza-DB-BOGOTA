@@ -1,4 +1,4 @@
-function CalculosConsolidacion(){
+function CalculosConsolidacion() {
     let dato = sumarvalor('Interes Corriente *')
     console.log("Valor Sumatoia de Intereses Corrientes: " + dato);
     setFieldValue('04dbcb19-8f74-4eac-81f3-6bcc76cd7f9a', dato)
@@ -13,23 +13,23 @@ function CalculosConsolidacion(){
     let porIntMo = interesmora == 0 || interesmora === "" ? 0 : 100;
     let porIntEX = interesextra == 0 || interesextra == "" ? 0 : 100;
     console.log("pocentajes de consolidacion: " + porIntCo, porIntMo, porIntEX);
-    
+
     setFieldValue('b42b41d8-cd57-4233-9bff-8a5ceec5af03', porIntCo)
-    
+
     setFieldValue('e970af6e-de8d-47b3-97d0-98e4950c9bdf', porIntEX)
-    
+
     setFieldValue('e079d101-5148-42ed-854e-9be982adc01e', porIntMo)
 
     let totalSaldo = sumarvalor('Saldo Total *')
-    let saldoDesembolsar = totalSaldo-porIntCo-porIntMo-porIntEX
+    let saldoDesembolsar = totalSaldo - dato - interesmora - interesextra
 
-    setFieldValue('69b7fc43-675b-4984-bd64-9fd68799a97b',saldoDesembolsar)
+    setFieldValue('69b7fc43-675b-4984-bd64-9fd68799a97b', saldoDesembolsar)
 
     let peormarca = obtenerMarcaLetraConPeorMarcaMaxima()
-    setFieldValue('183f4194-c998-41a4-9a8c-1436cc78132f',peormarca)
+    setFieldValue('183f4194-c998-41a4-9a8c-1436cc78132f', peormarca)
 }
 
-function obligacionesSinBaseConsolidacionvacia(data) {}
+function obligacionesSinBaseConsolidacionvacia(data) { }
 
 async function obligacionSinBaseConsolidacion(Cantidad) {
     const consolidacionDiv = document.getElementById("consolidacion");
@@ -179,7 +179,7 @@ function sumarvalor(label) {
         if (toggle && toggle.checked) {
             // Buscar el campo de "Saldo Total" usando el atributo 'data-label'
             const valorInput = card.querySelector(`.field-container .input[data-label='${label}']`);
-            
+
             if (valorInput) {
                 // Usar el valor sin formato del atributo 'data-raw-value'
                 const rawValue = valorInput.getAttribute('data-raw-value');
