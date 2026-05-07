@@ -1,18 +1,22 @@
-if (e.value > 0){
-    debugger;
-    DescuentoInteresCte()
-    recalcularcancelacion()
-    if (e.value < getFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f')) {
-        toastr.warning('El valor a pagar debe ser mayor al abono minimo que debe realizar el cliente.')
-    }
-    let descuento = getFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca')
-    let operacion = descuento - e.value + 10000
-    if (operacion > 0) {
-        setFieldValue('7ed52d26-15c9-4f11-9177-55a380d1427d', operacion)
-    } else {
-        setFieldValue('7ed52d26-15c9-4f11-9177-55a380d1427d', 0)
-    }
-}
 
-    
+ const selector = `body > app-root > app-base > div > div > div > div 
+    > app-forms > div > div > div > div > form > ul > li:nth-child(2) > a`;
 
+
+// pagina  principal sm
+const panel = document.querySelector("#e1de7a44-7292-4d1d-975f-7231b8f5fd39_panel");
+
+const labels = [...panel.querySelectorAll("span")]
+  .filter(span => span.textContent.includes("*"))
+  .map(span => span.textContent.trim());
+
+console.log(labels);
+
+// Novacviones pag.1
+const panel = document.querySelector("#62c08137-795d-4813-be3e-371472224abc_panel");
+
+const labels = [...panel.querySelectorAll("span")]
+  .filter(span => span.textContent.includes("*"))
+  .map(span => span.textContent.trim());
+
+console.log(labels);
