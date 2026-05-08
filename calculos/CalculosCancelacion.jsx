@@ -186,7 +186,7 @@ function DescuentoInteresCte() {
 
     //if(!sessionStorage.Capital){
     setFieldValue('60bebeab-d3ca-4547-9eff-00cc8db69b82', descuentoCapital)
-    let porCapital = (descuentoCapital / capital) * 100
+    let porCapital = Math.round((descuentoCapital / capital) * 100)
     setFieldValue('aa7aeaf3-6bc8-4939-9896-212d5efcd93e', porCapital)
     //}
     // Calcula los valores intermedios
