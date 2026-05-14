@@ -1,114 +1,128 @@
 function vaciacancelar() { }
 async function poblarCancelacion() {
+
     delete sessionStorage.Capital
-
     let producto = e.dataItem.Producto
+
     let saldoTotalObl = e.dataItem.SaldoTotalObl
+    setFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca', saldoTotalObl)
     let interescteObl = e.dataItem.InteresCteObl
-    let interesmora = e.dataItem.InteresMoraObl
-    let capital = e.dataItem.CapitalTotalObl
+    setFieldValue('48f8260e-5e81-43d3-b69c-d94808cb229e', interescteObl)
+
     let edadmora = e.dataItem.EdadMoraCl
-
     sessionStorage.edadmoraCancelacion = edadmora
-
-    // ── Consulta tasas ──
-    let query = `SELECT PorcCancelacionIntMora, PorcCancelacionIntCte, PorcPagoMoraIntExtraC, PorcentajeCT 
-                 FROM SimiladorDNC_Lappiz_TasasVertas WHERE RangoDias3 = '${edadmora}'`
+    let query = `select PorcCancelacionIntMora, PorcCancelacionIntCte, PorcPagoMoraIntExtraC, PorcentajeCT from SimiladorDNC_Lappiz_TasasVigentes where RangoDias3 = '${edadmora}'`
     let response = await execQuery(query)
+    console.log(response[0][0])
 
-    //  Validar que la query devolvió datos
-    if (!response || !response[0] || !response[0][0]) {
-        console.error(`poblarCancelacion: No se encontraron tasas para edad de mora "${edadmora}". 
-                       Verificar tabla SimiladorDNC_Lappiz_TasasVertas y columna RangoDias3.`)
-        toastr.warning(`No se encontraron tasas para la edad de mora: "${edadmora}"`)
-        return
-    }
+    sessionStorage.PorcCancelacionIntCte = response[0][0].PorcCancelacionIntCte
+    sessionStorage.PorcCancelacionIntMora = response[0][0].PorcCancelacionIntMora
+    sessionStorage.PorcPagoMoraIntExtraC = response[0][0].PorcPagoMoraIntExtraC
+    sessionStorage.PorcentajeCT = response[0][0].PorcentajeCT
 
-    let tasas = response[0][0]
 
-    let Pordescuentoint = tasas.PorcCancelacionIntCte
-    let pordescuentomora = tasas.PorcCancelacionIntMora
-    let pordescuentoextra = tasas.PorcPagoMoraIntExtraC
-    let PorcentajeCT = tasas.PorcentajeCT
+
+    let Pordescuentoint = response[0][0].PorcCancelacionIntCte
+
+
+    let pordescuentomora = response[0][0].PorcCancelacionIntMora
+    let pordescuentoextra = response[0][0].PorcPagoMoraIntExtraC
+    let PorcentajeCT = response[0][0].PorcentajeCT
     let desCapital = 0
-
     sessionStorage.MecanismoAplicaCampana = e.dataItem.MecanismoAplicaCampana
 
     if (e.dataItem.MecanismoAplicaCampana && e.dataItem.MecanismoAplicaCampana.includes("CANCELACION")) {
-        sessionStorage.campañacancelacion = 1
+        sessionStorage.campañacancelacion = "si"
         Pordescuentoint = e.dataItem.DtoInteresesCampana
         pordescuentomora = e.dataItem.DtoInteresesMoraCampana
         pordescuentoextra = e.dataItem.DtoInteresExtracontablesCampana
         PorcentajeCT = e.dataItem.DctoCapitalCampana
-        desCapital = capital * (e.dataItem.DctoCapitalCampana / 100)
+        console.log('si tiene campaña en cancelacion')
+        desCapital = e.dataItem.CapitalTotalObl * (e.dataItem.DctoCapitalCampana / 100)
         sessionStorage.DctoCapitalCampana = e.dataItem.DctoCapitalCampana / 100
         sessionStorage.Capital = 'Si'
-    }
 
-    // Guardar en session
+    } else {
+        sessionStorage.campañacancelacion = "no"
+    }
     sessionStorage.PorcCancelacionIntCte = Pordescuentoint
     sessionStorage.PorcCancelacionIntMora = pordescuentomora
-    sessionStorage.pordescuentoextra = pordescuentoextra
+
+    sessionStorage.desCapital = desCapital
     sessionStorage.PorcentajeCT = PorcentajeCT
     sessionStorage.Pordescuentoint = Pordescuentoint
     sessionStorage.pordescuentomora = pordescuentomora
-    sessionStorage.desCapital = desCapital
+    sessionStorage.pordescuentoextra = pordescuentoextra
+    setFieldValue('bcfd54b6-d1cf-40dc-8677-686652eedbb8', Pordescuentoint)
 
-    let bloqueado = (edadmora === "1-30 Días" || edadmora === "31-60 Días")
 
-    // ── Saldo total ──
-    setFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca', saldoTotalObl)
 
-    // ── Int corriente ──
-    setFieldValue('48f8260e-5e81-43d3-b69c-d94808cb229e', interescteObl)
-    let maxDctoIntCte = bloqueado ? 0 : (Pordescuentoint / 100) * interescteObl
-    setFieldValue('1c23cf01-dd67-4c9a-a4b6-871c781eec02', maxDctoIntCte)
-    setFieldValue('86f86bd7-d119-4d2a-a6c0-e711b1d835a6', maxDctoIntCte)
-    setFieldValue('bcfd54b6-d1cf-40dc-8677-686652eedbb8', bloqueado ? 0 : Pordescuentoint)
-
-    // ── Int mora ──
+    let maxDescuentoInt = (Pordescuentoint / 100) * interescteObl
+    setFieldValue('1c23cf01-dd67-4c9a-a4b6-871c781eec02', maxDescuentoInt)
+    //seccion mora
+    let interesmora = e.dataItem.InteresMoraObl
     setFieldValue('d85c85c3-2a7c-44db-b240-2420990d7375', interesmora)
-    let maxDctoMora = bloqueado ? 0 : (pordescuentomora / 100) * interesmora
-    setFieldValue('0c422603-5f6e-4c23-a7b5-b78cf30ba1d8', maxDctoMora)
-    setFieldValue('a6ee4c8b-a6c5-4bd8-8c30-9e29b9c40115', maxDctoMora)
-    setFieldValue('433ffa22-78e7-4004-be47-2b0ccf497ad1', bloqueado ? 0 : pordescuentomora)
+    let maxdescuentomora = (pordescuentomora / 100) * interesmora
+    setFieldValue('0c422603-5f6e-4c23-a7b5-b78cf30ba1d8', maxdescuentomora)
+    setFieldValue('a6ee4c8b-a6c5-4bd8-8c30-9e29b9c40115', maxdescuentomora)
+    setFieldValue('433ffa22-78e7-4004-be47-2b0ccf497ad1', pordescuentomora)
 
-    // ── Int extracontable TC ──
-    let interesExtraTC = (producto === 'TARJETA') ? e.dataItem.InteresesExtracontablesObl : 0
+    //seccion extracontables
+    let interesExtraTC = 0
+    if (producto == 'TARJETA') {
+        interesExtraTC = e.dataItem.InteresesExtracontablesObl
+    }
     setFieldValue('a9977387-4683-4d89-9e58-851cb72f9886', interesExtraTC)
-    let maxDctoExtra = bloqueado ? 0 : (pordescuentoextra / 100) * interesExtraTC
-    setFieldValue('6e01ec4d-1391-4878-8886-be49eef96d27', maxDctoExtra)
-    setFieldValue('8ea64929-53a9-41b4-a01f-a14b74293d01', maxDctoExtra)
-    setFieldValue('a724067d-e7bf-435c-94ac-bf44f72575e7', bloqueado ? 0 : pordescuentoextra)
 
-    // ── Capital ──
+    let maxdescuentointeresExtraTC = (pordescuentoextra / 100) * interesExtraTC
+    setFieldValue('6e01ec4d-1391-4878-8886-be49eef96d27', maxdescuentointeresExtraTC)
+    setFieldValue('8ea64929-53a9-41b4-a01f-a14b74293d01', maxdescuentointeresExtraTC)
+    setFieldValue('a724067d-e7bf-435c-94ac-bf44f72575e7', pordescuentoextra)
+
+    //seccion capital
+    let capital = e.dataItem.CapitalTotalObl
     setFieldValue('9dc154b0-5d64-4682-a76d-5e946415c253', capital)
-    let maxDctoCapital = bloqueado ? 0 : (PorcentajeCT / 100) * capital
-    setFieldValue('79b6141f-1973-4c00-b0ae-a26b657115e5', maxDctoCapital)
-    setFieldValue('60bebeab-d3ca-4547-9eff-00cc8db69b82', bloqueado ? 0 : desCapital)
-    let porCapitalInicial = (capital > 0 && !bloqueado) ? (desCapital / capital) * 100 : 0
-    setFieldValue('aa7aeaf3-6bc8-4939-9896-212d5efcd93e', porCapitalInicial)
 
-    // ── Totales ──
-    let totalMaxDctos = maxDctoIntCte + maxDctoExtra + maxDctoMora + maxDctoCapital
-    setFieldValue('7a94fe37-1d84-4232-9298-4e1986cdead2', totalMaxDctos)
+    let maxdescuentocapital = (PorcentajeCT / 100) * capital
+    setFieldValue('79b6141f-1973-4c00-b0ae-a26b657115e5', maxdescuentocapital)
+    setFieldValue('60bebeab-d3ca-4547-9eff-00cc8db69b82', desCapital)
+    let porcentajedescuentocapital = desCapital / capital
+    setFieldValue('aa7aeaf3-6bc8-4939-9896-212d5efcd93e', porcentajedescuentocapital)
 
-    let abonoMinimo = saldoTotalObl - totalMaxDctos + 10000
-    setFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f', abonoMinimo)
-    setFieldValue('7ed52d26-15c9-4f11-9177-55a380d1427d', totalMaxDctos)
+    let maxdescuentos = maxdescuentocapital + maxdescuentointeresExtraTC + maxdescuentomora + maxDescuentoInt
+    setFieldValue('7a94fe37-1d84-4232-9298-4e1986cdead2', maxdescuentos)
+    let abonominimo = e.dataItem.SaldoTotalObl - maxdescuentos + 10000
+    setFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f', abonominimo)
 
-    // ── Es Tarjeta ──
-    setFieldValue('876c30bc-ba27-4ec4-ad2e-1635b23cdccb', producto === 'TARJETA' ? 'Si' : 'No')
 
-    console.log('poblarCancelacion OK ✓', { edadmora, tasas, bloqueado })
+    if (producto == 'TARJETA') {
+        setFieldValue('876c30bc-ba27-4ec4-ad2e-1635b23cdccb', 'Si')
+    } else {
+        setFieldValue('876c30bc-ba27-4ec4-ad2e-1635b23cdccb', 'No')
+    }
+
 }
+
 
 
 function recalcularcancelacion() {
     debugger;
     let edad = sessionStorage.EdadMoraCl
-    let bloqueado = (edad === "1-30 Días" || edad === "31-60 Días")
+    let bloqueado = (edad === "1-30 Días" || edad === "31-60 Días") && (sessionStorage.campañacancelacion == "no");
 
+    // Si trae campaña ("si") y esta en el rango de edad
+    // true && false = false --> NO bloquea (da los descuentos)
+
+    // si esta en el rango de edad pero no trae campaña ("no")
+    // true && true = true --> SÍ bloquea (0 descuentos)
+
+    // si no esta en el rango de edad y tampoco trae campaña ("no")
+    // false && true = false -->  NO bloquea (da los descuentos normales)
+
+    // si no esta en el rango de edad pero si trae campaña ("si")
+    // false && false = false --> NO bloquea (da los descuentos de la campaña)
+
+    // ── Saldo total ──
     // ── Leer valores del formulario ──
     let saldoTotal = getFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca')
     let pagoAlSnr = getFieldValue('b5c33a6d-9d65-4920-8a39-e73621b7daa9')
@@ -239,13 +253,15 @@ function recalcularcancelacion() {
 
 }
 
+
+
 function DescuentoInteresCte() {
     recalcularcancelacion();
 }
-
 function DescuentoCapital() {
+    debugger;
     let edad = sessionStorage.edadmoraCancelacion
-    if (edad === "1-30 Días" || edad === "31-60 Días") return 0
+    if ((edad === "1-30 Días" || edad === "31-60 Días") && (sessionStorage.campañacancelacion == "no")) return 0
 
     let saldoTotal = getFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca')
     let pagoAlSnr = getFieldValue('b5c33a6d-9d65-4920-8a39-e73621b7daa9')
