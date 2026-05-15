@@ -198,7 +198,7 @@ function DescuentoInteresCte() {
     if (sumaBase - sumaDescuentos > 0) {
         return sumaBase - sumaDescuentos; // Devuelve el cálculo ajustado
     } else {
-        //setFieldValue('bcfd54b6-d1cf-40dc-8677-686652eedbb8', 100)
+        //setFieldValue('bcfd54b6-d1cf-40dc-8677-686652eedbb8', 0)
         return 0; // Devuelve el saldo total más intereses no facturados
     }
 }
@@ -227,7 +227,6 @@ function DescuentoCapital() {
 }
 
 // -----------------------------------------------------------------------------------------------------------
-
 
 function recalcularcancelacion() {
     debugger
@@ -312,4 +311,33 @@ function recalcularcancelacion() {
 
     let descuentooperacion = DescuentoInteresCte()
     setFieldValue('86f86bd7-d119-4d2a-a6c0-e711b1d835a6', descuentooperacion)
+}
+
+
+// value change de capital total 
+
+recalcularcancelacion();
+let capital = e.value
+let maxdescuentocapital = (sessionStorage.PorcentajeCT / 100) * capital
+setFieldValue('79b6141f-1973-4c00-b0ae-a26b657115e5', maxdescuentocapital)
+let abono1 = getFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f')
+let abonoexacto1 = abono1 - 1
+setFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f', abonoexacto1)
+
+
+
+// value change de pago snr 
+if (e.value > 0) {
+    debugger; DescuentoInteresCte()
+    recalcularcancelacion()
+    if (e.value < getFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f')) {
+        toastr.warning('El valor a pagar debe ser mayor al abono minimo que debe realizar el cliente.')
+    }
+    let descuento = getFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca')
+    let operacion = descuento + 10000 - e.value
+    if (operacion > 0) {
+        setFieldValue('7ed52d26-15c9-4f11-9177-55a380d1427d', operacion)
+    } else {
+        setFieldValue('7ed52d26-15c9-4f11-9177-55a380d1427d', 0)
+    }
 }

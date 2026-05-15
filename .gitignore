@@ -18,3 +18,4 @@ Thumbs.db
 # Builds
 dist/
 build/
+.opencode/

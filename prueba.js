@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
  const selector = `body > app-root > app-base > div > div > div > div 
     > app-forms > div > div > div > div > form > ul > li:nth-child(2) > a`;
@@ -20,3 +21,5 @@ const labels = [...panel.querySelectorAll("span")]
   .map(span => span.textContent.trim());
 
 console.log(labels);
+=======
+>>>>>>> 8c1bc6e0234b406c9c444a97e6fb1436c842613a

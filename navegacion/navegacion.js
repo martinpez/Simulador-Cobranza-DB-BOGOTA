@@ -257,19 +257,20 @@ function inicializarNavegacion() {
     $(".right-buttonAM3").click(() => {
         navegarA(VISTAS.INFORMACION_CLIENTE);
     });
-
+        // Navegacion para la pagina de Información Cliente Actividad Económica 
+        // Que se muestra para los mecanismos de Consolidacion y pago mora
     $(".left-buttonC3").click(() => {
         switch (sessionStorage.mecanismo) {
             case "consolidacion":
                 navegarA(VISTAS.CONSOLIDACION_P2);
                 break;
-            case "pagoMora":
+            case "pagomora":
                 navegarA(VISTAS.PAGOMORA_P2);
                 soxMora();
                 syncSoxCounter();
                 break;
         }
-    })
+    });
     $(".right-buttonC3").click(() => {
         switch (sessionStorage.mecanismo) {
             case "consolidacion":
@@ -277,11 +278,11 @@ function inicializarNavegacion() {
                 observacionConsolidado();
                 syncSoxCounter();
                 break;
-            case "pagoMora":
+            case "pagomora":
                 navegarA(VISTAS.INFORMACION_CLIENTE);
                 break;
         }
-    })
+    });
 
 
     // navegacion al volver de la pagina de informacion cliente
@@ -297,7 +298,7 @@ function inicializarNavegacion() {
                 llenarCampos();
                 syncSoxCounter();
                 break;
-            case "pagoMora":
+            case "pagomora":
                 navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
                 break;
             case "cancelacion":
