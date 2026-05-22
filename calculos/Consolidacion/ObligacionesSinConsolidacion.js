@@ -2,7 +2,7 @@ function obligacionesSinBaseConsolidacionvacia(data) {}
 
 async function obligacionSinBaseConsolidacion(Cantidad) {
     const consolidacionDiv = document.getElementById("consolidacion");
-    consolidacionDiv.innerHTML = "";
+    //consolidacionDiv.innerHTML = "";
 
     // Ejecutar consulta para obtener el response
     const response = await execQuery(`EXEC SimiladorDNC_Lappiz_EmailConfirmed @sw = 11`);
@@ -127,7 +127,6 @@ async function obligacionSinBaseConsolidacion(Cantidad) {
         consolidacionDiv.appendChild(card1);
     }
 }
-
 // Función para formatear números con separadores de miles
 function formatNumber(value) {
     return value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
