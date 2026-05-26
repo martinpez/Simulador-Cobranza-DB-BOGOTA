@@ -1,19 +1,17 @@
-function vaciacancelar() { }
-async function poblarCancelacion() {
-
+function vaciacancelar(){}
+async function poblarCancelacion(){
+    
     delete sessionStorage.Capital
     let producto = e.dataItem.Producto
-
+   
     let saldoTotalObl = e.dataItem.SaldoTotalObl
-    setFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca', saldoTotalObl)
+    setFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca',saldoTotalObl)
     let interescteObl = e.dataItem.InteresCteObl
-    setFieldValue('48f8260e-5e81-43d3-b69c-d94808cb229e', interescteObl)
+    setFieldValue('48f8260e-5e81-43d3-b69c-d94808cb229e',interescteObl)
 
     let edadmora = e.dataItem.EdadMoraCl
     sessionStorage.edadmoraCancelacion = edadmora
-
-    // Consulta tasas vigentes por edad de mora
-    let query = `SELECT PorcCancelacionIntMora, PorcCancelacionIntCte, PorcPagoMoraIntExtraC, PorcentajeCT from SimiladorDNC_Lappiz_TasasVertas where RangoDias3 = '${edadmora}'`
+    let query = `select PorcCancelacionIntMora, PorcCancelacionIntCte, PorcPagoMoraIntExtraC, PorcentajeCT from SimiladorDNC_Lappiz_TasasVigentes where RangoDias3 = '${edadmora}'`
     let response = await execQuery(query)
     console.log(response[0][0])
 
@@ -21,90 +19,91 @@ async function poblarCancelacion() {
     sessionStorage.PorcCancelacionIntMora = response[0][0].PorcCancelacionIntMora
     sessionStorage.PorcPagoMoraIntExtraC = response[0][0].PorcPagoMoraIntExtraC
     sessionStorage.PorcentajeCT = response[0][0].PorcentajeCT
+    
 
+   
+    let Pordescuentoint= response[0][0].PorcCancelacionIntCte
+    
 
-
-    let Pordescuentoint = response[0][0].PorcCancelacionIntCte
-
-
-    let pordescuentomora = response[0][0].PorcCancelacionIntMora
+    let pordescuentomora = response[0][0].PorcCancelacionIntMora 
     let pordescuentoextra = response[0][0].PorcPagoMoraIntExtraC
     let PorcentajeCT = response[0][0].PorcentajeCT
     let desCapital = 0
     sessionStorage.MecanismoAplicaCampana = e.dataItem.MecanismoAplicaCampana
-
-    if (e.dataItem.MecanismoAplicaCampana && e.dataItem.MecanismoAplicaCampana.includes("CANCELACION")) {
-        sessionStorage.campañacancelacion = 1
+    
+    if(e.dataItem.MecanismoAplicaCampana && e.dataItem.MecanismoAplicaCampana.includes("CANCELACION")) {
         Pordescuentoint = e.dataItem.DtoInteresesCampana
         pordescuentomora = e.dataItem.DtoInteresesMoraCampana
         pordescuentoextra = e.dataItem.DtoInteresExtracontablesCampana
         PorcentajeCT = e.dataItem.DctoCapitalCampana
-        console.log('si tiene campaña en cancelacion')
-        desCapital = e.dataItem.CapitalTotalObl * (e.dataItem.DctoCapitalCampana / 100)
-        sessionStorage.DctoCapitalCampana = e.dataItem.DctoCapitalCampana / 100
+    console.log('si tiene campaña en cancelacion')
+        desCapital = e.dataItem.CapitalTotalObl*(e.dataItem.DctoCapitalCampana/100)
+    sessionStorage.DctoCapitalCampana = e.dataItem.DctoCapitalCampana/100
         sessionStorage.Capital = 'Si'
 
     }
     sessionStorage.PorcCancelacionIntCte = Pordescuentoint
     sessionStorage.PorcCancelacionIntMora = pordescuentomora
-
-    sessionStorage.desCapital = desCapital
+    
+    sessionStorage.desCapital= desCapital
     sessionStorage.PorcentajeCT = PorcentajeCT
     sessionStorage.Pordescuentoint = Pordescuentoint
     sessionStorage.pordescuentomora = pordescuentomora
     sessionStorage.pordescuentoextra = pordescuentoextra
-    setFieldValue('bcfd54b6-d1cf-40dc-8677-686652eedbb8', Pordescuentoint)
-
-
-    // Porcentaje descuento interés corriente (siempre se llena)
-    let maxDescuentoInt = (Pordescuentoint / 100) * interescteObl
-    setFieldValue('1c23cf01-dd67-4c9a-a4b6-871c781eec02', maxDescuentoInt)
-
-    // Interés mora (siempre se llena)
+    setFieldValue('bcfd54b6-d1cf-40dc-8677-686652eedbb8',Pordescuentoint)
+    
+    
+    
+    debugger
+    
+    let maxDescuentoInt = (Pordescuentoint /100) * interescteObl
+    setFieldValue('1c23cf01-dd67-4c9a-a4b6-871c781eec02',maxDescuentoInt)
+    //seccion mora
     let interesmora = e.dataItem.InteresMoraObl
-    setFieldValue('d85c85c3-2a7c-44db-b240-2420990d7375', interesmora)
-    let maxdescuentomora = (pordescuentomora / 100) * interesmora
-    setFieldValue('0c422603-5f6e-4c23-a7b5-b78cf30ba1d8', maxdescuentomora)
-    setFieldValue('a6ee4c8b-a6c5-4bd8-8c30-9e29b9c40115', maxdescuentomora)
-    setFieldValue('433ffa22-78e7-4004-be47-2b0ccf497ad1', pordescuentomora)
+    setFieldValue('d85c85c3-2a7c-44db-b240-2420990d7375',interesmora)
+    let maxdescuentomora = (pordescuentomora/100) * interesmora
+    setFieldValue('0c422603-5f6e-4c23-a7b5-b78cf30ba1d8',maxdescuentomora)
+    setFieldValue('a6ee4c8b-a6c5-4bd8-8c30-9e29b9c40115',maxdescuentomora)
+    setFieldValue('433ffa22-78e7-4004-be47-2b0ccf497ad1',pordescuentomora)
 
-    // Interés extracontable (solo para TARJETA)
+    //seccion extracontables
     let interesExtraTC = 0
-    if (producto == 'TARJETA') {
+    if(producto == 'TARJETA'){
         interesExtraTC = e.dataItem.InteresesExtracontablesObl
     }
-    setFieldValue('a9977387-4683-4d89-9e58-851cb72f9886', interesExtraTC)
+    setFieldValue('a9977387-4683-4d89-9e58-851cb72f9886',interesExtraTC)
 
-    let maxdescuentointeresExtraTC = (pordescuentoextra / 100) * interesExtraTC
-    setFieldValue('6e01ec4d-1391-4878-8886-be49eef96d27', maxdescuentointeresExtraTC)
-    setFieldValue('8ea64929-53a9-41b4-a01f-a14b74293d01', maxdescuentointeresExtraTC)
-    setFieldValue('a724067d-e7bf-435c-94ac-bf44f72575e7', pordescuentoextra)
+    let maxdescuentointeresExtraTC = (pordescuentoextra/100)*interesExtraTC
+    setFieldValue('6e01ec4d-1391-4878-8886-be49eef96d27',maxdescuentointeresExtraTC)
+    setFieldValue('8ea64929-53a9-41b4-a01f-a14b74293d01',maxdescuentointeresExtraTC)
+    setFieldValue('a724067d-e7bf-435c-94ac-bf44f72575e7',pordescuentoextra)
 
-    // Capital (siempre se llena)
+    //seccion capital
     let capital = e.dataItem.CapitalTotalObl
-    setFieldValue('9dc154b0-5d64-4682-a76d-5e946415c253', capital)
+    setFieldValue('9dc154b0-5d64-4682-a76d-5e946415c253',capital)
 
-    let maxdescuentocapital = (PorcentajeCT / 100) * capital
+    let maxdescuentocapital = (PorcentajeCT/100)* capital
     setFieldValue('79b6141f-1973-4c00-b0ae-a26b657115e5', maxdescuentocapital)
-    setFieldValue('60bebeab-d3ca-4547-9eff-00cc8db69b82', desCapital)
+    setFieldValue('60bebeab-d3ca-4547-9eff-00cc8db69b82',desCapital)
     let porcentajedescuentocapital = desCapital / capital
-    setFieldValue('aa7aeaf3-6bc8-4939-9896-212d5efcd93e', porcentajedescuentocapital)
+    setFieldValue('aa7aeaf3-6bc8-4939-9896-212d5efcd93e',porcentajedescuentocapital)
 
-    // Total descuentos (siempre se calcula)
-    let maxdescuentos = maxdescuentocapital + maxdescuentointeresExtraTC + maxdescuentomora + maxDescuentoInt
-    setFieldValue('7a94fe37-1d84-4232-9298-4e1986cdead2', maxdescuentos)
 
-    // Abono mínimo (siempre se calcula)
+    //maximo descuentos
+    let maxdescuentos = maxdescuentocapital+maxdescuentointeresExtraTC+maxdescuentomora+maxDescuentoInt
+    setFieldValue('7a94fe37-1d84-4232-9298-4e1986cdead2',maxdescuentos)
+    //abono minimo
+
     let abonominimo = e.dataItem.SaldoTotalObl - maxdescuentos + 10000
-    setFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f', abonominimo)
-
-
-    // EsTarjeta (siempre se llena, indica si es producto TARJETA)
-    if (producto == 'TARJETA') {
-        setFieldValue('876c30bc-ba27-4ec4-ad2e-1635b23cdccb', 'Si')
-    } else {
-        setFieldValue('876c30bc-ba27-4ec4-ad2e-1635b23cdccb', 'No')
+    setFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f',abonominimo)
+    
+    
+     if(producto == 'TARJETA'){
+        setFieldValue('876c30bc-ba27-4ec4-ad2e-1635b23cdccb','Si')
+    }else{
+        setFieldValue('876c30bc-ba27-4ec4-ad2e-1635b23cdccb','No')
     }
+    
 }
 
 // -----------------------------------------------------------------------------------------------------------
@@ -187,7 +186,7 @@ function DescuentoInteresCte() {
 
     //if(!sessionStorage.Capital){
     setFieldValue('60bebeab-d3ca-4547-9eff-00cc8db69b82', descuentoCapital)
-    let porCapital = (descuentoCapital / capital) * 100
+    let porCapital = Math.round((descuentoCapital / capital) * 100)
     setFieldValue('aa7aeaf3-6bc8-4939-9896-212d5efcd93e', porCapital)
     //}
     // Calcula los valores intermedios

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Contenedor principal */
+        .class-div-padre {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px;
+        }
+        .panel-body[_ngcontent-slg-c140] {
+            display: flex;
+            justify-content: center;
+        }
+
+
+        .class-div-hijo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            width: max-content;
+        }
+
+
+
+        /* Botón circular */
+        #adicionar-obligacion {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            background-color: #0041a4;
+            color: white;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        /* Cambio de color al hacer hover */
+        .class-div-padre:hover #adicionar-obligacion {
+            background-color: #ffe100;
+            /* Ejecuta la animación 'girar' durante 2 segundos, una sola vez, de forma suave */
+            animation: girar 2s ease-in-out forwards;
+        }
+
+        /* Efecto de presión al hacer clic */
+        .class-div-padre:active #adicionar-obligacion {
+            transform: scale(0.95);
+        }
+
+        /* Definición de la animación de rotación (Gira 360 grados completos) */
+        @keyframes girar {
+            from {
+                transform: rotate(0deg);
+                /* velocidad de la rotacion */
+                animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Texto oculto con animación */
+        .texto-animado {
+            font-family: sans-serif;
+            font-size: 14px;
+            color: #141414;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: max-width 0.4s ease, opacity 0.3s ease;
+        }
+
+        /* Activación de la animación del texto */
+        .class-div-padre:hover .texto-animado {
+            max-width: 150px;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="class-div-padre">
+        <div class="class-div-hijo">
+            <button id="adicionar-obligacion" type="button" aria-label="Adicionar obligación">+</button>
+            <span class="texto-animado">Añadir Tarjeta</span>
+        </div>
+    </div>
+</body>
+
+</html>

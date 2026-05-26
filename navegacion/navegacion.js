@@ -138,7 +138,6 @@ function inicializarNavegacion() {
 
     // NOVACIONES
     //Principal
-
     $(".novaciones").click(() => {
         sessionStorage.mecanismo = "novacion"
         navegarA(VISTAS.NOVACIONES_P1);
@@ -164,7 +163,7 @@ function inicializarNavegacion() {
         navegarA(VISTAS.NOVACIONES_P1);
     });
     $(".right-button2").click(() => {
-        navegarA(VISTAS.INFORMACION_CLIENTE);
+        navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
     });
 
 
@@ -186,8 +185,6 @@ function inicializarNavegacion() {
         navegarA(VISTAS.PAGOMORA_P1);
     });
     $(".right-buttonM2").click(() => {
-        // Cambiar el pago a producto a pago nacional de recuado 
-        var pago = document.getElementById("685c5e9d-4409-4d4c-a11e-a0c17dcedb02").value = "000-778175"
         navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
     });
 
@@ -197,8 +194,10 @@ function inicializarNavegacion() {
     $(".cancelacion").click(() => {
         sessionStorage.mecanismo = "cancelacion"
         navegarA(VISTAS.CANCELACION_TOTAL_PAG1);
-        DescuentoInteresCte();
-        recalcularcancelacion();
+        let edadmora = sessionStorage.EdadMoraCl;
+        if (edadmora == "1-30 Días" || edadmora == "31-60 Días") {
+            recalcularcancelacion();
+        }
     });
     $(".right-buttonCA1").click(() => {
         navegarA(VISTAS.CANCELACION_P2);
@@ -218,7 +217,6 @@ function inicializarNavegacion() {
         navegarA(VISTAS.CANCELACION_P2);
     });
     $(".right-buttonCA3").click(() => {
-        var pago = document.getElementById("685c5e9d-4409-4d4c-a11e-a0c17dcedb02").value = "000-778175"
         navegarA(VISTAS.INFORMACION_CLIENTE);
     });
 
@@ -257,10 +255,10 @@ function inicializarNavegacion() {
     });
 
     $(".right-buttonAM3").click(() => {
-        var pago = document.getElementById("685c5e9d-4409-4d4c-a11e-a0c17dcedb02").value = "000-778175"
         navegarA(VISTAS.INFORMACION_CLIENTE);
     });
-
+    // Navegacion para la pagina de Información Cliente Actividad Económica 
+    // Que se muestra para los mecanismos de Consolidacion y pago mora
     $(".left-buttonC3").click(() => {
         switch (sessionStorage.mecanismo) {
             case "consolidacion":
@@ -272,7 +270,7 @@ function inicializarNavegacion() {
                 syncSoxCounter();
                 break;
         }
-    })
+    });
     $(".right-buttonC3").click(() => {
         switch (sessionStorage.mecanismo) {
             case "consolidacion":
@@ -284,7 +282,7 @@ function inicializarNavegacion() {
                 navegarA(VISTAS.INFORMACION_CLIENTE);
                 break;
         }
-    })
+    });
 
 
     // navegacion al volver de la pagina de informacion cliente
