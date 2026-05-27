@@ -11,13 +11,13 @@ async function poblarCancelacion() {
 
     let edadmora = e.dataItem.EdadMoraCl
     sessionStorage.edadmoraCancelacion = edadmora
-    let query = `select PorcCancelacionIntMora, PorcCancelacionIntCte, PorcPagoMoraIntExtraC, PorcentajeCT from SimiladorDNC_Lappiz_TasasVigentes where RangoDias3 = '${edadmora}'`
+    let query = `select PorcCancelacionIntMora, PorcCancelacionIntCte, PorcentajeCT from SimiladorDNC_Lappiz_TasasVigentes where RangoDias3 = '${edadmora}'`
     let response = await execQuery(query)
     console.log(response[0][0])
-
+    let porceCancelacionIntExtra = response[0][0].PorcCancelacionIntCte
     sessionStorage.PorcCancelacionIntCte = response[0][0].PorcCancelacionIntCte
     sessionStorage.PorcCancelacionIntMora = response[0][0].PorcCancelacionIntMora
-    sessionStorage.PorcPagoMoraIntExtraC = response[0][0].PorcPagoMoraIntExtraC
+    sessionStorage.PorCancelacionIntExtraC = porceCancelacionIntExtra // actuan igual que el interesescte
     sessionStorage.PorcentajeCT = response[0][0].PorcentajeCT
 
 
@@ -26,7 +26,7 @@ async function poblarCancelacion() {
 
 
     let pordescuentomora = response[0][0].PorcCancelacionIntMora
-    let pordescuentoextra = response[0][0].PorcPagoMoraIntExtraC
+    let pordescuentoextra = porceCancelacionIntExtra
     let PorcentajeCT = response[0][0].PorcentajeCT
     let desCapital = 0
     sessionStorage.MecanismoAplicaCampana = e.dataItem.MecanismoAplicaCampana
@@ -179,14 +179,17 @@ function recalcularcancelacion() {
 
     let exceso = pagoExtra  // lo que queda por "consumir" del rombo
 
-    // ──Llenar mora primero ──
+    // ─ Llenar de primeras el capital ──
     if (exceso > 0) {
-        let reduccionMora = Math.min(maxDctoMora, exceso)
-        dctoMora = maxDctoMora - reduccionMora
-        exceso -= reduccionMora
+        let reduccionCapital = Math.min(maxDctoCapital, exceso)
+        dctoCapital = maxDctoCapital - reduccionCapital
+        dctoCapital = Math.max(0, dctoCapital)
+    } else if (pagoAlSnr < abonoMinimo) {
+        let deficit = abonoMinimo - pagoAlSnr
+        dctoCapital = Math.min(capital, maxDctoCapital + deficit)
     }
 
-    // ──Llenar Int Cte e Int Extra juntos (misma proporción) ──
+    // ──Llenar de segundas el Int Cte e Int Extra juntos (misma proporción) ──
     if (exceso > 0) {
         // Total máximo de Cte + Extra juntos
         let maxCteExtra = maxDctoIntCte + maxDctoExtra
@@ -206,12 +209,12 @@ function recalcularcancelacion() {
         }
     }
 
-    // ─ Llenar capital (tope al máximo permitido) ──
+
+    // ──Llenar de ultimas la mora -- / 
     if (exceso > 0) {
-        let reduccionCapital = Math.min(maxDctoCapital, exceso)
-        dctoCapital = maxDctoCapital - reduccionCapital
-        // No puede bajar de 0 ni subir del máximo
-        dctoCapital = Math.max(0, dctoCapital)
+        let reduccionMora = Math.min(maxDctoMora, exceso)
+        dctoMora = maxDctoMora - reduccionMora
+        exceso -= reduccionMora
     }
 
     // ── Calcular porcentajes reales aplicados ──
@@ -219,7 +222,7 @@ function recalcularcancelacion() {
     let porCteReal = interescte > 0 ? (dctoCte / interescte) * 100 : 100
     let porMoraReal = interesmora > 0 ? Math.round((dctoMora / interesmora) * 100) : 100
     let porExtraReal = interesextra > 0 ? (dctoExtra / interesextra) * 100 : 100
-    let porCapitalReal = capital > 0 ? (dctoCapital / capital) * 100 : 0
+    let porCapitalReal = capital > 0 ? (dctoCapital / capital) * 100 : (dctoCapital / capital) * 100
 
     // Verificar que Cte y Extra tengan el mismo % (deben ser iguales)
     // Si hay diferencia por redondeo, usar el de Cte como referencia
