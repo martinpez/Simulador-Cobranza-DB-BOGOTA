@@ -179,13 +179,19 @@ function recalcularcancelacion() {
 
     let exceso = pagoExtra  // lo que queda por "consumir" del rombo
 
-    // ──Llenar mora primero ──
-    if (exceso > 0) {
-        let reduccionMora = Math.min(maxDctoMora, exceso)
-        dctoMora = maxDctoMora - reduccionMora
-        exceso -= reduccionMora
-    }
+    // logica de rombo definida por Adriana:
+    // Primero consume capital digamos si el descuento inicial es 30% del 
+    // capital y quiere pagar el total el cliente deberia pagar el total del capital y 
+    // luego si descontar de los interes y luego de la mora
 
+    // capital -> intcte == int extra -> mora
+
+    // LLenar capital primero (tope al máximo permitido)
+    if (exceso > 0) {
+        let reduccionCapital = Math.min(maxDctoCapital, exceso)
+        dctoCapital = maxDctoCapital - reduccionCapital
+        exceso -= reduccionCapital
+    }
     // ──Llenar Int Cte e Int Extra juntos (misma proporción) ──
     if (exceso > 0) {
         // Total máximo de Cte + Extra juntos
@@ -206,12 +212,11 @@ function recalcularcancelacion() {
         }
     }
 
-    // ─ Llenar capital (tope al máximo permitido) ──
+    // ultimo llena mora
     if (exceso > 0) {
-        let reduccionCapital = Math.min(maxDctoCapital, exceso)
-        dctoCapital = maxDctoCapital - reduccionCapital
-        // No puede bajar de 0 ni subir del máximo
-        dctoCapital = Math.max(0, dctoCapital)
+        let reduccionMora = Math.min(maxDctoMora, exceso)
+        dctoMora = maxDctoMora - reduccionMora
+        exceso -= reduccionMora
     }
 
     // ── Calcular porcentajes reales aplicados ──
@@ -260,7 +265,7 @@ function DescuentoInteresCte() {
 }
 function DescuentoCapital() {
     debugger;
-    let edad = sessionStorage.edadmoraCancelacion
+    let edad = sessionStorage.EdadMoraCl
     if ((edad === "1-30 Días" || edad === "31-60 Días") && (sessionStorage.campañacancelacion == "no")) return 0
 
     let saldoTotal = getFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca')

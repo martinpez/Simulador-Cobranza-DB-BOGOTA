@@ -195,9 +195,8 @@ function inicializarNavegacion() {
         sessionStorage.mecanismo = "cancelacion"
         navegarA(VISTAS.CANCELACION_TOTAL_PAG1);
         let edadmora = sessionStorage.EdadMoraCl;
-        if(edadmora == "1-30 Días" || edadmora == "31-60 Días"){
-            recalcularcancelacion();
-        }
+        poblarCancelacion();
+
     });
     $(".right-buttonCA1").click(() => {
         navegarA(VISTAS.CANCELACION_P2);

@@ -3,12 +3,12 @@ $(document).on('click', '#adicionar-obligacion', function () {
     debugger;
     try {
         Swal.fire({
-            title: '¿Cuántas obligaciones quieres?',
+            title: '¿Cuántas obligaciones quieres añadir?',
             html: `
     <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin: 20px 0;">
-      <button type="button" id="minus" class="swal2-styled" style="background-color: rgb(255, 6, 6); margin: 0; border-radius: 5px; width: 40px;">-</button>
+      <button type="button" id="minus" class="swal2-styled" style="background-color: #ffe100; margin: 0; border-radius: 5px; width: 40px;">-</button>
       <b id="cantidad" style="font-size: 1.5rem; width: 40px; text-align: center;">1</b>
-      <button type="button" id="plus" class="swal2-styled" style="background-color: #0269ca; margin: 0; border-radius: 5px; width: 40px;">+</button>
+      <button type="button" id="plus" class="swal2-styled" style="background-color: #0041a4; margin: 0; border-radius: 5px; width: 40px;">+</button>
     </div>
   `,
             showCancelButton: true,
@@ -36,7 +36,7 @@ $(document).on('click', '#adicionar-obligacion', function () {
             if (result.isConfirmed) {
                 // Obtenemos el valor directamente del texto del elemento HTML
                 const cantidadFinal = document.getElementById('cantidad').innerText;
-                console.log("Obligaciones solicitadas:", cantidadFinal);
+                
 
                 Swal.fire(`Elegiste ${cantidadFinal} obligaciones`);
                 var cantidad = cantidadFinal; // Asignamos la cantidad seleccionada a la variable
