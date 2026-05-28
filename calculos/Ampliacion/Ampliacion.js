@@ -61,8 +61,8 @@ function CalculosAmpliacion() {
         // Sin descuento en intereses → paga la totalidad más colchón
         AbonConDescMax =
           parseInt(PrimaU ?? 0) +
-          parseInt(InteCte ?? 0) +
-          parseInt(IntMora ?? 0) +
+          parseInt(InteCte ?? 0) + live
+        parseInt(IntMora ?? 0) +
           parseInt(otrosCargos ?? 0) +
           20000;
       } else {
@@ -205,13 +205,13 @@ function InteresCorrienteAmpliacion() {
   if (int <= 0 || (PrimaU + int + IntMora + otrosCargos - pagoSNR) <= 0) {
     porcentaje = 0;
   } else {
-   
-        // Fórmula: % real que genera el pago ingresado (SIN tope — el cliente
-        // debe ver exactamente qué descuento le representa su pago)
-        porcentaje = Math.round(((PrimaU + int + otrosCargos + 20000 - pagoSNR) / int) * 100) / 100;
-        porcentaje = Math.max(porcentaje, 0);   // Solo evitar negativos
-    }
-  
+
+    // Fórmula: % real que genera el pago ingresado (SIN tope — el cliente
+    // debe ver exactamente qué descuento le representa su pago)
+    porcentaje = Math.round(((PrimaU + int + otrosCargos + 20000 - pagoSNR) / int) * 100) / 100;
+    porcentaje = Math.max(porcentaje, 0);   // Solo evitar negativos
+  }
+
   let operacion = int * porcentaje;
   setFieldValue('15a75d66-7dc0-4e25-b3e3-213a984a22fe', operacion);
   setFieldValue('d8e6669a-3079-4248-88d5-5f01cca53106', porcentaje * 100);
@@ -244,7 +244,7 @@ function InteresCorrienteAmpliacion() {
 function PrimaUnicaAmpliacion() {
 
   let otrosCargos = getFieldValue('e64cbac2-f6de-49eb-a9ec-79695d0e655a');
-let PrimaU = e.value;
+  let PrimaU = e.value;
   let InteCte = getFieldValue('70101be7-9330-44e4-913c-e6772c5b8167');
   let IntMora = getFieldValue('aea118a4-8a99-4d3a-adf9-ffd5151db4f6');
 
@@ -265,15 +265,15 @@ let PrimaU = e.value;
       parseInt(otrosCargos ?? 0) +
       20000;
   }
-     if (AbonConDescMax) {
-        setFieldValue("9b88d521-a3dd-4948-8c3f-6dece97a17a5", AbonConDescMax);
-    }
+  if (AbonConDescMax) {
+    setFieldValue("9b88d521-a3dd-4948-8c3f-6dece97a17a5", AbonConDescMax);
+  }
   let AboMinSinDesc =
-        parseInt(PrimaU      ?? 0) +
-        parseInt(InteCte     ?? 0) +
-        parseInt(IntMora     ?? 0) +
-        parseInt(otrosCargos ?? 0);
-    setFieldValue('3a14031a-7edd-4540-8e52-e199892cba9a', AboMinSinDesc);
+    parseInt(PrimaU ?? 0) +
+    parseInt(InteCte ?? 0) +
+    parseInt(IntMora ?? 0) +
+    parseInt(otrosCargos ?? 0);
+  setFieldValue('3a14031a-7edd-4540-8e52-e199892cba9a', AboMinSinDesc);
 }
 
 console.log("Cliente usado:  75076028")

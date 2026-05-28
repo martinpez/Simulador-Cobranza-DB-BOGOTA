@@ -195,8 +195,14 @@ function inicializarNavegacion() {
         sessionStorage.mecanismo = "cancelacion"
         navegarA(VISTAS.CANCELACION_TOTAL_PAG1);
         let edadmora = sessionStorage.EdadMoraCl;
+<<<<<<< HEAD
         poblarCancelacion();
 
+=======
+        if (edadmora == "1-30 Días" || edadmora == "31-60 Días") {
+            recalcularcancelacion();
+        }
+>>>>>>> 0ae2e166cf775f377ac40cc7c960d6aef289120d
     });
     $(".right-buttonCA1").click(() => {
         navegarA(VISTAS.CANCELACION_P2);
@@ -256,8 +262,8 @@ function inicializarNavegacion() {
     $(".right-buttonAM3").click(() => {
         navegarA(VISTAS.INFORMACION_CLIENTE);
     });
-        // Navegacion para la pagina de Información Cliente Actividad Económica 
-        // Que se muestra para los mecanismos de Consolidacion y pago mora
+    // Navegacion para la pagina de Información Cliente Actividad Económica 
+    // Que se muestra para los mecanismos de Consolidacion y pago mora
     $(".left-buttonC3").click(() => {
         switch (sessionStorage.mecanismo) {
             case "consolidacion":
