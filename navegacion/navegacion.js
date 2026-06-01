@@ -319,6 +319,7 @@ function inicializarNavegacion() {
         }
     });
 
+
     //Botones Copiar Sox
     $(".copiar").click(() => {
         copiarTexto();

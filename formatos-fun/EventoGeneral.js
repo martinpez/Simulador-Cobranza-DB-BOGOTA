@@ -76,6 +76,7 @@ function funDataGenerica(mecanismo) {
             pagoProduto = document.getElementById("685c5e9d-4409-4d4c-a11e-a0c17dcedb02").value || ""
         } else {
             pagoProduto = "000-778175"
+            setFieldValue('685c5e9d-4409-4d4c-a11e-a0c17dcedb02', pagoProduto)
         }
         // 1. Obtenemos el objeto del sessionStorage
         let userObj = JSON.parse(sessionStorage.getItem("LappizUser") || "{}");
