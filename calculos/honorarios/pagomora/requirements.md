@@ -6,4 +6,15 @@ Campos que se nesecitan para honorarios de ICS
 
     |       Formualas 
     
-Calculos =  
+Calculos =  Restar del pago minimo los honorarios que trae la data 
+(el resultado seria el nuevo pago minimo)
+
+Calculo 2 = (abono minimo * el tipo de producto CONSUMO
+COMERCIAL	VEHICULO) / 100	
+
+El resultado son los honorarios a cobrar
+
+
+
+Campos:
+LineaPagoM
