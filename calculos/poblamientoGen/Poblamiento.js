@@ -6,7 +6,10 @@ function valoresPoblamiento() {
   let id = getIdByPartialText(e.dataItem.MarcaObl026, '8676efb4-1857-48d2-b604-8c4e23917fd0');
   setFieldValue('8676efb4-1857-48d2-b604-8c4e23917fd0', id) //marca obligacion
   let mora = getIdByPartialText(e.dataItem.EdadMoraCl, '5b9ce178-27fe-4c52-b91d-ba6a898ff546');
-
+  let producto = e.dataItem.Producto
+  sessionStorage.TipProducto = producto
+  //let honorarioVal = e.dataItem.Honorarios
+  //sessionStorage.honorarios = honorarioVal
   if (e.dataItem.MecanismoAplicaCampana && e.dataItem.MecanismoAplicaCampana.includes("PAGOMORA")) {
     sessionStorage.campanamora = 'si'
   }
