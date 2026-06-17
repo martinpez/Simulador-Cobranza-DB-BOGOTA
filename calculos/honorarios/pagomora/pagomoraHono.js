@@ -17,6 +17,29 @@ $(document).on('change', '#check', function () {
     }
 });
 
+// Funcion que va servir para cargar cualquier honorarios 
+// todos tienen 3 campos que se van a precargar check, linea , tipo cartera
+// se debe enviar los id de los campos de check, linea , tipo cartera
+
+function CargaCamposHonorarios(idcheck, idlinea, idTipoCartera) {
+    let Idcheck = idcheck
+    let IdLinea = idlinea
+    let IdTipoCartera = idTipoCartera
+    console.log([idcheck, idlinea, idTipoCartera]);
+    //valida si existen los elementos 
+
+    if (!(Idcheck && IdLinea && IdTipoCartera)) {
+        console.error("No se enviaron los uid de los elementos")
+
+    }
+    // valida si esta es honorarios 
+
+
+
+
+
+}
+
 
 function honoraVacios() {
 }
