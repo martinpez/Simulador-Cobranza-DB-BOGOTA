@@ -11,6 +11,7 @@ function CalculosMora() {
     sessionStorage.calculosMoraListo = 'no'
     sessionStorage.reintentosRecalculo = '0'
 
+
     if (e.dataItem.Producto == 'TARJETA') {
         tarjeta = true
         setFieldValue('7a5c89e8-a431-4b76-b3bc-24f6a187978c', 'Si')
@@ -27,6 +28,19 @@ function CalculosMora() {
         disableField('a01eeadb-b99e-4e08-9d93-3fe44b9e1cf8', true)
         disableField('0456eeb3-8809-48a5-8726-87e416efdcb3', true)
     }
+
+    // seteo de honorarios 
+    if (sessionStorage.UserCargado != "no") {
+        let idcheck = "check"
+        let idlineaKendo = "#9ccfa8bd-4060-4aa1-b437-4528d6f9bc35"
+        let idTipoCarteraKendo = "#6e51a18a-184d-455f-9f42-6b3a3d56729f"
+        let tipocobro = sessionStorage.TipoCobro
+        let tipolinea = sessionStorage.Linea
+        let tipocartera = sessionStorage.TipoCartera
+        CargaCamposHonorarios(idcheck, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera);
+    }
+
+
     const colchon = tarjeta ? 0 : 20000
     //validar si es tipo el producto es tipo cartera y restarle los honorarios al pago minimo 
     debugger;

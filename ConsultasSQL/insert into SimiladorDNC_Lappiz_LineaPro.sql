@@ -1,0 +1,108 @@
+insert into
+    SimiladorDNC_Lappiz_LineaProducto (CodCodigo, NomProductos)
+values
+    (
+        '0000',
+        'Tarjeta de Credito [Cualquier Franquicia]'
+    ),
+    ('0001', 'Ordinaria'),
+    ('0106', 'Anticipos Leasing'),
+    ('0107', 'Financiacion BOCEAS'),
+    ('0108', 'Financiacion Acciones Aval'),
+    (
+        '0117',
+        'Leasing Financiero Habitacional Familiar'
+    ),
+    (
+        '0118',
+        'Leasing Financiero Habitacional No Familiar'
+    ),
+    ('0119', 'Credito Vivienda Directo'),
+    ('0013', 'Credito de Tesoreria'),
+    ('0130', 'Libranzas'),
+    (
+        '0131',
+        'CREDIFACIL-Libranzas Convenios Mensuales'
+    ),
+    ('0133', 'Credifacil Vehiculo'),
+    ('0014', 'Crediservice'),
+    ('0015', 'Credito Vehiculo'),
+    ('0155', 'Crediestudiantil - Corto Plazo 6 Meses'),
+    ('0156', 'Crediestudiantil - Corto Plazo 12 Meses'),
+    ('0019', 'Credito Tesoreria Ordinario'),
+    ('0002', 'Liquidez 30 -180 dias'),
+    ('0021', 'Hipotecario compra vivienda nueva'),
+    ('0028', 'Vehiculo'),
+    ('0029', 'Pyme Camara de Comercio'),
+    ('0003', 'Credito Tesoreria 15'),
+    ('0034', 'Estudiantil 40% Capitalizable'),
+    ('0035', 'Compra Inmuebles Rec. en Dacion en Pago'),
+    ('0038', 'Cart. Ref. Comercial M/L'),
+    ('0039', 'Liquidez 18 Meses'),
+    ('0004', 'Financiacion Cesantias Porvenir'),
+    ('0042', 'CrediAval 1% C-Comercial'),
+    ('0420', 'DESCUENTOS'),
+    ('0421', 'REMESAS ME'),
+    ('0423', 'GIROS DIRECTOS Y COBRANZAS FINANC'),
+    ('0043', 'Crediaval 3A'),
+    ('0044', 'Credibien Vivienda'),
+    ('0045', 'Credibien Ccial CON periodo de gracia'),
+    ('0046', 'Crediben Ccial SIN periodo de gracia'),
+    (
+        '0047',
+        'Afiliados a Porvenir Aportes Voluntarios'
+    ),
+    ('0048', 'Ordinaria 40% Reest Ley 617 G la Nacion'),
+    ('0049', 'Ordinaria 60% Reest Ley 617 OG Adm'),
+    ('0005', 'Credito Libre Destino'),
+    (
+        '0050',
+        'Ordinaria 100% Rec. Frescos Ley 617 G La'
+    ),
+    ('0051', 'Ordinaria 100% Reest Ley 617 OG Adm'),
+    ('0053', 'Fija Microempresas'),
+    ('0054', 'Variable Microempresas'),
+    ('0540', 'Creditos en el exterior reembolsados'),
+    ('0541', 'Cartas de Credito Cubiertas'),
+    ('0056', 'UNIANDES 50% ROTATIVO 60 MESES'),
+    ('0057', 'Credito Ambiental'),
+    ('0058', 'Variable Pequena y Mediana Empresa'),
+    ('0060', 'Vivienda Vis'),
+    ('0602', 'Convenios C variable hasta 60 meses'),
+    ('0603', 'Convenio CEMEX Cuota Unica'),
+    ('0061', 'Crediestudiantil - Aval'),
+    (
+        '0610',
+        'Credivehiculo Invergrupo - Factoring con F'
+    ),
+    ('0612', 'Triangulacion Descuento a Proveedores'),
+    (
+        '0613',
+        'Triangulacion Descuento y Financ. a Prov.'
+    ),
+    ('0614', 'Pago a Proveedores'),
+    ('0617', 'Compra Cartera Crediservicios'),
+    ('0618', 'Com para Cartera Cooptel'),
+    ('0066', 'Fej Antioquia Conv Lib'),
+    ('0067', 'Campana Preaprobados'),
+    ('0007', 'Liquidez 12 Meses'),
+    ('0070', 'Credito Activo Pyme'),
+    ('0071', 'Rotativo Persona Juridica'),
+    ('0073', 'Vehiculos Nuevos'),
+    ('0074', 'Vehiculos Usados'),
+    ('0075', 'Vehiculos Publico Pasajeros'),
+    ('0076', 'Vehiculos Publico Comercial'),
+    ('0079', 'Normalizacion'),
+    ('0008', 'Prestahorro'),
+    ('0081', 'Microfinanzas'),
+    ('0082', 'Credito Neg. Empresarial'),
+    ('0083', 'Desvinculacion Libranza'),
+    ('0087', 'Aportes Voluntarios'),
+    ('0088', 'Microcredito'),
+    ('0089', 'Cartera Microcredito Normalizada'),
+    ('0091', 'LF Maquinaria y Equipo'),
+    ('0092', 'LF Equipo de Computo'),
+    ('0093', 'LF Bienes Inmuebles'),
+    ('0094', 'LF Muebles y Enseres'),
+    ('0095', 'LF Vehiculos'),
+    ('0096', 'LF Barcos, Trenes y Aviones')

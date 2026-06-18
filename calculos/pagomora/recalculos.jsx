@@ -1,4 +1,5 @@
 function RecalculosMora() {
+    debugger;
     // Si todavía no está listo el cálculo inicial, reintentar
     if (sessionStorage.calculosMoraListo !== 'si') {
         const intentos = parseInt(sessionStorage.reintentosRecalculo || '0')
@@ -46,14 +47,23 @@ function RecalculosMora() {
 
     const totalMaxDctos = maxcte + maxmora + maxExtC
     const abonoMinimo = PagoMinObl - totalMaxDctos + colchon
-    setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', abonoMinimo)
+
     // Honorarios
     let pagoHonorarios = (abonoMinimo * sessionStorage.PorcCartera) / 100
     setFieldValue('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', pagoHonorarios)
     let honorariosPagados = getFieldValue('ae33bcc4-183a-47de-a6c8-f4ecc44be169')
+    let sumaHonorarios = 0;
+    if (honorariosPagados > 0) {
+        //setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', abonoMinimo + pagoHonorarios)
+        sumaHonorarios = abonoMinimo + honorariosPagados;
+        setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', sumaHonorarios)
 
-    const excesoPago = Math.max(0, PagoSNR - abonoMinimo)
-    let exceso = excesoPago  - honorariosPagados
+    } else {
+        setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', abonoMinimo)
+    }
+
+    const pagoRealDeuda = Math.max(0, PagoSNR - pagoHonorarios)
+    let exceso = Math.max(0, pagoRealDeuda - abonoMinimo)
     let dctoMora = maxmora
     let dctoCte = maxcte
     let dctoExtraC = maxExtC
@@ -70,9 +80,9 @@ function RecalculosMora() {
         const reduccionCteExtC = (maxcte - dctoCte) + (esTarjeta ? (maxExtC - dctoExtraC) : 0)
         exceso -= reduccionCteExtC
 
-    } else if (PagoSNR < abonoMinimo && bolsaSincronizada > 0) {
+    } else if (pagoRealDeuda < abonoMinimo && bolsaSincronizada > 0) {
         // CASO DÉFICIT (excepción de negocio): aumentar proporcionalmente sin tope
-        const deficit = abonoMinimo - PagoSNR
+        const deficit = abonoMinimo - pagoRealDeuda
         const aumentada = bolsaSincronizada + deficit
         const factor = aumentada / bolsaSincronizada
         dctoCte = maxcte * factor
