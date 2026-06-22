@@ -1,5 +1,5 @@
 function RecalculosMora() {
-    debugger;
+
     // Si todavía no está listo el cálculo inicial, reintentar
     if (sessionStorage.calculosMoraListo !== 'si') {
         const intentos = parseInt(sessionStorage.reintentosRecalculo || '0')
@@ -19,7 +19,7 @@ function RecalculosMora() {
         getFieldValue('7a5c89e8-a431-4b76-b3bc-24f6a187978c') === 'Si'
 
     const colchon = esTarjeta ? 0 : 20000
-
+    debugger;
     const InteresCteObl = safeNumber(getFieldValue('9b3ac68c-68ff-4928-864d-906e9d851621'))
     const InteresMoraObl = safeNumber(getFieldValue('c13b3910-1960-422f-835d-7ea89982f8b6'))
     const PagoMinObl = safeNumber(getFieldValue('af9911f8-4a06-4483-b25d-6bec9e1647fe'))
@@ -49,9 +49,9 @@ function RecalculosMora() {
     const abonoMinimo = PagoMinObl - totalMaxDctos + colchon
 
     // Honorarios
-    let pagoHonorarios = (abonoMinimo * sessionStorage.PorcCartera) / 100
-    setFieldValue('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', pagoHonorarios)
-    let honorariosPagados = getFieldValue('ae33bcc4-183a-47de-a6c8-f4ecc44be169')
+    let HonorariosCalculados = Math.floor((abonoMinimo * sessionStorage.PorcCartera) / 100)
+    setFieldValue('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', HonorariosCalculados)
+    let honorariosPagados = safeNumber(getFieldValue('ae33bcc4-183a-47de-a6c8-f4ecc44be169'))
     let sumaHonorarios = 0;
     if (honorariosPagados > 0) {
         //setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', abonoMinimo + pagoHonorarios)
@@ -62,7 +62,7 @@ function RecalculosMora() {
         setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', abonoMinimo)
     }
 
-    const pagoRealDeuda = Math.max(0, PagoSNR - pagoHonorarios)
+    const pagoRealDeuda = Math.max(0, PagoSNR - honorariosPagados)
     let exceso = Math.max(0, pagoRealDeuda - abonoMinimo)
     let dctoMora = maxmora
     let dctoCte = maxcte

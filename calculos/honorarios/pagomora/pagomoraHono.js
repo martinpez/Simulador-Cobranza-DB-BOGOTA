@@ -18,7 +18,6 @@ $(document).on('change', '#check', function () {
 });
 
 function vacia() {
-
 }
 async function CargaCamposHonorarios(idcheck, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera) {
     // Funcion que va servir para cargar cualquier honorarios 
@@ -101,21 +100,14 @@ async function calculoHonorarios() {
 }
 
 function recalculoHonorarios() {
-    let abonomaxSINHonorarios = getFieldValue("8f7266d7-dfc0-4ff4-afad-c50fbfa67062")
-    let abonoMaxHonorarios = getFieldValue("993c55c0-8b02-4be9-a122-d7ec2cf5f87e");
-    //let abonoSNR = getFieldValue("3539dba8-0c22-491e-a05b-84642d675d59");
-    let honoConfirm = getFieldValue("ae33bcc4-183a-47de-a6c8-f4ecc44be169");
-    if (honoConfirm > 0) {
-        //let sumaHonorarios = abonoMaxHonorarios + abonomaxSINHonorarios;
-        //setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', sumaHonorarios);
-    } else if (honoConfirm <= 0) {
-        setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', abonomaxSINHonorarios);
-
-    }
-
+    const safeNumber = val => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
+    let abonoMaxHonorarios = safeNumber(getFieldValue("993c55c0-8b02-4be9-a122-d7ec2cf5f87e"));
+    let honoConfirm = safeNumber(getFieldValue("ae33bcc4-183a-47de-a6c8-f4ecc44be169"));
     if (honoConfirm > abonoMaxHonorarios) {
         toastr.error('El valor no puede ser mayor al abono maximo permitido de $' + abonoMaxHonorarios);
         setFieldValue('ae33bcc4-183a-47de-a6c8-f4ecc44be169', abonoMaxHonorarios);
     }
+
+    RecalculosMora();
 }
 
