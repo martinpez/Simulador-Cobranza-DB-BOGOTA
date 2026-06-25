@@ -43,12 +43,6 @@ function ListHonorarios(mecanismo) {
             }
             break;
         case "novacion":
-            if (userCargado == "no") {
-             if(valelist == "gx("c")
-                ad{   adssadasd
-                visibilityFieldsadsanmdhgadhsagdfjsg
-                oisiygfugfg
-            }
             break;
         default:
             console.error("Mecanismo no reconocido");
