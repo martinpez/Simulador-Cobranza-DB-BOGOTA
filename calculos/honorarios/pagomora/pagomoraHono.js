@@ -63,6 +63,11 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
         console.error("No se enviaron los uid de los elementos")
 
     }
+    
+    if(sessionStorage.TipProducto == "TARJETA"){
+        tipolinea = "0000"
+    }
+
     // valida si esta es honorarios 
     if (tipocobro == "HONORARIO" || tipocobro == "HONORARIOS") {
         // Se va habilitar el campo de list 
