@@ -2,19 +2,17 @@ Campos que se nesecitan para honorarios de ICS
 
 1) Linea de Producto:  Para saber la linea del producto y saber que % usar para sacar cada honorarios
 2) Honorarios:  Si tiene honorarios se le resta estos honorarios al pago minimo
-![alt text](image.png)
+![alt text](../image.png)
 
            Formualas
 
-Calculos =  Restar del pago minimo los honorarios que trae la data 
+Calculos =  Restar del pago minimo los honorarios que trae la data
 (el resultado seria el nuevo pago minimo)
 
 Calculo 2 = (abono minimo * el tipo de producto CONSUMO
-COMERCIAL	VEHICULO) / 100	
+COMERCIAL VEHICULO) / 100
 
 El resultado son los honorarios a cobrar
-
-
 
 Campos:
 LineaPagoM
@@ -22,5 +20,20 @@ Antes de esto tener un switch poder saber si se va aplicar honorarios o no , Los
 
 abono max permitido = 993c55c0-8b02-4be9-a122-d7ec2cf5f87e
 honorarios = ae33bcc4-183a-47de-a6c8-f4ecc44be169
-linea =9ccfa8bd-4060-4aa1-b437-4528d6f9bc35
+linea = 9ccfa8bd-4060-4aa1-b437-4528d6f9bc35
 tipo de cartera = 6e51a18a-184d-455f-9f42-6b3a3d56729f
+
+¿aplica honoraios o gastos de cobranza?
+default : no aplica
+Lista: boton de honorarios cambiar pors lista
+No aplica
+Gastos cobranza
+honorarios
+
+Tipo de linea // setear tarjeta automaticamente en el campo de linea si trae una tarjeta
+cambiar label Abono Max Honorarios
+por Valor Honorarios Maximo
+
+No aplica,GxC,Honorarios
+¿Honorarios o GxC?
+HonorariosOgxc

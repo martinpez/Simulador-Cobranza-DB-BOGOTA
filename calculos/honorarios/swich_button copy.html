@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            background: #ffffff;
+            color: #fff;
+            font-family: 'Sen', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+
+        /* ===== DROPDOWN ===== */
+        .dropdown {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            background: transparent;
+            border: 1px solid #34495e;
+            position: relative;
+            font-size: 18px;
+            perspective: 1000px;
+            z-index: 100;
+            cursor: pointer;
+            border-radius: 9px;
+        }
+
+        .dropdown:hover {
+            background: #2980b9;
+        }
+
+        .dropdown:hover .dropdown_menu li {
+            display: block;
+        }
+
+        /* ===== DROPDOWN MENU ===== */
+        .dropdown_menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            perspective: 1000px;
+            z-index: -1;
+
+        }
+
+        .dropdown_menu li {
+            display: none;
+            color: black;
+            background: transparent;
+            border: 1px solid #34495e;
+            padding: 10px 20px;
+            font-size: 16px;
+            opacity: 0;
+            border-radius: 3px;
+        }
+
+        .dropdown_menu li:hover {
+            background-color: #2980b9;
+        }
+
+        /* ===== TRANSLATEX ANIMATION ===== */
+        .dropdown_menu-5 .dropdown_item-1 {
+            animation: slideX 300ms 60ms ease-in-out forwards;
+            transform-origin: top center;
+        }
+
+        .dropdown_menu-5 .dropdown_item-2 {
+            animation: slideX 300ms 120ms ease-in-out forwards;
+            transform-origin: top center;
+        }
+
+        .dropdown_menu-5 .dropdown_item-3 {
+            animation: slideX 300ms 180ms ease-in-out forwards;
+            transform-origin: top center;
+        }
+
+        .dropdown_menu-5 .dropdown_item-4 {
+            animation: slideX 300ms 240ms ease-in-out forwards;
+            transform-origin: top center;
+        }
+
+        .dropdown_menu-5 .dropdown_item-5 {
+            animation: slideX 300ms 300ms ease-in-out forwards;
+            transform-origin: top center;
+        }
+
+        @keyframes slideX {
+            0% {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+
+            80% {
+                transform: translateX(-5px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <li class="dropdown dropdown-5">
+        ¿Honorarios o GxC?
+        <ul class="dropdown_menu dropdown_menu-5">
+            <li id="no_aplica" class="dropdown_item-1">No aplica</li>
+            <li id="gxc" class="dropdown_item-2">GxC</li>
+            <li id="honorarios" class="dropdown_item-3">Honorarios</li>
+
+        </ul>
+    </li>
+
+</body>
+
+</html>
+
+<script>
+    eventoClick()
+    function eventoClick() {
+        document.getElementById("no_aplica").addEventListener("click", function () {
+            console.log("no aplica")
+        })
+        document.getElementById("gxc").addEventListener("click", function () {
+            console.log("gxc")
+        })
+        document.getElementById("honorarios").addEventListener("click", function () {
+            console.log("honorarios")
+        })
+    }
+
+
+
+</script>

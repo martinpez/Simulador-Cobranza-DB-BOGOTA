@@ -1,5 +1,5 @@
 
-$(document).on('change', '#check', function () {
+$(document).on('change', '#check_cancelacion', function () {
     try {
         if (this.checked) {
             visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
@@ -24,7 +24,6 @@ async function CargaCamposHonorarios(idcheck, idlineaKendo, idTipoCarteraKendo, 
     // todos tienen 3 campos que se van a precargar check, linea , tipo cartera
     // se debe enviar los id de los campos de check, linea , tipo cartera
     debugger
-    tipoProducto = sessionStorage.TipProducto;
     console.log([idcheck, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera]);
     //valida si existen los elementos 
 
@@ -41,11 +40,6 @@ async function CargaCamposHonorarios(idcheck, idlineaKendo, idTipoCarteraKendo, 
         //validar si existe el dato en el storage 
 
         // y va a cargar la data en los campos
-
-        // Para las tarjetas que tienen honorarios la linea es 0900....
-        if (tipoProducto == "TARJETA") {
-            tipolinea = "0000"
-        }
 
         //Tipo de linea
         try {
@@ -70,7 +64,7 @@ async function CargaCamposHonorarios(idcheck, idlineaKendo, idTipoCarteraKendo, 
         }
 
         // tipo de cartera 
-        var dropDownList2 = kendo.jQuery(idTipoCarteraKendo).data("kendoDropDownList"); 3
+        var dropDownList2 = kendo.jQuery(idTipoCarteraKendo).data("kendoDropDownList");
         var item2 = dropDownList2.dataSource.data().find(
             x => x.TipoHonorarios === tipocartera
         );
@@ -105,7 +99,7 @@ async function calculoHonorarios() {
     }
 }
 
-function recalculoHonorarios() {
+function recalculoHonorarioscancela() {
     const safeNumber = val => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
     let abonoMaxHonorarios = safeNumber(getFieldValue("993c55c0-8b02-4be9-a122-d7ec2cf5f87e"));
     let honoConfirm = safeNumber(getFieldValue("ae33bcc4-183a-47de-a6c8-f4ecc44be169"));

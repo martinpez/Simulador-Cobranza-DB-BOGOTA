@@ -45,3 +45,8 @@ function gestionTel() {
         }
     }
 }
+
+// Value change
+const value = document.getElementById("8235c54b-36bd-4880-a29e-fa021ff71595").value;
+sessionStorage.GestionTelf = value;
+gestionTel();
