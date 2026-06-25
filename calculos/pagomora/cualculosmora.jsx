@@ -31,13 +31,14 @@ function CalculosMora() {
 
     // seteo de honorarios 
     if (sessionStorage.UserCargado != "no") {
-        let idcheck = "check"
+        let honorarioslista = "e321eed7-845b-46e4-89f8-0bdf0c53e0e4"
         let idlineaKendo = "#9ccfa8bd-4060-4aa1-b437-4528d6f9bc35"
         let idTipoCarteraKendo = "#6e51a18a-184d-455f-9f42-6b3a3d56729f"
         let tipocobro = sessionStorage.TipoCobro
         let tipolinea = sessionStorage.Linea
         let tipocartera = sessionStorage.TipoCartera
-        CargaCamposHonorarios(idcheck, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera);
+        let mecanismo = "pagomora"
+        CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo);
     }
 
 

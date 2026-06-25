@@ -1,51 +1,81 @@
+function ListHonorarios(mecanismo) {
+    // Mostrar campos de honorarios sin data
+    //console.log(e.value)
+    debugger;
+    const Safetext = val => typeof val === 'string' ? val : '';
+    let valelist = e.value;
+    let userCargado = sessionStorage.UserCargado;
+    let mecanismos = Safetext(mecanismo);
+    switch (mecanismos) {
+        case "cancelacion":
+            // listHonorariosCancelacion();
+            break;
+        case "pagomora":
 
-$(document).on('change', '#check', function () {
-    try {
-        if (this.checked) {
-            visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
-            visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
-            visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
-            visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
-        } else {
-            visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false)
-            visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false)
-            visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false)
-            visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false)
-        }
-    } catch (error) {
-        console.error("Error al mostrar los campos:", error);
+            if (userCargado == "no") {
+                document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4").disabled = false;
+                switch (valelist) {
+                    case "No aplica":
+                        visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false)
+                        visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false)
+                        visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false)
+                        visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false)
+                        break;
+                    case "Honorarios":
+                        visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
+                        visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
+                        visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
+                        visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
+                        break;
+                    default: "1: No aplica"
+                        visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false)
+                        visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false)
+                        visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false)
+                        visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false)
+                        break;
+                }
+            } else {
+                    visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
+                    visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
+                    visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
+                    visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
+                document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4").disabled = true;
+            }
+            break;
+        case "novacion":
+            if (userCargado == "no") {
+             if(valelist == "gx("c")
+                ad{   adssadasd
+                visibilityFieldsadsanmdhgadhsagdfjsg
+                oisiygfugfg
+            }
+            break;
+        default:
+            console.error("Mecanismo no reconocido");
     }
-});
+}
 
 function vacia() {
 }
-async function CargaCamposHonorarios(idcheck, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera) {
+async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo) {
     // Funcion que va servir para cargar cualquier honorarios 
     // todos tienen 3 campos que se van a precargar check, linea , tipo cartera
     // se debe enviar los id de los campos de check, linea , tipo cartera
     debugger
-    tipoProducto = sessionStorage.TipProducto;
-    console.log([idcheck, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera]);
+    console.log([honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo]);
     //valida si existen los elementos 
 
-    if (!(idcheck && idlineaKendo && idTipoCarteraKendo)) {
+    if (!(honorarioslista && idlineaKendo && idTipoCarteraKendo)) {
         console.error("No se enviaron los uid de los elementos")
 
     }
     // valida si esta es honorarios 
     if (tipocobro == "HONORARIO" || tipocobro == "HONORARIOS") {
-        // Se va habilitar el campo de check 
-        const chk = document.getElementById(idcheck);
-        chk.checked = true;
-        chk.dispatchEvent(new Event('change', { bubbles: true }));
-        //validar si existe el dato en el storage 
-
-        // y va a cargar la data en los campos
-
-        // Para las tarjetas que tienen honorarios la linea es 0900....
-        if (tipoProducto == "TARJETA") {
-            tipolinea = "0000"
-        }
+        // Se va habilitar el campo de list 
+        const list = document.getElementById(honorarioslista);
+        list.value = "2: Honorarios";
+        list.disabled = true;
+        ListHonorarios(mecanismo);
 
         //Tipo de linea
         try {
@@ -70,7 +100,7 @@ async function CargaCamposHonorarios(idcheck, idlineaKendo, idTipoCarteraKendo, 
         }
 
         // tipo de cartera 
-        var dropDownList2 = kendo.jQuery(idTipoCarteraKendo).data("kendoDropDownList"); 3
+        var dropDownList2 = kendo.jQuery(idTipoCarteraKendo).data("kendoDropDownList");
         var item2 = dropDownList2.dataSource.data().find(
             x => x.TipoHonorarios === tipocartera
         );
@@ -117,3 +147,5 @@ function recalculoHonorarios() {
     RecalculosMora();
 }
 
+let mecanismoStora = sessionStorage.mecanismo
+ListHonorarios(mecanismoStora);

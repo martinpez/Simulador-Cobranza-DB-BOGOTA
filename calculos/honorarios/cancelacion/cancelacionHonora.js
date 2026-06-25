@@ -1,46 +1,57 @@
-
-$(document).on('change', '#check_cancelacion', function () {
-    try {
-        if (this.checked) {
-            visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
-            visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
-            visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
-            visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
-        } else {
-            visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false)
-            visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false)
-            visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false)
-            visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false)
+function listHonorariosCancelacion() {
+    // Mostrar campos de honorarios sin data
+    _//console.log(e.value)
+    debugger;
+    let listHonorarios = e.value;
+    if (userCargado == "no") {
+        document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4").disabled = false;
+        switch (listHonorarios) {
+            case "No aplica":
+                visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false)
+                visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false)
+                visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false)
+                visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false)
+                break;
+            case "Honorarios":
+                visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
+                visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
+                visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
+                visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
+                break;
+            default: "1: No aplica"
+                visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false)
+                visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false)
+                visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false)
+                visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false)
+                break;
         }
-    } catch (error) {
-        console.error("Error al mostrar los campos:", error);
+    } else {
+        document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4").disabled = true;
     }
-});
+
+}
 
 function vacia() {
 }
-async function CargaCamposHonorarios(idcheck, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera) {
+async function CargaCamposHonorarios(listHonorarios, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera) {
     // Funcion que va servir para cargar cualquier honorarios 
     // todos tienen 3 campos que se van a precargar check, linea , tipo cartera
     // se debe enviar los id de los campos de check, linea , tipo cartera
     debugger
-    console.log([idcheck, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera]);
+    console.log([listHonorarios, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera]);
     //valida si existen los elementos 
 
-    if (!(idcheck && idlineaKendo && idTipoCarteraKendo)) {
+    if (!(listHonorarios && idlineaKendo && idTipoCarteraKendo)) {
         console.error("No se enviaron los uid de los elementos")
 
     }
     // valida si esta es honorarios 
     if (tipocobro == "HONORARIO" || tipocobro == "HONORARIOS") {
-        // Se va habilitar el campo de check 
-        const chk = document.getElementById(idcheck);
-        chk.checked = true;
-        chk.dispatchEvent(new Event('change', { bubbles: true }));
-        //validar si existe el dato en el storage 
-
-        // y va a cargar la data en los campos
-
+        // Se va habilitar el campo de list 
+        const list = document.getElementById(listHonorarios);
+        list.value = "2: Honorarios";
+        list.disabled = true;
+        listHonorarios();
         //Tipo de linea
         try {
             let query = `SELECT NomProductos FROM SimiladorDNC_Lappiz_LineaProducto WHERE CodCodigo = '${tipolinea}'`
