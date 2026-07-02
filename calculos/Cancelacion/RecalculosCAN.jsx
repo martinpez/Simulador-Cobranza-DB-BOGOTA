@@ -17,6 +17,7 @@ function recalcularcancelacion() {
 
     // ── Saldo total ──
     // ── Leer valores del formulario ──
+    debugger;
     let saldoTotal = getFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca')
     let pagoAlSnr = getFieldValue('b5c33a6d-9d65-4920-8a39-e73621b7daa9')
     let capital = getFieldValue('9dc154b0-5d64-4682-a76d-5e946415c253')
@@ -46,7 +47,20 @@ function recalcularcancelacion() {
     let totalMaxDctos = maxDctoIntCte + maxDctoExtra + maxDctoMora + maxDctoCapital
     let abonoMinimo = saldoTotal - totalMaxDctos + 10000
     setFieldValue('7a94fe37-1d84-4232-9298-4e1986cdead2', totalMaxDctos)  // Max Baja en cuentas
-    setFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f', abonoMinimo)   // Abono mínimo con Max %
+
+    // ── Honorarios ──
+    let pagoMinimoBase = getFieldValue('aa665762-9b2f-47f8-8d8c-cabca1924771') || 0
+    let baseHonorarios = Math.min(pagoMinimoBase, abonoMinimo)
+    let porcentajeCartera = parseFloat(sessionStorage.PorcCartera) || 0
+    let honorariosCalculados = Math.floor((baseHonorarios * porcentajeCartera) / 100)
+    setFieldValue('9ee8ee24-5ae5-42da-83c5-36948592e72b', honorariosCalculados)
+
+    let honorariosPagados = parseFloat(getFieldValue('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef')) || 0
+    if (honorariosPagados > 0) {
+        setFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f', abonoMinimo + honorariosPagados)
+    } else {
+        setFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f', abonoMinimo)   // Abono mínimo con Max %
+    }
 
     // ── Si está bloqueado, todo en 0 y salir ──
     if (bloqueado) {
@@ -59,10 +73,14 @@ function recalcularcancelacion() {
         setFieldValue('60bebeab-d3ca-4547-9eff-00cc8db69b82', 0)
         setFieldValue('aa7aeaf3-6bc8-4939-9896-212d5efcd93e', 0)
         setFieldValue('7ed52d26-15c9-4f11-9177-55a380d1427d', 0)
+        setFieldValue('9ee8ee24-5ae5-42da-83c5-36948592e72b', 0)
         return
     }
 
-    let pagoExtra = Math.max(0, pagoAlSnr - abonoMinimo)
+    // Los honorarios pagados se descuentan antes de calcular el exceso,
+    // para que no se confundan con un sobrepago que reduzca más los descuentos
+    let pagoRealDeuda = Math.max(0, pagoAlSnr - honorariosPagados)
+    let pagoExtra = Math.max(0, pagoRealDeuda - abonoMinimo)
 
     // Variables de descuento aplicado (inician en máximo y bajan)
     let dctoCte = maxDctoIntCte
@@ -78,8 +96,8 @@ function recalcularcancelacion() {
         dctoCapital = maxDctoCapital - reduccionCapital
         dctoCapital = Math.max(0, dctoCapital)
         exceso -= reduccionCapital
-    } else if (pagoAlSnr < abonoMinimo) {
-        let deficit = abonoMinimo - pagoAlSnr
+    } else if (pagoRealDeuda < abonoMinimo) {
+        let deficit = abonoMinimo - pagoRealDeuda
         dctoCapital = Math.min(capital, maxDctoCapital + deficit)
     }
 
@@ -148,26 +166,6 @@ function recalcularcancelacion() {
     setFieldValue('7ed52d26-15c9-4f11-9177-55a380d1427d', totalAplicado)
 
 
-}
-
-
-
-function DescuentoInteresCte() {
-    recalcularcancelacion();
-}
-function DescuentoCapital() {
-    debugger;
-    let edad = sessionStorage.edadmoraCancelacion
-    if ((edad === "1-30 Días" || edad === "31-60 Días") && (sessionStorage.campañacancelacion == "no")) return 0
-
-    let saldoTotal = getFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca')
-    let pagoAlSnr = getFieldValue('b5c33a6d-9d65-4920-8a39-e73621b7daa9')
-    let maxDctoIntCte = getFieldValue('1c23cf01-dd67-4c9a-a4b6-871c781eec02')
-    let maxDctoMora = getFieldValue('0c422603-5f6e-4c23-a7b5-b78cf30ba1d8')
-    let maxDctoExtra = getFieldValue('6e01ec4d-1391-4878-8886-be49eef96d27')
-
-    let resultado = (saldoTotal + 10000) - (pagoAlSnr + maxDctoIntCte + maxDctoMora + maxDctoExtra)
-    return resultado > 0 ? resultado : 0
 }
 
 

@@ -167,7 +167,7 @@ async function calculoHonorarios() {
     }
 }
 
-function recalculoHonorarios() {
+function recalculoHonorariosMora() {
     const safeNumber = val => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
     let abonoMaxHonorarios = safeNumber(getFieldValue("993c55c0-8b02-4be9-a122-d7ec2cf5f87e"));
     let honoConfirm = safeNumber(getFieldValue("ae33bcc4-183a-47de-a6c8-f4ecc44be169"));
@@ -177,6 +177,18 @@ function recalculoHonorarios() {
     }
 
     RecalculosMora();
+}
+
+function recalculoHonorariosCancelacion() {
+    const safeNumber = val => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
+    let abonoMaxHonorarios = safeNumber(getFieldValue("9ee8ee24-5ae5-42da-83c5-36948592e72b"));
+    let honoConfirm = safeNumber(getFieldValue("a0a2b9b0-17cc-41fe-be98-2ac2157e33ef"));
+    if (honoConfirm > abonoMaxHonorarios) {
+        toastr.error('El valor no puede ser mayor al abono maximo permitido de $' + abonoMaxHonorarios);
+        setFieldValue('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', abonoMaxHonorarios);
+    }
+
+    recalcularcancelacion();
 }
 
 

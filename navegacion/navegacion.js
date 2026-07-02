@@ -195,10 +195,7 @@ function inicializarNavegacion() {
     $(".cancelacion").click(() => {
         sessionStorage.mecanismo = "cancelacion"
         navegarA(VISTAS.CANCELACION_TOTAL_PAG1);
-        let edadmora = sessionStorage.EdadMoraCl;
-        if (edadmora == "1-30 Días" || edadmora == "31-60 Días") {
-            recalcularcancelacion();
-        }
+        recalcularcancelacion();
     });
     $(".right-buttonCA1").click(() => {
         navegarA(VISTAS.CANCELACION_P2);
@@ -319,6 +316,7 @@ function inicializarNavegacion() {
     //Botones Copiar Sox
     $(".copiar").click(() => {
         copiarTexto();
+        llenarCampos();
     });
     $(".copiar2").click(() => {
         copiarTexto2();

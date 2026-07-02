@@ -52,3 +52,7 @@ Tipo cartera = dfe46e30-5328-485e-bc80-bec20aab2d02
  pago minimo descontar isc honorarios =  comparar con snr  y multiplicar el menor con la cartera
  y
  saldo total - honorarios  
+
+ BaseHonorarios = MIN(PagoMinimoBase, SNR)
+
+Honorarios = BaseHonorarios * PorcentajeCartera
