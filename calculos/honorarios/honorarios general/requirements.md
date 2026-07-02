@@ -1,3 +1,5 @@
+# pago mora
+
 Campos que se nesecitan para honorarios de ICS
 
 1) Linea de Producto:  Para saber la linea del producto y saber que % usar para sacar cada honorarios
@@ -18,8 +20,8 @@ Campos:
 LineaPagoM
 Antes de esto tener un switch poder saber si se va aplicar honorarios o no , Los campos que se necesitan seria que eligir la linea del produto (lista desplegable) y el tipo de cartera (lista desplegable )para poder aplicar el campo de los hornorios y aplicar el porcentaje de los honorarios
 
-abono max permitido = 993c55c0-8b02-4be9-a122-d7ec2cf5f87e
-honorarios = ae33bcc4-183a-47de-a6c8-f4ecc44be169
+Valor Honorarios Maximo = 993c55c0-8b02-4be9-a122-d7ec2cf5f87e
+Honorarios cofirm  = ae33bcc4-183a-47de-a6c8-f4ecc44be169
 linea = 9ccfa8bd-4060-4aa1-b437-4528d6f9bc35
 tipo de cartera = 6e51a18a-184d-455f-9f42-6b3a3d56729f
 
@@ -37,4 +39,16 @@ por Valor Honorarios Maximo
 No aplica,GxC,Honorarios
 ¿Honorarios o GxC?
 HonorariosOgxc
-    
+
+# Cancelacion
+
+id lita desplegable = bda37ca7-d503-4d41-8ff4-aebde2cb7c30
+Valor Honorarios Maximo = 9ee8ee24-5ae5-42da-83c5-36948592e72b
+Honorarios cofirm = a0a2b9b0-17cc-41fe-be98-2ac2157e33ef
+Pago mínimo * = aa665762-9b2f-47f8-8d8c-cabca1924771
+Tipo linea = 8e8d6cf2-299c-4b45-8059-64cf50b2bd11
+Tipo cartera = dfe46e30-5328-485e-bc80-bec20aab2d02
+
+ pago minimo descontar isc honorarios =  comparar con snr  y multiplicar el menor con la cartera
+ y
+ saldo total - honorarios  

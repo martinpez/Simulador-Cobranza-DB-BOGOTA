@@ -33,6 +33,7 @@ const VISTAS = {
 
     CLIENTE_INFO_ECONOMICA: 11,
     INFORMACION_CLIENTE: 13
+    // Formato fun
 };
 
 const OBSERVATION_SOX_MAP = [
@@ -163,7 +164,7 @@ function inicializarNavegacion() {
         navegarA(VISTAS.NOVACIONES_P1);
     });
     $(".right-button2").click(() => {
-        navegarA(VISTAS.CLIENTE_INFO_ECONOMICA);
+        navegarA(VISTAS.INFORMACION_CLIENTE);
     });
 
 
@@ -285,7 +286,7 @@ function inicializarNavegacion() {
     });
 
 
-    // navegacion al volver de la pagina de informacion cliente
+    // navegacion al volver de la pagina de informacion cliente FUN
     $(".left-buttonInf").click(() => {
         switch (sessionStorage.mecanismo) {
             case "consolidacion":
