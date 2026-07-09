@@ -42,7 +42,7 @@ HonorariosOgxc
 
 # Cancelacion
 
-id lita desplegable = bda37ca7-d503-4d41-8ff4-aebde2cb7c30
+id lista desplegable = bda37ca7-d503-4d41-8ff4-aebde2cb7c30
 Valor Honorarios Maximo = 9ee8ee24-5ae5-42da-83c5-36948592e72b
 Honorarios cofirm = a0a2b9b0-17cc-41fe-be98-2ac2157e33ef
 Pago mínimo * = aa665762-9b2f-47f8-8d8c-cabca1924771
@@ -56,3 +56,13 @@ Tipo cartera = dfe46e30-5328-485e-bc80-bec20aab2d02
  BaseHonorarios = MIN(PagoMinimoBase, SNR)
 
 Honorarios = BaseHonorarios * PorcentajeCartera
+
+
+
+# Ampliacion
+id lista desplegable = 020563ab-b407-433b-bcf3-c534456818f3
+Valor Honorarios Maximo = d647e41b-7a50-46b0-ba5f-e30eeb44b463
+Honorarios cofirm = e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b
+Tipo linea = 8e1dc11f-e65c-4141-a1d5-42850fd9b214
+Tipo cartera = 93f08e21-47c5-48ee-8acc-b093afe84a38
+Honorarios = snr * PorcentajeCarteras

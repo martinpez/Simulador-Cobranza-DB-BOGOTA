@@ -9,6 +9,7 @@ function ListHonorarios(mecanismo) {
     switch (mecanismos) {
         case "cancelacion":
             if (userCargado == "no") {
+                // elementById Lista desplegable aplica o no aplica
                 document.getElementById("bda37ca7-d503-4d41-8ff4-aebde2cb7c30").disabled = false;
                 switch (valelist) {
                     case "No aplica":
@@ -76,7 +77,37 @@ function ListHonorarios(mecanismo) {
                 document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4").disabled = true;
             }
             break;
-        case "novacion":
+        case "ampliacion":
+
+            if (userCargado == "no") {
+                document.getElementById("020563ab-b407-433b-bcf3-c534456818f3").disabled = false;
+                switch (valelist) {
+                    case "No aplica":
+                        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', false)
+                        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', false)
+                        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', false)
+                        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', false)
+                        break;
+                    case "Honorarios":
+                        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
+                        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
+                        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
+                        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true)
+                        break;
+                    default: "1: No aplica"
+                        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', false)
+                        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', false)
+                        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', false)
+                        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', false)
+                        break;
+                }
+            } else {
+                visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
+                visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
+                visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
+                visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true)
+                document.getElementById("020563ab-b407-433b-bcf3-c534456818f3").disabled = true;
+            }
             break;
         default:
             console.error("Mecanismo no reconocido");
@@ -108,7 +139,6 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
         const list = document.getElementById(honorarioslista);
         list.value = "2: Honorarios";
         list.disabled = true;
-        ListHonorarios(mecanismo);
 
         //Tipo de linea
         try {
@@ -142,6 +172,7 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
             dropDownList2.value(item2.Id);
             dropDownList2.trigger("change");
         }
+        ListHonorarios(mecanismo);
 
     }
 }
@@ -189,6 +220,17 @@ function recalculoHonorariosCancelacion() {
     }
 
     recalcularcancelacion();
+}
+
+function recalculoHonorariosAmpliacion() {
+    const safeNumber = val => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
+    let abonoMaxHonorarios = safeNumber(getFieldValue("d647e41b-7a50-46b0-ba5f-e30eeb44b463"));
+    let honoConfirm = safeNumber(getFieldValue("e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b"));
+    if (honoConfirm > abonoMaxHonorarios) {
+        toastr.error('El valor no puede ser mayor al abono maximo permitido de $' + abonoMaxHonorarios);
+        setFieldValue('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', abonoMaxHonorarios);
+    }
+    _recalcularTodo()
 }
 
 

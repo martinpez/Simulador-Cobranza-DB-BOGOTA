@@ -17,7 +17,7 @@ const VISTAS = {
     NOVACIONES_P2: 3,
 
     AMPLIACION_P1: 4,
-    AMPLIACION_P2: 16,
+    AMPLIACION_P2: 17,
     AMPLIACION_P3: 7,
 
     CANCELACION_TOTAL_PAG1: 5,
@@ -28,12 +28,13 @@ const VISTAS = {
     CONSOLIDACION_P2: 9,
     CONSOLIDACION_P4: 8,
 
-    PAGOMORA_P1: 15,
+    PAGOMORA_P1: 16,
     PAGOMORA_P2: 10,
 
     CLIENTE_INFO_ECONOMICA: 11,
-    INFORMACION_CLIENTE: 13
-    // Formato fun
+    INFORMACION_CLIENTE: 14,
+
+    ITAU_P1: 13
 };
 
 const OBSERVATION_SOX_MAP = [
@@ -94,6 +95,11 @@ function navegarA(vistaIndex) {
 }
 
 function inicializarNavegacion() {
+
+    //ITAU
+    $(".itau").click(() => {
+    navegarA(VISTAS.ITAU_P1);
+    });
 
     // Consolidacion de productos
     //Principal

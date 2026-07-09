@@ -8,7 +8,7 @@ async function Obligacion() {
         let documentocliente = e.value;
         let fecha = new Date().toLocaleDateString()
         let tipodoc = getFieldValue('15fb0de1-4989-4986-a662-61fb88b3aba1')
-        let paramsArray = [sw, documentocliente, `'${fecha}'`];
+        //let paramsArray = [sw, documentocliente, `'${fecha}'`];
 
         let response = await execQuery(`EXEC SimiladorDNC_Lappiz_EmailConfirmed @sw = 10, @documentocliente= ${documentocliente}, @fecha = '${fecha}', @grupo = '${sessionStorage.Grupo}', @filtro = '${sessionStorage.Filtro}', @tipodoc = '${tipodoc}'`)
         if (response[0][0]) {

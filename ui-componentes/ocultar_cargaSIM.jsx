@@ -1,11 +1,28 @@
 setTimeout(function () {
     delete sessionStorage.campanamora
     if (!sessionStorage.UserId) {
+        // ocultar todo ampliacion honorarios campos antes de cargar
+        document.getElementById("020563ab-b407-433b-bcf3-c534456818f3").disabled = false;
+        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', false)
+        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', false)
+        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', false)
+        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', false)
+
         // ocultar todo pago mora honorarios campos antes de cargar
+        document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4").disabled = false;
         visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false)
         visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false)
         visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false)
         visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false)
+
+        // ocultar todo pago mora honorarios campos antes de cargar
+        document.getElementById("bda37ca7-d503-4d41-8ff4-aebde2cb7c30").disabled = false;
+        visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', false)
+        visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', false)
+        visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', false)
+        visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', false)
+        visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', false)
+
 
         document.querySelectorAll('.counter.ng-star-inserted')
             .forEach(el => el.remove());
