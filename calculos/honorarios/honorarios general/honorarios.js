@@ -78,7 +78,6 @@ function ListHonorarios(mecanismo) {
             }
             break;
         case "ampliacion":
-
             if (userCargado == "no") {
                 document.getElementById("020563ab-b407-433b-bcf3-c534456818f3").disabled = false;
                 switch (valelist) {
@@ -139,7 +138,7 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
         const list = document.getElementById(honorarioslista);
         list.value = "2: Honorarios";
         list.disabled = true;
-
+        ListHonorarios(mecanismo);
         //Tipo de linea
         try {
             let query = `SELECT NomProductos FROM SimiladorDNC_Lappiz_LineaProducto WHERE CodCodigo = '${tipolinea}'`

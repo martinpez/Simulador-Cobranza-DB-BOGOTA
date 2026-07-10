@@ -66,3 +66,5 @@ Honorarios cofirm = e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b
 Tipo linea = 8e1dc11f-e65c-4141-a1d5-42850fd9b214
 Tipo cartera = 93f08e21-47c5-48ee-8acc-b093afe84a38
 Honorarios = snr * PorcentajeCarteras
+
+1053327350
