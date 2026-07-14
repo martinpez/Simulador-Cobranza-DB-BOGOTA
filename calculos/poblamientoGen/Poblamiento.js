@@ -1,10 +1,15 @@
 function valoresPoblamiento() {
   //Pantalla Principal
+  debugger;
   delete sessionStorage.campanamora
-  setFieldValue('1ad60ed2-e515-4164-8270-54efa1e574fa', e.dataItem.NombreCompleto)
-  setFieldValue('4eedfe97-8bf2-499c-a05f-ff25e3ca9b95', e.dataItem.PosibilidadCambio026)
+
+  setFieldValue('1ad60ed2-e515-4164-8270-54efa1e574fa', e.dataItem.NombreCompleto) // Nombre Completo
+  e.dataItem.PosibilidadCambio026 == "SI" ? document.getElementById("4eedfe97-8bf2-499c-a05f-ff25e3ca9b95").selectedIndex = 1
+    : document.getElementById("4eedfe97-8bf2-499c-a05f-ff25e3ca9b95").selectedIndex = 2; // Cambio PoP
   let id = getIdByPartialText(e.dataItem.MarcaObl026, '8676efb4-1857-48d2-b604-8c4e23917fd0');
-  setFieldValue('8676efb4-1857-48d2-b604-8c4e23917fd0', id) //marca obligacion
+  setFieldValue('8676efb4-1857-48d2-b604-8c4e23917fd0', id); // Marca Obl
+  e.dataItem.GestionTelefonica == "SI" ? document.getElementById("8235c54b-36bd-4880-a29e-fa021ff71595").selectedIndex = 1
+    : document.getElementById("8235c54b-36bd-4880-a29e-fa021ff71595").selectedIndex = 2; // Gestion Telefonica
   let mora = getIdByPartialText(e.dataItem.EdadMoraCl, '5b9ce178-27fe-4c52-b91d-ba6a898ff546');
   if (e.dataItem.MecanismoAplicaCampana && e.dataItem.MecanismoAplicaCampana.includes("PAGOMORA")) {
     sessionStorage.campanamora = 'si'
@@ -39,7 +44,21 @@ function valoresPoblamiento() {
   //novaciones
   setFieldValue('616e6102-56e5-48e9-bfc2-fce8497e629d', e.dataItem.SaldoTotalObl);
   setFieldValue('1f7c2b79-87a6-402f-95f2-414aea88a4bf', e.dataItem.PagoMinObl);
+  setFieldValue('e2c2ca76-e568-413d-8aac-b7bd2c3b9f52', e.dataItem.InteresCteObl);                    // Int Corriente
+  setFieldValue('ce31f456-c5d9-4476-a56f-f5f44d2c8827', e.dataItem.InteresMoraObl);                   // Int Mora
+  setFieldValue('a710006e-72a9-4388-84ed-cc3b743ef45f', e.dataItem.InteresesExtracontablesObl || 0);  // Int Extracontable
+  setFieldValue('51440ec8-1f3c-49fa-8672-15870130cb90', e.dataItem.OtrosCargosExigibles || 0);        // Otros Cargos
+  setFieldValue('0cb35f96-ddc9-40e7-b948-8f0d4d86bf79', e.dataItem.DiasMoraObl);                      // Días de mora
 
+  // Seleccionar Tipo de Cartera (dispara calculoHonorariosNov -> línea + % honorarios)
+  let idCarteraNov = getIdByPartialText(sessionStorage.TipoCartera, 'baa0e784-8248-45b8-9394-8932fe45094e');
+  setFieldValue('baa0e784-8248-45b8-9394-8932fe45094e', idCarteraNov);
+
+  // Seleccionar la lista Honorarios / Gastos / No aplica según TipoCobro
+  if (typeof initGastoNov === 'function') { initGastoNov(); }
+
+  // Consultar rango de días (topes, % abono, tasa GxC) y lanzar el cálculo
+  if (typeof consultarRango === 'function') { consultarRango(); }
   let dropDownList1 = kendo.jQuery("#91d24002-ea79-468e-8375-8fee8964b2f8").data('kendoDropDownList');
   let dataSource1 = dropDownList1.dataSource;
 
