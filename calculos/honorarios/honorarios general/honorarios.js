@@ -4,15 +4,20 @@ function ListHonorarios(mecanismo) {
     debugger;
     const Safetext = val => typeof val === 'string' ? val : '';
     let valelist = e.value;
+    var tipoCobro = sessionStorage.TipoCobro;
     let userCargado = sessionStorage.UserCargado;
     let mecanismos = Safetext(mecanismo);
+    let  ListCan = document.getElementById("bda37ca7-d503-4d41-8ff4-aebde2cb7c30");
+    let ListPago = document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4");
+    let ListAmp = document.getElementById("020563ab-b407-433b-bcf3-c534456818f3");
     switch (mecanismos) {
         case "cancelacion":
             if (userCargado == "no") {
                 // elementById Lista desplegable aplica o no aplica
-                document.getElementById("bda37ca7-d503-4d41-8ff4-aebde2cb7c30").disabled = false;
+                ListCan.disabled = false;
                 switch (valelist) {
                     case "No aplica":
+                        ListCan.value = "1: No aplica";
                         visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', false)
                         visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', false)
                         visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', false)
@@ -20,6 +25,7 @@ function ListHonorarios(mecanismo) {
                         visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', false)
                         break;
                     case "Honorarios":
+                        ListCan.value = "2: Honorarios";
                         visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
                         visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
                         visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
@@ -27,85 +33,122 @@ function ListHonorarios(mecanismo) {
                         visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
 
                         break;
-                    default: "1: No aplica"
-                        visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', false)
-                        visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', false)
-                        visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', false)
-                        visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', false)
-                        visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', false)
+                    case "Piloto-GXC":
+                        ListCan.value = "3: Piloto-GXC";
+                        visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
+                        visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
+                        visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
+                        visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
+                        visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
                         break;
                 }
-            } else {
+            } else if (tipoCobro == "HONORARIOS") {
                 visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
                 visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
                 visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
                 visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
                 visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
-                document.getElementById("bda37ca7-d503-4d41-8ff4-aebde2cb7c30").disabled = true;
+                ListCan.disabled = true;
+                ListCan.value = "2: Honorarios";
 
+            } else if (tipoCobro == "GASTOS_90")  {
+                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
+                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
+                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
+                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
+                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+                ListCan.disabled = true;
+                ListCan.value = "3: Piloto-GXC";
             }
             break;
         case "pagomora":
-
             if (userCargado == "no") {
-                document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4").disabled = false;
+                ListPago.disabled = false;
                 switch (valelist) {
                     case "No aplica":
+                        ListPago.value = "1: No aplica";
                         visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false)
                         visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false)
                         visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false)
                         visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false)
                         break;
                     case "Honorarios":
+                        ListPago.value = "2: Honorarios";
                         visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
                         visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
                         visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
                         visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
                         break;
-                    default: "1: No aplica"
-                        visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false)
-                        visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false)
-                        visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false)
-                        visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false)
+                    case "Piloto-GXC":
+                        ListPago.value = "3: Piloto-GXC";
+                        visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
+                        visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
+                        visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
+                        visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
                         break;
                 }
-            } else {
-                visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
-                visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
-                visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
-                visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
-                document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4").disabled = true;
+            } else if (tipoCobro == "HONORARIOS") {
+                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
+                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
+                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
+                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
+                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+                ListPago.disabled = true;
+                ListPago.value = "2: Honorarios";
+
+            } else if (tipoCobro == "GASTOS_90")  {
+                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
+                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
+                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
+                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
+                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+                ListPago.disabled = true;
+                ListPago.value = "3: Piloto-GXC";
             }
             break;
         case "ampliacion":
             if (userCargado == "no") {
-                document.getElementById("020563ab-b407-433b-bcf3-c534456818f3").disabled = false;
+                ListAmp.disabled = false;
                 switch (valelist) {
                     case "No aplica":
+                        ListAmp.value = "1: No aplica";
                         visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', false)
                         visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', false)
                         visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', false)
                         visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', false)
                         break;
                     case "Honorarios":
+                        ListAmp.value = "2: Honorarios";
                         visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
                         visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
                         visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
                         visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true)
                         break;
-                    default: "1: No aplica"
-                        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', false)
-                        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', false)
-                        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', false)
-                        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', false)
+                    case "Piloto-GXC":
+                        ListAmp.value = "3: Piloto-GXC";
+                        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
+                        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
+                        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
+                        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true)
                         break;
                 }
-            } else {
-                visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
-                visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
-                visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
-                visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true)
-                document.getElementById("020563ab-b407-433b-bcf3-c534456818f3").disabled = true;
+            } else if (tipoCobro == "HONORARIOS") {
+                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
+                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
+                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
+                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
+                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+                ListAmp.disabled = true;
+                ListAmp.value = "2: Honorarios";
+
+            } else if ( tipoCobro == "GASTOS_90")  {
+                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
+                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
+                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
+                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
+                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+                ListAmp.disabled = true;
+                ListAmp.value = "3: Piloto-GXC";
             }
             break;
         default:
@@ -131,14 +174,12 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
     if (sessionStorage.TipProducto == "TARJETA") {
         tipolinea = "0000"
     }
-
+    ListHonorarios(mecanismo);
     // valida si esta es honorarios 
     if (tipocobro == "HONORARIO" || tipocobro == "HONORARIOS") {
         // Se va habilitar el campo de list 
         const list = document.getElementById(honorarioslista);
-        list.value = "2: Honorarios";
-        list.disabled = true;
-        ListHonorarios(mecanismo);
+       
         //Tipo de linea
         try {
             let query = `SELECT NomProductos FROM SimiladorDNC_Lappiz_LineaProducto WHERE CodCodigo = '${tipolinea}'`
@@ -172,6 +213,8 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
             dropDownList2.trigger("change");
         }
         ListHonorarios(mecanismo);
+
+    } else if (tipocobro == "GASTOS_90"){
 
     }
 }
