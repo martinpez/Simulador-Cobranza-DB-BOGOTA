@@ -1,6 +1,4 @@
 function RecalculosMora() {
-
-    // Si todavía no está listo el cálculo inicial, reintentar
     if (sessionStorage.calculosMoraListo !== 'si') {
         const intentos = parseInt(sessionStorage.reintentosRecalculo || '0')
         if (intentos < 10) {
@@ -9,9 +7,8 @@ function RecalculosMora() {
             return
         }
     }
-
     sessionStorage.reintentosRecalculo = '0'
-
+    debugger;
     const safeNumber = val =>
         isNaN(parseFloat(val)) ? 0 : parseFloat(val)
 
@@ -19,7 +16,7 @@ function RecalculosMora() {
         getFieldValue('7a5c89e8-a431-4b76-b3bc-24f6a187978c') === 'Si'
 
     const colchon = esTarjeta ? 0 : 20000
-    debugger;
+
     const InteresCteObl = safeNumber(getFieldValue('9b3ac68c-68ff-4928-864d-906e9d851621'))
     const InteresMoraObl = safeNumber(getFieldValue('c13b3910-1960-422f-835d-7ea89982f8b6'))
     const PagoMinObl = safeNumber(getFieldValue('af9911f8-4a06-4483-b25d-6bec9e1647fe'))

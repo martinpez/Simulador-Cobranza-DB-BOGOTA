@@ -1,7 +1,7 @@
 function Obligacionvacia() {
-
 }
 async function Obligacion() {
+
     try {
         let SpName = 'SimiladorDNC_Lappiz_EmailConfirmed';
         let sw = '10';
@@ -46,7 +46,6 @@ async function Obligacion() {
             visibilityField('c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0', true)
         }
 
-
     } catch (error) {
         sessionStorage.setItem('UserCargado', 'no');
         Swal.fire({
@@ -56,6 +55,27 @@ async function Obligacion() {
             confirmButtonColor: '#ee7402' // Cambia el color del botón
         })
         visibilityField('caae86ca-b4e0-4e59-918e-8f7a1a4d4114', false)
+    }
+    debugger;
+    // rangosPilotoGXC()
+    if (sessionStorage.pilotosDias) {
+        return;
+    }
+    try {
+        let query = `SELECT MaxDias,MinDias,PorcTasaGastoCobranza FROM SimiladorDNC_Lappiz_rangosGastosCobranza`
+        let response = await execQuery(query)
+        let pilotosDias = [];
+        for (let i = 0; i < response[0].length; i++) {
+            pilotosDias.push({
+                maxDias: response[0][i].MaxDias,
+                minDias: response[0][i].MinDias,
+                porcAbonoMinimo: response[0][i].PorcTasaGastoCobranza
+            });
+        }
+        sessionStorage.setItem('pilotosDias', JSON.stringify(pilotosDias));
+        console.log(sessionStorage.pilotosDias);
+    } catch (error) {
+        console.log(error);
     }
 
 }

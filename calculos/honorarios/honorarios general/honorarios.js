@@ -7,7 +7,7 @@ function ListHonorarios(mecanismo) {
     var tipoCobro = sessionStorage.TipoCobro;
     let userCargado = sessionStorage.UserCargado;
     let mecanismos = Safetext(mecanismo);
-    let  ListCan = document.getElementById("bda37ca7-d503-4d41-8ff4-aebde2cb7c30");
+    let ListCan = document.getElementById("bda37ca7-d503-4d41-8ff4-aebde2cb7c30");
     let ListPago = document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4");
     let ListAmp = document.getElementById("020563ab-b407-433b-bcf3-c534456818f3");
     switch (mecanismos) {
@@ -39,7 +39,8 @@ function ListHonorarios(mecanismo) {
                         visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
                         visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
                         visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
-                        visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+                        visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', true)
+                        //visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true) se oculta para piloto GXC
                         break;
                 }
             } else if (tipoCobro == "HONORARIOS") {
@@ -51,14 +52,16 @@ function ListHonorarios(mecanismo) {
                 ListCan.disabled = true;
                 ListCan.value = "2: Honorarios";
 
-            } else if (tipoCobro == "GASTOS_90")  {
+            } else if (tipoCobro == "GASTOS_90") {
+                ListCan.value = "3: Piloto-GXC";
+                ListCan.disabled = true;
                 visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
                 visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
                 visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
                 visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
-                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
-                ListCan.disabled = true;
-                ListCan.value = "3: Piloto-GXC";
+                visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', true)
+                // visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true) se oculta para piloto GXC
+
             }
             break;
         case "pagomora":
@@ -84,24 +87,24 @@ function ListHonorarios(mecanismo) {
                         visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
                         visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
                         visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
-                        visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
+                        //visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true) se oculta para piloto GXC
+                        visibilityField('247db41e-ea0d-444b-b3d0-627aae51ecd0', true)
                         break;
                 }
             } else if (tipoCobro == "HONORARIOS") {
-                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
-                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
-                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
-                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
-                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+                visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
+                visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
+                visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
+                visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
                 ListPago.disabled = true;
                 ListPago.value = "2: Honorarios";
 
-            } else if (tipoCobro == "GASTOS_90")  {
-                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
-                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
-                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
-                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
-                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+            } else if (tipoCobro == "GASTOS_90") {
+                visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
+                visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
+                visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
+                //visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
+                visibilityField('247db41e-ea0d-444b-b3d0-627aae51ecd0', true)
                 ListPago.disabled = true;
                 ListPago.value = "3: Piloto-GXC";
             }
@@ -129,24 +132,24 @@ function ListHonorarios(mecanismo) {
                         visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
                         visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
                         visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
-                        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true)
+                        visibilityField('7ba8643d-9438-4ade-bb3f-bab7948e2cbf', true)
+                        //visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true) se oculta para piloto GXC
                         break;
                 }
             } else if (tipoCobro == "HONORARIOS") {
-                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
-                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
-                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
-                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
-                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+                visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
+                visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
+                visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
+                visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true)
                 ListAmp.disabled = true;
                 ListAmp.value = "2: Honorarios";
 
-            } else if ( tipoCobro == "GASTOS_90")  {
-                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
-                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
-                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
-                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
-                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+            } else if (tipoCobro == "GASTOS_90") {
+                visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
+                visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
+                visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
+                visibilityField('7ba8643d-9438-4ade-bb3f-bab7948e2cbf', true)
+                //visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true) se oculta para piloto GXC
                 ListAmp.disabled = true;
                 ListAmp.value = "3: Piloto-GXC";
             }
@@ -155,6 +158,7 @@ function ListHonorarios(mecanismo) {
             console.error("Mecanismo no reconocido");
     }
 }
+
 
 function vacia() {
 }
@@ -176,10 +180,7 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
     }
     ListHonorarios(mecanismo);
     // valida si esta es honorarios 
-    if (tipocobro == "HONORARIO" || tipocobro == "HONORARIOS") {
-        // Se va habilitar el campo de list 
-        const list = document.getElementById(honorarioslista);
-       
+    if (tipocobro == "HONORARIOS" || tipocobro == "GASTOS_90") {
         //Tipo de linea
         try {
             let query = `SELECT NomProductos FROM SimiladorDNC_Lappiz_LineaProducto WHERE CodCodigo = '${tipolinea}'`
@@ -214,30 +215,62 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
         }
         ListHonorarios(mecanismo);
 
-    } else if (tipocobro == "GASTOS_90"){
-
     }
+
+
 }
 
 function honoraVacios() {
 }
 async function calculoHonorarios() {
-    try {
-        debugger;
-        let tipocartera = e.dataItem.TipoHonorarios;
-        let query = `select ValorHonorarios,TipoHonorarios  from SimiladorDNC_Lappiz_dethonorarios where TipoHonorarios = '${tipocartera}'`
-        let response = await execQuery(query)
-        console.log(response[0][0])
-        sessionStorage.PorcCartera = response[0][0].ValorHonorarios
-        sessionStorage.TipoHonorarios = response[0][0].TipoHonorarios
+    debugger;
+    var tipoCobro = sessionStorage.TipoCobro;
+    if (tipoCobro == "HONORARIOS") {
+        try {
+            let tipocartera = e.dataItem.TipoHonorarios;
+            let query = `select ValorHonorarios,TipoHonorarios from SimiladorDNC_Lappiz_dethonorarios where TipoHonorarios = '${tipocartera}'`
+            let response = await execQuery(query)
+            console.log(response[0][0])
+            sessionStorage.PorcCartera = response[0][0].ValorHonorarios
+            sessionStorage.TipoHonorarios = response[0][0].TipoHonorarios
 
-        //let abonomax = getFieldValue("8f7266d7-dfc0-4ff4-afad-c50fbfa67062")
-        //let pagoHonorarios = (abonomax * sessionStorage.PorcCartera) / 100
-        //setFieldValue('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', pagoHonorarios)
-
-    } catch (error) {
-        console.error("Error al mostrar los campos:", error);
+        } catch (error) {
+            console.error("Error al mostrar los campos:", error);
+        }
+    } else if (tipoCobro == "GASTOS_90") {
+        RecalcularPilotoGXC();
     }
+
+}
+// para piloto gxc
+function RecalcularPilotoGXC() {
+    debugger;
+    // Obtener días de mora: si MoraObl existe en sessionStorage se usa ese valor, si no se toma del evento
+    var diaMora = sessionStorage.MoraObl !== undefined ? parseFloat(sessionStorage.MoraObl) : parseFloat(e.value);
+
+    if (!diaMora && diaMora !== 0) {
+        console.warn("No se tiene dias de mora");
+        return;
+    }
+
+    // Obtener la lista de rangos almacenada en sessionStorage (guardada como JSON en traeratadebase.jsx)
+    var rangoConbranzas = JSON.parse(sessionStorage.pilotosDias || "[]");
+
+    // Buscar el rango cuyo minDias <= diaMora <= maxDias
+    var rangoEncontrado = rangoConbranzas.find(function (rango) {
+        return diaMora >= rango.minDias && diaMora <= rango.maxDias;
+    });
+
+    if (!rangoEncontrado) {
+        console.warn("No se encontró un rango de cobranza para " + diaMora + " días de mora");
+        return;
+    }
+
+    var porcentaje = rangoEncontrado.porcAbonoMinimo;
+    console.log("Días de mora: " + diaMora + " | Rango: " + rangoEncontrado.minDias + " - " + rangoEncontrado.maxDias + " | Porcentaje: " + porcentaje + "%");
+
+    // Guardar el porcentaje encontrado para usarlo en los cálculos siguientes
+    sessionStorage.PorcCartera = porcentaje * 100;
 }
 
 function recalculoHonorariosMora() {
@@ -276,6 +309,6 @@ function recalculoHonorariosAmpliacion() {
 }
 
 
-// Value change
+// Value change 52339224,  17151899
 let mecanismoStora = sessionStorage.mecanismo
 ListHonorarios(mecanismoStora);

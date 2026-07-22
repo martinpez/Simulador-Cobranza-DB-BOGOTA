@@ -14,11 +14,11 @@ function CalculosMora() {
 
     if (e.dataItem.Producto == 'TARJETA') {
         tarjeta = true
-        document.getElementById('7a5c89e8-a431-4b76-b3bc-24f6a187978c').selectedIndex = 1
+        setFieldValue('7a5c89e8-a431-4b76-b3bc-24f6a187978c', 'Si')
         disableField('aef7fd98-0a00-4ec8-95d9-37840df1fe67', false)
     } else {
         tarjeta = false
-        document.getElementById('7a5c89e8-a431-4b76-b3bc-24f6a187978c').selectedIndex = 2
+        setFieldValue('7a5c89e8-a431-4b76-b3bc-24f6a187978c', 'No')
         setFieldValue('aef7fd98-0a00-4ec8-95d9-37840df1fe67', 0)
         setFieldValue('de744073-f3bd-4c05-ac6f-9ca493664262', 0)
         setFieldValue('a01eeadb-b99e-4e08-9d93-3fe44b9e1cf8', 0)
@@ -48,7 +48,8 @@ function CalculosMora() {
     let pagoMinimo;
     let pagomin = e.dataItem.PagoMinObl;
     let honorarios = sessionStorage.honorariosValues;
-    if (sessionStorage.Producto == 'CARTERA') {
+    let produt = sessionStorage.Producto;
+    if (produt == 'CARTERA' || produt == 'SOBREGIRO') {
         pagoMinimo = pagomin - honorarios
     } else {
         pagoMinimo = e.dataItem.PagoMinObl
