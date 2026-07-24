@@ -1,10 +1,12 @@
 function valoresPoblamiento() {
   //Pantalla Principal
   debugger;
+  delete sessionStorage.pidepago
   delete sessionStorage.campanamora
   delete sessionStorage.UserCargado
   delete sessionStorage.MoraObl
   delete sessionStorage.PorcCartera
+  delete sessionStorage.AmpliConsumo185;
 
   setFieldValue('1ad60ed2-e515-4164-8270-54efa1e574fa', e.dataItem.NombreCompleto) // Nombre Completo
   e.dataItem.PosibilidadCambio026 == "SI" ? document.getElementById("4eedfe97-8bf2-499c-a05f-ff25e3ca9b95").selectedIndex = 1
@@ -21,7 +23,10 @@ function valoresPoblamiento() {
   setFieldValue('5b9ce178-27fe-4c52-b91d-ba6a898ff546', mora) //edad mora
 
 
-  // honorarios 
+  // honorarios
+  let MarcaCampCrm = e.dataItem.MarcaCampCrm;
+  let esPidePago = MarcaCampCrm && (/(PIDE\s?PAGO|PIDEPAGO)/i.test(MarcaCampCrm)) && !/NO PIDE PAGO/i.test(MarcaCampCrm);
+  sessionStorage.pidepago = esPidePago ? 'si' : 'no';
   let producto = e.dataItem.Producto
   let TipoCobro = e.dataItem.CustomChar3
   let Linea = e.dataItem.CustomChar2

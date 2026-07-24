@@ -167,6 +167,7 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
     // todos tienen 3 campos que se van a precargar check, linea , tipo cartera
     // se debe enviar los id de los campos de check, linea , tipo cartera
     debugger
+
     console.log([honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo]);
     //valida si existen los elementos 
 
@@ -174,9 +175,16 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
         console.error("No se enviaron los uid de los elementos")
 
     }
-
+    // VALIDACION CUANDO SON TARGETA Y SON 0900 LA LINEA
     if (sessionStorage.TipProducto == "TARJETA") {
         tipolinea = "0000"
+    }
+    // VALIDACION PARA CUANDO APLICA EL 22,5 Y EL MECANISMO TRAE PAGO
+    if (tipocartera == "CONSUMO" && sessionStorage.PorcAmpliacionIntCte == 100 && mecanismo == "ampliacion" && tipocobro != "GASTOS_90") {
+        sessionStorage.AmpliConsumo185 = 'true';
+        tipocartera = 'CONSUMO';
+    } else if (sessionStorage.pidepago == "si" && tipocartera == "CONSUMO") {
+        tipocartera = 'CONSUMO-CAMPAÑA';
     }
     ListHonorarios(mecanismo);
     // valida si esta es honorarios 
@@ -224,10 +232,30 @@ function honoraVacios() {
 }
 async function calculoHonorarios() {
     debugger;
+    delete sessionStorage.PorcCarteraAplicoAmpliacion;
     var tipoCobro = sessionStorage.TipoCobro;
-    if (tipoCobro == "HONORARIOS") {
+    let PidePago = sessionStorage.pidepago;
+    let tipocartera = e.dataItem.TipoHonorarios;
+    if (PidePago && tipocartera == "CONSUMO") {
+        tipocartera = 'CONSUMO-CAMPAÑA'
+    }
+
+    if (sessionStorage.PorcAmpliacionIntCte == 100 && sessionStorage.AmpliConsumo185 == 'true') {
+        tipocartera = 'CONSUMO';
         try {
-            let tipocartera = e.dataItem.TipoHonorarios;
+            let query = `select ValorHonorarios,TipoHonorarios from SimiladorDNC_Lappiz_dethonorarios where TipoHonorarios = '${tipocartera}'`
+            let response = await execQuery(query)
+            console.log(response[0][0])
+            sessionStorage.PorcCarteraAplicoAmpliacion = response[0][0].ValorHonorarios
+            sessionStorage.TipoHonorarios = response[0][0].TipoHonorarios
+
+        } catch (error) {
+            console.error("Error al mostrar los campos:", error);
+        }
+    } else if (tipoCobro == "GASTOS_90") {
+        RecalcularPilotoGXC();
+    } else if (tipoCobro == "HONORARIOS") {
+        try {
             let query = `select ValorHonorarios,TipoHonorarios from SimiladorDNC_Lappiz_dethonorarios where TipoHonorarios = '${tipocartera}'`
             let response = await execQuery(query)
             console.log(response[0][0])
@@ -237,11 +265,11 @@ async function calculoHonorarios() {
         } catch (error) {
             console.error("Error al mostrar los campos:", error);
         }
-    } else if (tipoCobro == "GASTOS_90") {
-        RecalcularPilotoGXC();
     }
 
+
 }
+
 // para piloto gxc
 function RecalcularPilotoGXC() {
     debugger;
@@ -309,6 +337,6 @@ function recalculoHonorariosAmpliacion() {
 }
 
 
-// Value change 52339224,  17151899
+// Value change 52339224,  17151899 , 1005000537, 91524438 ,71364491
 let mecanismoStora = sessionStorage.mecanismo
 ListHonorarios(mecanismoStora);

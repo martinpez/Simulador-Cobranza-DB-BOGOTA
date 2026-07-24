@@ -1,5 +1,5 @@
-function _recalcularTodo() {        
-    debugger;
+function _recalcularTodo() {
+  debugger;
   var InteCte = parseFloat(getFieldValue('70101be7-9330-44e4-913c-e6772c5b8167')) || 0;
   var IntMora = parseFloat(getFieldValue('aea118a4-8a99-4d3a-adf9-ffd5151db4f6')) || 0;
   var otrosCargos = parseFloat(getFieldValue('e64cbac2-f6de-49eb-a9ec-79695d0e655a')) || 0;
@@ -11,7 +11,7 @@ function _recalcularTodo() {
 
   // Abono mínimo sin descuento
   var aboMinSinDesc = Math.floor(PrimaU) + Math.floor(InteCte) +
-  Math.floor(IntMora) + Math.floor(otrosCargos);
+    Math.floor(IntMora) + Math.floor(otrosCargos);
   console.log('Abono mínimo sin descuento:', aboMinSinDesc);
 
   //   Descuento en Int Mora
@@ -25,21 +25,26 @@ function _recalcularTodo() {
   var abonConDescMax = Math.floor(PrimaU) + Math.floor(otrosCargos) +
     IntMoraNeta + intCteNetoMaxDesc + 20000;
   console.log('Abono con descuento máximo:', abonConDescMax);
-   // honorarios 
+  // honorarios 
   const safeNumber = val =>
-        isNaN(parseFloat(val)) ? 0 : parseFloat(val)
-  let HonorariosCalculados = Math.floor((abonConDescMax * sessionStorage.PorcCartera) / 100)
-    setFieldValue('d647e41b-7a50-46b0-ba5f-e30eeb44b463', HonorariosCalculados)
-    let honorariosPagados = safeNumber(getFieldValue('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b'))
-    let sumaHonorarios = 0;
-    if (honorariosPagados > 0) {
-        //setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', abonoMinimo + pagoHonorarios)
-        sumaHonorarios = abonConDescMax + honorariosPagados;
-        setFieldValue('9b88d521-a3dd-4948-8c3f-6dece97a17a5', sumaHonorarios)
+    isNaN(parseFloat(val)) ? 0 : parseFloat(val)
+  // validacion del 18.5% cuando tiene descuentos del 100 %  
+  let porcCartera = sessionStorage.PorcCartera;
+  if (sessionStorage.PorcAmpliacionIntCte == 100 && sessionStorage.AmpliConsumo185 == 'true') {
+    porcCartera = sessionStorage.PorcCarteraAplicoAmpliacion;
+  }
+  let HonorariosCalculados = Math.floor((abonConDescMax * porcCartera) / 100)
+  setFieldValue('d647e41b-7a50-46b0-ba5f-e30eeb44b463', HonorariosCalculados)
+  let honorariosPagados = safeNumber(getFieldValue('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b'))
+  let sumaHonorarios = 0;
+  if (honorariosPagados > 0) {
+    //setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', abonoMinimo + pagoHonorarios)
+    sumaHonorarios = abonConDescMax + honorariosPagados;
+    setFieldValue('9b88d521-a3dd-4948-8c3f-6dece97a17a5', sumaHonorarios)
 
-    } else {
-        setFieldValue('9b88d521-a3dd-4948-8c3f-6dece97a17a5', abonConDescMax)
-    }
+  } else {
+    setFieldValue('9b88d521-a3dd-4948-8c3f-6dece97a17a5', abonConDescMax)
+  }
 
 
   // Descuento en Int Cte: se calcula el % que representa lo que NO alcanzó a pagar el pago ingresado de lo que se debía pagar de
@@ -52,7 +57,7 @@ function _recalcularTodo() {
     } else {
       // Cuánto del pago queda disponible para cubrir IntCte
       // después de pagar PrimaU + OtrosCargos + IntMoraNeta + colchón
-      var pagoParaIntCte = (pagoSNR - honorariosPagados) - Math.floor(PrimaU) - Math.floor(otrosCargos) - IntMoraNeta - 20000 ;
+      var pagoParaIntCte = (pagoSNR - honorariosPagados) - Math.floor(PrimaU) - Math.floor(otrosCargos) - IntMoraNeta - 20000;
       // % de descuento que representa lo que NO alcanzó a pagar de IntCte
       porcCte = (1 - pagoParaIntCte / InteCte) * 100;
       porcCte = Math.round(porcCte * 100) / 100;  // 2 decimales

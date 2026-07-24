@@ -71,3 +71,19 @@ Honorarios = snr * PorcentajeCarteras
 1053327350
 
 # Aplicacion de honorarios 22,5
+
+Aclaración de política
+Se confirmó que:
+El 22,5% NO depende de si existe campaña o no.
+Aplica para obligaciones de consumo con pago en los mecanismos:
+Pago mora
+Cancelación
+Ampliación
+Se reiteró que:
+Sin pago no hay cobro de honorarios.
+ Excepción clave
+
+·        Para ampliaciones con 100% de descuento en intereses:
+
+o   NO aplica 22,5%
+o   Aplica 18,5% sobre el pago al SNR
