@@ -1,16 +1,23 @@
 function Obligacionvacia() {
 }
 async function Obligacion() {
-
     try {
-        let SpName = 'SimiladorDNC_Lappiz_EmailConfirmed';
-        let sw = '10';
         let documentocliente = e.value;
         let fecha = new Date().toLocaleDateString()
-        let tipodoc = getFieldValue('15fb0de1-4989-4986-a662-61fb88b3aba1')
-        //let paramsArray = [sw, documentocliente, `'${fecha}'`];
-
-        let response = await execQuery(`EXEC SimiladorDNC_Lappiz_EmailConfirmed @sw = 10, @documentocliente= ${documentocliente}, @fecha = '${fecha}', @grupo = '${sessionStorage.Grupo}', @filtro = '${sessionStorage.Filtro}', @tipodoc = '${tipodoc}'`)
+        let tipodocSeleccionado = getFieldValue('15fb0de1-4989-4986-a662-61fb88b3aba1')
+        // Lista de tipos de documento a intentar, empezando por el que este seleccionado en el dropdown
+        let tiposDocumento = ['CC', 'CE', 'NIT', 'PAS', 'TI'];
+        let tiposAProbar = [tipodocSeleccionado, ...tiposDocumento.filter(t => t !== tipodocSeleccionado)];
+        let response = null;
+        let tipodocEncontrado = tipodocSeleccionado;
+        for (const tipodocIntento of tiposAProbar) {
+            let intento = await execQuery(`EXEC SimiladorDNC_Lappiz_EmailConfirmed @sw = 10, @documentocliente= ${documentocliente}, @fecha = '${fecha}', @grupo = '${sessionStorage.Grupo}', @filtro = '${sessionStorage.Filtro}', @tipodoc = '${tipodocIntento}'`)
+            if (intento && intento[0] && intento[0][0]) {
+                response = intento;
+                tipodocEncontrado = tipodocIntento;
+                break;
+            }
+        }
         if (response[0][0]) {
             // bandera para los cuando se encuentre el cliente en la base de datos y habilitar tasas campaña
             sessionStorage.setItem('UserCargado', 'si');

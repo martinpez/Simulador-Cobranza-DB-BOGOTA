@@ -54,7 +54,7 @@ dias mora = 27cfef98-5ca4-415e-8149-7149479d487a
  y
  saldo total - honorarios  
 
- BaseHonorarios = MIN(PagoMinimoBase, SNR)
+BaseHonorarios = MIN(PagoMinimoBase, abono minimo)
 
 Honorarios = BaseHonorarios * PorcentajeCartera
 

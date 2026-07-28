@@ -12,6 +12,8 @@ function ListHonorarios(mecanismo) {
     let ListAmp = document.getElementById("020563ab-b407-433b-bcf3-c534456818f3");
     switch (mecanismos) {
         case "cancelacion":
+            const inputHonorariosCan = document.getElementById("a0a2b9b0-17cc-41fe-be98-2ac2157e33ef");
+            const inputMaximoCan = document.getElementById("9ee8ee24-5ae5-42da-83c5-36948592e72b");
             if (userCargado == "no") {
                 // elementById Lista desplegable aplica o no aplica
                 ListCan.disabled = false;
@@ -26,20 +28,57 @@ function ListHonorarios(mecanismo) {
                         break;
                     case "Honorarios":
                         ListCan.value = "2: Honorarios";
+                        sessionStorage.TipoCobro = "HONORARIOS";
                         visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
                         visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
                         visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
                         visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
                         visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+                        // Honorarios
+                        if (inputHonorariosCan) {
+                            const container = inputHonorariosCan.closest(".col-xs-12");
+                            const label = container?.querySelector("label span");
 
+                            if (label) {
+                                label.textContent = "Honorarios";
+                            }
+                        }
+                        // Valor Honorarios Máximo
+                        if (inputMaximoCan) {
+                            const container = inputMaximoCan.closest(".col-xs-12");
+                            const label = container?.querySelector("label span");
+
+                            if (label) {
+                                label.textContent = "Valor Honorarios Máximo";
+                            }
+                        }
                         break;
                     case "Piloto-GXC":
                         ListCan.value = "3: Piloto-GXC";
+                        sessionStorage.TipoCobro = "GASTOS_90";
                         visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
                         visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
                         visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
                         visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
                         visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', true)
+                        if (inputHonorariosCan) {
+                            const container = inputHonorariosCan.closest(".col-xs-12");
+                            const label = container?.querySelector("label span");
+
+                            if (label) {
+                                label.textContent = "Valor Gastos GXC:";
+                            }
+                        }
+                        // Valor Honorarios Máximo
+                        if (inputMaximoCan) {
+                            const container = inputMaximoCan.closest(".col-xs-12");
+                            const label = container?.querySelector("label span");
+
+                            if (label) {
+                                label.textContent = "Valor Máximo Pilotos";
+                            }
+                        }
+
                         //visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true) se oculta para piloto GXC
                         break;
                 }
@@ -51,7 +90,23 @@ function ListHonorarios(mecanismo) {
                 visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
                 ListCan.disabled = true;
                 ListCan.value = "2: Honorarios";
+                if (inputHonorariosCan) {
+                    const container = inputHonorariosCan.closest(".col-xs-12");
+                    const label = container?.querySelector("label span");
 
+                    if (label) {
+                        label.textContent = "Honorarios";
+                    }
+                }
+                // Valor Honorarios Máximo
+                if (inputMaximoCan) {
+                    const container = inputMaximoCan.closest(".col-xs-12");
+                    const label = container?.querySelector("label span");
+
+                    if (label) {
+                        label.textContent = "Valor Honorarios Máximo";
+                    }
+                }
             } else if (tipoCobro == "GASTOS_90") {
                 ListCan.value = "3: Piloto-GXC";
                 ListCan.disabled = true;
@@ -60,11 +115,29 @@ function ListHonorarios(mecanismo) {
                 visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
                 visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
                 visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', true)
-                // visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true) se oculta para piloto GXC
+                if (inputHonorariosCan) {
+                    const container = inputHonorariosCan.closest(".col-xs-12");
+                    const label = container?.querySelector("label span");
+
+                    if (label) {
+                        label.textContent = "Valor Gastos GXC:";
+                    }
+                }
+                // Valor Honorarios Máximo
+                if (inputMaximoCan) {
+                    const container = inputMaximoCan.closest(".col-xs-12");
+                    const label = container?.querySelector("label span");
+
+                    if (label) {
+                        label.textContent = "Valor Máximo Pilotos";
+                    }
+                }
 
             }
             break;
         case "pagomora":
+            const inputHonorarios = document.getElementById("ae33bcc4-183a-47de-a6c8-f4ecc44be169");
+            const inputMaximo = document.getElementById("993c55c0-8b02-4be9-a122-d7ec2cf5f87e");
             if (userCargado == "no") {
                 ListPago.disabled = false;
                 switch (valelist) {
@@ -77,18 +150,61 @@ function ListHonorarios(mecanismo) {
                         break;
                     case "Honorarios":
                         ListPago.value = "2: Honorarios";
+                        sessionStorage.TipoCobro = "HONORARIOS";
                         visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
                         visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
                         visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
                         visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
+                        // Honorarios
+                        if (inputHonorarios) {
+                            const label = inputHonorarios
+                                .closest(".col-xs-12")
+                                ?.querySelector("label span");
+
+                            if (label) {
+                                label.textContent = "Honorarios:";
+                            }
+                        }
+                        // Valor Honorarios Máximo
+                        if (inputMaximo) {
+                            const label = inputMaximo
+                                .closest(".col-xs-12")
+                                ?.querySelector("label span");
+
+                            if (label) {
+                                label.textContent = "Valor Maximo Honorarios";
+                            }
+                        }
                         break;
                     case "Piloto-GXC":
                         ListPago.value = "3: Piloto-GXC";
+                        sessionStorage.TipoCobro = "GASTOS_90";
                         visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
                         visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
                         visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
                         //visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true) se oculta para piloto GXC
-                        visibilityField('247db41e-ea0d-444b-b3d0-627aae51ecd0', true)
+                        // Honorarios
+                        if (inputHonorarios) {
+                            const label = inputHonorarios
+                                .closest(".col-xs-12")
+                                ?.querySelector("label span");
+
+                            if (label) {
+                                label.textContent = "Valor GXC Piloto:";
+                            }
+                        }
+
+                        // Valor Honorarios Máximo
+                        if (inputMaximo) {
+                            const label = inputMaximo
+                                .closest(".col-xs-12")
+                                ?.querySelector("label span");
+
+                            if (label) {
+                                label.textContent = "Valor Maximo Pilotos";
+                            }
+                        }
+
                         break;
                 }
             } else if (tipoCobro == "HONORARIOS") {
@@ -98,6 +214,26 @@ function ListHonorarios(mecanismo) {
                 visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
                 ListPago.disabled = true;
                 ListPago.value = "2: Honorarios";
+                // Honorarios
+                if (inputHonorarios) {
+                    const label = inputHonorarios
+                        .closest(".col-xs-12")
+                        ?.querySelector("label span");
+
+                    if (label) {
+                        label.textContent = "Honorarios:";
+                    }
+                }
+                // Valor Honorarios Máximo
+                if (inputMaximo) {
+                    const label = inputMaximo
+                        .closest(".col-xs-12")
+                        ?.querySelector("label span");
+
+                    if (label) {
+                        label.textContent = "Valor Maximo Honorarios";
+                    }
+                }
 
             } else if (tipoCobro == "GASTOS_90") {
                 visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
@@ -107,9 +243,30 @@ function ListHonorarios(mecanismo) {
                 visibilityField('247db41e-ea0d-444b-b3d0-627aae51ecd0', true)
                 ListPago.disabled = true;
                 ListPago.value = "3: Piloto-GXC";
+                if (inputHonorarios) {
+                    const label = inputHonorarios
+                        .closest(".col-xs-12")
+                        ?.querySelector("label span");
+
+                    if (label) {
+                        label.textContent = "Valor GXC Piloto:";
+                    }
+                }
+                // Valor Honorarios Máximo
+                if (inputMaximo) {
+                    const label = inputMaximo
+                        .closest(".col-xs-12")
+                        ?.querySelector("label span");
+
+                    if (label) {
+                        label.textContent = "Valor Maximo Pilotos";
+                    }
+                }
             }
             break;
         case "ampliacion":
+            const inputHonorariosAM = document.getElementById("e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b");
+            const inputMaximoAM = document.getElementById("d647e41b-7a50-46b0-ba5f-e30eeb44b463");
             if (userCargado == "no") {
                 ListAmp.disabled = false;
                 switch (valelist) {
@@ -122,18 +279,54 @@ function ListHonorarios(mecanismo) {
                         break;
                     case "Honorarios":
                         ListAmp.value = "2: Honorarios";
+                        sessionStorage.TipoCobro = "HONORARIOS";
                         visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
                         visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
                         visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
                         visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true)
+                        // Honorarios
+                        if (inputHonorariosAM) {
+                            const container = inputHonorariosAM.closest(".col-xs-12");
+                            const label = container?.querySelector("label span");
+
+                            if (label) {
+                                label.textContent = "Honorarios";
+                            }
+                        }
+                        // Valor Honorarios Máximo
+                        if (inputMaximoAM) {
+                            const container = inputMaximoAM.closest(".col-xs-12");
+                            const label = container?.querySelector("label span");
+
+                            if (label) {
+                                label.textContent = "Valor Honorarios Máximo";
+                            }
+                        }
                         break;
                     case "Piloto-GXC":
                         ListAmp.value = "3: Piloto-GXC";
+                        sessionStorage.TipoCobro = "GASTOS_90";
                         visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
                         visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
                         visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
                         visibilityField('7ba8643d-9438-4ade-bb3f-bab7948e2cbf', true)
-                        //visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true) se oculta para piloto GXC
+                        if (inputHonorariosAM) {
+                            const container = inputHonorariosAM.closest(".col-xs-12");
+                            const label = container?.querySelector("label span");
+
+                            if (label) {
+                                label.textContent = "Valor GXC Piloto:";
+                            }
+                        }
+                        // Valor Honorarios Máximo
+                        if (inputMaximoAM) {
+                            const container = inputMaximoAM.closest(".col-xs-12");
+                            const label = container?.querySelector("label span");
+
+                            if (label) {
+                                label.textContent = "Valor Maximo Pilotos";
+                            }
+                        }
                         break;
                 }
             } else if (tipoCobro == "HONORARIOS") {
@@ -143,6 +336,23 @@ function ListHonorarios(mecanismo) {
                 visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true)
                 ListAmp.disabled = true;
                 ListAmp.value = "2: Honorarios";
+                if (inputHonorariosAM) {
+                    const container = inputHonorariosAM.closest(".col-xs-12");
+                    const label = container?.querySelector("label span");
+
+                    if (label) {
+                        label.textContent = "Honorarios";
+                    }
+                }
+                // Valor Honorarios Máximo
+                if (inputMaximoAM) {
+                    const container = inputMaximoAM.closest(".col-xs-12");
+                    const label = container?.querySelector("label span");
+
+                    if (label) {
+                        label.textContent = "Valor Honorarios Máximo";
+                    }
+                }
 
             } else if (tipoCobro == "GASTOS_90") {
                 visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
@@ -152,6 +362,24 @@ function ListHonorarios(mecanismo) {
                 //visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true) se oculta para piloto GXC
                 ListAmp.disabled = true;
                 ListAmp.value = "3: Piloto-GXC";
+                if (inputHonorariosAM) {
+                    const container = inputHonorariosAM.closest(".col-xs-12");
+                    const label = container?.querySelector("label span");
+
+                    if (label) {
+                        label.textContent = "Valor GXC Piloto:";
+                    }
+                }
+                // Valor Honorarios Máximo
+                if (inputMaximoAM) {
+                    const container = inputMaximoAM.closest(".col-xs-12");
+                    const label = container?.querySelector("label span");
+
+                    if (label) {
+                        label.textContent = "Valor Maximo Pilotos";
+                    }
+                }
+
             }
             break;
         default:
@@ -184,7 +412,7 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
         sessionStorage.AmpliConsumo185 = 'true';
         tipocartera = 'CONSUMO';
     } else if (sessionStorage.pidepago == "si" && tipocartera == "CONSUMO") {
-        tipocartera = 'CONSUMO-CAMPAÑA';
+        tipocartera = 'CAMPAÑA';
     }
     ListHonorarios(mecanismo);
     // valida si esta es honorarios 
@@ -237,7 +465,7 @@ async function calculoHonorarios() {
     let PidePago = sessionStorage.pidepago;
     let tipocartera = e.dataItem.TipoHonorarios;
     if (PidePago && tipocartera == "CONSUMO") {
-        tipocartera = 'CONSUMO-CAMPAÑA'
+        tipocartera = 'CAMPAÑA'
     }
 
     if (sessionStorage.PorcAmpliacionIntCte == 100 && sessionStorage.AmpliConsumo185 == 'true') {
