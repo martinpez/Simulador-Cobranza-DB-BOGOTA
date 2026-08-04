@@ -13,7 +13,9 @@ const URLS =
 })();
 
 async function consultaAuxiliar() {
-    let query = `select top 50 Id, Nombre,Apellidos,FechaCreacion, NumeroDocumento, TipoDocumento, Rol, CorreoElectronico, Contrasena, (select Id from SimiladorDNC_Lappiz_GrupoUsuario where CodigoGrupo = Grupo) as Grupo from SimiladorDNC_Lappiz_AuxiliarUsuario where Estado = 'Activo'`
+    let query = `SELECT TOP 50 Id, Nombre,Apellidos,FechaCreacion, NumeroDocumento, TipoDocumento, Rol, CorreoElectronico, Contrasena, (
+    select Id from SimiladorDNC_Lappiz_GrupoUsuario where NombreGrupo = Grupo)
+    as Grupo from SimiladorDNC_Lappiz_AuxiliarUsuario where Estado = 'Activo'`
     let response = await consultar(query)
 
     let actualizacion = await Estado(response)
@@ -30,7 +32,7 @@ async function consultaAuxiliar() {
 };
 
 async function procesar(datos, token) {
-    if (datos.Nombre != 'undefined' && datos.Apellidos && datos.TipoDocumento != 'undefined' && datos.NumeroDocumento != 'undefined' && datos.Contrasena != 'undefined' && datos.Grupo != 'undefined' && datos.Rol != 'undefined') {
+    if (localStorage.getItem("DataAuxiliar") == "apta") {
         /* Obtenemos los valores para registrar el usuario */
         let nombre = datos.Nombre,
             apellidos = datos.Apellidos,
@@ -39,9 +41,9 @@ async function procesar(datos, token) {
             numeroDocumento = datos.NumeroDocumento,
             email = `${datos.TipoDocumento.split('')[0]}${datos.NumeroDocumento}@bdb.com`,
             usuario = '',
-            CorreoElectronico = datos.CorreoElectronico,
-            Contrasena = datos.Contrasena,
-            Grupo = datos.Grupo,
+            correoElectronico = datos.CorreoElectronico,
+            contrasena = 'Bdb.' + datos.NumeroDocumento,
+            grupo = datos.Grupo,
             rol = datos.Rol,
             idRol = await obtenerIdRol(rol, token) || "40b1e10d-4b7a-42ae-bf46-d5b6a74c30e7",
             inicial = ''
@@ -54,6 +56,12 @@ async function procesar(datos, token) {
                 break;
             case 'CE':
                 inicial = "E";
+                break;
+            case 'PAS':
+                inicial = 'P';
+                break;
+            case 'IT':
+                inicial = 'IT';
                 break;
         }
         email = `${inicial}${datos.NumeroDocumento}@bdb.com`
@@ -83,10 +91,10 @@ async function procesar(datos, token) {
                         TipoDocumento: tipoDocumento,
                         Identification: numeroDocumento,
                         Email: email,
-                        CorreoElectronico: CorreoElectronico,
-                        Contrasena: Contrasena,
+                        CorreoElectronico: correoElectronico,
+                        Contrasena: contrasena,
                         Usuario: usuario,
-                        Grupo: Grupo
+                        Grupo: grupo
 
                     }
                     if (bodyUser.Apellidos == 'undefined') {

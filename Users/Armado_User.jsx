@@ -14,6 +14,12 @@ function usuario() {
             case 'CE':
                 inicial = "E";
                 break;
+            case 'PAS':
+                inicial = 'P';
+                break;
+            case 'IT':
+                inicial = 'IT';
+                break;
         }
         let usuario = inicial + numerodocumento
         setFieldValue('07300819-cfe6-473f-9946-2bc87ae283fd', usuario)
