@@ -7,9 +7,10 @@ function ListHonorarios(mecanismo) {
     var tipoCobro = sessionStorage.TipoCobro;
     let userCargado = sessionStorage.UserCargado;
     let mecanismos = Safetext(mecanismo);
-    let ListCan = document.getElementById("bda37ca7-d503-4d41-8ff4-aebde2cb7c30");
+    let ListCan = document.getElementById("bda37ca7-d503-4d41-8ff4-aebde2cb7c30"); // lista desplegable
     let ListPago = document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4");
     let ListAmp = document.getElementById("020563ab-b407-433b-bcf3-c534456818f3");
+
     switch (mecanismos) {
         case "cancelacion":
             const inputHonorariosCan = document.getElementById("a0a2b9b0-17cc-41fe-be98-2ac2157e33ef");
@@ -20,20 +21,23 @@ function ListHonorarios(mecanismo) {
                 switch (valelist) {
                     case "No aplica":
                         ListCan.value = "1: No aplica";
-                        visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', false)
-                        visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', false)
-                        visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', false)
-                        visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', false)
-                        visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', false)
+                        ListCan.disabled = false;
+                        visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', false) // Campo valor maximo honorarios
+                        visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', false) //Campo Honorarios confirm
+                        visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', false) //Campo pago minimo
+                        visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', false) //Campo linea
+                        visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', false) //Campo tipo cartera
+                        visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', false) //Campo Días de mora
                         break;
                     case "Honorarios":
                         ListCan.value = "2: Honorarios";
                         sessionStorage.TipoCobro = "HONORARIOS";
-                        visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
-                        visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
-                        visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
-                        visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
-                        visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+                        visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true) // Campo valor maximo honorarios
+                        visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true) //Campo Honorarios confirm
+                        visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true) //Campo pago minimo
+                        visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true) //Campo linea
+                        visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true) //Campo tipo cartera
+                        visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', false) //Campo Días de mora
                         // Honorarios
                         if (inputHonorariosCan) {
                             const container = inputHonorariosCan.closest(".col-xs-12");
@@ -56,11 +60,13 @@ function ListHonorarios(mecanismo) {
                     case "Piloto-GXC":
                         ListCan.value = "3: Piloto-GXC";
                         sessionStorage.TipoCobro = "GASTOS_90";
-                        visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
-                        visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
-                        visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
-                        visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
-                        visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', true)
+                        visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true) // Campo valor maximo honorarios
+                        visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true) //Campo Honorarios confirm
+                        visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true) //Campo pago minimo
+                        visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true) //Campo linea
+                        visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', false) //Campo tipo cartera
+                        visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', true) //Campo Días de mora
+
                         if (inputHonorariosCan) {
                             const container = inputHonorariosCan.closest(".col-xs-12");
                             const label = container?.querySelector("label span");
@@ -83,11 +89,12 @@ function ListHonorarios(mecanismo) {
                         break;
                 }
             } else if (tipoCobro == "HONORARIOS") {
-                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
-                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
-                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
-                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
-                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true)
+                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true) // Campo valor maximo honorarios
+                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true) //Campo Honorarios confirm
+                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true) //Campo pago minimo
+                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true) //Campo linea
+                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', true) //Campo tipo cartera
+                visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', false) //Campo Días de mora
                 ListCan.disabled = true;
                 ListCan.value = "2: Honorarios";
                 if (inputHonorariosCan) {
@@ -110,11 +117,12 @@ function ListHonorarios(mecanismo) {
             } else if (tipoCobro == "GASTOS_90") {
                 ListCan.value = "3: Piloto-GXC";
                 ListCan.disabled = true;
-                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true)
-                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true)
-                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true)
-                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true)
-                visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', true)
+                visibilityField('9ee8ee24-5ae5-42da-83c5-3694859ccfa8bd-4060-4aa1-b437-4528d6f9bc3592e72b', true) // Campo valor maximo honorarios
+                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true) //Campo Honorarios confirm
+                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true) //Campo pago minimo
+                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true) //Campo linea
+                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', false) //Campo tipo cartera
+                visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', true) //Campo Días de mora
                 if (inputHonorariosCan) {
                     const container = inputHonorariosCan.closest(".col-xs-12");
                     const label = container?.querySelector("label span");
@@ -133,6 +141,15 @@ function ListHonorarios(mecanismo) {
                     }
                 }
 
+            } else {
+                ListCan.value = "1: No aplica";
+                ListCan.disabled = true;
+                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', false)
+                visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', false)
+                visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', false)
+                visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', false)
+                visibilityField('dfe46e30-5328-485e-bc80-bec20aab2d02', false)
+                visibilityField('27cfef98-5ca4-415e-8149-7149479d487a', false)
             }
             break;
         case "pagomora":
@@ -143,18 +160,20 @@ function ListHonorarios(mecanismo) {
                 switch (valelist) {
                     case "No aplica":
                         ListPago.value = "1: No aplica";
-                        visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false)
-                        visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false)
-                        visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false)
-                        visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false)
+                        visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false) // Campo valor maximo honorarios
+                        visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false) //Campo Honorarios confirm
+                        visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false) // Campo Linea
+                        visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false) //Campo tipo cartera
+                        visibilityField('247db41e-ea0d-444b-b3d0-627aae51ecd0', false) //Campo Dias de mora
                         break;
                     case "Honorarios":
                         ListPago.value = "2: Honorarios";
                         sessionStorage.TipoCobro = "HONORARIOS";
-                        visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
-                        visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
-                        visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
-                        visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
+                        visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true) // Campo valor maximo honorarios
+                        visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true) //Campo Honorarios confirm
+                        visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true) // Campo Linea
+                        visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true) //Campo tipo cartera
+                        visibilityField('247db41e-ea0d-444b-b3d0-627aae51ecd0', false) //Campo Dias de mora
                         // Honorarios
                         if (inputHonorarios) {
                             const label = inputHonorarios
@@ -179,10 +198,11 @@ function ListHonorarios(mecanismo) {
                     case "Piloto-GXC":
                         ListPago.value = "3: Piloto-GXC";
                         sessionStorage.TipoCobro = "GASTOS_90";
-                        visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
-                        visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
-                        visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
-                        //visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true) se oculta para piloto GXC
+                        visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true) // Campo valor maximo honorarios
+                        visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true) //Campo Honorarios confirm
+                        visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true) // Campo Linea
+                        visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false) //Campo tipo cartera
+                        visibilityField('247db41e-ea0d-444b-b3d0-627aae51ecd0', true) //Campo Dias de mora
                         // Honorarios
                         if (inputHonorarios) {
                             const label = inputHonorarios
@@ -208,12 +228,13 @@ function ListHonorarios(mecanismo) {
                         break;
                 }
             } else if (tipoCobro == "HONORARIOS") {
-                visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
-                visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
-                visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
-                visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
                 ListPago.disabled = true;
                 ListPago.value = "2: Honorarios";
+                visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true) // Campo valor maximo honorarios
+                visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true) //Campo Honorarios confirm
+                visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true) // Campo Linea
+                visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true) //Campo tipo cartera
+                visibilityField('247db41e-ea0d-444b-b3d0-627aae51ecd0', false) //Campo Dias de mora
                 // Honorarios
                 if (inputHonorarios) {
                     const label = inputHonorarios
@@ -236,11 +257,11 @@ function ListHonorarios(mecanismo) {
                 }
 
             } else if (tipoCobro == "GASTOS_90") {
-                visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true)
-                visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true)
-                visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true)
-                //visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', true)
-                visibilityField('247db41e-ea0d-444b-b3d0-627aae51ecd0', true)
+                visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', true) // Campo valor maximo honorarios
+                visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', true) //Campo Honorarios confirm
+                visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', true) // Campo Linea
+                visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false) //Campo tipo cartera
+                visibilityField('247db41e-ea0d-444b-b3d0-627aae51ecd0', true) //Campo Dias de mora
                 ListPago.disabled = true;
                 ListPago.value = "3: Piloto-GXC";
                 if (inputHonorarios) {
@@ -262,6 +283,14 @@ function ListHonorarios(mecanismo) {
                         label.textContent = "Valor Maximo Pilotos";
                     }
                 }
+            } else {
+                ListPago.disabled = true;
+                ListPago.value = "1: No aplica";
+                visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false) // Campo valor maximo honorarios
+                visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false) //Campo Honorarios confirm
+                visibilityField('9ccfa8bd-4060-4aa1-b437-4528d6f9bc35', false) // Campo Linea
+                visibilityField('6e51a18a-184d-455f-9f42-6b3a3d56729f', false) //Campo tipo cartera
+                visibilityField('247db41e-ea0d-444b-b3d0-627aae51ecd0', false) //Campo Dias de mora
             }
             break;
         case "ampliacion":
@@ -272,18 +301,20 @@ function ListHonorarios(mecanismo) {
                 switch (valelist) {
                     case "No aplica":
                         ListAmp.value = "1: No aplica";
-                        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', false)
-                        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', false)
-                        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', false)
-                        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', false)
+                        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', false) // Campo valor maximo honorarios
+                        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', false) // Campo honorarios
+                        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', false) // Campo Linea
+                        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', false) // Campo tipo cartera
+                        visibilityField('7ba8643d-9438-4ade-bb3f-bab7948e2cbf', false) //Campo dias de mora
                         break;
                     case "Honorarios":
                         ListAmp.value = "2: Honorarios";
                         sessionStorage.TipoCobro = "HONORARIOS";
-                        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
-                        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
-                        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
-                        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true)
+                        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true) // Campo valor maximo honorarios
+                        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true) // Campo honorarios
+                        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true) // Campo Linea
+                        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true) // Campo tipo cartera
+                        visibilityField('7ba8643d-9438-4ade-bb3f-bab7948e2cbf', false) //Campo dias de mora
                         // Honorarios
                         if (inputHonorariosAM) {
                             const container = inputHonorariosAM.closest(".col-xs-12");
@@ -306,10 +337,11 @@ function ListHonorarios(mecanismo) {
                     case "Piloto-GXC":
                         ListAmp.value = "3: Piloto-GXC";
                         sessionStorage.TipoCobro = "GASTOS_90";
-                        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
-                        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
-                        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
-                        visibilityField('7ba8643d-9438-4ade-bb3f-bab7948e2cbf', true)
+                        visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true) // Campo valor maximo honorarios
+                        visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true) // Campo honorarios
+                        visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true) // Campo Linea
+                        visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', false) // Campo tipo cartera
+                        visibilityField('7ba8643d-9438-4ade-bb3f-bab7948e2cbf', true) //Campo dias de mora
                         if (inputHonorariosAM) {
                             const container = inputHonorariosAM.closest(".col-xs-12");
                             const label = container?.querySelector("label span");
@@ -330,12 +362,13 @@ function ListHonorarios(mecanismo) {
                         break;
                 }
             } else if (tipoCobro == "HONORARIOS") {
-                visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
-                visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
-                visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
-                visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true)
                 ListAmp.disabled = true;
                 ListAmp.value = "2: Honorarios";
+                visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true) // Campo valor maximo honorarios
+                visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true) // Campo honorarios
+                visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true) // Campo Linea
+                visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true) // Campo tipo cartera
+                visibilityField('7ba8643d-9438-4ade-bb3f-bab7948e2cbf', false) //Campo dias de mora
                 if (inputHonorariosAM) {
                     const container = inputHonorariosAM.closest(".col-xs-12");
                     const label = container?.querySelector("label span");
@@ -355,13 +388,13 @@ function ListHonorarios(mecanismo) {
                 }
 
             } else if (tipoCobro == "GASTOS_90") {
-                visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true)
-                visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true)
-                visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true)
-                visibilityField('7ba8643d-9438-4ade-bb3f-bab7948e2cbf', true)
-                //visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', true) se oculta para piloto GXC
                 ListAmp.disabled = true;
                 ListAmp.value = "3: Piloto-GXC";
+                visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true) // Campo valor maximo honorarios
+                visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true) // Campo honorarios
+                visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', true) // Campo Linea
+                visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', false) // Campo tipo cartera
+                visibilityField('7ba8643d-9438-4ade-bb3f-bab7948e2cbf', true) //Campo dias de mora
                 if (inputHonorariosAM) {
                     const container = inputHonorariosAM.closest(".col-xs-12");
                     const label = container?.querySelector("label span");
@@ -379,6 +412,15 @@ function ListHonorarios(mecanismo) {
                         label.textContent = "Valor Maximo Pilotos";
                     }
                 }
+
+            } else {
+                ListAmp.disabled = true;
+                ListAmp.value = "1: No aplica";
+                visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', false) // Campo valor maximo honorarios
+                visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', false) // Campo honorarios
+                visibilityField('8e1dc11f-e65c-4141-a1d5-42850fd9b214', false) // Campo Linea
+                visibilityField('93f08e21-47c5-48ee-8acc-b093afe84a38', false) // Campo tipo cartera
+                visibilityField('7ba8643d-9438-4ade-bb3f-bab7948e2cbf', false) //Campo dias de mora
 
             }
             break;
@@ -449,7 +491,6 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
             dropDownList2.value(item2.Id);
             dropDownList2.trigger("change");
         }
-        ListHonorarios(mecanismo);
 
     }
 
@@ -460,15 +501,11 @@ function honoraVacios() {
 }
 async function calculoHonorarios() {
     debugger;
-    delete sessionStorage.PorcCarteraAplicoAmpliacion;
     var tipoCobro = sessionStorage.TipoCobro;
     let PidePago = sessionStorage.pidepago;
     let tipocartera = e.dataItem.TipoHonorarios;
-    if (PidePago && tipocartera == "CONSUMO") {
-        tipocartera = 'CAMPAÑA'
-    }
 
-    if (sessionStorage.PorcAmpliacionIntCte == 100 && sessionStorage.AmpliConsumo185 == 'true') {
+    if (sessionStorage.PorcAmpliacionIntCte == 100 && sessionStorage.AmpliConsumo185 == 'true' && tipocartera != "CAMPAÑA") {
         tipocartera = 'CONSUMO';
         try {
             let query = `select ValorHonorarios,TipoHonorarios from SimiladorDNC_Lappiz_dethonorarios where TipoHonorarios = '${tipocartera}'`
@@ -476,26 +513,35 @@ async function calculoHonorarios() {
             console.log(response[0][0])
             sessionStorage.PorcCarteraAplicoAmpliacion = response[0][0].ValorHonorarios
             sessionStorage.TipoHonorarios = response[0][0].TipoHonorarios
-
         } catch (error) {
             console.error("Error al mostrar los campos:", error);
         }
-    } else if (tipoCobro == "GASTOS_90") {
-        RecalcularPilotoGXC();
-    } else if (tipoCobro == "HONORARIOS") {
+    } else if (PidePago == 'si') {
+        tipocartera = 'CAMPAÑA';
+        if (tipoCobro == "HONORARIOS") {
+            try {
+                let query = `select ValorHonorarios,TipoHonorarios from SimiladorDNC_Lappiz_dethonorarios where TipoHonorarios = '${tipocartera}'`
+                let response = await execQuery(query)
+                console.log(response[0][0])
+                sessionStorage.PorcCartera = response[0][0].ValorHonorarios
+                sessionStorage.TipoHonorarios = response[0][0].TipoHonorarios
+            } catch (error) {
+                console.error("Error al mostrar los campos:", error);
+            }
+        } else if (tipoCobro == "GASTOS_90") {
+            RecalcularPilotoGXC();
+        }
+    } else {
         try {
             let query = `select ValorHonorarios,TipoHonorarios from SimiladorDNC_Lappiz_dethonorarios where TipoHonorarios = '${tipocartera}'`
             let response = await execQuery(query)
             console.log(response[0][0])
             sessionStorage.PorcCartera = response[0][0].ValorHonorarios
             sessionStorage.TipoHonorarios = response[0][0].TipoHonorarios
-
         } catch (error) {
             console.error("Error al mostrar los campos:", error);
         }
     }
-
-
 }
 
 // para piloto gxc
@@ -566,5 +612,5 @@ function recalculoHonorariosAmpliacion() {
 
 
 // Value change 52339224,  17151899 , 1005000537, 91524438 ,71364491
-let mecanismoStora = sessionStorage.mecanismo
-ListHonorarios(mecanismoStora);
+// let mecanismoStora = sessionStorage.mecanismo
+// ListHonorarios(mecanismoStora);

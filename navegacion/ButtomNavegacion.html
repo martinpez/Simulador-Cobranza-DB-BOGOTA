@@ -1,65 +1,132 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .button-containerCA2 {
-            display: flex;
-            justify-content: center;
-        }
-
-        .button {
-      background-size: contain;
-    background-color: white;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 8vh;
-    width: 15vh;  
-    border-radius: 15px;
-    transition: all 0.3s ease-in-out;
-    border: solid 1px #ddd7d7;
-  }
-  .button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 10px #6f6466;
-  }
-        .left-buttonCA2 {
-            justify-content: flex-end;
-        }
-
-        .right-buttonCA2 {
-          margin-left: 58px;
-            justify-content: flex-start;
-        }
-
-        .arrowCA2 {
-            width: 30px;
-            height: 20px;
-            margin-right: 10px;
-        }
-
-        .left-arrowCA2 {
-            background: url('https://i.postimg.cc/4dTT6c7m/izquierda.png') no-repeat center center;
-        }
-
-        .right-arrowCA2 {
-            background: url('https://i.postimg.cc/2jcKmvkh/derecha.png') no-repeat center center;
-            margin-left: 55px;
-        }
-    </style>
-</head>
-<body>
-    <div class="button-containerCA2">
-        <button class="button left-buttonCA2">
-            <div class="arrowCA2 left-arrowCA2"></div>
-           
-        </button>
-        <button  style="visibility: hidden;" class="   BtnNavegacionFun button right-buttonCA2">
-            <div class="arrowCA2 right-arrowCA2"></div>
-           
-        </button>
+<div class="contenedor">
+    <div class="grupoItau">
+        <button class="btnSimulador itau">itaú</button>
+        <button class="flechaBtn" id="btnFlecha" aria-label="Expandir menú">›</button>
     </div>
-</body>
-</html>
+    <button class="btnSimulador consolidacion oculto">Consolidación de Productos</button>
+    <button class="btnSimulador novaciones oculto">Novaciones</button>
+    <button class="btnSimulador pagomora oculto">Pago Mora</button>
+    <button class="btnSimulador cancelacion oculto">Cancelación Total</button>
+    <button class="btnSimulador ampliacion oculto">Ampliación</button>
+</div>
+
+<style>
+    .contenedor {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+    .grupoItau {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .btnSimulador {
+        border: none;
+        border-radius: 15px;
+        height: 50px;
+        color: white;
+        background-color: #0041a4;
+        font-weight: bold;
+        flex: 0 1 200px;
+        max-width: 200px;
+        width: 200px;
+        text-align: center;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s, box-shadow 0.2s, transform 0.3s, opacity 0.3s;
+    }
+
+    .btnSimulador:hover {
+        background-color: #00317e;
+        box-shadow: 0 0 10px #00317e;
+    }
+
+    .flechaBtn {
+        background: none;
+        border: none;
+        color: #0041a4;
+        font-size: 38px;
+        font-weight: bold;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0 6px;
+        transition: transform 0.6s, color 0.2s;
+    }
+
+    .flechaBtn:hover {
+        color: #00317e;
+    }
+
+    .contenedor.expandido .flechaBtn {
+        transform: rotate(90deg);
+    }
+
+    .btnSimulador.oculto {
+        display: none;
+    }
+
+    .contenedor.expandido .btnSimulador.oculto {
+        display: inline-flex;
+        animation: aparecer 0.6s ease forwards;
+    }
+
+    .contenedor.expandido .btnSimulador.consolidacion { animation-delay: 0s; }
+    .contenedor.expandido .btnSimulador.novaciones { animation-delay: 0.08s; }
+    .contenedor.expandido .btnSimulador.pagomora { animation-delay: 0.16s; }
+    .contenedor.expandido .btnSimulador.cancelacion { animation-delay: 0.24s; }
+    .contenedor.expandido .btnSimulador.ampliacion { animation-delay: 0.32s; }
+
+    @keyframes aparecer {
+        from {
+            opacity: 0;
+            transform: translateX(-25px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .btnSimulador {
+            flex: 1 1 100%;
+            max-width: 100%;
+            width: 100%;
+        }
+    }
+</style>
+
+<script>
+    (function() {
+        const btnFlecha = document.getElementById('btnFlecha');
+        const contenedor = btnFlecha.closest('.contenedor');
+        let timeoutOcultar;
+
+        btnFlecha.addEventListener('click', function() {
+            contenedor.classList.toggle('expandido');
+        });
+
+        btnFlecha.addEventListener('mouseenter', function() {
+            clearTimeout(timeoutOcultar);
+            contenedor.classList.add('expandido');
+        });
+
+        contenedor.addEventListener('mouseleave', function() {
+            timeoutOcultar = setTimeout(function() {
+                contenedor.classList.remove('expandido');
+            }, 200);
+        });
+
+        contenedor.addEventListener('mouseenter', function() {
+            clearTimeout(timeoutOcultar);
+        });
+    })();
+</script>

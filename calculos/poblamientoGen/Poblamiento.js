@@ -2,11 +2,18 @@ function valoresPoblamiento() {
   //Pantalla Principal
   debugger;
   delete sessionStorage.pidepago
+  delete sessionStorage.PorcCarteraAplicoAmpliacion;
   delete sessionStorage.campanamora
   delete sessionStorage.UserCargado
   delete sessionStorage.MoraObl
   delete sessionStorage.PorcCartera
   delete sessionStorage.AmpliConsumo185;
+  delete sessionStorage.TipProducto
+  delete sessionStorage.TipoCobro
+  delete sessionStorage.Linea
+  delete sessionStorage.honorariosValues
+  delete sessionStorage.TipoCartera
+
 
   setFieldValue('1ad60ed2-e515-4164-8270-54efa1e574fa', e.dataItem.NombreCompleto) // Nombre Completo
   e.dataItem.PosibilidadCambio026 == "SI" ? document.getElementById("4eedfe97-8bf2-499c-a05f-ff25e3ca9b95").selectedIndex = 1
@@ -44,14 +51,18 @@ function valoresPoblamiento() {
   sessionStorage.edadMora = e.dataItem.EdadMoraCl
   sessionStorage.intCampaña = e.dataItem.DtoInteresesCampana
   sessionStorage.intMoraCampaña = e.dataItem.DtoInteresesMoraCampana
-  setFieldValue("247db41e-ea0d-444b-b3d0-627aae51ecd0", e.dataItem.DiasMoraObl)
+  if (TipoCobro == "GASTOS_90") {
+    setFieldValue("247db41e-ea0d-444b-b3d0-627aae51ecd0", e.dataItem.DiasMoraObl)
+    setFieldValue("7ba8643d-9438-4ade-bb3f-bab7948e2cbf", e.dataItem.DiasMoraObl)
+    setFieldValue("27cfef98-5ca4-415e-8149-7149479d487a", e.dataItem.DiasMoraObl)
+  }
   //Ampliacion
   CalculosAmpliacion()
-  setFieldValue("7ba8643d-9438-4ade-bb3f-bab7948e2cbf", e.dataItem.DiasMoraObl)
+
 
   //cancelacion
   poblarCancelacion()
-  setFieldValue("27cfef98-5ca4-415e-8149-7149479d487a", e.dataItem.DiasMoraObl)
+
 
   //novaciones
   setFieldValue('616e6102-56e5-48e9-bfc2-fce8497e629d', e.dataItem.SaldoTotalObl);
