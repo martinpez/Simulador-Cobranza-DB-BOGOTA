@@ -2,8 +2,11 @@ function Obligacionvacia() {
 }
 async function Obligacion() {
     try {
+        debugger;
         let documentocliente = e.value;
-        let fecha = new Date().toLocaleDateString()
+        let fecha = new Intl.DateTimeFormat('es-CO', {
+            timeZone: 'America/Bogota',
+        }).format(new Date());
         let tipodocSeleccionado = getFieldValue('15fb0de1-4989-4986-a662-61fb88b3aba1')
         // Lista de tipos de documento a intentar, empezando por el que este seleccionado en el dropdown
         let tiposDocumento = ['CC', 'CE', 'NIT', 'PAS', 'TI'];
@@ -18,53 +21,72 @@ async function Obligacion() {
                 break;
             }
         }
-        if (response[0][0]) {
-            // bandera para los cuando se encuentre el cliente en la base de datos y habilitar tasas campaña
+        if (response) {
             sessionStorage.setItem('UserCargado', 'si');
             if (sessionStorage.getItem("EdadMoraCl") === "0 - Al día") {
                 sessionStorage.campanaNovacion = 'no'
             }
             console.log("console.log(backandGlobal.environment); " + backandGlobal.environment);
             sessionStorage.campanaAmpliacion = 'No';
+            if (tipodocEncontrado !== tipodocSeleccionado) {
+                setFieldValue('15fb0de1-4989-4986-a662-61fb88b3aba1', tipodocEncontrado);
+
+                let selectTipoDoc = document.getElementById('15fb0de1-4989-4986-a662-61fb88b3aba1');
+                let opcion = Array.from(selectTipoDoc.options).find(o => o.text.trim() === tipodocEncontrado);
+                if (opcion) {
+                    selectTipoDoc.value = opcion.value;
+                    selectTipoDoc.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+                console.log('Tipo de documento corregido automaticamente a: ' + tipodocEncontrado);
+            }
             kendo.jQuery("#caae86ca-b4e0-4e59-918e-8f7a1a4d4114").data('kendoDropDownList').dataSource.data(response[0])
+
+            let nombreCompleto = response[0][0].NombreCompleto;
+            setFieldValue('1ad60ed2-e515-4164-8270-54efa1e574fa', nombreCompleto);
+
             visibilityField('caae86ca-b4e0-4e59-918e-8f7a1a4d4114', true)
             obligacionConsolidacion(response[0])
-            //campos nuevos de obl y cantidad
+            obligacionesitau(response[0])
             visibilityField('0ab23e22-1c3c-4a43-8c58-207b83625867', false)
             visibilityField('c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0', false)
-
         } else {
-            // Para saber si el usuario cargo desde la base de datos o no
             sessionStorage.setItem('UserCargado', 'no');
-            // saber si el cliente aplica a campaña de ampliación
             sessionStorage.campanaAmpliacion = 'No';
-            // saber si el cliente aplica a campaña de novación
             sessionStorage.campanaNovacion = 'no'
             console.log("Bandera de usuario de sesion " + sessionStorage.getItem('UserCargado'));
             Swal.fire({
                 title: '¡Verifica tu información!',
                 text: 'La información ingresada es incorrecta o no tiene registros asociados',
                 icon: 'error',
-                confirmButtonColor: '#ee7402' // Cambia el color del botón
+                confirmButtonColor: '#ee7402'
             })
             visibilityField('caae86ca-b4e0-4e59-918e-8f7a1a4d4114', false)
-            //campos nuevos de obl y cantidad
             visibilityField('0ab23e22-1c3c-4a43-8c58-207b83625867', true)
             visibilityField('c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0', true)
+            // Refresca visibilidad/disabled de novación con UserCargado='no'
+            try {
+                if (typeof toggleHonorariosNov === 'function' && typeof esHonorariosNov === 'function') {
+                    toggleHonorariosNov(esHonorariosNov());
+                }
+            } catch (e) { }
         }
-
     } catch (error) {
         sessionStorage.setItem('UserCargado', 'no');
         Swal.fire({
             title: '¡Verifica tu información!',
             text: 'La información ingresada es incorrecta o no tiene registros asociados',
             icon: 'error',
-            confirmButtonColor: '#ee7402' // Cambia el color del botón
+            confirmButtonColor: '#ee7402'
         })
         visibilityField('caae86ca-b4e0-4e59-918e-8f7a1a4d4114', false)
+        // Refresca visibilidad/disabled de novación con UserCargado='no'
+        try {
+            if (typeof toggleHonorariosNov === 'function' && typeof esHonorariosNov === 'function') {
+                toggleHonorariosNov(esHonorariosNov());
+            }
+        } catch (e) { }
     }
     debugger;
-    // rangosPilotoGXC()
     if (sessionStorage.pilotosDias) {
         return;
     }
@@ -84,5 +106,4 @@ async function Obligacion() {
     } catch (error) {
         console.log(error);
     }
-
 }

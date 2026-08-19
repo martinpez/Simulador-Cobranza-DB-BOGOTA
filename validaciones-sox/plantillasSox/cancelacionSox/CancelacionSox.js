@@ -11,7 +11,7 @@ function CancelacionSox() {
     } else {
         obligacion = getFieldValue('c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0') || '';
     }
-
+    let honorarios = getFieldValue('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef') || 0;
     let saldoTotal = getFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca') || '';
     let descuentointcte = getFieldValue('bcfd54b6-d1cf-40dc-8677-686652eedbb8') || '';
     let descuentomora = getFieldValue('433ffa22-78e7-4004-be47-2b0ccf497ad1') || '';
@@ -20,15 +20,15 @@ function CancelacionSox() {
     let totaldescuento = getFieldValue('7ed52d26-15c9-4f11-9177-55a380d1427d') || '';
     let pagoalSNR = getFieldValue('b5c33a6d-9d65-4920-8a39-e73621b7daa9') || '';
     let fecha = document.querySelector("#\\39 630246d-c683-4104-a141-391c9541b5cd > div > div > div.dx-texteditor-input-container > input").value
-    fecha = fecha.replaceAll(/-|\//g, '');
+    fecha = fecha.replaceAll('/', '');
     let execpcion = getFieldValue('e99362f1-b8da-4cca-8982-c8af8dcb5caf') || '';
 
-    let gestionTel = getFieldValue('8235c54b-36bd-4880-a29e-fa021ff71595') || '';
-
+    let gestionTel = sessionStorage.GestionTelf || '';
+    console.log("gestionTel", gestionTel);
     let tipoGestion = ""
 
     let cantDescExtra = Number(getFieldValue('a9977387-4683-4d89-9e58-851cb72f9886'));
-    if (gestionTel == "Si") {
+    if (gestionTel == "1: Si") {
         tipoGestion = "TEL"
     } else {
         tipoGestion = "DOC"
@@ -49,7 +49,7 @@ function CancelacionSox() {
 
 
     // ===================== PLANTILLA =====================
-    let plantillaSOX = `FECHAPAGOXX${fecha}LLLVALORCONSIGSNRXX${pagoalSNR}LLLVALORPAGOPRODUCTOXX0LLLVALORHONORARIOSXX0LLLVALORPRODUCTOXX${pagoalSNR}LLLTIPONEGXX${tipoGestion}LLLCUOTAPROYECTADAXXNO APLICALLLOBSERVACIONESXX${observaciones}LLLEXCEPCIONXX${execpcion}LLL`;
+    let plantillaSOX = `FECHAPAGOXX${fecha}LLLVALORCONSIGSNRXX${pagoalSNR}LLLVALORPAGOPRODUCTOXX0LLLVALORHONORARIOSXX${honorarios}LLLVALORPRODUCTOXX${pagoalSNR}LLLTIPONEGXX${tipoGestion}LLLCUOTAPROYECTADAXXNO APLICALLLOBSERVACIONESXX${observaciones}LLLEXCEPCIONXX${execpcion}LLL`;
 
     setFieldValue('d4f89a7c-0207-4756-9bd7-e2e669ac3ce0', plantillaSOX);
     setFieldValue('24e68f6c-b401-40d9-bb2d-ec6d246426f9', observaciones);
