@@ -32,7 +32,7 @@ function observacionConsolidado() {
 
     let fechaPago = document.querySelector("#\\33 9505284-3650-4303-b564-747e7dd3a8e9 > div.dx-dropdowneditor-input-wrapper > div > div.dx-texteditor-input-container > input").value
     fechaPago = fechaPago.replaceAll('/', '')
-    let gestionTel = getFieldValue('8235c54b-36bd-4880-a29e-fa021ff71595') || '';
+    let gestionTel = sessionStorage.GestionTelf || '';
     let actividadEconomica = document.querySelector("#c852f2a7-6f9c-48f6-96b5-6fdc26c399ef").selectedOptions[0].textContent;
 
     if (actividadEconomica == 'Seleccione un registro...') {
@@ -44,7 +44,7 @@ function observacionConsolidado() {
 
     let tipoGestion = ""
 
-    if (gestionTel == "Si") {
+    if (gestionTel == "1: Si") {
         tipoGestion = "TEL"
     } else {
         tipoGestion = "DOC"

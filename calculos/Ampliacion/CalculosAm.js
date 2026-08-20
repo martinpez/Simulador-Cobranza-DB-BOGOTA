@@ -83,6 +83,10 @@ function procesarCalculosAmpliacion() {
     let mecanismo = "ampliacion";
     if (sessionStorage.PorcAmpliacionIntCte == 100) {
       tipocartera = "CONSUMO";
+    } else if (tipocartera !== "CONSUMO") {
+      // No hace nada
+    } else {
+      tipocartera = "CAMPAÑA";
     }
     if (typeof CargaCamposHonorarios === 'function') {
       CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo);

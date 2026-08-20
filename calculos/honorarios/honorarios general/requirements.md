@@ -83,7 +83,7 @@ Se reiteró que:
 Sin pago no hay cobro de honorarios.
  Excepción clave
 
-·        Para ampliaciones con 100% de descuento en intereses:
+·        Para ampliaciones con 100% de descuento en intereses cte:
 
 o   NO aplica 22,5%
 o   Aplica 18,5% sobre el pago al SNR

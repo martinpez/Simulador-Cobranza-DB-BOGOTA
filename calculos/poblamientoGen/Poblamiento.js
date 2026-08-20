@@ -1,18 +1,19 @@
 function valoresPoblamiento() {
   //Pantalla Principal
   debugger;
-  delete sessionStorage.pidepago
+  delete sessionStorage.pidepago;
   delete sessionStorage.PorcCarteraAplicoAmpliacion;
-  delete sessionStorage.campanamora
-  delete sessionStorage.UserCargado
-  delete sessionStorage.MoraObl
-  delete sessionStorage.PorcCartera
+  delete sessionStorage.campanamora;
+  delete sessionStorage.UserCargado;
+  delete sessionStorage.MoraObl;
+  delete sessionStorage.PorcCartera;
   delete sessionStorage.AmpliConsumo185;
-  delete sessionStorage.TipProducto
-  delete sessionStorage.TipoCobro
-  delete sessionStorage.Linea
-  delete sessionStorage.honorariosValues
-  delete sessionStorage.TipoCartera
+  delete sessionStorage.TipProducto;
+  delete sessionStorage.TipoCobro;
+  delete sessionStorage.Linea;
+  delete sessionStorage.honorariosValues;
+  delete sessionStorage.TipoCartera;
+  delete sessionStorage.GestionTelf;
 
 
   setFieldValue('1ad60ed2-e515-4164-8270-54efa1e574fa', e.dataItem.NombreCompleto) // Nombre Completo
@@ -22,6 +23,8 @@ function valoresPoblamiento() {
   setFieldValue('8676efb4-1857-48d2-b604-8c4e23917fd0', id); // Marca Obl
   e.dataItem.GestionTelefonica == "SI" ? document.getElementById("8235c54b-36bd-4880-a29e-fa021ff71595").selectedIndex = 1
     : document.getElementById("8235c54b-36bd-4880-a29e-fa021ff71595").selectedIndex = 2; // Gestion Telefonica
+  let GEStel = document.getElementById("8235c54b-36bd-4880-a29e-fa021ff71595").value;
+  sessionStorage.GestionTelf = GEStel;
   let mora = getIdByPartialText(e.dataItem.EdadMoraCl, '5b9ce178-27fe-4c52-b91d-ba6a898ff546');
   if (e.dataItem.MecanismoAplicaCampana && e.dataItem.MecanismoAplicaCampana.includes("PAGOMORA")) {
     sessionStorage.campanamora = 'si'
