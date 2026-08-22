@@ -1,3 +1,4 @@
+
 setTimeout(function () {
     delete sessionStorage.campanamora
     NombreGrupo()
@@ -11,30 +12,32 @@ setTimeout(function () {
     disableField('92fe640e-4571-49e7-8fce-4f714888f307', true)
 }, 500);
 const VISTAS = {
-    PRINCIPAL: 1,
 
-    NOVACIONES_P1: 2,
-    NOVACIONES_P2: 3,
+PRINCIPAL: 1,
 
-    AMPLIACION_P1: 4,
-    AMPLIACION_P2: 17,
-    AMPLIACION_P3: 7,
+NOVACIONES_P1: 2,
+NOVACIONES_P2: 3,
 
-    CANCELACION_TOTAL_PAG1: 5,
-    CANCELACION_P2: 6,
-    CANCELACION_P3: 12,
+AMPLIACION_P1: 4,
+AMPLIACION_P2: 18,
+AMPLIACION_P3: 7,
 
-    CONSOLIDACION_P1: 14,
-    CONSOLIDACION_P2: 9,
-    CONSOLIDACION_P4: 8,
+CANCELACION_TOTAL_PAG1: 5,
+CANCELACION_P2: 6,
+CANCELACION_P3: 13,
 
-    PAGOMORA_P1: 16,
-    PAGOMORA_P2: 10,
+CONSOLIDACION_P1: 16,
+CONSOLIDACION_P2: 9,
+CONSOLIDACION_P4: 8,
 
-    CLIENTE_INFO_ECONOMICA: 11,
-    INFORMACION_CLIENTE: 14,
+PAGOMORA_P1: 17,
+PAGOMORA_P2: 10,
 
-    ITAU_P1: 13
+CLIENTE_INFO_ECONOMICA: 12,
+INFORMACION_CLIENTE: 15,
+
+ITAU_P1: 14
+
 };
 
 const OBSERVATION_SOX_MAP = [
@@ -99,6 +102,11 @@ function inicializarNavegacion() {
     //ITAU
     $(".itau").click(() => {
     navegarA(VISTAS.ITAU_P1);
+    });
+
+     $(".left-buttonI").click(() => {
+        navegarA(VISTAS.PRINCIPAL);
+
     });
 
     // Consolidacion de productos
