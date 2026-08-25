@@ -117,7 +117,7 @@ function ListHonorarios(mecanismo) {
             } else if (tipoCobro == "GASTOS_90") {
                 ListCan.value = "3: Piloto-GXC";
                 ListCan.disabled = true;
-                visibilityField('9ee8ee24-5ae5-42da-83c5-3694859ccfa8bd-4060-4aa1-b437-4528d6f9bc3592e72b', true) // Campo valor maximo honorarios
+                visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', true) // Campo valor maximo honorarios
                 visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', true) //Campo Honorarios confirm
                 visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', true) //Campo pago minimo
                 visibilityField('8e8d6cf2-299c-4b45-8059-64cf50b2bd11', true) //Campo linea

@@ -161,10 +161,13 @@ function recalcularcancelacion() {
     setFieldValue('60bebeab-d3ca-4547-9eff-00cc8db69b82', dctoCapital)
     setFieldValue('aa7aeaf3-6bc8-4939-9896-212d5efcd93e', porCapitalReal)
 
-    // ── Bajas en cuentas aplicadas ──
+    // ──MAX Bajas en cuentas aplicadas ──
     let totalAplicado = dctoCte + dctoExtra + dctoMora + dctoCapital
-    setFieldValue('7ed52d26-15c9-4f11-9177-55a380d1427d', totalAplicado)
-
+    setFieldValue('7a94fe37-1d84-4232-9298-4e1986cdead2', totalAplicado)
+    // Baja en cuenta aplicadas
+   
+    let operacion = saldoTotal + 10000 - abonoMinimo
+    setFieldValue('7ed52d26-15c9-4f11-9177-55a380d1427d', operacion > 0 ? operacion : 0)  // Bajas en cuentas Aplicadas
 
 }
 
@@ -176,16 +179,11 @@ function recalcularcancelacion() {
 if (e.value <= 0) {
 
 } else {
-    recalcularcancelacion();
+    debugger;
+    recalcularcancelacion()
 
     let abonoMinimo = getFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f')
     if (e.value < abonoMinimo) {
         toastr.warning('El valor a pagar debe ser mayor al abono mínimo que debe realizar el cliente.')
     }
-    let saldoTotal = getFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca')
-    let operacion = saldoTotal + 10000 - e.value
-    setFieldValue('7ed52d26-15c9-4f11-9177-55a380d1427d', operacion > 0 ? operacion : 0) // Bajas en cuentas Aplicadas
 }
-
-
-
