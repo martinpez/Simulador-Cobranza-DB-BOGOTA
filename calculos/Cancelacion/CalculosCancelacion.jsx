@@ -26,11 +26,11 @@ async function poblarCancelacion() {
 
     debugger;
     let pagoMinimo;
-    let pagomin = e.dataItem.PagoMinObl;
+    pagoMinimo = e.dataItem.PagoMinObl;
     let honorarios = sessionStorage.honorariosValues;
     let produt = sessionStorage.Producto;
     if (produt == 'CARTERA' || produt == 'SOBREGIRO') {
-        pagoMinimo = pagomin - honorarios
+        pagoMinimo = pagoMinimo - honorarios
     } else {
         pagoMinimo = e.dataItem.PagoMinObl
     }
