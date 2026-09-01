@@ -14,7 +14,7 @@ function load_modalBugs() {
   if (usuario) usuario.value = userName;
   if (date) {
     if (fechaInput) {
-      fechaInput.value = date;
+      fechaInput.value = date + ' · ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
   }
 
@@ -33,21 +33,7 @@ function load_modalBugs() {
   }
 
   if (submitBtn) {
-    submitBtn.addEventListener('click', function () {
-      var modulo = modal.querySelector('#_bugsTG-modulo').value;
-      var descripcion = modal.querySelector('#_bugsTG-descripcion').value;
-      var file = fileInput && fileInput.files.length > 0 ? fileInput.files[0] : null;
-
-      console.log('Reporte de bug:', {
-        usuario: usuario ? usuario.value : '',
-        fecha: fechaInput ? fechaInput.value : '',
-        modulo: modulo,
-        descripcion: descripcion,
-        evidencia: file ? file.name : null
-      });
-
-      modal.close();
-    });
+    sumitBugReport();
   }
 
   if (uploadZone && fileInput) {
@@ -58,5 +44,7 @@ function load_modalBugs() {
           'Archivo: <strong>' + fileInput.files[0].name + '</strong>';
       }
     });
+
   }
 }
+
