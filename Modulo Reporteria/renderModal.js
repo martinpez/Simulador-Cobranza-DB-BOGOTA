@@ -1,4 +1,5 @@
-<style>
+function bugsmodal(){
+    var contHTM=`<style>
   ._bugsTG-modal::backdrop {
     background: rgba(0, 0, 0, 0.5);
   }
@@ -328,3 +329,6 @@
     <button class="_bugsTG-btn _bugsTG-btn-submit" id="_bugsTG-btn-submit" type="button">Enviar reporte</button>
   </div>
 </dialog>
+`
+document.querySelector('app-forms').insertAdjacentHTML('beforeend', contHTM)
+}
