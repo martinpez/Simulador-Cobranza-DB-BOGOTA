@@ -7,10 +7,20 @@ function valoresPoblamiento() {
   delete sessionStorage.UserCargado;
   delete sessionStorage.MoraObl;
   delete sessionStorage.PorcCartera;
+  delete sessionStorage.PorcCarteraPagoMora;
+  delete sessionStorage.PorcCarteraCancelacion;
+  delete sessionStorage.PorcCarteraAmpliacion;
+  delete sessionStorage.TipoHonorariosPagoMora;
+  delete sessionStorage.TipoHonorariosCancelacion;
+  delete sessionStorage.TipoHonorariosAmpliacion;
+  delete sessionStorage.ConsultaHonorariosPagoMora;
+  delete sessionStorage.ConsultaHonorariosCancelacion;
+  delete sessionStorage.ConsultaHonorariosAmpliacion;
   delete sessionStorage.AmpliConsumo185;
   delete sessionStorage.TipProducto;
   delete sessionStorage.TipoCobro;
   delete sessionStorage.Linea;
+  delete sessionStorage.AmpliConsumo205;
   delete sessionStorage.honorariosValues;
   delete sessionStorage.TipoCartera;
   delete sessionStorage.GestionTelf;
@@ -43,22 +53,22 @@ function valoresPoblamiento() {
   let honorariosValues = e.dataItem.CustomNumber1
   let TipoCartera = e.dataItem.CustomChar1
   sessionStorage.TipProducto = producto
-  sessionStorage.TipoCobro = TipoCobro
+  sessionStorage.TipoCobro = String(TipoCobro || '').toUpperCase()
   sessionStorage.Linea = Linea
   sessionStorage.honorariosValues = parseFloat(honorariosValues)
   sessionStorage.TipoCartera = TipoCartera
-
+  if (TipoCobro == "GASTOS_90") {
+    setFieldValue("247db41e-ea0d-444b-b3d0-627aae51ecd0", e.dataItem.DiasMoraObl)
+    setFieldValue("7ba8643d-9438-4ade-bb3f-bab7948e2cbf", e.dataItem.DiasMoraObl)
+    setFieldValue("27cfef98-5ca4-415e-8149-7149479d487a", e.dataItem.DiasMoraObl)
+  }
 
   //Mora
   CalculosMora()
   sessionStorage.edadMora = e.dataItem.EdadMoraCl
   sessionStorage.intCampaña = e.dataItem.DtoInteresesCampana
   sessionStorage.intMoraCampaña = e.dataItem.DtoInteresesMoraCampana
-  if (TipoCobro == "GASTOS_90") {
-    setFieldValue("247db41e-ea0d-444b-b3d0-627aae51ecd0", e.dataItem.DiasMoraObl)
-    setFieldValue("7ba8643d-9438-4ade-bb3f-bab7948e2cbf", e.dataItem.DiasMoraObl)
-    setFieldValue("27cfef98-5ca4-415e-8149-7149479d487a", e.dataItem.DiasMoraObl)
-  }
+
   //Ampliacion
   CalculosAmpliacion()
 
@@ -151,3 +161,7 @@ function getIdByPartialText(partialText, elemento) {
   const matchedOption = options.find(option => option.text.includes(partialText));
   return matchedOption ? matchedOption.value : null;
 }
+
+
+cancelacion = quitar 10000 de colchon 
+diadiagec@bancodebogota.co.com

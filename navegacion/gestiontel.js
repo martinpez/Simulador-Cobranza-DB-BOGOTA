@@ -12,15 +12,7 @@ function gestionTel() {
     console.log("Boton encontrado:", boton);
 
     if (boton && boton2 && boton3 && boton4 && boton5) {
-        // setear el pago al snr en el fun 
-        let pagoProduto = "";
-        if (sessionStorage.mecanismo === "novacion" || sessionStorage.mecanismo === "consolidacion") {
-            pagoProduto = document.getElementById("685c5e9d-4409-4d4c-a11e-a0c17dcedb02").value || ""
-        } else {
-            pagoProduto = "000-778175"
-        }
-        setFieldValue('685c5e9d-4409-4d4c-a11e-a0c17dcedb02', pagoProduto);
-        console.log("pagoProduto", pagoProduto);
+
         // LÓGICA INVERSA: 
         // Si dice "Si", lo mantenemos oculto (o lo ocultamos si algo lo mostró)
         if (gestion.includes("1: Si")) {

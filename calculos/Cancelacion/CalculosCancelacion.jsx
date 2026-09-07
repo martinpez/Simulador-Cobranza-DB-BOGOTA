@@ -5,24 +5,43 @@ async function poblarCancelacion() {
     let producto = e.dataItem.Producto
     debugger;
     let saldoTotalObl = e.dataItem.SaldoTotalObl
-    let honorariosIsc= parseFloat(sessionStorage.honorariosValues)
-    saldoTotalObl = saldoTotalObl - honorariosIsc ? honorariosIsc == 0: saldoTotalObl;
-    setFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca', saldoTotalObl)
+    let honorariosIsc = parseFloat(sessionStorage.honorariosValues)
+    let saldoTotal = 0;
+    if (honorariosIsc !== 0) {
+        saldoTotal = saldoTotalObl - honorariosIsc;
+    }
+    saldoTotal = saldoTotalObl;
+    setFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca', saldoTotal)
     let interescteObl = e.dataItem.InteresCteObl
     setFieldValue('48f8260e-5e81-43d3-b69c-d94808cb229e', interescteObl)
 
 
-    // seteo de honorarios 
-    if (sessionStorage.UserCargado != "no") {
-        let honorarioslista = "bda37ca7-d503-4d41-8ff4-aebde2cb7c30"
-        let idlineaKendo = "#8e8d6cf2-299c-4b45-8059-64cf50b2bd11"
-        let idTipoCarteraKendo = "#dfe46e30-5328-485e-bc80-bec20aab2d02"
-        let tipocobro = sessionStorage.TipoCobro
-        let tipolinea = sessionStorage.Linea
-        let tipocartera = sessionStorage.TipoCartera
-        let mecanismo = "cancelacion"
-        CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo);
+    const tipoCobro = String(sessionStorage.TipoCobro || '').toUpperCase()
+
+    // Los campos de cartera solo se cargan para Honorarios.
+    if (tipoCobro == 'HONORARIOS') {
+        if (tipoCobro == "HONORARIOS" && sessionStorage.UserCargado != "no") {
+            let honorarioslista = "bda37ca7-d503-4d41-8ff4-aebde2cb7c30"
+            let idlineaKendo = "#8e8d6cf2-299c-4b45-8059-64cf50b2bd11"
+            let idTipoCarteraKendo = "#dfe46e30-5328-485e-bc80-bec20aab2d02"
+            let tipocobro = sessionStorage.TipoCobro
+            let tipolinea = sessionStorage.Linea
+            let tipocartera = sessionStorage.TipoCartera
+            let mecanismo = "cancelacion"
+            CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo);
+        }
     }
+    debugger;
+    if (tipoCobro == "GASTOS_90") {
+        RecalcularPilotoGXC("cancelacion", sessionStorage.Linea);
+    }
+    if (tipoCobro == "HONORARIOS") {
+        console.log("ya se cargo la lista de honorarios");
+    } else {
+        ListHonorarios("cancelacion");
+    }
+
+
 
     debugger;
     let pagoMinimo;
@@ -130,4 +149,3 @@ async function poblarCancelacion() {
     }
 
 }
-

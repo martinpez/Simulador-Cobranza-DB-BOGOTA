@@ -28,11 +28,8 @@ function _recalcularTodo() {
   // honorarios 
   const safeNumber = val =>
     isNaN(parseFloat(val)) ? 0 : parseFloat(val)
-  // validacion del 18.5% cuando tiene descuentos del 100 %  
-  let porcCartera = sessionStorage.PorcCartera;
-  if (sessionStorage.PorcAmpliacionIntCte == 100 && sessionStorage.AmpliConsumo185 == 'true') {
-    porcCartera = sessionStorage.PorcCarteraAplicoAmpliacion;
-  }
+  // Honorarios del mecanismo Ampliacion
+  let porcCartera = parseFloat(sessionStorage.PorcCarteraAmpliacion) || 0;
   let HonorariosCalculados = Math.floor((abonConDescMax * porcCartera) / 100)
   setFieldValue('d647e41b-7a50-46b0-ba5f-e30eeb44b463', HonorariosCalculados)
   let honorariosPagados = safeNumber(getFieldValue('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b'))

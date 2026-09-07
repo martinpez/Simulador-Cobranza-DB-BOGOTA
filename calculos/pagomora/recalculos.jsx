@@ -1,13 +1,4 @@
 function RecalculosMora() {
-    if (sessionStorage.calculosMoraListo !== 'si') {
-        const intentos = parseInt(sessionStorage.reintentosRecalculo || '0')
-        if (intentos < 10) {
-            sessionStorage.reintentosRecalculo = intentos + 1
-            setTimeout(RecalculosMora, 200)
-            return
-        }
-    }
-    sessionStorage.reintentosRecalculo = '0'
     debugger;
     const safeNumber = val =>
         isNaN(parseFloat(val)) ? 0 : parseFloat(val)
@@ -45,8 +36,9 @@ function RecalculosMora() {
     const totalMaxDctos = maxcte + maxmora + maxExtC
     const abonoMinimo = PagoMinObl - totalMaxDctos + colchon
 
-    // Honorarios
-    let HonorariosCalculados = Math.floor((abonoMinimo * sessionStorage.PorcCartera) / 100)
+    // Honorarios del mecanismo Pago Mora
+    const porcentajeCartera = safeNumber(sessionStorage.PorcCarteraPagoMora)
+    let HonorariosCalculados = Math.floor((abonoMinimo * porcentajeCartera) / 100)
     setFieldValue('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', HonorariosCalculados)
     let honorariosPagados = safeNumber(getFieldValue('ae33bcc4-183a-47de-a6c8-f4ecc44be169'))
     let sumaHonorarios = 0;
@@ -96,7 +88,7 @@ function RecalculosMora() {
     const porcMoraReal = InteresMoraObl > 0 ? (dctoMora / InteresMoraObl) * 100 : 0
     const porcComun = maxcte > 0 ? (dctoCte / maxcte) * PorcPagoMoraIntCte1 : 0
     const porcCteReal = porcComun
-    const porcExtraCReal = esTarjeta ? porcComun : 0
+    const porcExtraCReal = esTarjeta ? (maxExtC > 0 ? (dctoExtraC / maxExtC) * porcDescIntExtraCTC1 : 0) : 0
 
     setFieldValue('36329717-6123-40c7-b4c9-d5f447a3cac4', maxcte)
     setFieldValue('49ed37fa-10f7-46d1-b2d3-bd4e28bef0db', dctoCte)

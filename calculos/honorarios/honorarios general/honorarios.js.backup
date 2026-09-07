@@ -1,7 +1,7 @@
 function ListHonorarios(mecanismo) {
     // Mostrar campos de honorarios sin data
     //console.log(e.value)
-
+    debugger;
     const Safetext = val => typeof val === 'string' ? val : '';
     let valelist = e.value;
     var tipoCobro = sessionStorage.TipoCobro;
@@ -429,44 +429,40 @@ function ListHonorarios(mecanismo) {
     }
 }
 
+
 function vacia() {
 }
 async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo) {
     // Funcion que va servir para cargar cualquier honorarios 
     // todos tienen 3 campos que se van a precargar check, linea , tipo cartera
     // se debe enviar los id de los campos de check, linea , tipo cartera
-    debugger;
+    debugger
 
-    const tipoCobro = String(tipocobro || '').toUpperCase();
-    console.log([honorarioslista, idlineaKendo, idTipoCarteraKendo, tipoCobro, tipolinea, tipocartera, mecanismo]);
+    console.log([honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo]);
     //valida si existen los elementos 
 
     if (!(honorarioslista && idlineaKendo && idTipoCarteraKendo)) {
         console.error("No se enviaron los uid de los elementos")
 
     }
-    // VALIDACION CUANDO SON TARJETA Y SON 0900 LA LINEA
+    // VALIDACION CUANDO SON TARGETA Y SON 0900 LA LINEA
     if (sessionStorage.TipProducto == "TARJETA") {
         tipolinea = "0000"
     }
-    // El tipo recibido del cliente no se modifica; solo se define el valor
-    // que debe consultar y seleccionar en la lista.
-    let tipocarteraconsulta = tipocartera;
-    if (tipoCobro == "HONORARIOS") {
-        if (mecanismo == "ampliacion" && tipocartera == "CONSUMO" &&
-            sessionStorage.PorcAmpliacionIntCte != 100) {
-            sessionStorage.AmpliConsumo205 = 'true';
-            tipocarteraconsulta = 'CAMPAÑA';
-        } else if (tipocartera == "CONSUMO" && sessionStorage.pidepago == "si" && mecanismo != "ampliacion") {
-            tipocarteraconsulta = 'CAMPAÑA';
-        }
+    // VALIDACION PARA CUANDO APLICA EL 22,5 Y EL MECANISMO TRAE PAGO
+    // AMPLIACION con 100% intereses: mantiene CONSUMO (18.5%) - exception prioritaria
+    if (mecanismo == "ampliacion" && sessionStorage.PorcAmpliacionIntCte == 100 && tipocobro != "GASTOS_90") {
+        sessionStorage.AmpliConsumo185 = 'true';
+        tipocartera = 'CONSUMO';
     }
-    if (tipoCobro == "HONORARIOS") {
-        await calculoHonorarios(mecanismo, tipocarteraconsulta);
+    // PAGO MORA y CANCELACION con pidepago: aplica CAMPAÑA (22.5%)
+    else if (mecanismo != "ampliacion" && sessionStorage.pidepago == "si" && tipocartera == "CONSUMO") {
+        tipocartera = 'CAMPAÑA';
     }
+    // Para pilotos (GASTOS_90) en cualquier mecanismo: no cambia tipocartera, usa tabla de dias
     ListHonorarios(mecanismo);
     // valida si esta es honorarios 
-    if (tipoCobro == "HONORARIOS") {
+    if (tipocobro == "HONORARIOS" || tipocobro == "GASTOS_90") {
         //Tipo de linea
         try {
             let query = `SELECT NomProductos FROM SimiladorDNC_Lappiz_LineaProducto WHERE CodCodigo = '${tipolinea}'`
@@ -492,7 +488,7 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
         // tipo de cartera 
         var dropDownList2 = kendo.jQuery(idTipoCarteraKendo).data("kendoDropDownList");
         var item2 = dropDownList2.dataSource.data().find(
-            x => x.TipoHonorarios === tipocarteraconsulta
+            x => x.TipoHonorarios === tipocartera
         );
         console.log(item2)
         if (item2) {
@@ -502,146 +498,66 @@ async function CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarter
 
     }
 
-}
 
+}
 
 function honoraVacios() {
 }
-async function calculoHonorarios(mecanismo, tipocartera) {
+async function calculoHonorarios() {
     debugger;
-    mecanismo = mecanismo || sessionStorage.mecanismo;
-    const PidePago = sessionStorage.pidepago;
-    const tipoCarteraOriginal = tipocartera || e.dataItem.TipoHonorarios;
-    let clavePorcentaje;
-    let claveTipoHonorarios;
-    let claveConsulta;
+    var tipoCobro = sessionStorage.TipoCobro;
+    let PidePago = sessionStorage.pidepago;
+    // Usar sessionStorage.TipoCartera si fue modificado por CargaCamposHonorarios
+    let tipocartera = sessionStorage.TipoCartera || e.dataItem.TipoHonorarios;
 
-    switch (mecanismo) {
-        case "pagomora":
-            clavePorcentaje = "PorcCarteraPagoMora";
-            claveTipoHonorarios = "TipoHonorariosPagoMora";
-            claveConsulta = "ConsultaHonorariosPagoMora";
-            break;
-        case "cancelacion":
-            clavePorcentaje = "PorcCarteraCancelacion";
-            claveTipoHonorarios = "TipoHonorariosCancelacion";
-            claveConsulta = "ConsultaHonorariosCancelacion";
-            break;
-        case "ampliacion":
-            clavePorcentaje = "PorcCarteraAmpliacion";
-            claveTipoHonorarios = "TipoHonorariosAmpliacion";
-            claveConsulta = "ConsultaHonorariosAmpliacion";
-            break;
-        default:
-            console.warn("Mecanismo no reconocido:", mecanismo);
-            return;
-    }
-
-
-    // sessionStorage distingue una clave existente aunque su valor sea 0.
-    // La marca pendiente evita consultas duplicadas por los trigger("change").
-    if (sessionStorage.getItem(clavePorcentaje) !== null && sessionStorage.getItem(claveConsulta) === "si") {
-        return;
-    }
-
-    let tipoCarteraConsulta = tipoCarteraOriginal;
-    switch (mecanismo) {
-        case "pagomora":
-        case "cancelacion":
-            if (PidePago == "si") {
-                tipoCarteraConsulta = "CAMPAÑA";
-            }
-            break;
-        case "ampliacion":
-            if (sessionStorage.AmpliConsumo205 == "true") {
-                tipoCarteraConsulta = "CAMPAÑA";
-            } else if (tipoCarteraOriginal == "CAMPAÑA" && PidePago == "si") {
-                break;
-            }
-    }
-
-    sessionStorage.setItem(claveConsulta, "si");
-    try {
-        let query = `select ValorHonorarios,TipoHonorarios from SimiladorDNC_Lappiz_dethonorarios where TipoHonorarios = '${tipoCarteraConsulta}'`;
-        let response = await execQuery(query)
-        debugger;
-        console.log(response[0][0]);
-        sessionStorage.setItem(clavePorcentaje, response[0][0].ValorHonorarios);
-        sessionStorage.setItem(claveTipoHonorarios, response[0][0].TipoHonorarios);
-    } catch (error) {
-        console.error("Error al consultar el valor de honorarios:", error);
-    } finally {
-        sessionStorage.removeItem(claveConsulta);
-    }
-
-}
-// para piloto gxc
-async function RecalcularPilotoGXC(mecanismo, tipolinea) {
-    debugger;
-    mecanismo = mecanismo || sessionStorage.mecanismo;
-    let clavePorcentaje;
-    let campoDiasMora;
-    let idkendo;
-
-    switch (mecanismo) {
-        case "pagomora":
-            clavePorcentaje = "PorcCarteraPagoMora";
-            campoDiasMora = "247db41e-ea0d-444b-b3d0-627aae51ecd0";
-            idkendo = "#9ccfa8bd-4060-4aa1-b437-4528d6f9bc35";
-            break;
-        case "cancelacion":
-            clavePorcentaje = "PorcCarteraCancelacion";
-            campoDiasMora = "27cfef98-5ca4-415e-8149-7149479d487a";
-            idkendo = "#8e8d6cf2-299c-4b45-8059-64cf50b2bd11";
-            break;
-        case "ampliacion":
-            clavePorcentaje = "PorcCarteraAmpliacion";
-            campoDiasMora = "7ba8643d-9438-4ade-bb3f-bab7948e2cbf";
-            idkendo = "#8e1dc11f-e65c-4141-a1d5-42850fd9b214";
-            break;
-        default:
-            console.warn("Mecanismo no reconocido para piloto GXC:", mecanismo);
-            return;
-    }
-
-    if (tipolinea !== undefined) {
-        // VALIDACION CUANDO SON TARJETA Y SON 0900 LA LINEA
-        if (sessionStorage.TipProducto == "TARJETA") {
-            tipolinea = "0000"
-        }
+    // AMPLIACION con 100% intereses: mantiene CONSUMO (18.5%)
+    if (sessionStorage.PorcAmpliacionIntCte == 100 && sessionStorage.AmpliConsumo185 == 'true' && tipocartera != "CAMPAÑA") {
+        tipocartera = 'CONSUMO';
         try {
-            let query = `SELECT NomProductos FROM SimiladorDNC_Lappiz_LineaProducto WHERE CodCodigo = '${tipolinea}'`
+            let query = `select ValorHonorarios,TipoHonorarios from SimiladorDNC_Lappiz_dethonorarios where TipoHonorarios = '${tipocartera}'`
             let response = await execQuery(query)
             console.log(response[0][0])
-            let response_nombre = response[0][0].NomProductos
-            var dropDownList1 = kendo.jQuery(idkendo).data("kendoDropDownList");
-            // Busca el item por el valor de la propiedad NomProductos
-            var item = dropDownList1.dataSource.data().find(
-                x => x.NomProductos === response_nombre
-            );
-
-            if (item) {
-                dropDownList1.value(item.Id);
-                dropDownList1.trigger("change");
-            }
-
-
+            sessionStorage.PorcCarteraAplicoAmpliacion = response[0][0].ValorHonorarios
+            sessionStorage.TipoHonorarios = response[0][0].TipoHonorarios
+        } catch (error) {
+            console.error("Error al mostrar los campos:", error);
+        }
+    } else if (PidePago == 'si' && tipoCobro == "HONORARIOS") {
+        // Solo para HONORARIOS con pidepago se cambia a CAMPAÑA
+        tipocartera = 'CAMPAÑA';
+        try {
+            let query = `select ValorHonorarios,TipoHonorarios from SimiladorDNC_Lappiz_dethonorarios where TipoHonorarios = '${tipocartera}'`
+            let response = await execQuery(query)
+            console.log(response[0][0])
+            sessionStorage.PorcCartera = response[0][0].ValorHonorarios
+            sessionStorage.TipoHonorarios = response[0][0].TipoHonorarios
+        } catch (error) {
+            console.error("Error al mostrar los campos:", error);
+        }
+    } else if (tipoCobro == "GASTOS_90") {
+        // Para pilotos, usar la tabla de dias de mora (no consulta DB para tipo cartera)
+        RecalcularPilotoGXC();
+    } else {
+        // Para casos normales sin pidepago o sin 100% intereses
+        try {
+            let query = `select ValorHonorarios,TipoHonorarios from SimiladorDNC_Lappiz_dethonorarios where TipoHonorarios = '${tipocartera}'`
+            let response = await execQuery(query)
+            console.log(response[0][0])
+            sessionStorage.PorcCartera = response[0][0].ValorHonorarios
+            sessionStorage.TipoHonorarios = response[0][0].TipoHonorarios
         } catch (error) {
             console.error("Error al mostrar los campos:", error);
         }
     }
+}
 
-    if (String(sessionStorage.TipoCobro || '').toUpperCase() != "GASTOS_90") {
-        return;
-    }
+// para piloto gxc
+function RecalcularPilotoGXC() {
+    debugger;
+    // Obtener días de mora: si MoraObl existe en sessionStorage se usa ese valor, si no se toma del evento
+    var diaMora = sessionStorage.MoraObl !== undefined ? parseFloat(sessionStorage.MoraObl) : parseFloat(e.value);
 
-    // Siempre se toma el valor actual del campo del mecanismo correspondiente.
-    var diaMora = parseFloat(getFieldValue(campoDiasMora));
-    if (isNaN(diaMora)) {
-        diaMora = sessionStorage.MoraObl !== undefined ? parseFloat(sessionStorage.MoraObl) : parseFloat(e.value);
-    }
-
-    if (isNaN(diaMora)) {
+    if (!diaMora && diaMora !== 0) {
         console.warn("No se tiene dias de mora");
         return;
     }
@@ -663,10 +579,8 @@ async function RecalcularPilotoGXC(mecanismo, tipolinea) {
     console.log("Días de mora: " + diaMora + " | Rango: " + rangoEncontrado.minDias + " - " + rangoEncontrado.maxDias + " | Porcentaje: " + porcentaje + "%");
 
     // Guardar el porcentaje encontrado para usarlo en los cálculos siguientes
-    sessionStorage.setItem(clavePorcentaje, porcentaje * 100);
+    sessionStorage.PorcCartera = porcentaje * 100;
 }
-
-
 
 function recalculoHonorariosMora() {
     const safeNumber = val => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
@@ -693,7 +607,6 @@ function recalculoHonorariosCancelacion() {
 }
 
 function recalculoHonorariosAmpliacion() {
-    debugger;
     const safeNumber = val => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
     let abonoMaxHonorarios = safeNumber(getFieldValue("d647e41b-7a50-46b0-ba5f-e30eeb44b463"));
     let honoConfirm = safeNumber(getFieldValue("e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b"));
@@ -703,6 +616,7 @@ function recalculoHonorariosAmpliacion() {
     }
     _recalcularTodo()
 }
+
 
 // Value change 52339224,  17151899 , 1005000537, 91524438 ,71364491
 // let mecanismoStora = sessionStorage.mecanismo

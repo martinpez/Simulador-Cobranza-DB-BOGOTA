@@ -71,29 +71,31 @@ function aplicarTasasNormales(dbPorcCte, dbPorcMora) {
 }
 
 // Lógica final de honorarios y recalculo
-function procesarCalculosAmpliacion() {
+async function procesarCalculosAmpliacion() {
   debugger;
-  if (sessionStorage.UserCargado != "no") {
-    let honorarioslista = "020563ab-b407-433b-bcf3-c534456818f3";
-    let idlineaKendo = "#8e1dc11f-e65c-4141-a1d5-42850fd9b214";
-    let idTipoCarteraKendo = "#93f08e21-47c5-48ee-8acc-b093afe84a38";
-    let tipocobro = sessionStorage.TipoCobro;
-    let tipolinea = sessionStorage.Linea;
-    let tipocartera = sessionStorage.TipoCartera;
-    let mecanismo = "ampliacion";
-    if (sessionStorage.PorcAmpliacionIntCte == 100) {
-      tipocartera = "CONSUMO";
-    } else if (tipocartera !== "CONSUMO") {
-      // No hace nada
-    } else {
-      tipocartera = "CAMPAÑA";
-    }
-    if (typeof CargaCamposHonorarios === 'function') {
-      CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo);
+  const tipoCobro = String(sessionStorage.TipoCobro || '').toUpperCase();
+  if (tipoCobro == 'HONORARIOS') {
+    if (tipoCobro == "HONORARIOS" && sessionStorage.UserCargado != "no") {
+      let honorarioslista = "020563ab-b407-433b-bcf3-c534456818f3";
+      let idlineaKendo = "#8e1dc11f-e65c-4141-a1d5-42850fd9b214";
+      let idTipoCarteraKendo = "#93f08e21-47c5-48ee-8acc-b093afe84a38";
+      let tipocobro = sessionStorage.TipoCobro;
+      let tipolinea = sessionStorage.Linea;
+      let tipocartera = sessionStorage.TipoCartera;
+      let mecanismo = "ampliacion";
+      if (typeof CargaCamposHonorarios === 'function') {
+        await CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo);
+      }
     }
   }
-  if (typeof _recalcularTodo === 'function') {
-    _recalcularTodo();
+  debugger;
+  if (tipoCobro == "GASTOS_90") {
+    RecalcularPilotoGXC("ampliacion", sessionStorage.Linea);
+  }
+  if (tipoCobro == "HONORARIOS") {
+    console.log("ya se cargo la lista de honorarios");
+  } else {
+    ListHonorarios("ampliacion");
   }
 
   // Cargar valores del cliente en el formulario por seguridad final

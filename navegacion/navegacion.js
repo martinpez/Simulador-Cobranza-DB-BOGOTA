@@ -13,30 +13,30 @@ setTimeout(function () {
 }, 500);
 const VISTAS = {
 
-PRINCIPAL: 1,
+    PRINCIPAL: 1,
 
-NOVACIONES_P1: 2,
-NOVACIONES_P2: 3,
+    NOVACIONES_P1: 2,
+    NOVACIONES_P2: 3,
 
-AMPLIACION_P1: 4,
-AMPLIACION_P2: 18,
-AMPLIACION_P3: 7,
+    AMPLIACION_P1: 4,
+    AMPLIACION_P2: 18,
+    AMPLIACION_P3: 7,
 
-CANCELACION_TOTAL_PAG1: 5,
-CANCELACION_P2: 6,
-CANCELACION_P3: 13,
+    CANCELACION_TOTAL_PAG1: 5,
+    CANCELACION_P2: 6,
+    CANCELACION_P3: 13,
 
-CONSOLIDACION_P1: 16,
-CONSOLIDACION_P2: 9,
-CONSOLIDACION_P4: 8,
+    CONSOLIDACION_P1: 16,
+    CONSOLIDACION_P2: 9,
+    CONSOLIDACION_P4: 8,
 
-PAGOMORA_P1: 17,
-PAGOMORA_P2: 10,
+    PAGOMORA_P1: 17,
+    PAGOMORA_P2: 10,
 
-CLIENTE_INFO_ECONOMICA: 12,
-INFORMACION_CLIENTE: 15,
+    CLIENTE_INFO_ECONOMICA: 12,
+    INFORMACION_CLIENTE: 15,
 
-ITAU_P1: 14
+    ITAU_P1: 14
 
 };
 
@@ -101,18 +101,30 @@ function inicializarNavegacion() {
 
     //ITAU
     $(".itau").click(() => {
-    navegarA(VISTAS.ITAU_P1);
+        navegarA(VISTAS.ITAU_P1);
     });
 
-     $(".left-buttonI").click(() => {
+    $(".left-buttonI").click(() => {
         navegarA(VISTAS.PRINCIPAL);
 
     });
+
+    //Formato excepciones
+    $(".btn-formato-excepciones").click(() => {
+        abrirFormatoExcepciones();
+    });
+
+
 
     // Consolidacion de productos
     //Principal
     $(".consolidacion").click(() => {
         sessionStorage.mecanismo = "consolidacion"
+        // setear el pago al snr en el fun 
+        let pagoProduto = "";
+        pagoProduto = "Pago a producto"
+        setFieldValue('685c5e9d-4409-4d4c-a11e-a0c17dcedb02', pagoProduto);
+        console.log("pagoProduto", pagoProduto);
         navegarA(VISTAS.CONSOLIDACION_P1);
         let cantidad = getFieldValue('0ab23e22-1c3c-4a43-8c58-207b83625867')
         if (cantidad > 0) {
@@ -155,6 +167,11 @@ function inicializarNavegacion() {
     //Principal
     $(".novaciones").click(() => {
         sessionStorage.mecanismo = "novacion"
+        // setear el pago al snr en el fun 
+        let pagoProduto = "";
+        pagoProduto = "Pago a producto"
+        setFieldValue('685c5e9d-4409-4d4c-a11e-a0c17dcedb02', pagoProduto);
+        console.log("pagoProduto", pagoProduto);
         navegarA(VISTAS.NOVACIONES_P1);
         disableField('4cbf2d64-0442-4c98-964f-e741a6a4e6a1', true)
         disableField('c6923383-8eec-4efe-81a5-954ce52b8882', true)

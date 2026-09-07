@@ -29,22 +29,36 @@ function CalculosMora() {
         disableField('0456eeb3-8809-48a5-8726-87e416efdcb3', true)
     }
 
-    // seteo de honorarios 
-    if (sessionStorage.UserCargado != "no") {
-        let honorarioslista = "e321eed7-845b-46e4-89f8-0bdf0c53e0e4"
-        let idlineaKendo = "#9ccfa8bd-4060-4aa1-b437-4528d6f9bc35"
-        let idTipoCarteraKendo = "#6e51a18a-184d-455f-9f42-6b3a3d56729f"
-        let tipocobro = sessionStorage.TipoCobro
-        let tipolinea = sessionStorage.Linea
-        let tipocartera = sessionStorage.TipoCartera
-        let mecanismo = "pagomora"
-        CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo);
+    const tipoCobro = String(sessionStorage.TipoCobro || '').toUpperCase()
+
+    // Los campos de cartera solo se cargan para Honorarios.
+    if (tipoCobro == 'HONORARIOS') {
+        if (sessionStorage.UserCargado != "no") {
+            let honorarioslista = "e321eed7-845b-46e4-89f8-0bdf0c53e0e4"
+            let idlineaKendo = "#9ccfa8bd-4060-4aa1-b437-4528d6f9bc35"
+            let idTipoCarteraKendo = "#6e51a18a-184d-455f-9f42-6b3a3d56729f"
+            let tipocobro = sessionStorage.TipoCobro
+            let tipolinea = sessionStorage.Linea
+            let tipocartera = sessionStorage.TipoCartera
+            let mecanismo = "pagomora"
+            CargaCamposHonorarios(honorarioslista, idlineaKendo, idTipoCarteraKendo, tipocobro, tipolinea, tipocartera, mecanismo);
+        }
     }
+    debugger;
+    if (tipoCobro == "GASTOS_90") {
+        RecalcularPilotoGXC("pagomora" ,sessionStorage.Linea);
+    }
+    if (tipoCobro == "HONORARIOS") {
+        console.log("ya se cargo la lista de honorarios");
+    }else{
+        ListHonorarios("pagomora");
+    }
+    
 
 
     const colchon = tarjeta ? 0 : 20000
     //validar si es tipo el producto es tipo cartera y restarle los honorarios al pago minimo 
-    debugger;
+    
     let pagoMinimo;
     let pagomin = e.dataItem.PagoMinObl;
     let honorarios = sessionStorage.honorariosValues;
@@ -117,7 +131,6 @@ function CalculosMora() {
                 setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', abonoMin)
                 setFieldValue('6af98cad-1f96-4ad5-b33c-b0ddc8f68133', MaxTotalDesc)
 
-                sessionStorage.calculosMoraListo = 'si'
             })
     }, 300)
 }
