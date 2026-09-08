@@ -13,11 +13,11 @@ function soxAmpliacion() {
     }
     let honorarios = getFieldValue('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b') || 0;
     let plazo = getFieldValue('f43686aa-8f4e-4203-9733-b483660e6ab1') || '';
-    let capital = getFieldValue('12671e00-a829-472f-b644-be49ea7ebdbf') || '';
-    let intMora = getFieldValue('4f9627f2-7ada-415b-bf0c-cf308407c82a') || '';
-    let intCte = getFieldValue('d8e6669a-3079-4248-88d5-5f01cca53106') || '';
-    let pagoSNR = getFieldValue('44770cdb-4d75-4b2a-957f-400410e65e8d') || '';
-    let cuotaPro = getFieldValue('2edec98b-a7b5-49a8-8cae-623f05fe0cd5') || '';
+    let capital = getFieldValue('12671e00-a829-472f-b644-be49ea7ebdbf') || 0;
+    let intMora = getFieldValue('4f9627f2-7ada-415b-bf0c-cf308407c82a') || 0;
+    let intCte = getFieldValue('d8e6669a-3079-4248-88d5-5f01cca53106') || 0;
+    let pagoSNR = getFieldValue('44770cdb-4d75-4b2a-957f-400410e65e8d') || 0;
+    let cuotaPro = getFieldValue('2edec98b-a7b5-49a8-8cae-623f05fe0cd5') || 0;
     let fechaPago = document.querySelector(
         "#\\33 d0f4be2-1bb6-446c-9ebb-b38a7eba0d5c > div.dx-dropdowneditor-input-wrapper > div > div.dx-texteditor-input-container > input"
     ).value.replaceAll('/', '') || '';
@@ -25,9 +25,9 @@ function soxAmpliacion() {
     let ocupacion = document.querySelector("#\\35 1550b53-1a9f-49cd-8274-abd718d04b51")
         .selectedOptions[0]?.textContent || '';
 
-    let ingresobruto = getFieldValue('f51fe08e-3b3b-4064-9ae0-fb9584fd93b3') || '';
-    let cuotaSinBdb = getFieldValue('e637400b-996d-45b2-bccd-a360dcbc6fa7') || '';
-    let ingAdicionales = getFieldValue('ee3c91d9-9f6c-4ea5-bd31-047686ce4c76') || '';
+    let ingresobruto = getFieldValue('f51fe08e-3b3b-4064-9ae0-fb9584fd93b3') || 0;
+    let cuotaSinBdb = getFieldValue('e637400b-996d-45b2-bccd-a360dcbc6fa7') || 0;
+    let ingAdicionales = getFieldValue('ee3c91d9-9f6c-4ea5-bd31-047686ce4c76') || 0;
 
     let ocupacionIngA = document.querySelector("#\\33 a3c6541-bfed-459a-9a8d-608eebb2ad63")
         .selectedOptions[0]?.textContent || '';

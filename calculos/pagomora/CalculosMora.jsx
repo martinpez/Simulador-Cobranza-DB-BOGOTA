@@ -127,7 +127,7 @@ function CalculosMora() {
                 const MaxTotalDesc = maxDescCTE + maxDescIntM + maxDescIntTC
                 setFieldValue('6cfd4b2c-6ef4-4821-95d5-364657fda787', MaxTotalDesc)
 
-                const abonoMin = parseInt(PagoMinObl) - MaxTotalDesc + colchon
+                const abonoMin = parseInt(pagoMinimo) - MaxTotalDesc + colchon
                 setFieldValue('8f7266d7-dfc0-4ff4-afad-c50fbfa67062', abonoMin)
                 setFieldValue('6af98cad-1f96-4ad5-b33c-b0ddc8f68133', MaxTotalDesc)
 

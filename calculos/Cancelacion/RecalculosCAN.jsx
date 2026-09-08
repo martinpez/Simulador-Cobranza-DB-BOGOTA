@@ -44,7 +44,7 @@ function recalcularcancelacion() {
 
     // -- Abono mínimo (pago que cubre el 100% de todos los descuentos) --
     let totalMaxDctos = maxDctoIntCte + maxDctoExtra + maxDctoMora + maxDctoCapital
-    let abonoMinimo = saldoTotal - totalMaxDctos + 10000
+    let abonoMinimo = saldoTotal - totalMaxDctos
     setFieldValue('7a94fe37-1d84-4232-9298-4e1986cdead2', totalMaxDctos)  // Max Baja en cuentas
 
     // -- Honorarios --
@@ -138,10 +138,10 @@ function recalcularcancelacion() {
 
     // -- Calcular porcentajes reales aplicados --
     // % de descuento = cuánto se está condonando vs el total del componente
-    let porCteReal = interescte > 0 ? (dctoCte / interescte) * 100 : 100
-    let porMoraReal = interesmora > 0 ? Math.round((dctoMora / interesmora) * 100) : 100
-    let porExtraReal = interesextra > 0 ? (dctoExtra / interesextra) * 100 : 100
-    let porCapitalReal = capital > 0 ? (dctoCapital / capital) * 100 : 100
+    let porCteReal = interescte > 0 ? (dctoCte / interescte) * 100 : 0
+    let porMoraReal = interesmora > 0 ? Math.round((dctoMora / interesmora) * 100) : 0
+    let porExtraReal = interesextra > 0 ? (dctoExtra / interesextra) * 100 : 0
+    let porCapitalReal = capital > 0 ? (dctoCapital / capital) * 100 : 0
 
     // Verificar que Cte y Extra tengan el mismo % (deben ser iguales)
     // Si hay diferencia por redondeo, usar el de Cte como referencia

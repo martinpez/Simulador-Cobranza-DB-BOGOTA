@@ -5,7 +5,7 @@ function ListHonorarios(mecanismo) {
     const Safetext = val => typeof val === 'string' ? val : '';
     let valelist = e.value;
     var tipoCobro = sessionStorage.TipoCobro;
-    let userCargado = sessionStorage.UserCargado;
+    let userCargado = sessionStorage.UserCargado ;
     let mecanismos = Safetext(mecanismo);
     let ListCan = document.getElementById("bda37ca7-d503-4d41-8ff4-aebde2cb7c30"); // lista desplegable
     let ListPago = document.getElementById("e321eed7-845b-46e4-89f8-0bdf0c53e0e4");

@@ -138,7 +138,7 @@ async function poblarCancelacion() {
 
     let maxdescuentos = maxdescuentocapital + maxdescuentointeresExtraTC + maxdescuentomora + maxDescuentoInt
     setFieldValue('7a94fe37-1d84-4232-9298-4e1986cdead2', maxdescuentos)
-    let abonominimo = e.dataItem.SaldoTotalObl - maxdescuentos + 10000
+    let abonominimo = e.dataItem.SaldoTotalObl - maxdescuentos
     setFieldValue('0864b793-256f-41f6-ab7c-5b5c18c1f51f', abonominimo)
 
 

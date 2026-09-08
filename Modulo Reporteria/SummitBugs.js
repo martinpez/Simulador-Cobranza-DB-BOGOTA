@@ -9,7 +9,38 @@ var _bugsTG_MODULOS_PERMITIDOS = [
 ];
 var _bugsTG_MAX_ARCHIVOS = 3;
 var _bugsTG_TAM_MAX_BYTES = 2 * 1024 * 1024;
-var ccCORREOS = ['martinperezmercado2004@gmail.com', 'perezmercadomartin@gmail.com'];
+var ccCORREOS = [];
+
+// Consulta los correos autorizados para recibir copia del reporte.
+var ccCorreosPromise = execQuery(
+    'SELECT EmailCCpermitidos FROM SimiladorDNC_Lappiz_incidente_evidencia_bugs WHERE EmailCCpermitidos IS NOT NULL'
+)
+    .then(function (response) {
+        var filas = Array.isArray(response && response[0])
+            ? response[0]
+            : (Array.isArray(response) ? response : []);
+        var correos = [];
+
+        filas.forEach(function (row) {
+            String(row && row.EmailCCpermitidos || '')
+                .split(/[;,]/)
+                .forEach(function (correo) {
+                    correo = correo.trim().toLowerCase();
+                    if (correo && correos.indexOf(correo) === -1) {
+                        correos.push(correo);
+                    }
+                });
+        });
+
+        ccCORREOS = correos;
+        console.log('ccCORREOS', ccCORREOS);
+        return ccCORREOS;
+    })
+    .catch(function (error) {
+        console.error('Error consultando correos permitidos:', error);
+        ccCORREOS = [];
+        return ccCORREOS;
+    });
 
 function sumitBugReport() {
     var modal = document.getElementById('modalBugsTG');
@@ -106,7 +137,9 @@ function sumitBugReport() {
 
             _bugsTG_leerArchivosComoDataURL(archivos)
                 .then(function (archivosDataURL) {
-                    return sendBugs_enviarCorreo(respuesta, archivosDataURL)
+                    return ccCorreosPromise.then(function (correosCC) {
+                        return sendBugs_enviarCorreo(respuesta, archivosDataURL, correosCC);
+                    })
                         .then(function () {
                             Swal.fire({
                                 icon: 'success',
@@ -157,7 +190,7 @@ function _bugsTG_leerArchivosComoDataURL(archivos) {
     return Promise.all(promesas);
 }
 
-function sendBugs_enviarCorreo(reporte, archivosDataURL) {
+function sendBugs_enviarCorreo(reporte, archivosDataURL, correosCC) {
     return new Promise(function (resolve, reject) {
         if (typeof sendEmail !== 'function') {
             reject(new Error('La función sendEmail no está disponible'));
@@ -187,7 +220,7 @@ function sendBugs_enviarCorreo(reporte, archivosDataURL) {
         var destinatario = reporte.userEmail ? [reporte.userEmail] : [];
         var smtpsender = 'aws';
 
-        sendEmail(smtpsender, destinatario, subject, text, null, attachments, ccCORREOS, [])
+        sendEmail(smtpsender, destinatario, subject, text, null, attachments, correosCC || [], [])
             .then(resolve, reject);
     });
 }

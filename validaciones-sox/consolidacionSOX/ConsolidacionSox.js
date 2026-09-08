@@ -21,12 +21,14 @@ function observacionConsolidado() {
 
     let obligacion = obligacionesActivas.join(' ');
     let plazo = getFieldValue('aa4de771-cbaf-486d-8de2-06941dc220d5') || '';
-    let saldoDesembolsar = getFieldValue('69b7fc43-675b-4984-bd64-9fd68799a97b') || '';
-    let porcDescuento = "100%";
-    let pagoNegociacion = getFieldValue('0ee03528-b018-47d1-856b-9e30dbae2ddf') || '';
-    let cuotaProyectada = getFieldValue('e74b2587-dccc-4395-8333-f6c2f34338aa') || '';
+    let saldoDesembolsar = getFieldValue('69b7fc43-675b-4984-bd64-9fd68799a97b') || 0;
+    let porIntCte = getFieldValue('b42b41d8-cd57-4233-9bff-8a5ceec5af03') || 0;
+    let porcIntMora = getFieldValue('e079d101-5148-42ed-854e-9be982adc01e') || 0;
+    let porcIntExtra = getFieldValue('e970af6e-de8d-47b3-97d0-98e4950c9bdf') || 0;
+    let pagoNegociacion = getFieldValue('0ee03528-b018-47d1-856b-9e30dbae2ddf') || 0;
+    let cuotaProyectada = getFieldValue('e74b2587-dccc-4395-8333-f6c2f34338aa') || 0;
     let peorMarca = getFieldValue('183f4194-c998-41a4-9a8c-1436cc78132f')
-    let observacion = `TITULAR TOMA CONSOLIDACION DE DEUDAS PARA LOS PRODUCTO TERMINADOS EN ${obligacion} A UN PLAZO DE ${plazo} MESES CUYO SALDO A DESEMBOLSAR A LA FECHA ES DE ${saldoDesembolsar} DE LOS CUALES PARA EL ABONO SE LE GENERARA UNA BAJA EN CUENTA DE INTERES MORATORIO DEL ${porcDescuento} DE INTERES CORRIENTE DE ${porcDescuento} DE EXTRACONTABLES (SI APLICA)${porcDescuento} DANDO VALOR A PAGAR DE ${pagoNegociacion} CUOTA APROXIMADA DE ${cuotaProyectada} MAS SEGUROS PAGO AL PRODUCTO CABEZA DE MORA SE LE INFORMA DE POLITICAS Y CONDICIONES ESTA DE ACUERDO SE LE INFORMA NEGOCIACION SUJETA A VERIFICACION APROBACION O NEGACION POR PARTE DEL BANCO`
+    let observacion = `TITULAR TOMA CONSOLIDACION DE DEUDAS PARA LOS PRODUCTO TERMINADOS EN ${obligacion} A UN PLAZO DE ${plazo} MESES CUYO SALDO A DESEMBOLSAR A LA FECHA ES DE ${saldoDesembolsar} DE LOS CUALES PARA EL ABONO SE LE GENERARA UNA BAJA EN CUENTA DE INTERES MORATORIO DEL ${porcIntMora} DE INTERES CORRIENTE DE ${porIntCte} DE EXTRACONTABLES (SI APLICA)${porcIntExtra} DANDO VALOR A PAGAR DE ${pagoNegociacion} CUOTA APROXIMADA DE ${cuotaProyectada} MAS SEGUROS PAGO AL PRODUCTO CABEZA DE MORA SE LE INFORMA DE POLITICAS Y CONDICIONES ESTA DE ACUERDO SE LE INFORMA NEGOCIACION SUJETA A VERIFICACION APROBACION O NEGACION POR PARTE DEL BANCO`
 
     setFieldValue('be70a202-71a9-40ea-851b-945702693b51', observacion)
 
