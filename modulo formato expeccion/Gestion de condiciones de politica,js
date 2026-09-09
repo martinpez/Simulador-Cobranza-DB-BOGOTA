@@ -1,0 +1,286 @@
+function areaGestionChange() {
+    setTimeout(function () {
+        const idAreaGestion = 'fcd6b207-25e5-4d5c-9388-17cf357c1880';
+        const idAgencia = '3b8dc74b-cad1-4c23-803f-77427ddb315f';
+        const idPctHonorarios = '59fe89a7-c69c-4f57-bc7d-0e7e8807d9de';
+        const idFechaCastigo = 'd73aa70d-f12d-4a29-bfb7-fbc5b4ae38e0';
+        const idFechaNegociacion = 'ce0ec03d-15e0-48e9-9fb5-12dc9de3116e';
+        const idFechaInicioProceso = 'caa5288f-4982-46a6-b719-516d467f2a99';
+        const idEtapaProceso = '6668d103-6e5d-4225-a578-9f9d144fb011';
+        const idEstadoReclamacionFngFag = '65e882e4-8b5e-40dc-b106-ead5adb26951';
+        const idFechaEtapaProcesal = 'c1e7ccd1-3611-48ae-8c00-c6bdaea3ea1a';
+        const idMedidasCautelares = '427b5b63-db83-416e-a1c5-566faad3384f';
+        const idDetallePropuesta = '6e2616a1-ee70-4253-af29-c5dbe17b552c';
+ 
+        const idMecanismo = 'f707a4ad-ebde-49d9-914c-27406b8fb8eb';
+        const idNumeroObligacion = '316c8054-17af-4ccb-bdfa-85fb26584053';
+        const idTipoObligacion = '5d9474e6-2d3e-46b6-af6f-c5f53347baa9';
+        const idEdadMora = '58091737-5ecd-4637-ae64-e66aa37f419e';
+        const idPlazo = '79407da3-e4f4-460f-84b3-541f540a0d68';
+        const idValorPropuesta = '4a8bcf2f-e6ed-475e-af74-bd106b224662';
+        const idSaldoTotal = 'ced6329d-0943-4ca9-b5ac-1d3fec0458b6';
+        const idCapitalTotal = 'e87bce24-141d-4328-b306-2e810628366b';
+        const idInteresCorriente = 'd6ddd037-e5b8-4f67-a2a2-6e6256b5ef6c';
+        const idInteresMora = '873dff4b-b6ef-47d0-b3d6-ad8ff35ab9d5';
+        const idInteresesExtracontables = '811dddcc-060c-4752-b4b4-ba3aee87530a';
+        const idOtrosCargos = '2a4d66d6-6924-44b2-ad63-2dbbc01d0f1a';
+        const idFechaPromesaPagoRef = 'e8787168-f162-479a-b094-cd33ab69af16';
+        const idValorHonorarios = 'e7abf0ab-9932-4879-a003-4d421a4fc81c';
+        const idPctCastigoIntCte = 'f1efc02a-90eb-4724-8c23-63653105751d';
+        const idPctCastigoIntMora = '304cad5a-e1be-4958-a0f0-2fff1d8ccbd2';
+        const idPctCastigoExtrac = '10e9b1ba-93d5-488e-9f41-336f016993d2';
+        const idPctCastigoCapital = '35e5a8af-663f-423f-a6f4-b94c1c560556';
+        const idValorCastigoCapital = 'c351ffc5-1f1f-41d8-8b40-d53936dd7e68';
+ 
+        function formatearFecha(valor) {
+            if (!valor) return '';
+            if (valor instanceof Date) {
+                const y = valor.getFullYear();
+                const m = String(valor.getMonth() + 1).padStart(2, '0');
+                const d = String(valor.getDate()).padStart(2, '0');
+                return y + '-' + m + '-' + d;
+            }
+            return valor;
+        }
+ 
+        function normalizarTexto(texto) {
+            return (texto || '').toString().trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        }
+ 
+        function comoPorcentajeTexto(valor) {
+            const num = parseFloat(valor);
+            if (isNaN(num)) return '0%';
+            return (num * 100).toFixed(2).replace(/\.00$/, '') + '%';
+        }
+ 
+        const areaGestion = (getFieldValue(idAreaGestion) || '').trim().toUpperCase();
+        const esTemprana = areaGestion === 'TEMPRANA';
+        const esJuridico = areaGestion === 'JURIDICO';
+ 
+        // AGENCIA: TEMPRANA -> se fuerza a "TEMPRANA"; en cualquier otro caso se puebla con el grupo real desde localStorage
+        let agenciaOriginal = '';
+        try {
+            const datosGuardados = JSON.parse(localStorage.getItem('datosNegociacionFE') || '{}');
+            agenciaOriginal = datosGuardados.AGENCIA || '';
+        } catch (error) {
+            agenciaOriginal = '';
+        }
+        if (esTemprana) {
+            setFieldValue(idAgencia, 'TEMPRANA');
+        } else {
+            setFieldValue(idAgencia, agenciaOriginal);
+        }
+ 
+        // % HONORARIOS: 0% y bloqueado cuando es TEMPRANA, editable en el resto de casos
+        if (esTemprana) {
+            setFieldValue(idPctHonorarios, 0);
+            disableField(idPctHonorarios, true);
+        } else {
+            disableField(idPctHonorarios, false);
+        }
+ 
+        // FECHA_CASTIGO: fija cuando es TEMPRANA, toma la fecha de negociacion en cualquier otro caso
+        if (esTemprana) {
+            setFieldValue(idFechaCastigo, '1900-01-01');
+        } else {
+            setFieldValue(idFechaCastigo, formatearFecha(getFieldValue(idFechaNegociacion)) || '');
+        }
+ 
+        // Campos exclusivos de JURIDICO: si NO es juridico, se dejan con su valor por defecto
+        if (!esJuridico) {
+            setFieldValue(idFechaInicioProceso, '1900-01-01');
+            setFieldValue(idEtapaProceso, 'N/A');
+            setFieldValue(idEstadoReclamacionFngFag, 'N/A');
+            setFieldValue(idFechaEtapaProcesal, '1900-01-01');
+            setFieldValue(idMedidasCautelares, 'N/A');
+        }
+ 
+        // FECHA_PROMESA_DE_PAGO: cuando es JURIDICO se sobreescribe a 1
+        if (esJuridico) {
+            setFieldValue(idFechaPromesaPagoRef, 1);
+        }
+ 
+        // MEDIDAS CAUTELARES: visible solo para JURIDICO
+        visibilityField(idMedidasCautelares, esJuridico);
+ 
+        // ETAPA DE PROCESO y ESTADO_RECLAMACIÓN_FNG_FAG: siempre escondidos
+        visibilityField(idEtapaProceso, false);
+        visibilityField(idEstadoReclamacionFngFag, false);
+ 
+        // MARCA C026: TEMPRANA y CASAS MENOR A 210 -> marca real de la obligacion; CASAS MAYOR A 210 y JURIDICO -> 0
+        // se lee el valor original desde localStorage (fuente confiable), no del campo del DOM,
+        // porque MARCA_C026 es un campo de lista con carga asincrona y cachear desde el DOM puede capturar vacio
+        const idMarcaC026 = 'ead0f463-f647-49d6-aab7-39738fcbc864';
+        let marcaOriginal = '';
+        try {
+            const datosGuardados = JSON.parse(localStorage.getItem('datosNegociacionFE') || '{}');
+            marcaOriginal = datosGuardados.MARCA_C026 || '';
+        } catch (error) {
+            marcaOriginal = '';
+        }
+ 
+        if (esTemprana || areaGestion === 'CASAS MENOR A 210') {
+            setFieldValue(idMarcaC026, marcaOriginal);
+        } else if (areaGestion === 'CASAS MAYOR A 210' || esJuridico) {
+            setFieldValue(idMarcaC026, 0);
+        }
+ 
+        // VALOR_HONORARIOS: 0 cuando es TEMPRANA
+        if (esTemprana) {
+            setFieldValue(idValorHonorarios, 0);
+        }
+ 
+        // VALOR_TOTAL_CASTIGOS_PARCIAL_BAJA_CUENTA: suma de los 4 valores de castigo
+        const idCastigoIntCorriente = '3b95db00-d04e-4122-9fb0-ca1fb8a93391';
+        const idCastigoIntMora = '8aa4d791-2cc7-486d-af08-61c80f9a32fc';
+        const idCastigoExtracontables = 'ae6a860a-04d0-4c67-94d4-ba75c5b629a6';
+        const idValorTotalCastigos = '7e9ea683-0655-442d-a268-53414ea21538';
+ 
+        function comoNumero(id) {
+            const num = parseFloat(getFieldValue(id));
+            return isNaN(num) ? 0 : num;
+        }
+ 
+        const totalCastigos =
+            comoNumero(idValorCastigoCapital) +
+            comoNumero(idCastigoIntCorriente) +
+            comoNumero(idCastigoIntMora) +
+            comoNumero(idCastigoExtracontables);
+ 
+        setFieldValue(idValorTotalCastigos, totalCastigos);
+ 
+        // Campos de castigo de Capital: visibles para Cancelacion, Ampliacion y Consolidacion (las que si manejan capital); escondidos para Pago Mora y Novacion
+        let mecanismo = '';
+        try {
+            const datosGuardados2 = JSON.parse(localStorage.getItem('datosNegociacionFE') || '{}');
+            mecanismo = normalizarTexto(datosGuardados2.MECANISMO);
+        } catch (error) {
+            mecanismo = '';
+        }
+        const esMecanismoConCapital =
+            mecanismo.indexOf('cancelacion') !== -1 ||
+            mecanismo.indexOf('ampliacion') !== -1 ||
+            mecanismo.indexOf('consolidacion') !== -1;
+ 
+        visibilityField(idValorCastigoCapital, esMecanismoConCapital);
+        visibilityField(idPctCastigoCapital, esMecanismoConCapital);
+ 
+        // si estan escondidos (Pago Mora / Novacion), se les deja un valor por defecto (0)
+        // para que no queden vacios y "requeridos" al momento de guardar
+        if (!esMecanismoConCapital) {
+            setFieldValue(idValorCastigoCapital, 0);
+            setFieldValue(idPctCastigoCapital, 0);
+        }
+ 
+        // si estan escondidos, se les deja un valor por defecto (0) para no dejarlos vacios y requeridos
+        if (!esMecanismoConCapital) {
+            setFieldValue(idValorCastigoCapital, 0);
+            setFieldValue(idPctCastigoCapital, 0);
+        }
+ 
+        // --- DETALLE DE LA PROPUESTA: narrativa especifica segun el mecanismo ---
+        const numeroObligacion = getFieldValue(idNumeroObligacion) || 'N/A';
+        const tipoObligacion = getFieldValue(idTipoObligacion) || 'sin producto especificado';
+        const edadMora = getFieldValue(idEdadMora) || '0';
+        const plazo = getFieldValue(idPlazo) || '1';
+        const valorPropuesta = getFieldValue(idValorPropuesta) || '0';
+        const saldoTotal = getFieldValue(idSaldoTotal) || '0';
+        const capitalTotal = getFieldValue(idCapitalTotal) || '0';
+        const interesCorriente = getFieldValue(idInteresCorriente) || '0';
+        const interesMora = getFieldValue(idInteresMora) || '0';
+        const interesesExtracontables = getFieldValue(idInteresesExtracontables) || '0';
+        const otrosCargos = getFieldValue(idOtrosCargos) || '0';
+        const fechaPromesaPago = formatearFecha(getFieldValue(idFechaPromesaPagoRef)) || 'por definir';
+        const valorHonorarios = getFieldValue(idValorHonorarios) || '0';
+        const pctCastigoIntCte = comoPorcentajeTexto(getFieldValue(idPctCastigoIntCte));
+        const pctCastigoIntMora = comoPorcentajeTexto(getFieldValue(idPctCastigoIntMora));
+        const pctCastigoExtrac = comoPorcentajeTexto(getFieldValue(idPctCastigoExtrac));
+        const pctCastigoCapital = comoPorcentajeTexto(getFieldValue(idPctCastigoCapital));
+        const valorCastigoCapital = getFieldValue(idValorCastigoCapital) || '0';
+ 
+        let detallePropuesta = '';
+ 
+        if (mecanismo.indexOf('consolidacion') !== -1) {
+            detallePropuesta =
+                'El cliente solicita una excepción para CONSOLIDACIÓN DE PRODUCTOS de la obligación N° ' + numeroObligacion +
+                ' (' + tipoObligacion + '), con ' + edadMora + ' días de mora. ' +
+                'Se propone consolidar un saldo total de $' + saldoTotal + ' (capital total: $' + capitalTotal + ') ' +
+                'en un nuevo crédito a ' + plazo + ' meses, ' +
+                'con un pago para la negociación de $' + valorPropuesta + '. ' +
+                'Se contempla una baja en capital de $' + valorCastigoCapital + ' (' + pctCastigoCapital + '), ' +
+                'baja en cuenta de interés corriente por $' + interesCorriente + ' (' + pctCastigoIntCte + '), ' +
+                'interés mora por $' + interesMora + ' (' + pctCastigoIntMora + '), ' +
+                'e intereses extracontables por $' + interesesExtracontables + ' (' + pctCastigoExtrac + '). ' +
+                'Honorarios pactados: $' + valorHonorarios + '. Fecha promesa de pago: ' + fechaPromesaPago + '.';
+ 
+        } else if (mecanismo.indexOf('pagomora') !== -1) {
+            detallePropuesta =
+                'El cliente solicita una excepción para PAGO DE MORA de la obligación N° ' + numeroObligacion +
+                ' (' + tipoObligacion + '), con ' + edadMora + ' días de mora y saldo total de $' + saldoTotal + '. ' +
+                'Se propone un pago de $' + valorPropuesta + ' para ponerse al día. ' +
+                'Baja en cuenta de interés corriente: $' + interesCorriente + ' (' + pctCastigoIntCte + '); ' +
+                'interés en mora: $' + interesMora + ' (' + pctCastigoIntMora + '); ' +
+                'intereses extracontables TC: $' + interesesExtracontables + ' (' + pctCastigoExtrac + '). ' +
+                'Honorarios: $' + valorHonorarios + '. Fecha promesa de pago: ' + fechaPromesaPago + '.';
+ 
+        } else if (mecanismo.indexOf('cancelacion') !== -1) {
+            detallePropuesta =
+                'El cliente solicita una excepción para CANCELACIÓN TOTAL de la obligación N° ' + numeroObligacion +
+                ' (' + tipoObligacion + '), con ' + edadMora + ' días de mora. ' +
+                'Saldo total: $' + saldoTotal + ', capital total: $' + capitalTotal + '. ' +
+                'Se propone un pago único de $' + valorPropuesta + ' para cancelar la obligación en su totalidad, con: ' +
+                'baja en capital de $' + valorCastigoCapital + ' (' + pctCastigoCapital + '), ' +
+                'interés corriente $' + interesCorriente + ' (' + pctCastigoIntCte + '), ' +
+                'interés mora $' + interesMora + ' (' + pctCastigoIntMora + '), ' +
+                'intereses extracontables TC $' + interesesExtracontables + ' (' + pctCastigoExtrac + '). ' +
+                'Honorarios: $' + valorHonorarios + '. Fecha promesa de pago: ' + fechaPromesaPago + '.';
+ 
+        } else if (mecanismo.indexOf('ampliacion') !== -1) {
+            detallePropuesta =
+                'El cliente solicita una excepción para AMPLIACIÓN DE PLAZO de la obligación N° ' + numeroObligacion +
+                ' (' + tipoObligacion + '), con ' + edadMora + ' días de mora. ' +
+                'Se propone ampliar el plazo a ' + plazo + ' meses, con capital total de $' + capitalTotal + ' ' +
+                'e intereses/gastos no facturados incluidos en otros cargos exigibles por $' + otrosCargos + '. ' +
+                'Pago propuesto: $' + valorPropuesta + '. ' +
+                'Interés corriente $' + interesCorriente + ' (baja del ' + pctCastigoIntCte + '), ' +
+                'intereses en mora $' + interesMora + ' (baja del ' + pctCastigoIntMora + '). ' +
+                'Honorarios: $' + valorHonorarios + '. Fecha promesa de pago: ' + fechaPromesaPago + '.';
+ 
+        } else {
+            // novacion u otro mecanismo no contemplado con narrativa especifica: se deja la generica
+            detallePropuesta =
+                'El cliente solicita una excepción para el mecanismo de ' + mecanismo +
+                ', sobre la obligación N° ' + numeroObligacion + ' (' + tipoObligacion + '), ' +
+                'con ' + edadMora + ' días de mora. Se propone un pago de $' + valorPropuesta +
+                ' sobre un saldo total de $' + saldoTotal + ', a un plazo de ' + plazo + ' meses. ' +
+                'Honorarios: $' + valorHonorarios + '. Fecha promesa de pago: ' + fechaPromesaPago + '.';
+        }
+ 
+        setFieldValue(idDetallePropuesta, detallePropuesta);
+    }, 150);
+}
+function estadoObligacionChange() {
+    const idEstadoObligacion = 'bb9bc9c6-ca21-45e8-a539-3bbe80e9aeb4';
+    const idPctAdicionalBajaCuenta = '7c123120-194d-4a14-b252-48b8f8bf1f1c';
+
+    const estado = (getFieldValue(idEstadoObligacion) || '').trim().toUpperCase();
+
+    const el = document.getElementById(idPctAdicionalBajaCuenta);
+    if (!el || el.tagName !== 'SELECT') { return; }
+
+    let opcionesPermitidas = [];
+    if (estado === 'CASTIGADA') {
+        opcionesPermitidas = ['0%', '5%', '10%', '>10%'];
+    } else if (estado === 'VENCIDA') {
+        opcionesPermitidas = ['0%', '1%', '3%', '>3%'];
+    } else {
+        return;
+    }
+
+    Array.from(el.options).forEach(function (opcion) {
+        const texto = opcion.text.trim();
+        const visible = opcionesPermitidas.indexOf(texto) !== -1;
+        opcion.hidden = !visible;
+        opcion.disabled = !visible;
+    });
+}
