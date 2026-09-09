@@ -10,41 +10,40 @@ var _bugsTG_MODULOS_PERMITIDOS = [
 var _bugsTG_MAX_ARCHIVOS = 3;
 var _bugsTG_TAM_MAX_BYTES = 2 * 1024 * 1024;
 var ccCORREOS = [];
-
-// Consulta los correos autorizados para recibir copia del reporte.
-var ccCorreosPromise = execQuery(
-    'SELECT EmailCCpermitidos FROM SimiladorDNC_Lappiz_incidente_evidencia_bugs WHERE EmailCCpermitidos IS NOT NULL'
-)
-    .then(function (response) {
-        var filas = Array.isArray(response && response[0])
-            ? response[0]
-            : (Array.isArray(response) ? response : []);
-        var correos = [];
-
-        filas.forEach(function (row) {
-            String(row && row.EmailCCpermitidos || '')
-                .split(/[;,]/)
-                .forEach(function (correo) {
-                    correo = correo.trim().toLowerCase();
-                    if (correo && correos.indexOf(correo) === -1) {
-                        correos.push(correo);
-                    }
-                });
-        });
-
-        ccCORREOS = correos;
-        console.log('ccCORREOS', ccCORREOS);
-        return ccCORREOS;
-    })
-    .catch(function (error) {
-        console.error('Error consultando correos permitidos:', error);
-        ccCORREOS = [];
-        return ccCORREOS;
-    });
-
 function sumitBugReport() {
     var modal = document.getElementById('modalBugsTG');
     if (!modal) return;
+
+    // Consulta los correos autorizados para recibir copia del reporte.
+    var ccCorreosPromise = execQuery(
+        'SELECT EmailCCpermitidos FROM SimiladorDNC_Lappiz_incidente_evidencia_bugs WHERE EmailCCpermitidos IS NOT NULL'
+    )
+        .then(function (response) {
+            var filas = Array.isArray(response && response[0])
+                ? response[0]
+                : (Array.isArray(response) ? response : []);
+            var correos = [];
+
+            filas.forEach(function (row) {
+                String(row && row.EmailCCpermitidos || '')
+                    .split(/[;,]/)
+                    .forEach(function (correo) {
+                        correo = correo.trim().toLowerCase();
+                        if (correo && correos.indexOf(correo) === -1) {
+                            correos.push(correo);
+                        }
+                    });
+            });
+
+            ccCORREOS = correos;
+            console.log('ccCORREOS', ccCORREOS);
+            return ccCORREOS;
+        })
+        .catch(function (error) {
+            console.error('Error consultando correos permitidos:', error);
+            ccCORREOS = [];
+            return ccCORREOS;
+        });
 
     var ObjJSON = sessionStorage.LappizUser;
     var obj = JSON.parse(ObjJSON);
