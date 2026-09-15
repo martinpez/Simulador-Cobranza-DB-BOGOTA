@@ -52,10 +52,8 @@ function recalcularcancelacion() {
     const pagoMinimoBase = parseFloat(getFieldValue('aa665762-9b2f-47f8-8d8c-cabca1924771')) || 0
     let baseHonorarios = 0
 
-    if (tipoCobro === "HONORARIOS") {
+    if (tipoCobro === "HONORARIOS" || tipoCobro === "GASTOS_90") {
         baseHonorarios = Math.min(pagoMinimoBase, abonoMinimo)
-    } else if (tipoCobro === "GASTOS_90") {
-        baseHonorarios = abonoMinimo
     }
 
     const porcentajeCartera = parseFloat(sessionStorage.PorcCarteraCancelacion) || 0

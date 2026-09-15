@@ -142,8 +142,8 @@ function ListHonorarios(mecanismo) {
                 }
 
             } else {
+                ListCan.disabled = false;
                 ListCan.value = "1: No aplica";
-                ListCan.disabled = true;
                 visibilityField('9ee8ee24-5ae5-42da-83c5-36948592e72b', false)
                 visibilityField('a0a2b9b0-17cc-41fe-be98-2ac2157e33ef', false)
                 visibilityField('aa665762-9b2f-47f8-8d8c-cabca1924771', false)
@@ -284,7 +284,7 @@ function ListHonorarios(mecanismo) {
                     }
                 }
             } else {
-                ListPago.disabled = true;
+                ListCan.disabled = false;
                 ListPago.value = "1: No aplica";
                 visibilityField('993c55c0-8b02-4be9-a122-d7ec2cf5f87e', false) // Campo valor maximo honorarios
                 visibilityField('ae33bcc4-183a-47de-a6c8-f4ecc44be169', false) //Campo Honorarios confirm
@@ -362,7 +362,7 @@ function ListHonorarios(mecanismo) {
                         break;
                 }
             } else if (tipoCobro == "HONORARIOS") {
-                ListAmp.disabled = true;
+                ListAmp.disabled = false;
                 ListAmp.value = "2: Honorarios";
                 visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', true) // Campo valor maximo honorarios
                 visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', true) // Campo honorarios
@@ -414,7 +414,7 @@ function ListHonorarios(mecanismo) {
                 }
 
             } else {
-                ListAmp.disabled = true;
+                ListAmp.disabled = false;
                 ListAmp.value = "1: No aplica";
                 visibilityField('d647e41b-7a50-46b0-ba5f-e30eeb44b463', false) // Campo valor maximo honorarios
                 visibilityField('e2a45a6f-d7e5-40ea-813f-cdbee2c58c4b', false) // Campo honorarios

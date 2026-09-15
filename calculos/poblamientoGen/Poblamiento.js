@@ -16,7 +16,6 @@ function valoresPoblamiento() {
   delete sessionStorage.ConsultaHonorariosPagoMora;
   delete sessionStorage.ConsultaHonorariosCancelacion;
   delete sessionStorage.ConsultaHonorariosAmpliacion;
-  delete sessionStorage.AmpliConsumo185;
   delete sessionStorage.TipProducto;
   delete sessionStorage.TipoCobro;
   delete sessionStorage.Linea;
@@ -161,7 +160,3 @@ function getIdByPartialText(partialText, elemento) {
   const matchedOption = options.find(option => option.text.includes(partialText));
   return matchedOption ? matchedOption.value : null;
 }
-
-
-cancelacion = quitar 10000 de colchon 
-diadiagec@bancodebogota.co.com
