@@ -161,7 +161,3 @@ function getIdByPartialText(partialText, elemento) {
   const matchedOption = options.find(option => option.text.includes(partialText));
   return matchedOption ? matchedOption.value : null;
 }
-
-
-cancelacion = quitar 10000 de colchon 
-diadiagec@bancodebogota.co.com

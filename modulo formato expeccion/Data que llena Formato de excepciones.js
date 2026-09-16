@@ -63,12 +63,12 @@ function poblarCamposFormatoExcepciones() {
                 'consolidacion': 'Consolidación de deudas',
                 'ampliacion': 'Ampliación de plazo'
             };
-            const mecanismoLegibleFormato = mapaMecanismoFormato[String(datos.MECANISMO || '').trim().toLowerCase()] || datos.MECANISMO;
+                       const mecanismoLegibleFormato = mapaMecanismoFormato[String(datos.MECANISMO || '').trim().toLowerCase()] || datos.MECANISMO;
 
             asignarValor('f707a4ad-ebde-49d9-914c-27406b8fb8eb', mecanismoLegibleFormato);
             asignarValor('8053b8b4-9a2b-47b4-9b6d-8faa3986b32c', datos.TIPO_ID);
             asignarValor('c2e7dd61-3c3d-4f87-aac9-667b09496897', datos.NUMERO_ID);
-            asignarValor('ce0ec03d-15e0-48e9-9fb5-12dc9de3116e', datos.FECHA_NEGOCIACION);
+            asignarValor('ce0ec03d-15e0-48e9-9fb5-12dc9de3116e', datos.FECHA_NEGOCIACION );
             asignarValor('fcd6b207-25e5-4d5c-9388-17cf357c1880', datos.AREA_GESTION);
             asignarValor('3b8dc74b-cad1-4c23-803f-77427ddb315f', datos.AGENCIA);
             asignarValor('316c8054-17af-4ccb-bdfa-85fb26584053', datos.NUMERO_OBLIGACION);
@@ -91,7 +91,8 @@ function poblarCamposFormatoExcepciones() {
             asignarValor('ced6329d-0943-4ca9-b5ac-1d3fec0458b6', datos.SALDO_TOTAL);
             asignarValor('34b709d9-9103-4939-9b83-0ebb1c13bbc5', datos.TASA_INTERES_EA);
             asignarValor('ead0f463-f647-49d6-aab7-39738fcbc864', datos.MARCA_C026);
-            // FECHA_PROMESA_DE_PAGO recibe la fecha real; FECHA_PAGO se deja vacia a proposito (llenado manual posterior)
+            // FECHA_PROMESA_DE_PAGO recibe la fecha real junto a FECHA_PAGO 
+            asignarValor('37e118e1-5f67-4845-b522-4a8afb32d219', datos.FECHA_PROMESA_DE_PAGO);
             asignarValor('e8787168-f162-479a-b094-cd33ab69af16', datos.FECHA_PROMESA_DE_PAGO);
             asignarValor('6194963c-7051-4e3b-a9fb-4c1d9874d335', datos.VALOR_PAGO);
             asignarValor('4a8bcf2f-e6ed-475e-af74-bd106b224662', datos.VALOR_PROPUESTA);
