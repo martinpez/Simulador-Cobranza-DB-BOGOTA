@@ -96,6 +96,7 @@ BEGIN TRY
     INSERT INTO Similador_DNC_Lappiz_Bugs_Reporteria
 (
     Id,
+    Created_date,
     UserEmail,
     UsuarioReporta,
     ModuloAfectado,
@@ -106,6 +107,7 @@ BEGIN TRY
 VALUES
 (
     @Id,
+    GETDATE(),
     '${sqlEscape(UserEmail)}',
     '${sqlEscape(UserReporta)}',
     '${sqlEscape(modulo)}',
@@ -146,6 +148,7 @@ END CATCH;`;
         success: true,
         idRepote: fila.IDrepote,
         id: fila.Id,
+        created_date: fila.Created_date,
         moduloAfectado: modulo,
         descripcion: descripcion,
         usuarioReporta: UserReporta,

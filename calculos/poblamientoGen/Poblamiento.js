@@ -16,7 +16,6 @@ function valoresPoblamiento() {
   delete sessionStorage.ConsultaHonorariosPagoMora;
   delete sessionStorage.ConsultaHonorariosCancelacion;
   delete sessionStorage.ConsultaHonorariosAmpliacion;
-  delete sessionStorage.AmpliConsumo185;
   delete sessionStorage.TipProducto;
   delete sessionStorage.TipoCobro;
   delete sessionStorage.Linea;
@@ -160,4 +159,8 @@ function getIdByPartialText(partialText, elemento) {
   const options = Array.from(select.options); // Convierte a un array
   const matchedOption = options.find(option => option.text.includes(partialText));
   return matchedOption ? matchedOption.value : null;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 92513cb65211d9d38d3c1ac728f0b2effe7e13b7
