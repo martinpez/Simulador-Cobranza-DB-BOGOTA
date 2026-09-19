@@ -203,7 +203,13 @@ function inicializarNavegacion() {
     //Principal
     $(".pagomora").click(() => {
         sessionStorage.mecanismo = "pagomora"
+        // setear el pago al snr en el fun 
+        let pagoProduto = "";
+        pagoProduto = "000-778175"
+        setFieldValue('685c5e9d-4409-4d4c-a11e-a0c17dcedb02', pagoProduto);
+        console.log("pagoProduto", pagoProduto);
         navegarA(VISTAS.PAGOMORA_P1);
+        RecalculosMora();
     });
     $(".left-button").click(() => {
         navegarA(VISTAS.PRINCIPAL);
@@ -225,6 +231,11 @@ function inicializarNavegacion() {
     //Principal
     $(".cancelacion").click(() => {
         sessionStorage.mecanismo = "cancelacion"
+        // setear el pago al snr en el fun 
+        let pagoProduto = "";
+        pagoProduto = "000-778175"
+        setFieldValue('685c5e9d-4409-4d4c-a11e-a0c17dcedb02', pagoProduto);
+        console.log("pagoProduto", pagoProduto);
         navegarA(VISTAS.CANCELACION_TOTAL_PAG1);
         recalcularcancelacion();
     });
@@ -254,6 +265,11 @@ function inicializarNavegacion() {
     //Principal
     $(".ampliacion").click(() => {
         sessionStorage.mecanismo = "ampliacion"
+        // setear el pago al snr en el fun 
+        let pagoProduto = "";
+        pagoProduto = "000-778175"
+        setFieldValue('685c5e9d-4409-4d4c-a11e-a0c17dcedb02', pagoProduto);
+        console.log("pagoProduto", pagoProduto);
         navegarA(VISTAS.AMPLIACION_P1);
         let Int = getFieldValue('70101be7-9330-44e4-913c-e6772c5b8167')
         let mora = getFieldValue('aea118a4-8a99-4d3a-adf9-ffd5151db4f6')

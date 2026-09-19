@@ -7,10 +7,12 @@ async function poblarCancelacion() {
     let saldoTotalObl = e.dataItem.SaldoTotalObl
     let honorariosIsc = parseFloat(sessionStorage.honorariosValues)
     let saldoTotal = 0;
-    if (honorariosIsc !== 0) {
+    if (honorariosIsc != 0) {
         saldoTotal = saldoTotalObl - honorariosIsc;
+    } else {
+        saldoTotal = saldoTotalObl;
     }
-    saldoTotal = saldoTotalObl;
+
     setFieldValue('f47f1a89-6743-4f60-9cf6-0696e6c841ca', saldoTotal)
     let interescteObl = e.dataItem.InteresCteObl
     setFieldValue('48f8260e-5e81-43d3-b69c-d94808cb229e', interescteObl)
