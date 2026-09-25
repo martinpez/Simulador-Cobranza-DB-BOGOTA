@@ -1,0 +1,8 @@
+// algunos codigos para la consola interesantes
+Orden de las páginas en la consola 
+ 
+[...document.querySelectorAll("form > ul > li")].forEach((li, i) => { 
+
+  console.log(i + 1, li.innerText.trim()); 
+
+}); 

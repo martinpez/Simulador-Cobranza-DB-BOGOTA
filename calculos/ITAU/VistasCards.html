@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards ITAU</title>
+  <style>
+    .button-containeritau {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px 0;
+    }
+
+    .botonItau {
+      background-color: #0041a4;
+      color: #f0f0f0;
+      height: 8vh;
+      width: 25vh;
+      border-radius: 15px;
+      transition: all 0.3s ease-in-out;
+      border: solid 1px #F2FF00;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-style: bold;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .botonItau:hover {
+      background-color: #9557db;
+      color: #0041a4;
+      transform: translateY(-5px);
+      box-shadow: 0 0 10px #070707;
+      border: #9557db;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    #consolidacionitahu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 15px;
+    }
+
+    #consolidacionitahu.vista-tabla {
+      display: block;
+    }
+
+    #consolidacionitahu .card1itahu {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border: 1px solid #ddd;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #consolidacionitahu .card1itahu:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #consolidacionitahu .card1itahu h3 {
+      font-size: 18px;
+      margin: 0 0 15px 0;
+      word-break: break-word;
+    }
+
+    #consolidacionitahu .fields-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px 10px;
+      width: 100%;
+    }
+
+    #consolidacionitahu .field-container {
+      margin: 0;
+      min-width: 0;
+      width: 100%;
+      position: relative;
+    }
+
+    #consolidacionitahu .field-container label {
+      display: block;
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #consolidacionitahu .field-container .value-box {
+      width: 100%;
+      max-width: 100%;
+      padding: 6px;
+      font-size: 13px;
+      font-family: inherit;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      position: relative;
+      background: white;
+      color: #333;
+      cursor: default;
+    }
+
+    #consolidacionitahu .field-container .value-box:hover {
+      overflow: visible;
+      white-space: normal;
+      word-break: break-word;
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      background: #fffbea;
+      border-color: #f0ad4e;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      height: auto;
+      min-height: 100%;
+    }
+
+    /* ---------- Estilos vista Tabla ---------- */
+    .tabla-itau-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ddd;
+    }
+
+    .tabla-itau {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1400px;
+      font-size: 13px;
+    }
+
+    .tabla-itau thead th {
+      background: #0041a4;
+      color: #f0f0f0;
+      text-align: left;
+      padding: 10px 8px;
+      position: sticky;
+      top: 0;
+      white-space: nowrap;
+      font-size: 12px;
+      z-index: 1;
+    }
+
+    .tabla-itau tbody td {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      white-space: nowrap;
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tabla-itau tbody tr:nth-child(even) {
+      background: #f7f9fc;
+    }
+
+    .tabla-itau tbody tr:hover td {
+      overflow: visible;
+      white-space: normal;
+      background: #fffbea;
+    }
+
+    .td-money {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 1024px) {
+      #consolidacionitahu {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .botonItau {
+        height: 6vh;
+        width: 20vh;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #consolidacionitahu {
+        padding: 10px;
+      }
+
+      #consolidacionitahu .fields-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .button-containeritau {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .botonItau {
+        height: 5vh;
+        width: 45vw;
+        font-size: 11px;
+      }
+
+      #consolidacionitahu .fields-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="button-containeritau">
+    <button class="botonItau" id="viewButton" onclick="cambiarVista()">
+      <span id="viewText">Visualizar en Cards</span>
+    </button>
+    <!--
+    <button class="botonItau" id="btnContingencia" onclick="triggerContingencia()">
+      <span id="contingenciaText"></span>
+    </button>
+     !-->
+  </div>
+  <div id="consolidacionitahu" class="vista-cards"></div>
+</body>
+
+</html>

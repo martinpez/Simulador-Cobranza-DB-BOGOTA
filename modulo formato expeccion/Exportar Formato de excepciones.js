@@ -289,7 +289,7 @@ function exportarExcelFormatoExcepciones() {
             const fdSQL = fechaDesembolsoFE ? "'" + (fechaDesembolsoFE instanceof Date ? (fechaDesembolsoFE.getFullYear() + '-' + String(fechaDesembolsoFE.getMonth() + 1).padStart(2, '0') + '-' + String(fechaDesembolsoFE.getDate()).padStart(2, '0')) : String(fechaDesembolsoFE).substring(0, 10)) + "'" : 'NULL';
             const vicSQL = isNaN(parseFloat(valorInicialCupoFE)) ? '0' : parseFloat(valorInicialCupoFE);
             const taiSQL = isNaN(parseFloat(tasaInteresEaFE)) ? '0' : parseFloat(tasaInteresEaFE);
-            const garSQL = garantiaFE ? "'" + sqlEscape(garantiaFE) + "'" : 'NULL';
+            const garSQL = garantiaFE ? "'" + sqlEscape(garantiaFE) + "'" : '0';
             const snrGSQL = (() => { const t = String(snrFE || '').trim(); const p = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i; return p.test(t) ? "'" + t + "'" : 'NULL'; })();
             const ncSQL = numeroCuentaFE ? "'" + sqlEscape(numeroCuentaFE) + "'" : 'NULL';
             const fppSQL = fechaPromesaPagoFE ? "'" + (fechaPromesaPagoFE instanceof Date ? (fechaPromesaPagoFE.getFullYear() + '-' + String(fechaPromesaPagoFE.getMonth() + 1).padStart(2, '0') + '-' + String(fechaPromesaPagoFE.getDate()).padStart(2, '0')) : String(fechaPromesaPagoFE).substring(0, 10)) + "'" : 'NULL';

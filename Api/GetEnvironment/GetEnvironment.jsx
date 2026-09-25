@@ -1,0 +1,1 @@
+return res.status(200).send(_appsettings)

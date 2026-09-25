@@ -240,8 +240,8 @@ async function getToken() {
         const url = URLS.UrlAPI + "/Api/token";
         const data = new URLSearchParams();
         data.append("grant_type", "password");
-        data.append("username", "administrador@simuladordnc.com");
-        data.append("password", "Simulador.2023");
+        data.append("username", "--");
+        data.append("password", "--");
         const config = {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
         };
