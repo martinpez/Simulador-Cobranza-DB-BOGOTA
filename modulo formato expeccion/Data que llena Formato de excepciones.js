@@ -3,6 +3,7 @@ function poblarCamposFormatoExcepciones() {
     window.__feYaPoblado = true;
 
     setTimeout(function () {
+        debugger;
         setFieldValue('6c6ead14-3395-4a14-8559-9c9e66b01e26', localStorage.getItem('userName'));
         const raw = localStorage.getItem('datosNegociacionFE');
         if (!raw) {
@@ -106,9 +107,70 @@ function poblarCamposFormatoExcepciones() {
             asignarValor('c351ffc5-1f1f-41d8-8b40-d53936dd7e68', datos.VALOR_CASTIGO_CAPITAL);
             asignarValor('e7abf0ab-9932-4879-a003-4d421a4fc81c', datos.VALOR_HONORARIOS);
             function comoPorcentajeTexto(valor) {
-                const num = parseFloat(valor);
-                if (isNaN(num)) return '0%';
-                return (num * 100).toFixed(2).replace(/\.00$/, '') + '%';
+                if (valor === null || valor === undefined || String(valor).trim() === '') return '0%';
+
+                let texto = String(valor).trim()
+                    .replace(/\u00a0/g, '')
+                    .replace(/\s/g, '');
+                const tieneSignoPorcentaje = texto.indexOf('%') !== -1;
+                texto = texto.replace(/%/g, '');
+
+                const ultimoPunto = texto.lastIndexOf('.');
+                const ultimaComa = texto.lastIndexOf(',');
+                if (ultimoPunto !== -1 && ultimaComa !== -1) {
+                    if (ultimaComa > ultimoPunto) {
+                        texto = texto.replace(/\./g, '').replace(',', '.');
+                    } else {
+                        texto = texto.replace(/,/g, '');
+                    }
+                } else if (ultimaComa !== -1) {
+                    texto = texto.replace(',', '.');
+                }
+
+                const num = Number(texto);
+                if (!Number.isFinite(num)) return '0%';
+
+                // datosNegociacionFE guarda estos valores como fracciones (incluidos porcentajes mayores a 100%).
+                const porcentaje = tieneSignoPorcentaje ? num : num * 100;
+                return porcentaje.toFixed(2).replace(/\.00$/, '') + '%';
+            }
+
+            function fechaPromesaTexto(valor) {
+                if (valor === null || valor === undefined || String(valor).trim() === '') return 'por definir';
+
+                let anio;
+                let mes;
+                let dia;
+                if (valor instanceof Date) {
+                    if (isNaN(valor.getTime())) return 'por definir';
+                    anio = valor.getFullYear();
+                    mes = valor.getMonth() + 1;
+                    dia = valor.getDate();
+                } else {
+                    const texto = String(valor).trim();
+                    const iso = texto.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+                    const local = texto.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/);
+                    if (iso) {
+                        anio = Number(iso[1]);
+                        mes = Number(iso[2]);
+                        dia = Number(iso[3]);
+                    } else if (local) {
+                        dia = Number(local[1]);
+                        mes = Number(local[2]);
+                        anio = Number(local[3]);
+                    } else {
+                        return texto.split(/[T ]/)[0] || 'por definir';
+                    }
+                }
+
+                const fechaValidada = new Date(Date.UTC(anio, mes - 1, dia));
+                if (fechaValidada.getUTCFullYear() !== anio ||
+                    fechaValidada.getUTCMonth() !== mes - 1 ||
+                    fechaValidada.getUTCDate() !== dia) {
+                    return 'por definir';
+                }
+
+                return anio + '-' + String(mes).padStart(2, '0') + '-' + String(dia).padStart(2, '0');
             }
             const nombresMecanismo = {
                 consolidacion: 'consolidación de productos',
@@ -117,6 +179,8 @@ function poblarCamposFormatoExcepciones() {
                 cancelacion: 'cancelación total',
                 ampliacion: 'ampliación de plazo'
             };
+            debugger;
+            console.log(datos.FECHA_PROMESA_DE_PAGO);
             const mecanismoLegible = nombresMecanismo[(datos.MECANISMO || '').toLowerCase()] || datos.MECANISMO || 'sin mecanismo';
             const detallePropuesta =
                 'El cliente solicita una excepción para el mecanismo de ' + mecanismoLegible +
@@ -135,7 +199,7 @@ function poblarCamposFormatoExcepciones() {
                 ' (castigo del ' + comoPorcentajeTexto(datos.PCT_CASTIGO_EXTRAC) + '), ' +
                 'con un castigo de capital del ' + comoPorcentajeTexto(datos.PCT_CASTIGO_CAPITAL) + '. ' +
                 'Adicionalmente se contemplan otros cargos exigibles por $' + (datos.OTROS_CARGOS || '0') + '. ' +
-                'La fecha de pago propuesta es ' + (datos.FECHA_PROMESA_DE_PAGO || 'por definir') +
+                'La fecha de pago propuesta es ' + fechaPromesaTexto(datos.FECHA_PROMESA_DE_PAGO) +
                 ', con honorarios de $' + (datos.VALOR_HONORARIOS || '0') + '.';
             setFieldValue('6e2616a1-ee70-4253-af29-c5dbe17b552c', detallePropuesta);
             console.log('Formato de Excepciones: campos poblados desde localStorage');

@@ -1,4 +1,136 @@
 function exportarExcelFormatoExcepciones() {
+    const columnasPorcentajeFraccion = [
+        'TASA_INTERÉS_E.A',
+        '% ADICIONAL A POLITICA',
+        '% CASTIGO_PARCIAL_BAJA_CUENTA_CAPITAL',
+        '% CASTIGO_PARCIAL_BAJA_CUENTA_INTERES_CORRIENTES',
+        '% CASTIGO_PARCIAL_BAJA_CUENTA_INTERESES_MORA',
+        '% CASTIGO_PARCIAL_BAJA_CUENTA_INTERESES_EXTRACONTRABLES',
+        '% HONORARIOS',
+        'PROVISIÓN'
+    ];
+
+    function parsearNumero(valor) {
+        if (typeof valor === 'number') {
+            return Number.isFinite(valor) ? valor : null;
+        }
+        if (valor === null || valor === undefined || String(valor).trim() === '') {
+            return null;
+        }
+
+        let texto = String(valor).trim()
+            .replace(/\u00a0/g, '')
+            .replace(/\s/g, '')
+            .replace(/\$/g, '')
+            .replace(/COP/gi, '')
+            .replace(/%/g, '');
+
+        const ultimoPunto = texto.lastIndexOf('.');
+        const ultimaComa = texto.lastIndexOf(',');
+        if (ultimoPunto !== -1 && ultimaComa !== -1) {
+            if (ultimaComa > ultimoPunto) {
+                texto = texto.replace(/\./g, '').replace(',', '.');
+            } else {
+                texto = texto.replace(/,/g, '');
+            }
+        } else if (ultimaComa !== -1) {
+            texto = texto.replace(',', '.');
+        }
+
+        const numero = Number(texto);
+        return Number.isFinite(numero) ? numero : null;
+    }
+
+    function porcentajeComoFraccion(valor) {
+        const numero = parsearNumero(valor);
+        if (numero === null) return null;
+
+        const tieneSignoPorcentaje = typeof valor === 'string' && valor.indexOf('%') !== -1;
+        const fraccion = tieneSignoPorcentaje || Math.abs(numero) > 1
+            ? numero / 100
+            : numero;
+
+        // Las columnas numéricas de porcentaje usan numeric(38,4).
+        return Number(fraccion.toFixed(4));
+    }
+
+    function porcentajeSql(valor) {
+        const porcentaje = porcentajeComoFraccion(valor);
+        return porcentaje === null ? '0' : String(porcentaje);
+    }
+
+    function enteroSql(valor, valorVacio) {
+        if (valor === null || valor === undefined || String(valor).trim() === '') {
+            return valorVacio;
+        }
+
+        const coincidencia = String(valor).trim().match(/^([+-]?\d+)(?:[.,]0+)?$/);
+        return coincidencia ? coincidencia[1] : valorVacio;
+    }
+
+    function numeroSql(valor, valorVacio) {
+        const numero = parsearNumero(valor);
+        return numero === null ? valorVacio : String(numero);
+    }
+
+    function textoSql(valor, valorVacio) {
+        if (valor === null || valor === undefined || String(valor).trim() === '') {
+            return valorVacio;
+        }
+        return "'" + String(valor).replace(/'/g, "''") + "'";
+    }
+
+    function fechaSql(valor, permitirFechaPorDefecto) {
+        if (valor === null || valor === undefined || valor === '') return 'NULL';
+
+        if (permitirFechaPorDefecto && String(valor).trim() === '1') {
+            return "'1900-01-01'";
+        }
+
+        let anio;
+        let mes;
+        let dia;
+        if (valor instanceof Date) {
+            if (isNaN(valor.getTime())) return 'NULL';
+            anio = valor.getFullYear();
+            mes = valor.getMonth() + 1;
+            dia = valor.getDate();
+        } else {
+            const texto = String(valor).trim();
+            const iso = texto.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+            const local = texto.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})(?:\s.*)?$/);
+            if (iso) {
+                anio = Number(iso[1]);
+                mes = Number(iso[2]);
+                dia = Number(iso[3]);
+            } else if (local) {
+                dia = Number(local[1]);
+                mes = Number(local[2]);
+                anio = Number(local[3]);
+            } else {
+                return 'NULL';
+            }
+        }
+
+        const fechaValidada = new Date(Date.UTC(anio, mes - 1, dia));
+        if (fechaValidada.getUTCFullYear() !== anio ||
+            fechaValidada.getUTCMonth() !== mes - 1 ||
+            fechaValidada.getUTCDate() !== dia) {
+            return 'NULL';
+        }
+
+        const fecha = anio + '-' + String(mes).padStart(2, '0') + '-' + String(dia).padStart(2, '0');
+        return "'" + fecha + "'";
+    }
+
+    function fechaTextoSql(valor) {
+        const fechaISO = fechaSql(valor);
+        if (fechaISO === 'NULL') return 'NULL';
+
+        const partes = fechaISO.match(/^'(\d{4})-(\d{2})-(\d{2})'$/);
+        return partes ? "'" + partes[3] + '/' + partes[2] + '/' + partes[1] + "'" : 'NULL';
+    }
+
     function generarArchivo() {
         const columnas = [
             { nombre: 'MECANISMO', id: 'f707a4ad-ebde-49d9-914c-27406b8fb8eb' },
@@ -73,8 +205,6 @@ function exportarExcelFormatoExcepciones() {
             'VALOR CASTIGO_PARCIAL_BAJA_CUENTA_INTERESES_MORA', 'VALOR CASTIGO_PARCIAL_BAJA_CUENTA_INTERESES_EXTRACONTABLES',
             'VALOR_HONORARIOS', 'VALOR_TOTAL_CASTIGOS_PARCIAL_BAJA_CUENTA'
         ];
-        const columnasPorcentajeExtra = ['TASA_INTERÉS_E.A'];
-
         function formatearFechaExportar(valor) {
             if (typeof valor !== 'string') return valor;
             const coincidencia = valor.match(/^(\d{4})-(\d{2})-(\d{2})/);
@@ -155,7 +285,10 @@ function exportarExcelFormatoExcepciones() {
                 valor = '';
             } else if (col.nombre === 'MECANISMO') {
                 valor = mapaMecanismoExport[String(valor).trim().toLowerCase()] || valor;
-            } else if (col.nombre.trim().startsWith('%') || columnasPorcentajeExtra.indexOf(col.nombre) !== -1) {
+            } else if (columnasPorcentajeFraccion.indexOf(col.nombre) !== -1) {
+                const porcentaje = porcentajeComoFraccion(valor);
+                valor = porcentaje === null ? valor : porcentaje;
+            } else if (col.nombre.trim().startsWith('%')) {
                 valor = formatearPorcentaje(valor);
             } else if (columnasMoneda.indexOf(col.nombre) !== -1) {
                 valor = formatearMoneda(valor);
@@ -177,6 +310,15 @@ function exportarExcelFormatoExcepciones() {
 
         const encabezados = columnas.map(function (c) { return c.nombre; });
         const hoja = XLSX.utils.json_to_sheet([fila], { header: encabezados });
+        columnasPorcentajeFraccion.forEach(function (nombre) {
+            const indice = encabezados.indexOf(nombre);
+            if (indice !== -1) {
+                const referencia = XLSX.utils.encode_cell({ r: 1, c: indice });
+                if (hoja[referencia] && typeof hoja[referencia].v === 'number') {
+                    hoja[referencia].z = '0.00%';
+                }
+            }
+        });
         const libro = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(libro, hoja, 'FormatoExcepciones');
 
@@ -220,8 +362,9 @@ function exportarExcelFormatoExcepciones() {
             const tasaInteresEaFE = getFieldValue('34b709d9-9103-4939-9b83-0ebb1c13bbc5');
             const garantiaFE = getFieldValue('f351eb9f-0ed0-46c4-a13e-0ac3f5f04c88') || '';
             const snrFE = getFieldValue('82cc7235-51a2-44a2-9038-d2661f9ccfef');
-            const numeroCuentaFE = getFieldValue('14147d37-86b5-4f19-ba01-49062f584897') || '';
+            const numeroCuentaFE = getFieldValue('14147d37-86b5-4f19-ba01-49062f584897');
             const fechaPromesaPagoFE = getFieldValue('e8787168-f162-479a-b094-cd33ab69af16');
+            console.log(fechaPromesaPagoFE);
             const valorPagoFE = getFieldValue('6194963c-7051-4e3b-a9fb-4c1d9874d335');
             const fechaPagoFE = getFieldValue('37e118e1-5f67-4845-b522-4a8afb32d219');
             const adicionalBajaCuentaFE = getFieldValue('7c123120-194d-4a14-b252-48b8f8bf1f1c') || '';
@@ -268,58 +411,61 @@ function exportarExcelFormatoExcepciones() {
 
             const mecSQL = mecanismoFE ? "'" + sqlEscape(mecanismoFE) + "'" : 'NULL';
             const tiSQL = tipoIdFE ? "'" + sqlEscape(tipoIdFE) + "'" : 'NULL';
-            const numIdSQL = numeroIdFE ? "'" + sqlEscape(numeroIdFE) + "'" : 'NULL';
-            const fnSQL = fechaNegociacionFE ? "'" + (fechaNegociacionFE instanceof Date ? (fechaNegociacionFE.getFullYear() + '-' + String(fechaNegociacionFE.getMonth() + 1).padStart(2, '0') + '-' + String(fechaNegociacionFE.getDate()).padStart(2, '0')) : String(fechaNegociacionFE).substring(0, 10)) + "'" : 'NULL';
+            const numIdSQL = enteroSql(numeroIdFE, 'NULL');
+            const fnSQL = fechaSql(fechaNegociacionFE);
+            const fechaProcesoSQL = fechaTextoSql(fechaNegociacionFE);
             const agSQL = agenciaFE ? "'" + sqlEscape(agenciaFE) + "'" : 'NULL';
-            const noSQL = isNaN(parseInt(numeroOblFE, 10)) ? '0' : parseInt(numeroOblFE, 10);
+            const noSQL = textoSql(numeroOblFE, 'NULL');
             const toSQL = tipoObligacionFE ? "'" + sqlEscape(tipoObligacionFE) + "'" : 'NULL';
             const eoSQL = estadoOblFE ? "'" + sqlEscape(estadoOblFE) + "'" : 'NULL';
             const tpSQL = (() => { const t = String(tipoProductoFE || '').trim(); const p = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i; return p.test(t) ? "'" + t + "'" : 'NULL'; })();
-            const fcSQL = fechaCastigoFE ? "'" + (fechaCastigoFE instanceof Date ? (fechaCastigoFE.getFullYear() + '-' + String(fechaCastigoFE.getMonth() + 1).padStart(2, '0') + '-' + String(fechaCastigoFE.getDate()).padStart(2, '0')) : String(fechaCastigoFE).substring(0, 10)) + "'" : 'NULL';
-            const dmSQL = isNaN(parseInt(diasMoraFE, 10)) ? '0' : parseInt(diasMoraFE, 10);
-            const plSQL = isNaN(parseInt(plazoFE, 10)) ? '0' : parseInt(plazoFE, 10);
+            const fcSQL = fechaSql(fechaCastigoFE, true);
+            const dmSQL = textoSql(diasMoraFE, "'0'");
+            const plSQL = textoSql(plazoFE, "'0'");
             const coSQL = coberturaFE ? "'" + sqlEscape(coberturaFE) + "'" : 'NULL';
-            const cvSQL = isNaN(parseFloat(capitalVencidoFE)) ? '0' : parseFloat(capitalVencidoFE);
-            const ctSQL = isNaN(parseFloat(capitalTotalFE)) ? '0' : parseFloat(capitalTotalFE);
-            const icSQL = isNaN(parseFloat(interesCorrienteFE)) ? '0' : parseFloat(interesCorrienteFE);
-            const imSQL = isNaN(parseFloat(interesMoraFE)) ? '0' : parseFloat(interesMoraFE);
-            const ieSQL = isNaN(parseFloat(interesesExtracontablesFE)) ? '0' : parseFloat(interesesExtracontablesFE);
-            const ocSQL = isNaN(parseFloat(otrosCargosFE)) ? '0' : parseFloat(otrosCargosFE);
-            const stSQL = isNaN(parseFloat(saldoTotalFE)) ? '0' : parseFloat(saldoTotalFE);
-            const fdSQL = fechaDesembolsoFE ? "'" + (fechaDesembolsoFE instanceof Date ? (fechaDesembolsoFE.getFullYear() + '-' + String(fechaDesembolsoFE.getMonth() + 1).padStart(2, '0') + '-' + String(fechaDesembolsoFE.getDate()).padStart(2, '0')) : String(fechaDesembolsoFE).substring(0, 10)) + "'" : 'NULL';
-            const vicSQL = isNaN(parseFloat(valorInicialCupoFE)) ? '0' : parseFloat(valorInicialCupoFE);
-            const taiSQL = isNaN(parseFloat(tasaInteresEaFE)) ? '0' : parseFloat(tasaInteresEaFE);
-            const garSQL = garantiaFE ? "'" + sqlEscape(garantiaFE) + "'" : '0';
+            const cvSQL = numeroSql(capitalVencidoFE, '0');
+            const ctSQL = numeroSql(capitalTotalFE, '0');
+            const icSQL = numeroSql(interesCorrienteFE, '0');
+            const imSQL = numeroSql(interesMoraFE, '0');
+            const ieSQL = numeroSql(interesesExtracontablesFE, '0');
+            const ocSQL = numeroSql(otrosCargosFE, '0');
+            const stSQL = numeroSql(saldoTotalFE, '0');
+            const fdSQL = fechaSql(fechaDesembolsoFE);
+            const vicSQL = numeroSql(valorInicialCupoFE, '0');
+            const taiSQL = porcentajeSql(tasaInteresEaFE);
+            const garantiaNormalizada = String(garantiaFE == null ? '' : garantiaFE).trim();
+            const garantiaSinDato = garantiaNormalizada.replace(/\s/g, '') === '' || /^N\/?A$/i.test(garantiaNormalizada.replace(/\s/g, ''));
+            const garSQL = "'" + sqlEscape(garantiaSinDato ? '0' : garantiaNormalizada) + "'";
             const snrGSQL = (() => { const t = String(snrFE || '').trim(); const p = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i; return p.test(t) ? "'" + t + "'" : 'NULL'; })();
-            const ncSQL = numeroCuentaFE ? "'" + sqlEscape(numeroCuentaFE) + "'" : 'NULL';
-            const fppSQL = fechaPromesaPagoFE ? "'" + (fechaPromesaPagoFE instanceof Date ? (fechaPromesaPagoFE.getFullYear() + '-' + String(fechaPromesaPagoFE.getMonth() + 1).padStart(2, '0') + '-' + String(fechaPromesaPagoFE.getDate()).padStart(2, '0')) : String(fechaPromesaPagoFE).substring(0, 10)) + "'" : 'NULL';
-            const vpSQL = isNaN(parseFloat(valorPagoFE)) ? '0' : parseFloat(valorPagoFE);
-            const fpSQL = fechaPagoFE ? "'" + (fechaPagoFE instanceof Date ? (fechaPagoFE.getFullYear() + '-' + String(fechaPagoFE.getMonth() + 1).padStart(2, '0') + '-' + String(fechaPagoFE.getDate()).padStart(2, '0')) : String(fechaPagoFE).substring(0, 10)) + "'" : 'NULL';
+            const ncSQL = textoSql(numeroCuentaFE, 'NULL');
+            const fppSQL = fechaSql(fechaPromesaPagoFE, true);
+            const vpSQL = numeroSql(valorPagoFE, '0');
+            const fpSQL = fechaSql(fechaPagoFE);
             const abSQL = adicionalBajaCuentaFE ? "'" + sqlEscape(adicionalBajaCuentaFE) + "'" : 'NULL';
-            const apSQL = isNaN(parseFloat(adicionalPoliticaFE)) ? '0' : parseFloat(adicionalPoliticaFE);
-            const propSQL = isNaN(parseFloat(valorPropuestaFE)) ? '0' : parseFloat(valorPropuestaFE);
-            const pccSQL = isNaN(parseFloat(pctCastigoCapitalFE)) ? '0' : parseFloat(pctCastigoCapitalFE);
-            const vccSQL = isNaN(parseFloat(valorCastigoCapitalFE)) ? '0' : parseFloat(valorCastigoCapitalFE);
-            const pciSQL = isNaN(parseFloat(pctCastigoIntCteFE)) ? '0' : parseFloat(pctCastigoIntCteFE);
-            const vciSQL = isNaN(parseFloat(valorCastigoIntCteFE)) ? '0' : parseFloat(valorCastigoIntCteFE);
-            const pcmSQL = isNaN(parseFloat(pctCastigoIntMoraFE)) ? '0' : parseFloat(pctCastigoIntMoraFE);
-            const vcmSQL = isNaN(parseFloat(valorCastigoIntMoraFE)) ? '0' : parseFloat(valorCastigoIntMoraFE);
-            const pceSQL = isNaN(parseFloat(pctCastigoExtracFE)) ? '0' : parseFloat(pctCastigoExtracFE);
-            const vceSQL = isNaN(parseFloat(valorCastigoExtracFE)) ? '0' : parseFloat(valorCastigoExtracFE);
-            const phSQL = isNaN(parseFloat(pctHonorariosFE)) ? '0' : parseFloat(pctHonorariosFE);
-            const vhSQL = isNaN(parseFloat(valorHonorariosFE)) ? '0' : parseFloat(valorHonorariosFE);
-            const vtSQL = isNaN(parseFloat(valorTotalCastigosFE)) ? '0' : parseFloat(valorTotalCastigosFE);
-            const fiSQL = fechaInicioProcesoFE ? "'" + (fechaInicioProcesoFE instanceof Date ? (fechaInicioProcesoFE.getFullYear() + '-' + String(fechaInicioProcesoFE.getMonth() + 1).padStart(2, '0') + '-' + String(fechaInicioProcesoFE.getDate()).padStart(2, '0')) : String(fechaInicioProcesoFE).substring(0, 10)) + "'" : 'NULL';
+            const apSQL = porcentajeSql(adicionalPoliticaFE);
+            const propSQL = numeroSql(valorPropuestaFE, '0');
+            const pccSQL = porcentajeSql(pctCastigoCapitalFE);
+            const vccSQL = numeroSql(valorCastigoCapitalFE, '0');
+            const pciSQL = porcentajeSql(pctCastigoIntCteFE);
+            const vciSQL = numeroSql(valorCastigoIntCteFE, '0');
+            const pcmSQL = porcentajeSql(pctCastigoIntMoraFE);
+            const vcmSQL = numeroSql(valorCastigoIntMoraFE, '0');
+            const pceSQL = porcentajeSql(pctCastigoExtracFE);
+            const vceSQL = numeroSql(valorCastigoExtracFE, '0');
+            const phSQL = porcentajeSql(pctHonorariosFE);
+            const vhSQL = numeroSql(valorHonorariosFE, '0');
+            const vtSQL = numeroSql(valorTotalCastigosFE, '0');
+            const fiSQL = fechaSql(fechaInicioProcesoFE, true);
             const epSQL = etapaProcesoFE ? "'" + sqlEscape(etapaProcesoFE) + "'" : 'NULL';
             const erSQL = estadoReclamacionFE ? "'" + sqlEscape(estadoReclamacionFE) + "'" : 'NULL';
-            const feSQL = fechaEtapaProcesalFE ? "'" + (fechaEtapaProcesalFE instanceof Date ? (fechaEtapaProcesalFE.getFullYear() + '-' + String(fechaEtapaProcesalFE.getMonth() + 1).padStart(2, '0') + '-' + String(fechaEtapaProcesalFE.getDate()).padStart(2, '0')) : String(fechaEtapaProcesalFE).substring(0, 10)) + "'" : 'NULL';
+            const feSQL = fechaSql(fechaEtapaProcesalFE, true);
             const mcSQL = medidasCautelaresFE ? "'" + sqlEscape(medidasCautelaresFE) + "'" : 'NULL';
-            const provSQL = isNaN(parseFloat(provisionFE)) ? '0' : parseFloat(provisionFE);
+            const provSQL = porcentajeSql(provisionFE);
             const mc026SQL = marcaC026FE ? "'" + sqlEscape(marcaC026FE) + "'" : 'NULL';
             const calSQL = calificacionFE ? "'" + sqlEscape(calificacionFE) + "'" : 'NULL';
             const cmSQL = causaMoraFE ? "'" + sqlEscape(causaMoraFE) + "'" : 'NULL';
             const dpSQL = detallePropuestaFE ? "'" + sqlEscape(detallePropuestaFE) + "'" : 'NULL';
-            const paSQL = isNaN(parseInt(plazoAcuerdoPagoFE, 10)) ? '0' : parseInt(plazoAcuerdoPagoFE, 10);
+            const paSQL = enteroSql(plazoAcuerdoPagoFE, '0');
             const pmiSQL = pagoMinimoInferiorFE ? "'" + sqlEscape(pagoMinimoInferiorFE) + "'" : 'NULL';
             const cpiSQL = capacidadPagoInferiorFE ? "'" + sqlEscape(capacidadPagoInferiorFE) + "'" : 'NULL';
             const temSQL = tiempoEntreMecanismosFE ? "'" + sqlEscape(tiempoEntreMecanismosFE) + "'" : 'NULL';
@@ -351,7 +497,7 @@ function exportarExcelFormatoExcepciones() {
                     DETALLEDELAPROPUESTAfe, PLAZOACUERDODEPAGOfe, PAGOMINIMOINFERIORfe,
                     CAPACIDADDEPAGOINFERIORALANUEVACUOTAfe, FETIEMPOENTREMECANISMOSMENOR, EDADMORAPARAAPLICARMECANISMOfe,
                     BAJADESALDOSSUPERIORESALAPOLTICA, SINPAGOFE, ELPRODUCTONOESLACABEZADEMORAFE, EXTENCIONESDEPLAZOfe, AREADEGESTION,
-                    TIPOPRODUCTOLIMPIO, SNRLIMPIO
+                    TIPOPRODUCTOLIMPIO, SNRLIMPIO, FechaProceso
                 ) VALUES (
                     NEWID(), GETDATE(), GETDATE(), ${"'"+sqlEscape(usuario)+"'"}, 'Insertar', ${"'"+sqlEscape(usuario)+"'"}, 'active',
                     ${mecSQL}, ${tiSQL}, ${numIdSQL}, ${fnSQL}, ${agSQL}, ${noSQL},
@@ -369,9 +515,9 @@ function exportarExcelFormatoExcepciones() {
                     ${dpSQL}, ${paSQL}, ${pmiSQL},
                     ${cpiSQL}, ${temSQL}, ${emaSQL},
                     ${bspSQL}, ${spSQL}, ${pncmSQL},
-                    ${epLSQL}, ${agGSQL}, ${tplSQL}, ${snrLSQL}
+                    ${epLSQL}, ${agGSQL}, ${tplSQL}, ${snrLSQL}, ${fechaProcesoSQL}
                 )`;
-
+            console.log(query);
             await execQuery(query);
 
             Swal.fire({

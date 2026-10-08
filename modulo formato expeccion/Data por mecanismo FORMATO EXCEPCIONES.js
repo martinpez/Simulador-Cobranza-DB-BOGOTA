@@ -186,8 +186,23 @@ async function llenarFormatoExcepciones() {
     const grupo = valorConFallback(null, 'Grupo');
     const areaGestion = (grupo || '').trim().toUpperCase() === 'TEMPRANA' ? 'TEMPRANA' : '';
     const fechaCastigo = areaGestion === 'JURIDICO' ? '' : '1900-01-01';
-    const hoy = new Date();
-    const fecha = hoy.getFullYear() + '-' + String(hoy.getMonth() + 1).padStart(2, '0') + '-' + String(hoy.getDate()).padStart(2, '0');
+    const fechaSesion = String(sessionStorage.getItem('dateExep') || '').trim();
+    const partesFechaSesion = fechaSesion.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    let fecha = '';
+    if (partesFechaSesion) {
+        const anio = Number(partesFechaSesion[1]);
+        const mes = Number(partesFechaSesion[2]);
+        const dia = Number(partesFechaSesion[3]);
+        const fechaValidada = new Date(Date.UTC(anio, mes - 1, dia));
+        if (fechaValidada.getUTCFullYear() === anio &&
+            fechaValidada.getUTCMonth() === mes - 1 &&
+            fechaValidada.getUTCDate() === dia) {
+            fecha = fechaSesion;
+        }
+    }
+    if (!fecha) {
+        console.warn('Formato de Excepciones: sessionStorage.dateExep no contiene una fecha ISO válida');
+    }
 
     const idEdadMora = idsEdadMora[mecanismo];
 

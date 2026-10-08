@@ -1,22 +1,3 @@
-/*
- * Bugs_Api_Insert
- * Función Lappiz (backend). Inserta únicamente el reporte de fallo.
- * Las imágenes NO se guardan en BD; se mantienen en memoria del navegador
- * y se envían por correo después de un insert exitoso (HTTP 200).
- *
- * Body esperado (obj.body):
- * {
- *   ModuloAfectado: "Pago mora",
- *   Descripcion: "...",
- *   UsuarioReporta: "MPERE41@bancodebogota.com.co",
- *   UserEmail: "MPERE41@bancodebogota.com.co",
- *   Evidencias: []   // 0 a 3 (no se persisten; solo viajan en el body)
- * }
- *
- * Respuesta éxito: { success: true, idRepote, id, moduloAfectado,
- *                    descripcion, usuarioReporta, userEmail }
- * Respuesta error: { success: false, errors: [ { campo, mensaje } ] }
- */
 const MODULOS_PERMITIDOS = [
     'Pago mora', 'Ampliación', 'Cancelación', 'Itaú',
     'Novación', 'Consolidación', 'Formato Excepciones', 'Otro'

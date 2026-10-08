@@ -1,10 +1,10 @@
 function formatoExcepcionesChange() {
     const mapaMecanismo = {
         'consolidacion': { idLista: '48dfc177-18ab-4c7c-91a9-e2a63c92dc15', idBoton: 'btnFormatoExcepcionesConsolidacion' },
-        'novacion':      { idLista: '9f53f77e-2ed6-48f2-a6f9-87552428a4db', idBoton: 'btnFormatoExcepcionesNovacion' },
-        'pagomora':      { idLista: 'd3b8782c-c94a-4b7a-a2aa-00baba7bfbd5', idBoton: 'btnFormatoExcepcionesPagomora' },
-        'cancelacion':   { idLista: 'e99362f1-b8da-4cca-8982-c8af8dcb5caf', idBoton: 'btnFormatoExcepcionesCancelacion' },
-        'ampliacion':    { idLista: '13719b60-17be-4c9f-a190-d6fe27ab12f6', idBoton: 'btnFormatoExcepcionesAmpliacion' }
+        'novacion': { idLista: '9f53f77e-2ed6-48f2-a6f9-87552428a4db', idBoton: 'btnFormatoExcepcionesNovacion' },
+        'pagomora': { idLista: 'd3b8782c-c94a-4b7a-a2aa-00baba7bfbd5', idBoton: 'btnFormatoExcepcionesPagomora' },
+        'cancelacion': { idLista: 'e99362f1-b8da-4cca-8982-c8af8dcb5caf', idBoton: 'btnFormatoExcepcionesCancelacion' },
+        'ampliacion': { idLista: '13719b60-17be-4c9f-a190-d6fe27ab12f6', idBoton: 'btnFormatoExcepcionesAmpliacion' }
     };
 
     const mecanismo = sessionStorage.mecanismo;
@@ -34,8 +34,25 @@ function formatoExcepcionesChange() {
     btnFormatoExcepciones.style.display = (valor === 'SI') ? 'inline-block' : 'none';
 }
 // funcion enganchada al click del boton Formato de Excepciones
-function abrirFormatoExcepciones() {
-    llenarFormatoExcepciones();
-    const URL_FORMATO_EXCEPCIONES = "https://simuladorcobranzasbdbpru.lappiz.io/#/forms?viewName=SimiladorDNC_Lappiz_FormatoExcepciones&entityId=75f7d794-95f1-43a4-b445-f453fa3d3315&entityName=SimiladorDNC_Lappiz_FormatoExcepciones&appViewId=abd9246f-8baf-45f4-8557-c5f9c77fb1ee";
-    window.open(URL_FORMATO_EXCEPCIONES, '_blank');
+async function abrirFormatoExcepciones() {
+    const environment = backandGlobal.environment;
+    const baseUrl = environment === 'TEST'
+        ? 'https://simuladorcobranzasbdbpru.lappiz.io'
+        : 'https://simuladorcobranzasbdb.lappiz.io';
+    const urlFormatoExcepciones = baseUrl + "/#/forms?viewName=SimiladorDNC_Lappiz_FormatoExcepciones&entityId=75f7d794-95f1-43a4-b445-f453fa3d3315&entityName=SimiladorDNC_Lappiz_FormatoExcepciones&appViewId=abd9246f-8baf-45f4-8557-c5f9c77fb1ee";
+
+    // Abrir la pestaña directamente desde el clic para evitar que el navegador la bloquee.
+    const ventanaFormato = window.open('about:blank', '_blank');
+    if (!ventanaFormato) {
+        console.error('Formato de Excepciones: el navegador bloqueó la nueva pestaña');
+        return;
+    }
+
+    try {
+        await llenarFormatoExcepciones();
+        ventanaFormato.location.href = urlFormatoExcepciones;
+    } catch (error) {
+        ventanaFormato.close();
+        console.error('Formato de Excepciones: no se pudieron preparar los datos', error);
+    }
 }

@@ -40,7 +40,19 @@ function areaGestionChange() {
                 const d = String(valor.getDate()).padStart(2, '0');
                 return y + '-' + m + '-' + d;
             }
-            return valor;
+
+            const texto = String(valor).trim();
+            const iso = texto.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+            if (iso) {
+                return iso[1] + '-' + String(iso[2]).padStart(2, '0') + '-' + String(iso[3]).padStart(2, '0');
+            }
+
+            const local = texto.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/);
+            if (local) {
+                return local[3] + '-' + String(local[2]).padStart(2, '0') + '-' + String(local[1]).padStart(2, '0');
+            }
+
+            return texto.split(/[T ]/)[0];
         }
  
         function normalizarTexto(texto) {
@@ -48,9 +60,33 @@ function areaGestionChange() {
         }
  
         function comoPorcentajeTexto(valor) {
-            const num = parseFloat(valor);
-            if (isNaN(num)) return '0%';
-            return (num * 100).toFixed(2).replace(/\.00$/, '') + '%';
+            if (valor === null || valor === undefined || String(valor).trim() === '') return '0%';
+
+            let texto = String(valor).trim()
+                .replace(/\u00a0/g, '')
+                .replace(/\s/g, '');
+            const tieneSignoPorcentaje = texto.indexOf('%') !== -1;
+            texto = texto.replace(/%/g, '');
+
+            const ultimoPunto = texto.lastIndexOf('.');
+            const ultimaComa = texto.lastIndexOf(',');
+            if (ultimoPunto !== -1 && ultimaComa !== -1) {
+                if (ultimaComa > ultimoPunto) {
+                    texto = texto.replace(/\./g, '').replace(',', '.');
+                } else {
+                    texto = texto.replace(/,/g, '');
+                }
+            } else if (ultimaComa !== -1) {
+                texto = texto.replace(',', '.');
+            }
+
+            const num = Number(texto);
+            if (!Number.isFinite(num)) return '0%';
+
+            // Mantiene la misma escala que la conversión al guardar: las fracciones se multiplican por 100;
+            // los valores mayores a 1 ya vienen expresados en puntos porcentuales.
+            const porcentaje = tieneSignoPorcentaje || Math.abs(num) > 1 ? num : num * 100;
+            return porcentaje.toFixed(2).replace(/\.00$/, '') + '%';
         }
  
         const areaGestion = (getFieldValue(idAreaGestion) || '').trim().toUpperCase();
@@ -95,7 +131,7 @@ function areaGestionChange() {
             setFieldValue(idMedidasCautelares, 'N/A');
         }
  
-        // FECHA_PROMESA_DE_PAGO: cuando es JURIDICO se sobreescribe a 1
+        // FECHA_PROMESA_DE_PAGO: para JURIDICO se reemplaza por 1.
         if (esJuridico) {
             setFieldValue(idFechaPromesaPagoRef, 1);
         }
