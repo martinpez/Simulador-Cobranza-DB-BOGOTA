@@ -9,6 +9,21 @@ function exportarExcelFormatoExcepciones() {
         '% HONORARIOS',
         'PROVISIÓN'
     ];
+    const columnasFechaSerialExcel = [
+        'FECHA_CASTIGO',
+        'FECHA INICIO DE PROCESO',
+        'FECHA ETAPA PROCESAL'
+    ];
+    const columnasFechaExcelIds = [
+        'ce0ec03d-15e0-48e9-9fb5-12dc9de3116e', // FECHA DE NEGOCIACIÓN
+        'fa1b56c9-376c-4ad2-b3c2-cb7efd1c4e00', // FECHA_DESEMBOLSO
+        'e8787168-f162-479a-b094-cd33ab69af16', // FECHA_PROMESA_DE_PAGO
+        '37e118e1-5f67-4845-b522-4a8afb32d219'  // FECHA_PAGO
+    ];
+    const columnasNumeroExcelIds = [
+        'c2e7dd61-3c3d-4f87-aac9-667b09496897', // NUMERO_ID
+        '14147d37-86b5-4f19-ba01-49062f584897'  // CUENTA
+    ];
 
     function parsearNumero(valor) {
         if (typeof valor === 'number') {
@@ -41,6 +56,53 @@ function exportarExcelFormatoExcepciones() {
         return Number.isFinite(numero) ? numero : null;
     }
 
+    function parsearNumeroMoneda(valor) {
+        if (typeof valor === 'number') {
+            return Number.isFinite(valor) ? Math.trunc(valor) : null;
+        }
+        if (valor === null || valor === undefined || String(valor).trim() === '') return null;
+
+        let texto = String(valor).trim()
+            .replace(/\u00a0/g, '')
+            .replace(/\s/g, '')
+            .replace(/COP/gi, '')
+            .replace(/\$/g, '');
+        const negativoEnParentesis = /^\(.*\)$/.test(texto);
+        if (negativoEnParentesis) texto = texto.slice(1, -1);
+        texto = texto.replace(/[^\d.,+-]/g, '');
+
+        const ultimoPunto = texto.lastIndexOf('.');
+        const ultimaComa = texto.lastIndexOf(',');
+        if (ultimoPunto !== -1 && ultimaComa !== -1) {
+            const posicionDecimal = Math.max(ultimoPunto, ultimaComa);
+            const decimales = texto.length - posicionDecimal - 1;
+            if (decimales > 0 && decimales <= 2) {
+                const parteEntera = texto.slice(0, posicionDecimal).replace(/[.,]/g, '');
+                const parteDecimal = texto.slice(posicionDecimal + 1).replace(/[.,]/g, '');
+                texto = parteEntera + '.' + parteDecimal;
+            } else {
+                texto = texto.replace(/[.,]/g, '');
+            }
+        } else if (ultimoPunto !== -1 || ultimaComa !== -1) {
+            const separador = ultimoPunto !== -1 ? '.' : ',';
+            const posiciones = texto.split(separador).length - 1;
+            const ultimaPosicion = texto.lastIndexOf(separador);
+            const decimales = texto.length - ultimaPosicion - 1;
+            if (decimales > 0 && decimales <= 2) {
+                const parteEntera = texto.slice(0, ultimaPosicion).replace(/[.,]/g, '');
+                const parteDecimal = texto.slice(ultimaPosicion + 1).replace(/[.,]/g, '');
+                texto = parteEntera + '.' + parteDecimal;
+            } else if (posiciones > 1 || decimales === 3) {
+                texto = texto.replace(/[.,]/g, '');
+            }
+        }
+
+        let numero = Number(texto);
+        if (!Number.isFinite(numero)) return null;
+        if (negativoEnParentesis) numero = -Math.abs(numero);
+        return Math.trunc(numero);
+    }
+
     function porcentajeComoFraccion(valor) {
         const numero = parsearNumero(valor);
         if (numero === null) return null;
@@ -70,7 +132,7 @@ function exportarExcelFormatoExcepciones() {
 
     function numeroSql(valor, valorVacio) {
         const numero = parsearNumero(valor);
-        return numero === null ? valorVacio : String(numero);
+        return numero === null ? valorVacio : String(Math.trunc(numero));
     }
 
     function textoSql(valor, valorVacio) {
@@ -129,6 +191,57 @@ function exportarExcelFormatoExcepciones() {
 
         const partes = fechaISO.match(/^'(\d{4})-(\d{2})-(\d{2})'$/);
         return partes ? "'" + partes[3] + '/' + partes[2] + '/' + partes[1] + "'" : 'NULL';
+    }
+
+    function fechaComoSerialExcel(valor) {
+        if (valor === null || valor === undefined || String(valor).trim() === '') return null;
+        if (typeof valor === 'number') return Number.isFinite(valor) ? Math.round(valor) : null;
+
+        const texto = String(valor).trim();
+        if (/^[+-]?\d+(?:[.,]0+)?$/.test(texto)) {
+            return Math.round(Number(texto.replace(',', '.')));
+        }
+
+        let anio;
+        let mes;
+        let dia;
+        if (valor instanceof Date) {
+            if (isNaN(valor.getTime())) return null;
+            anio = valor.getFullYear();
+            mes = valor.getMonth() + 1;
+            dia = valor.getDate();
+        } else {
+            const iso = texto.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+            const local = texto.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/);
+            if (iso) {
+                anio = Number(iso[1]);
+                mes = Number(iso[2]);
+                dia = Number(iso[3]);
+            } else if (local) {
+                dia = Number(local[1]);
+                mes = Number(local[2]);
+                anio = Number(local[3]);
+            } else {
+                return null;
+            }
+        }
+
+        const fechaUTC = Date.UTC(anio, mes - 1, dia);
+        const fechaValidada = new Date(fechaUTC);
+        if (fechaValidada.getUTCFullYear() !== anio ||
+            fechaValidada.getUTCMonth() !== mes - 1 ||
+            fechaValidada.getUTCDate() !== dia) {
+            return null;
+        }
+
+        const serial = Math.round((fechaUTC - Date.UTC(1899, 11, 30)) / 86400000);
+        // Excel conserva el día ficticio 29/02/1900 en su sistema de fechas.
+        return fechaUTC < Date.UTC(1900, 2, 1) ? serial - 1 : serial;
+    }
+
+    function fechaSerialSql(valor) {
+        const serial = fechaComoSerialExcel(valor);
+        return serial === null ? 'NULL' : String(serial);
     }
 
     function generarArchivo() {
@@ -215,9 +328,8 @@ function exportarExcelFormatoExcepciones() {
         }
 
         function formatearMoneda(valor) {
-            const num = parseFloat(valor);
-            if (isNaN(num)) return valor;
-            return '$ ' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const numero = parsearNumeroMoneda(valor);
+            return numero === null ? 0 : numero;
         }
 
         function formatearPorcentaje(valor) {
@@ -279,12 +391,27 @@ function exportarExcelFormatoExcepciones() {
                     valor = el.value;
                 }
             }
-            if (valor === null || valor === undefined || valor === '' || esValorPlaceholder(col.id, valor)) {
+            const garantiaSinDato = col.nombre === 'GARANTÍA' && (
+                valor === null || valor === undefined || String(valor).trim() === '' ||
+                /^N\/?A$/i.test(String(valor).trim())
+            );
+            if (garantiaSinDato) {
+                valor = 0;
+            } else if (valor === null || valor === undefined || valor === '' || esValorPlaceholder(col.id, valor)) {
                 camposVacios.push(col.nombre);
                 if (el) { el.classList.add('campo-vacio-fe'); }
                 valor = '';
             } else if (col.nombre === 'MECANISMO') {
                 valor = mapaMecanismoExport[String(valor).trim().toLowerCase()] || valor;
+            } else if (columnasFechaSerialExcel.indexOf(col.nombre) !== -1) {
+                const serialFecha = fechaComoSerialExcel(valor);
+                valor = serialFecha === null ? valor : serialFecha;
+            } else if (columnasFechaExcelIds.indexOf(col.id) !== -1) {
+                const serialFecha = fechaComoSerialExcel(valor);
+                valor = serialFecha === null ? valor : serialFecha;
+            } else if (columnasNumeroExcelIds.indexOf(col.id) !== -1) {
+                const numero = parsearNumero(valor);
+                valor = numero === null ? valor : Math.trunc(numero);
             } else if (columnasPorcentajeFraccion.indexOf(col.nombre) !== -1) {
                 const porcentaje = porcentajeComoFraccion(valor);
                 valor = porcentaje === null ? valor : porcentaje;
@@ -316,6 +443,42 @@ function exportarExcelFormatoExcepciones() {
                 const referencia = XLSX.utils.encode_cell({ r: 1, c: indice });
                 if (hoja[referencia] && typeof hoja[referencia].v === 'number') {
                     hoja[referencia].z = '0.00%';
+                }
+            }
+        });
+        columnasFechaSerialExcel.forEach(function (nombre) {
+            const indice = encabezados.indexOf(nombre);
+            if (indice !== -1) {
+                const referencia = XLSX.utils.encode_cell({ r: 1, c: indice });
+                if (hoja[referencia] && typeof hoja[referencia].v === 'number') {
+                    hoja[referencia].z = 'dd/mm/yyyy';
+                }
+            }
+        });
+        columnasFechaExcelIds.forEach(function (id) {
+            const indice = columnas.findIndex(function (col) { return col.id === id; });
+            if (indice !== -1) {
+                const referencia = XLSX.utils.encode_cell({ r: 1, c: indice });
+                if (hoja[referencia] && typeof hoja[referencia].v === 'number') {
+                    hoja[referencia].z = 'dd/mm/yyyy';
+                }
+            }
+        });
+        columnasNumeroExcelIds.forEach(function (id) {
+            const indice = columnas.findIndex(function (col) { return col.id === id; });
+            if (indice !== -1) {
+                const referencia = XLSX.utils.encode_cell({ r: 1, c: indice });
+                if (hoja[referencia] && typeof hoja[referencia].v === 'number') {
+                    hoja[referencia].z = '0';
+                }
+            }
+        });
+        columnasMoneda.forEach(function (nombre) {
+            const indice = encabezados.indexOf(nombre);
+            if (indice !== -1) {
+                const referencia = XLSX.utils.encode_cell({ r: 1, c: indice });
+                if (hoja[referencia] && typeof hoja[referencia].v === 'number') {
+                    hoja[referencia].z = '0';
                 }
             }
         });
@@ -408,6 +571,7 @@ function exportarExcelFormatoExcepciones() {
             const tipoProductoLimpioFE = textoTipoProd || '';
             const snrLimpioFE = textoTipoSNR || '';
             const usuario = localStorage.getItem('userName') || '';
+            const grupoAgenciaFE = String(sessionStorage.Grupo || '').trim().toUpperCase();
 
             const mecSQL = mecanismoFE ? "'" + sqlEscape(mecanismoFE) + "'" : 'NULL';
             const tiSQL = tipoIdFE ? "'" + sqlEscape(tipoIdFE) + "'" : 'NULL';
@@ -419,7 +583,7 @@ function exportarExcelFormatoExcepciones() {
             const toSQL = tipoObligacionFE ? "'" + sqlEscape(tipoObligacionFE) + "'" : 'NULL';
             const eoSQL = estadoOblFE ? "'" + sqlEscape(estadoOblFE) + "'" : 'NULL';
             const tpSQL = (() => { const t = String(tipoProductoFE || '').trim(); const p = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i; return p.test(t) ? "'" + t + "'" : 'NULL'; })();
-            const fcSQL = fechaSql(fechaCastigoFE, true);
+            const fcSQL = fechaSerialSql(fechaCastigoFE);
             const dmSQL = textoSql(diasMoraFE, "'0'");
             const plSQL = textoSql(plazoFE, "'0'");
             const coSQL = coberturaFE ? "'" + sqlEscape(coberturaFE) + "'" : 'NULL';
@@ -455,10 +619,10 @@ function exportarExcelFormatoExcepciones() {
             const phSQL = porcentajeSql(pctHonorariosFE);
             const vhSQL = numeroSql(valorHonorariosFE, '0');
             const vtSQL = numeroSql(valorTotalCastigosFE, '0');
-            const fiSQL = fechaSql(fechaInicioProcesoFE, true);
+            const fiSQL = fechaSerialSql(fechaInicioProcesoFE);
             const epSQL = etapaProcesoFE ? "'" + sqlEscape(etapaProcesoFE) + "'" : 'NULL';
             const erSQL = estadoReclamacionFE ? "'" + sqlEscape(estadoReclamacionFE) + "'" : 'NULL';
-            const feSQL = fechaSql(fechaEtapaProcesalFE, true);
+            const feSQL = fechaSerialSql(fechaEtapaProcesalFE);
             const mcSQL = medidasCautelaresFE ? "'" + sqlEscape(medidasCautelaresFE) + "'" : 'NULL';
             const provSQL = porcentajeSql(provisionFE);
             const mc026SQL = marcaC026FE ? "'" + sqlEscape(marcaC026FE) + "'" : 'NULL';
@@ -477,6 +641,7 @@ function exportarExcelFormatoExcepciones() {
             const agGSQL = areaGestionFE ? "'" + sqlEscape(areaGestionFE) + "'" : 'NULL';
             const tplSQL = tipoProductoLimpioFE ? "'" + sqlEscape(tipoProductoLimpioFE) + "'" : 'NULL';
             const snrLSQL = snrLimpioFE ? "'" + sqlEscape(snrLimpioFE) + "'" : 'NULL';
+            const grupoAgenciaSQL = grupoAgenciaFE ? "'" + sqlEscape(grupoAgenciaFE) + "'" : 'NULL';
 
             const query = `
                 INSERT INTO dbo.SimiladorDNC_Lappiz_FormatoExcepciones (
@@ -497,7 +662,7 @@ function exportarExcelFormatoExcepciones() {
                     DETALLEDELAPROPUESTAfe, PLAZOACUERDODEPAGOfe, PAGOMINIMOINFERIORfe,
                     CAPACIDADDEPAGOINFERIORALANUEVACUOTAfe, FETIEMPOENTREMECANISMOSMENOR, EDADMORAPARAAPLICARMECANISMOfe,
                     BAJADESALDOSSUPERIORESALAPOLTICA, SINPAGOFE, ELPRODUCTONOESLACABEZADEMORAFE, EXTENCIONESDEPLAZOfe, AREADEGESTION,
-                    TIPOPRODUCTOLIMPIO, SNRLIMPIO, FechaProceso
+                    TIPOPRODUCTOLIMPIO, SNRLIMPIO, FechaProceso, GrupoAgencia,FechaControlExep
                 ) VALUES (
                     NEWID(), GETDATE(), GETDATE(), ${"'"+sqlEscape(usuario)+"'"}, 'Insertar', ${"'"+sqlEscape(usuario)+"'"}, 'active',
                     ${mecSQL}, ${tiSQL}, ${numIdSQL}, ${fnSQL}, ${agSQL}, ${noSQL},
@@ -515,7 +680,7 @@ function exportarExcelFormatoExcepciones() {
                     ${dpSQL}, ${paSQL}, ${pmiSQL},
                     ${cpiSQL}, ${temSQL}, ${emaSQL},
                     ${bspSQL}, ${spSQL}, ${pncmSQL},
-                    ${epLSQL}, ${agGSQL}, ${tplSQL}, ${snrLSQL}, ${fechaProcesoSQL}
+                    ${epLSQL}, ${agGSQL}, ${tplSQL}, ${snrLSQL}, ${fechaProcesoSQL}, ${grupoAgenciaSQL},GETDATE()
                 )`;
             console.log(query);
             await execQuery(query);

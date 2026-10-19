@@ -54,6 +54,41 @@ function areaGestionChange() {
 
             return texto.split(/[T ]/)[0];
         }
+
+        function fechaLocalParaWidget(valor) {
+            if (valor === null || valor === undefined || valor === '') return valor;
+
+            let anio;
+            let mes;
+            let dia;
+            if (valor instanceof Date) {
+                if (isNaN(valor.getTime())) return valor;
+                anio = valor.getFullYear();
+                mes = valor.getMonth() + 1;
+                dia = valor.getDate();
+            } else {
+                const texto = String(valor).trim();
+                const iso = texto.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+                const local = texto.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/);
+                if (iso) {
+                    anio = Number(iso[1]);
+                    mes = Number(iso[2]);
+                    dia = Number(iso[3]);
+                } else if (local) {
+                    dia = Number(local[1]);
+                    mes = Number(local[2]);
+                    anio = Number(local[3]);
+                } else {
+                    return valor;
+                }
+            }
+
+            const fecha = new Date(anio, mes - 1, dia);
+            if (fecha.getFullYear() !== anio || fecha.getMonth() !== mes - 1 || fecha.getDate() !== dia) {
+                return valor;
+            }
+            return fecha;
+        }
  
         function normalizarTexto(texto) {
             return (texto || '').toString().trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -117,17 +152,17 @@ function areaGestionChange() {
  
         // FECHA_CASTIGO: fija cuando es TEMPRANA, toma la fecha de negociacion en cualquier otro caso
         if (esTemprana) {
-            setFieldValue(idFechaCastigo, '1900-01-01');
+            setFieldValue(idFechaCastigo, fechaLocalParaWidget('1900-01-01'));
         } else {
-            setFieldValue(idFechaCastigo, formatearFecha(getFieldValue(idFechaNegociacion)) || '');
+            setFieldValue(idFechaCastigo, fechaLocalParaWidget(getFieldValue(idFechaNegociacion)) || '');
         }
  
         // Campos exclusivos de JURIDICO: si NO es juridico, se dejan con su valor por defecto
         if (!esJuridico) {
-            setFieldValue(idFechaInicioProceso, '1900-01-01');
+            setFieldValue(idFechaInicioProceso, fechaLocalParaWidget('1900-01-01'));
             setFieldValue(idEtapaProceso, 'N/A');
             setFieldValue(idEstadoReclamacionFngFag, 'N/A');
-            setFieldValue(idFechaEtapaProcesal, '1900-01-01');
+            setFieldValue(idFechaEtapaProcesal, fechaLocalParaWidget('1900-01-01'));
             setFieldValue(idMedidasCautelares, 'N/A');
         }
  

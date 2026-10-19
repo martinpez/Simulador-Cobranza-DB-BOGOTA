@@ -1,6 +1,7 @@
 /*
-    Alinea los metadatos de Campos y la tabla de destino con las reglas del
-    Formato de Excepciones. Ejecutar en la base que contiene dbo.SimiladorDNC_Lappiz_FormatoExcepciones.
+    Ajusta únicamente las columnas de dbo.SimiladorDNC_Lappiz_FormatoExcepciones.
+    No modifica metadatos ni bases V2. La recreación de las tres columnas numéricas
+    descarta sus valores anteriores; ejecutarlo después de eliminar los datos existentes.
 */
 SET XACT_ABORT ON;
 
@@ -10,20 +11,47 @@ BEGIN TRY
     IF OBJECT_ID(N'dbo.SimiladorDNC_Lappiz_FormatoExcepciones', N'U') IS NULL
         THROW 50001, 'No existe dbo.SimiladorDNC_Lappiz_FormatoExcepciones en la base actual.', 1;
 
-    UPDATE c
-    SET c.SqlType = cambios.SqlType
-    FROM LappizV2Prod.dbo.Campos AS c
-    INNER JOIN
+    IF
     (
-        VALUES
-            (CONVERT(uniqueidentifier, '6668D103-6E5D-4225-A578-9F9D144FB011'), N'VarChar'), -- ETAPA DE PROCESO
-            (CONVERT(uniqueidentifier, '65E882E4-8B5E-40DC-B106-EAD5ADB26951'), N'VarChar'), -- ESTADO_RECLAMACIÓN_FNG_FAG
-            (CONVERT(uniqueidentifier, '427B5B63-DB83-416E-A1C5-566FAAD3384F'), N'VarChar'), -- MEDIDAS CAUTELARES
-            (CONVERT(uniqueidentifier, '37E118E1-6F5E-4845-B522-4A8AFB32D219'), N'Date')     -- FECHA_PAGO
-    ) AS cambios(CampoId, SqlType)
-        ON c.CampoId = cambios.CampoId
-    WHERE c.Tablaid = '75f7d794-95f1-43a4-b445-f453fa3d3315'
-      AND c.SqlType <> cambios.SqlType;
+        SELECT COUNT(*)
+        FROM sys.columns
+        WHERE object_id = OBJECT_ID(N'dbo.SimiladorDNC_Lappiz_FormatoExcepciones')
+          AND name COLLATE DATABASE_DEFAULT IN (N'FEfechadecastigo', N'FECHAINICIODEPROCESOFE', N'FECHAETAPAPROCESALFE')
+    ) <> 3
+        THROW 50002, 'Falta una de las tres columnas de fecha que se cambiarán a numeric.', 1;
+
+    IF
+    (
+        SELECT COUNT(*)
+        FROM sys.columns
+        WHERE object_id = OBJECT_ID(N'dbo.SimiladorDNC_Lappiz_FormatoExcepciones')
+          AND name COLLATE DATABASE_DEFAULT IN (N'FEfechadecastigo', N'FECHAINICIODEPROCESOFE', N'FECHAETAPAPROCESALFE')
+          AND TYPE_NAME(user_type_id) = N'date'
+    ) <> 3
+        THROW 50004, 'Las tres columnas deben seguir siendo date para ejecutar esta migración destructiva una sola vez.', 1;
+
+    DECLARE @SQLDefaults nvarchar(max) = N'';
+
+    SELECT @SQLDefaults = @SQLDefaults +
+        N'ALTER TABLE [dbo].[SimiladorDNC_Lappiz_FormatoExcepciones] DROP CONSTRAINT ' +
+        QUOTENAME(dc.name) + N';' + CHAR(10)
+    FROM sys.default_constraints AS dc
+    INNER JOIN sys.columns AS sc
+        ON sc.object_id = dc.parent_object_id
+       AND sc.column_id = dc.parent_column_id
+    WHERE dc.parent_object_id = OBJECT_ID(N'dbo.SimiladorDNC_Lappiz_FormatoExcepciones')
+      AND sc.name COLLATE DATABASE_DEFAULT IN (N'FEfechadecastigo', N'FECHAINICIODEPROCESOFE', N'FECHAETAPAPROCESALFE');
+
+    IF @SQLDefaults <> N''
+        EXEC sys.sp_executesql @SQLDefaults;
+
+    ALTER TABLE dbo.SimiladorDNC_Lappiz_FormatoExcepciones
+        DROP COLUMN FEfechadecastigo, FECHAINICIODEPROCESOFE, FECHAETAPAPROCESALFE;
+
+    ALTER TABLE dbo.SimiladorDNC_Lappiz_FormatoExcepciones
+        ADD FEfechadecastigo numeric(10,0) NULL,
+            FECHAINICIODEPROCESOFE numeric(10,0) NULL,
+            FECHAETAPAPROCESALFE numeric(10,0) NULL;
 
     DECLARE @CambiosTabla TABLE
     (
@@ -43,10 +71,10 @@ BEGIN TRY
         FROM @CambiosTabla AS cambio
         LEFT JOIN sys.columns AS columna
             ON columna.object_id = OBJECT_ID(N'dbo.SimiladorDNC_Lappiz_FormatoExcepciones')
-           AND columna.name = cambio.NombreColumna
+           AND columna.name COLLATE DATABASE_DEFAULT = cambio.NombreColumna COLLATE DATABASE_DEFAULT
         WHERE columna.column_id IS NULL
     )
-        THROW 50002, 'Falta una de las columnas de texto esperadas en la tabla FormatoExcepciones.', 1;
+        THROW 50003, 'Falta una de las columnas de texto esperadas en la tabla FormatoExcepciones.', 1;
 
     DECLARE @NombreColumna sysname;
     DECLARE @TipoDestino nvarchar(30);
@@ -61,7 +89,7 @@ BEGIN TRY
     FROM @CambiosTabla AS c
     INNER JOIN sys.columns AS sc
         ON sc.object_id = OBJECT_ID(N'dbo.SimiladorDNC_Lappiz_FormatoExcepciones')
-       AND sc.name = c.NombreColumna;
+       AND sc.name COLLATE DATABASE_DEFAULT = c.NombreColumna COLLATE DATABASE_DEFAULT;
 
     OPEN cursor_cambios;
 

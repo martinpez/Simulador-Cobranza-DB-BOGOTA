@@ -10,6 +10,41 @@ function poblarCamposFormatoExcepciones() {
             console.warn('Formato de Excepciones: no hay datos guardados en localStorage');
         } else {
             const datos = JSON.parse(raw);
+            function fechaLocalParaWidget(valor) {
+                if (valor === null || valor === undefined || valor === '') return valor;
+
+                let anio;
+                let mes;
+                let dia;
+                if (valor instanceof Date) {
+                    if (isNaN(valor.getTime())) return valor;
+                    anio = valor.getFullYear();
+                    mes = valor.getMonth() + 1;
+                    dia = valor.getDate();
+                } else {
+                    const texto = String(valor).trim();
+                    const iso = texto.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+                    const local = texto.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/);
+                    if (iso) {
+                        anio = Number(iso[1]);
+                        mes = Number(iso[2]);
+                        dia = Number(iso[3]);
+                    } else if (local) {
+                        dia = Number(local[1]);
+                        mes = Number(local[2]);
+                        anio = Number(local[3]);
+                    } else {
+                        return valor;
+                    }
+                }
+
+                const fecha = new Date(anio, mes - 1, dia);
+                if (fecha.getFullYear() !== anio || fecha.getMonth() !== mes - 1 || fecha.getDate() !== dia) {
+                    return valor;
+                }
+                return fecha;
+            }
+
             function asignarValor(id, valor) {
                 if (valor === null || valor === undefined || valor === '') { return; }
                 const el = document.getElementById(id);
@@ -75,7 +110,7 @@ function poblarCamposFormatoExcepciones() {
             asignarValor('316c8054-17af-4ccb-bdfa-85fb26584053', datos.NUMERO_OBLIGACION);
             asignarValor('5d9474e6-2d3e-46b6-af6f-c5f53347baa9', datos.TIPO_OBLIGACION);
             asignarValor('2e812bd9-29cb-495c-a275-e7a833bae510', datos.TIPO_PRODUCTO);
-            asignarValor('d73aa70d-f12d-4a29-bfb7-fbc5b4ae38e0', datos.FECHA_CASTIGO);
+            asignarValor('d73aa70d-f12d-4a29-bfb7-fbc5b4ae38e0', fechaLocalParaWidget(datos.FECHA_CASTIGO));
             asignarValor('58091737-5ecd-4637-ae64-e66aa37f419e', datos.EDAD_MORA);
             asignarValor('79407da3-e4f4-460f-84b3-541f540a0d68', datos.PLAZO);
             asignarValor('33af076c-4476-4831-af44-19d96fedb4f4', datos.PLAZO);

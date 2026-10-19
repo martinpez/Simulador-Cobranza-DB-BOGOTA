@@ -20,3 +20,15 @@ if (partesFecha) {
     }
 }
 sessionStorage.setItem('dateExep', date);
+
+// dateExepAyer = dia anterior a dateExep (YYYY-MM-DD). Bloque para no chocar con nombres del script.
+{
+    const partesIso = String(date).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    let ayer = '';
+    if (partesIso) {
+        // Date.UTC resuelve el dia 0 como el ultimo dia del mes anterior
+        ayer = new Date(Date.UTC(Number(partesIso[1]), Number(partesIso[2]) - 1, Number(partesIso[3]) - 1))
+            .toISOString().slice(0, 10);
+    }
+    sessionStorage.setItem('dateExepAyer', ayer);
+}

@@ -137,6 +137,7 @@
 |FEtipodeobligacion                                    |varchar         |1.000          |
 |FETipodeproducto                                      |uniqueidentifier|               |
 |Garantiafe                                            |varchar         |1.000          |
+|GrupoAgencia                                          |varchar         |150            |
 |Id                                                    |uniqueidentifier|               |
 |IpAddress                                             |varchar         |100            |
 |MARCAC026FE                                           |varchar         |150            |

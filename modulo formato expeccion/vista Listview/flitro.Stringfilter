@@ -1,0 +1,6 @@
+// filtro de un dia 
+#UrlBase#/SimiladorDNC_Lappiz.api/api/SimiladorDNC_Lappiz_FormatoExcepciones?$filter=SimiladorDNC_Lappiz_FormatoExcepciones.GrupoAgencia eq '#sessionStorage.grupoExp#' and SimiladorDNC_Lappiz_FormatoExcepciones.Fechadenegociacionfe eq '#sessionStorage.dateExep#'
+// filtro de dos dias
+#UrlBase#/SimiladorDNC_Lappiz.api/api/SimiladorDNC_Lappiz_FormatoExcepciones?$filter=SimiladorDNC_Lappiz_FormatoExcepciones.GrupoAgencia eq '#sessionStorage.grupoExp#' and (SimiladorDNC_Lappiz_FormatoExcepciones.Fechadenegociacionfe eq '#sessionStorage.dateExep#' or SimiladorDNC_Lappiz_FormatoExcepciones.Fechadenegociacionfe eq '#sessionStorage.dateExepAyer#')
+// filtro de dos dias sin grupo
+#UrlBase#/SimiladorDNC_Lappiz.api/api/SimiladorDNC_Lappiz_FormatoExcepciones?$filter=SimiladorDNC_Lappiz_FormatoExcepciones.Fechadenegociacionfe eq '#sessionStorage.dateExep#' or SimiladorDNC_Lappiz_FormatoExcepciones.Fechadenegociacionfe eq '#sessionStorage.dateExepAyer#'
