@@ -10,12 +10,19 @@ const LOTE = 50;
 // Estados posibles en la tabla auxiliar (verifica que la columna Estado acepte estos valores)
 const ESTADO = {
     PENDIENTE: 'Activo',
-    PROGRESO: 'Progreso',
-    OK: 'Ingresado',
+    PROGRESO: 'Progreso',   // prefijo: la marca real lleva timestamp -> 'Progreso|2026-10-21 10:15:00'
+    INGRESADO: 'Ingresado',  // insertado y replicado en la API
+    OK: 'OK',                // verificado tras la espera, listo para eliminar
     DUPLICADO: 'Duplicado',
     INCOMPLETO: 'Incompleto',
     ERROR: 'Error'
 };
+
+// Minutos que un lote puede permanecer en Progreso antes de considerarse abandonado
+const MINUTOS_VIGENCIA_PROGRESO = 10;
+
+// Tiempo de espera antes de verificar y eliminar los usuarios ingresados
+const ESPERA_VERIFICACION_MS = 5000;
 
 const INICIAL_DOCUMENTO = { CC: 'C', NIT: 'N', CE: 'E' };
 
@@ -44,7 +51,15 @@ async function consultaAuxiliar() {
     await cambiarEstadoLote(
         await consultar(`select Id from ${TABLA_AUX} where Estado = '${ESTADO.ERROR}'`),
         ESTADO.PENDIENTE,
-        ESTADO.ERROR
+        `Estado = '${ESTADO.ERROR}'`
+    );
+
+    // se recuperan los lotes abandonados: filas en Progreso cuya marca es mas antigua que la vigencia.
+    // Las filas en Progreso de la ejecucion actual llevan timestamp, asi que nunca se recuperan.
+    await consultar(
+        `update ${TABLA_AUX} set Estado = '${ESTADO.PENDIENTE}' ` +
+        `where Estado = '${ESTADO.PROGRESO}' ` +
+        `or (Estado like '${ESTADO.PROGRESO}|%' and Estado < '${limiteProgreso()}'); select 1`
     );
 
     // se consulta para los usuarios con estado PENDIENTE, se procesan y se actualiza el estado en la tabla auxiliar
@@ -69,7 +84,7 @@ async function consultaAuxiliar() {
     try {
         roles = await obtenerRoles(token);
     } catch (err) {
-        await cambiarEstadoLote(pendientes, ESTADO.ERROR);
+        await cambiarEstadoLote(pendientes, ESTADO.ERROR, `Estado like '${ESTADO.PROGRESO}%'`);
         throw new Error(`No se pudieron obtener los roles: ${err.message}`);
     }
 
@@ -87,20 +102,49 @@ async function consultaAuxiliar() {
         try {
             await cambiarEstado(datos.Id, resultado.estado);
         } catch (err) {
-            resultado.mensaje += ` (no se pudo actualizar el estado: ${msgError(err)})`;
-        }
-
-        if (resultado.estado === ESTADO.OK) {
-            // consular todos los estados OK y eliminarlos de la tabla auxiliar
+            // Se reintenta una vez; si vuelve a fallar, la fila se corrige al final de la ejecución
             try {
-                await consultar(`DELETE FROM ${TABLA_AUX} WHERE Estado = '${ESTADO.OK}'; select 1`);
-            } catch (err) {
-                resultado.mensaje += ` (no se pudo eliminar el registro de la tabla auxiliar: ${msgError(err)})`;
+                await cambiarEstado(datos.Id, resultado.estado);
+            } catch (err2) {
+                resultado.mensaje += ` (no se pudo actualizar el estado: ${msgError(err2)})`;
             }
         }
 
         // Nunca se devuelve la contraseña
         finalMessage += `DATOS: ${datos.Nombre} ${datos.Apellidos || ''} - ${datos.TipoDocumento} ${datos.NumeroDocumento} | ${resultado.estado}: ${resultado.mensaje}\n`;
+    }
+
+    // Cualquier fila del lote que siga en Progreso significa que no se pudo escribir su estado final.
+    // Se devuelven a Error para que la proxima ejecucion las reintente.
+    try {
+        await cambiarEstadoLote(pendientes, ESTADO.ERROR, `Estado like '${ESTADO.PROGRESO}%'`);
+    } catch (err) {
+        finalMessage += `No se pudieron recuperar los registros en Progreso: ${msgError(err)}\n`;
+    }
+
+    // Se espera antes de verificar el estado de los usuarios ingresados
+    await esperar(ESPERA_VERIFICACION_MS);
+
+    // Se consultan los usuarios que quedaron en estado Ingresado
+    let ingresados = [];
+    try {
+        ingresados = await consultar(
+            `select Id from ${TABLA_AUX} where Estado = '${ESTADO.INGRESADO}'`
+        );
+    } catch (err) {
+        finalMessage += `No se pudieron consultar los usuarios ingresados: ${msgError(err)}\n`;
+    }
+
+    if (ingresados.length) {
+        const ids = ingresados.map(d => `'${esc(d.Id)}'`).join(',');
+        try {
+            // Se marcan como OK y luego se eliminan de la tabla auxiliar
+            await consultar(`update ${TABLA_AUX} set Estado = '${ESTADO.OK}' where Id in (${ids}); select 1`);
+            await consultar(`delete from ${TABLA_AUX} where Id in (${ids}); select 1`);
+            finalMessage += `Se eliminaron ${ingresados.length} registros de la tabla auxiliar\n`;
+        } catch (err) {
+            finalMessage += `No se pudieron eliminar ${ingresados.length} registros: ${msgError(err)}\n`;
+        }
     }
 
     await consultar('EXEC SimiladorDNC_Lappiz_EmailConfirmed @sw = 1');
@@ -215,7 +259,7 @@ async function procesar(datos, token, roles) {
     }
     // respuesta exitosa
     return {
-        estado: ESTADO.OK,
+        estado: ESTADO.INGRESADO,
         mensaje: porDefecto
             ? 'Usuario registrado (rol no encontrado, se asignó el rol por defecto)'
             : 'Usuario registrado correctamente'
@@ -247,18 +291,37 @@ function buscarRol(roles, nombreRol) {
 
 /* ---------- Estados ---------- */
 async function marcarProgreso(lista) {
-    await cambiarEstadoLote(lista, ESTADO.PROGRESO, ESTADO.PENDIENTE);
+    // La marca incluye el timestamp para poder distinguir un lote en curso de uno abandonado
+    await cambiarEstadoLote(lista, marcaProgreso(), `Estado = '${ESTADO.PENDIENTE}'`);
 }
 
-async function cambiarEstadoLote(lista, estado, soloDesde) {
+// estado: valor a asignar. filtro: condición SQL opcional sobre el estado actual
+async function cambiarEstadoLote(lista, estado, filtro) {
     const ids = lista.map(d => `'${esc(d.Id)}'`).join(',');
     if (!ids) return;
-    const filtro = soloDesde ? ` and Estado = '${soloDesde}'` : '';
-    await consultar(`UPDATE ${TABLA_AUX} set Estado = '${estado}' where Id in (${ids})${filtro}; select 1`);
+    const extra = filtro ? ` and (${filtro})` : '';
+    await consultar(`UPDATE ${TABLA_AUX} set Estado = '${estado}' where Id in (${ids})${extra}; select 1`);
 }
 
 async function cambiarEstado(id, estado) {
     await consultar(`UPDATE ${TABLA_AUX} set Estado = '${estado}' where Id = '${esc(id)}'; select 1`);
+}
+
+// Marca del estado Progreso: 'Progreso|yyyy-MM-dd HH:mm:ss'
+function marcaProgreso() {
+    return `${ESTADO.PROGRESO}|${selloFecha(new Date())}`;
+}
+
+// Límite anterior a la vigencia: las marcas menores que este valor se consideran abandonadas
+function limiteProgreso() {
+    return `${ESTADO.PROGRESO}|${selloFecha(new Date(Date.now() - MINUTOS_VIGENCIA_PROGRESO * 60000))}`;
+}
+
+// Formato ordenable lexicograficamente (yyyy-MM-dd HH:mm:ss)
+function selloFecha(fecha) {
+    const p = n => String(n).padStart(2, '0');
+    return `${fecha.getFullYear()}-${p(fecha.getMonth() + 1)}-${p(fecha.getDate())} ` +
+           `${p(fecha.getHours())}:${p(fecha.getMinutes())}:${p(fecha.getSeconds())}`;
 }
 
 /* ---------- Utilidades ---------- */
@@ -302,4 +365,9 @@ function msgError(err) {
     if (err instanceof Error) return err.message;
     if (typeof err === 'string') return err;
     try { return JSON.stringify(err); } catch (_) { return String(err); }
+}
+
+// Espera el tiempo indicado en milisegundos
+function esperar(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
